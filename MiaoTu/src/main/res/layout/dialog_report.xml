@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="68.5dp">
+<TextView
+    android:id="@+id/tv_add_black_list"
+    android:layout_width="match_parent"
+    android:layout_height="34dp"
+    android:gravity="center"
+    android:textColor="@color/dark_grey"
+    android:text="拉黑"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#b4b4b4">
+    </View>
+    <TextView
+        android:id="@+id/tv_and_report"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:gravity="center"
+        android:textColor="@color/dark_grey"
+        android:text="拉黑并举报"/>
+</LinearLayout>

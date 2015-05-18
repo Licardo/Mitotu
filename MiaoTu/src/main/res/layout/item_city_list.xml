@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/alpha"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="13dip"
+        android:textSize="12sp"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="#969696"
+         />
+    <View
+        android:id="@+id/alpha_line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#646464"
+        android:layout_below="@+id/alpha"
+        />
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/alpha"
+        android:layout_marginRight="5.0dip"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:layout_alignTop="@id/image_view"
+        android:layout_below="@id/alpha"
+        android:layout_marginLeft="10dip"
+        android:layout_marginRight="5.0dip"
+        android:paddingBottom="5dp"
+        android:paddingRight="10dp"
+        android:singleLine="true"
+        android:text="name"
+        android:textSize="14sp"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:textColor="#323232" />
+    <!-- android:layout_toRightOf="@id/image_view" -->
+
+    <TextView
+        android:id="@+id/number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/name"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_below="@id/name"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text="number"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:textColor="#AAAAAA"
+        android:visibility="gone" />
+
+</RelativeLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="guide1">#6ac0bd</color>
+    <color name="guide2">#67ddab</color>
+    <color name="guide3">#fbe496</color>
+    <color name="guide4">#f58669</color>
+    <color name="grey">#a0a0a0</color>
+    <color name="dark_grey">#808080</color>
+    <color name="text_orange">#ff8000</color>
+    <color name="text_jacinth">#fe5a35</color>
+    <color name="background_orange">#fc8d14</color>
+    <color name="background">#dbdbdb</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#fe0000</color>
+    <color name="blue_ash">#ebf0f4</color>
+    <color name="blue_light">#436EEE</color>
+    <color name="line_grey">#c8c8c8</color>
+    <color name="light_sky_blue">#87CEFA</color>
+    <color name="persimmon_red">#f9644e</color>
+    <color name="orange_red">#ff6b50</color>
+    <color name="my_order_status_obligation">#88fbab4a</color>
+    <color name="my_order_status_paid">#8846b692</color>
+    <color name="my_order_status_closed">#88b4b4b4</color>
+    <color name="word_grey">#b4b4b4</color>
+
+    <color name="grey64">#646464</color>
+    <color name="money_add">#efa12e</color>
+    <color name="money_minus">#b4b4b4</color>
+    
+    <color name="invite_status_invite_me">#fbab4a</color>
+    <color name="invite_status_waite">#ff6b50</color>
+    <color name="invite_status_accept_me">#46b692</color>
+    <color name="invite_status_refuse_me">#969696</color>
+    <color name="activity_over">#dcdcdc</color>
+    <color name="fbab4a">#fbab4a</color>
+    <color name="ffbab4a">#7ffbab4a</color>
+    <color name="acc4bc">#acc4bc</color>
+    <color name="c46b692">#46b692</color>
+    <!-- 友盟 -->
+    <color name="body_text_1">#ff000000</color>
+    <color name="body_text_2">#99000000</color>
+    <color name="body_text_disabled">#66000000</color>
+    <color name="body_text_1_inverse">#ffffffff</color>
+    <color name="body_text_2_inverse">#99ffffff</color>
+    <color name="accent_1">#ff29549f</color>
+    <color name="hyperlink">#ffff549f</color>
+    <color name="background_1">#ffffffff</color>
+    <color name="whats_on_separator">#4d000000</color>
+    <color name="all_track_color">#ff222222</color>
+    <color name="block_column_1">#ff0fabff</color>
+    <color name="block_column_2">#ffdf1831</color>
+    <color name="block_column_3">#ff009939</color>
+    <color name="text_color">#323232</color>
+</resources>

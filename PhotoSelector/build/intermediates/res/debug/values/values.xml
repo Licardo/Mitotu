@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/build/intermediates/exploded-aar/MiaoTu3.0/SupportV4Lib/unspecified/res/values/values.xml -->
+    <eat-comment/>
+    <color name="background_gradient_end">#DDDDDD</color>
+    <color name="background_gradient_start">#000000</color>
+    <!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/colors.xml -->
+    <eat-comment/>
+    <color name="bg">#65BBF6</color>
+    <!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/build/intermediates/exploded-aar/MiaoTu3.0/SupportV4Lib/unspecified/res/values/values.xml -->
+    <eat-comment/>
+    <color name="black">#59000000</color>
+    <color name="black_opaque">#AA000000</color>
+    <color name="default_background">#3d3d3d</color>
+    <color name="detail_background">#0096a6</color>
+    <color name="fastlane_background">#0096a6</color>
+    <color name="img_full_opaque">#00000000</color>
+    <color name="img_soft_opaque">#30FF0000</color>
+    <color name="orange">#FADCA7</color>
+    <color name="orange_transparent">#AAFADCA7</color>
+    <color name="search_opaque">#ffaa3f</color>
+    <color name="soft_opaque">#30000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="yellow">#EEFF41</color>
+    <declare-styleable name="ArcProgress"><attr format="integer" name="arc_progress"/><attr format="float" name="arc_angle"/><attr format="dimension" name="arc_stroke_width"/><attr format="integer" name="arc_max"/><attr format="color" name="arc_unfinished_color"/><attr format="color" name="arc_finished_color"/><attr format="dimension" name="arc_text_size"/><attr format="color" name="arc_text_color"/><attr format="string" name="arc_suffix_text"/><attr format="dimension" name="arc_suffix_text_size"/><attr format="dimension" name="arc_suffix_text_padding"/><attr format="string" name="arc_bottom_text"/><attr format="dimension" name="arc_bottom_text_size"/></declare-styleable>
+    <declare-styleable name="CircleProgress"><attr format="integer" name="circle_progress"/><attr format="integer" name="circle_max"/><attr format="color" name="circle_unfinished_color"/><attr format="color" name="circle_finished_color"/><attr format="dimension" name="circle_text_size"/><attr format="color" name="circle_text_color"/><attr format="string" name="circle_prefix_text"/><attr format="string" name="circle_suffix_text"/></declare-styleable>
+    <declare-styleable name="DonutProgress"><attr format="integer" name="donut_progress"/><attr format="integer" name="donut_max"/><attr format="color" name="donut_unfinished_color"/><attr format="color" name="donut_finished_color"/><attr format="dimension" name="donut_finished_stroke_width"/><attr format="dimension" name="donut_unfinished_stroke_width"/><attr format="dimension" name="donut_text_size"/><attr format="color" name="donut_text_color"/><attr format="string" name="donut_prefix_text"/><attr format="string" name="donut_suffix_text"/><attr format="color" name="donut_background_color"/><attr format="string" name="donut_inner_bottom_text"/><attr format="dimension" name="donut_inner_bottom_text_size"/><attr format="color" name="donut_inner_bottom_text_color"/></declare-styleable>
+    <declare-styleable name="Themes"><attr format="reference" name="circleProgressStyle"/><attr format="reference" name="donutProgressStyle"/><attr format="reference" name="arcProgressStyle"/></declare-styleable>
+    <!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="albumitem_content_height">80dp</dimen>
+    <dimen name="albumitem_height">100dp</dimen>
+    <dimen name="albumitem_image_height">20dp</dimen>
+    <dimen name="checkbox_height">25dp</dimen>
+    <dimen name="collection_photo_toolbar_height">45dp</dimen>
+    <dimen name="layout_title_content_heigh">30dp</dimen>
+    <dimen name="layout_title_heigh">45dp</dimen>
+    <dimen name="layout_title_mini_textsize">16sp</dimen>
+    <dimen name="sticky_item_horizontalSpacing">2dp</dimen>
+    <dimen name="sticky_item_verticalSpacing">2dp</dimen>
+    <!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/build/intermediates/exploded-aar/MiaoTu3.0/SupportV4Lib/unspecified/res/values/values.xml -->
+    <eat-comment/>
+    <string name="about_app">About DemoCast Player</string>
+    <!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="app_name">PhotoSelector</string>
+    <!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/build/intermediates/exploded-aar/MiaoTu3.0/SupportV4Lib/unspecified/res/values/values.xml -->
+    <eat-comment/>
+    <string name="browse_title"><![CDATA[Videos by Your Company]]></string>
+    <string name="buy_1">Buy and Own</string>
+    <string name="buy_2">AT $9.99</string>
+    <string name="error">Error</string>
+    <string name="grid_view">Grid View</string>
+    <string name="init_text">00:00</string>
+    <string name="loading">Loading…</string>
+    <string name="movie">Movie</string>
+    <string name="no_video_found">No video was found</string>
+    <string name="ok">OK</string>
+    <string name="oops">Oops</string>
+    <string name="pause">Pause</string>
+    <string name="personal_settings">Personal Settings</string>
+    <string name="play">Play</string>
+    <string name="play_pause_description">Play Pause Button</string>
+    <string name="popular_header">Popular Videos</string>
+    <string name="preferences">PREFERENCES</string>
+    <string name="related_movies">Related Videos</string>
+    <string name="rent_1">Rent By Day</string>
+    <string name="rent_2">From $1.99</string>
+    <string name="search_results">Search Results</string>
+    <string name="send_feeback">Send Feedback</string>
+    <string name="should_start">shouldStart</string>
+    <string name="start_position">startPosition</string>
+    <string name="stop">Stop</string>
+    <string name="version">Version: %1$s</string>
+    <string name="vertical_grid_title"><![CDATA[Vertical Video Grid]]></string>
+    <string name="video_error_media_load_timeout">Media loading timed out</string>
+    <string name="video_error_server_unaccessible">Media server was not reachable</string>
+    <string name="video_error_unknown_error">Failed to load video</string>
+    <string name="watch_trailer_1">Watch trailer</string>
+    <string name="watch_trailer_2">FREE</string>
+    <!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/btn_checkbox_selector</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+</resources>

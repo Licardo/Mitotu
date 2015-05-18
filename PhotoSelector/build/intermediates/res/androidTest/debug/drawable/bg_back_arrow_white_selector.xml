@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/arrow_left_grey" android:state_pressed="true"/>
+    <item android:drawable="@drawable/arrow_left_grey" android:state_focused="true"/>
+    <item android:drawable="@drawable/arrow_left_grey" />
+
+</selector><!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/src/main/res/drawable/bg_back_arrow_white_selector.xml --><!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/build/intermediates/bundles/debug/res/drawable/bg_back_arrow_white_selector.xml -->

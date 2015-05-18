@@ -1,0 +1,126 @@
+<resources>
+    <string name="app_name">妙途</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_choose_login">ChooseLoginActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_register1">Register1Activity</string>
+    <string name="title_activity_register2">Register2Activity</string>
+    <string name="title_activity_register3">Register3Activity</string>
+
+
+    <!-- 友盟 -->
+    <string name="umeng_example_home_btn_analytics">Analytics</string>
+    <string name="umeng_example_home_btn_xp">XP</string>
+    <string name="umeng_example_home_btn_ad">Ads</string>
+    <string name="umeng_example_home_btn_tools">Tools</string>
+    <string name="umeng_example_home_btn_fb">Feedback</string>
+    <string name="umeng_example_home_btn_update">Update</string>
+    <string name="umeng_example_home_btn_plus">Socialize</string>
+    <string name="umeng_example_home_btn_xp_ufp">Umeng For Publisher</string>
+    <string name="umeng_example_xp_home_btn_container">Container</string>
+    <string name="umeng_example_xp_home_btn_banner">Banner</string>
+    <string name="umeng_example_xp_home_btn_banner_ufp">"Banner\n(UFP)"</string>
+    <string name="umeng_example_xp_home_btn_handler">Handler</string>
+    <string name="umeng_example_xp_home_btn_handler_ufp">"Handler\n(UFP)"</string>
+    <string name="umeng_example_xp_home_btn_tab">Multi-Pages</string>
+    <string name="umeng_example_xp_home_btn_wap">WebView</string>
+    <string name="umeng_example_xp_home_btn_custom">Custom</string>
+    <string name="umeng_example_xp_home_btn_wap_ufp">"WebView\n(UFP)"</string>
+    <string name="umeng_example_xp_home_btn_push_header">Push AD\n(UFP)</string>
+    <string name="umeng_example_xp_home_btn_textlink">Text Link</string>
+    <string name="umeng_example_xp_home_btn_container_header">LargeImage</string>
+    <string name="umeng_example_xp_home_handler_icons">Icons \n(UFP)</string>
+    <string name="umeng_example_fb_home_btn_simple">Simple Demo</string>
+    <string name="actionbar_activity_not_found">Failed to open intent&#8230;</string>
+    <string name="umeng_example_home_hint_wait">Coming soooooon</string>
+    <string name="intro"> The webview before show js call Umeng Analytics APIs</string>
+    <string name="instruction">1.建议旅客购买旅游人身意外险，18至65周岁间保额30万，18周岁以下及65周岁以上者保额5万，保费30元。\n
+		2.团队人数达16人以上成行，如不成行提前五天通知，建议调整出团时间。\n
+		3.此为参考行程，以最终签订合同时出团通知书行程为准。如遇不可抗拒因素或航班变更，团队行程会有所调整。\n
+		4.旅客必须随团游览，不得擅自离团，如离团需支付违约金1800元/人。\n
+		5.通行证如本人保管需带至机场。请自行检查港澳通行证及香港、澳门签注是否齐全及有效期，若由于证件原因导致无法出入境，责任由客人自行承担\n
+		6. 请所有客户留意：港澳购物刷卡退货有5%的手续费损失，并须附有刷卡单才可退货。\n
+		7.行程中所列门票用餐等项目若由于个人或不可抗力原因未使用恕不退款。\n
+		8.由于近期国际油价不断上升，我公司保留由于航空公司上调燃油附加费的原因，调整卖价的权力！\n
+
+		【报名及支付方式】：\n
+		报名请添加微信13082835661（妙途小二），或电话：0571-87756997，13858059810（小丸子）。\n
+		支付方式：支付宝：liuyongna123@hotmail.com 刘永娜，请注明姓名+手机号码\n
+		完成支付即视为报名成功。\n
+
+		【备注】：\n
+		1.违约责任提示：出发前7天至4天（含7天）改期、换线或退团，需按合同支付旅游费用总额50%%；出发前3天至1天（含3天）改期、换线或退团，需按合同支付旅游费用总额60%%；\n
+		2.本次旅行只针对单身人士；\n
+		3.如遇恶劣天气（雷暴/台风），领押队有权决定顺延或取消行程；\n
+		4.本次行程最低出团人数为16人，如至报名截止时间，报名人数不满最低出团人数的，我们将取消行程，全额退还报名费用；\n
+		5.鉴于报名人数众多，原则上以收最终缴费成功为报名成功。</string>
+    <!-- 环信 -->
+    <string name="text_ack_msg">已读</string>
+    <string name="text_delivered_msg">送达</string>
+    <string name="back">返回</string>
+    <string name="save">保存</string>
+    <string name="button_pushtotalk">按住说话</string>
+    <string name="button_send">发送</string>
+    <string name="attach_smile">表情</string>
+    <string name="attach_picture">图片</string>
+    <string name="attach_take_pic">拍照</string>
+    <string name="attach_location">位置</string>
+    <string name="attach_file">文件</string>
+    <string name="attach_voice_call">语音电话</string>
+    <string name="user_card">名片</string>
+    <string name="move_up_to_cancel">手指上滑，取消发送</string>
+    <string name="release_to_cancel">松开手指，取消发送</string>
+    <string name="send_fail">发送消息失败,</string>
+    <string name="delete_message">删除消息</string>
+    <string name="copy_message">复制消息</string>
+    <string name="delete_voice">删除语音</string>
+    <string name="delete_video">删除视频</string>
+    <string name="delete">删除</string>
+    <string name="resend">重发</string>
+    <string name="confirm_resend">确认重发该信息？</string>
+    <string name="connect_failuer_toast">请检查网络或稍候重试</string>
+    <string name="network_unavailable">网络连接不可用，请检查网络</string>
+    <string name="copy">复制</string>
+    <string name="forward">转发</string>
+    <string name="button_logout">退出登录</string>
+    <string name="button_uploadlog">上传运行日志</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="prompt">提示</string>
+    <string name="clear_records">清空记录</string>
+    <string name="clear_all_records">是否清空所有聊天记录？</string>
+    <string name="location_recv">[%1$s的位置]</string>
+    <string name="location_message">位置信息</string>
+    <string name="recording_video">录制视频</string>
+    <string name="location_prefix">[我的位置]</string>
+    <string name="voice">[语音]</string>
+    <string name="picture">[图片]</string>
+    <string name="video">[视频]</string>
+    <string name="file">[文件]</string>
+    <string name="voice_call">[语音通话]</string>
+
+    <string name="button_cancel">取消</string>
+    <string name="button_save">保存</string>
+    <string name="button_search">查找</string>
+    <string name="button_add">添加</string>
+    <string name="search_header">搜</string>
+
+    <string name="network_isnot_available">网络不可用</string>
+    <string name="recoding_fail">录音失败，请重试！</string>
+    <string name="select_contacts">选择联系人</string>
+    <string name="confirm_forward_to">确定转发到：%1$s ?</string>
+    <string name="logout">退出登录</string>
+    <string name="logout_hint">退出后不会删除任何历史数据，下次登录依然可以使用本账号</string>
+    <string name="exit_group_hint">退出后，将不再接收此群聊信息</string>
+    <string name="dissolution_group_hint">退出后，此群将被解散</string>
+    <string name="exit_group">退出</string>
+    <string name="connect_conflict">同一帐号已在其他设备登录</string>
+    <string name="imageview_top_height">top</string>
+    <string name="imageview_bottom_height">bottom</string>
+    <string name="imageview_url">url</string>
+    <string name="icon_user_id">userId</string>
+    <string name="icon_like_flg">likeFlg</string>
+    <string name="like_fans">关注&amp;粉丝</string>
+</resources>
