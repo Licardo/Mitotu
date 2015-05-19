@@ -56,6 +56,8 @@ private View root;
         switch (view.getId()) {
             case R.id.iv_publish:
                 //发布新的旅行
+                Intent publishTogetherIntent = new Intent(getActivity(),PublishTogetherStep1Activity.class);
+                startActivity(publishTogetherIntent);
                 break;
         }
     }
