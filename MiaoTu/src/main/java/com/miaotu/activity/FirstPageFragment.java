@@ -68,7 +68,7 @@ private View root;
                 curPage = 0;
                 if (mTab01 == null) {
                     // 如果MessageFragment为空，则创建一个并添加到界面上
-                    mTab01 = new FirstPageFragment();
+                    mTab01 = new FirstPageTab1Fragment();
                     transaction.add(R.id.id_content, mTab01);
                 } else {
                     // 如果MessageFragment不为空，则直接将它显示出来
@@ -79,7 +79,7 @@ private View root;
                 curPage = 1;
                 if (mTab02 == null) {
                     // 如果MessageFragment为空，则创建一个并添加到界面上
-                    mTab02 = new FirstPageFragment();
+                    mTab02 = new FirstPageTab1Fragment();
                     transaction.add(R.id.id_content, mTab02);
                 } else {
                     // 如果MessageFragment不为空，则直接将它显示出来

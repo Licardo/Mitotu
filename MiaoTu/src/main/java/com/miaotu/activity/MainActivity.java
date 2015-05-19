@@ -390,9 +390,9 @@ public class MainActivity extends BaseFragmentActivity implements
             } else if (v.getId() == R.id.layout_tab_mine) {
                 desPage = 3;
             }
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            /*Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivityForResult(intent, 1);
-            return;
+            return;*/
         }
         resetTabBtn();
         switch (v.getId()) {

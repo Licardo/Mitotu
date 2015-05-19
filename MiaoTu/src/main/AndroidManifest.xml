@@ -40,11 +40,11 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
             android:name=".activity.ChooseLoginActivity"
-            android:label="@string/title_activity_choose_login"
-            android:theme="@style/LoginTheme"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_choose_login"
+            android:screenOrientation="portrait"
+            android:theme="@style/LoginTheme"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -53,61 +53,64 @@
         </activity>
         <activity
             android:name=".activity.LoginActivity"
-            android:label="@string/title_activity_login"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.Register1Activity"
-            android:label="@string/title_activity_register1"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_register1"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.Register2Activity"
-            android:label="@string/title_activity_register2"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_register2"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.Register3Activity"
-            android:label="@string/title_activity_register3"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_register3"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.CityListActivity"
-            android:label="@string/title_activity_register3"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_register3"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/title_activity_register3"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-            android:screenOrientation="portrait"
+            android:label="@string/title_activity_register3"
             android:launchMode="singleTask"
-            >
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.ChatsActivity"
-            android:label="@string/title_activity_register3"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_register3"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.GroupDetailActivity"
-            android:label="@string/title_activity_register3"
             android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-            android:screenOrientation="portrait">
+            android:label="@string/title_activity_register3"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
+        </activity>
+        <activity
+            android:name=".activity.EditUserInfoActivity"
+            android:label="@string/title_activity_edit_user_info" >
         </activity>
     </application>
 
