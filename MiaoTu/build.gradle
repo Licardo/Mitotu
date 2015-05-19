@@ -210,4 +210,5 @@ dependencies {
     compile files('libs/easemobchat_2.1.8.jar')
     compile files('libs/umeng-update-v2.6.0.1.jar')
     compile files('libs/urlimageviewhelper.jar')
+    compile files('libs/Android_Location_V1.3.2.jar')
 }
