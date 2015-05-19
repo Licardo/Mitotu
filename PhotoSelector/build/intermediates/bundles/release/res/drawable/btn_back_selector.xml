@@ -5,4 +5,4 @@
     <item android:state_focused="true" android:drawable="@drawable/bg_title_pressed"/>
     <item android:drawable="@drawable/bg_title_normal"></item>
 
-</selector><!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/src/main/res/drawable/btn_back_selector.xml -->
+</selector><!-- From: file:/D:/miaotu-zh/workspace/MiaoTu3.0/PhotoSelector/src/main/res/drawable/btn_back_selector.xml -->
