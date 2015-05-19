@@ -124,4 +124,5 @@
     <string name="icon_like_flg">likeFlg</string>
     <string name="like_fans">关注&amp;粉丝</string>
     <string name="title_activity_edit_user_info">EditUserInfoActivity</string>
+    <string name="title_activity_publish_together_step1">PublishTogetherStep1Activity</string>
 </resources>
