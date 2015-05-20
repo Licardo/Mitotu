@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/iv_background"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_choose_login"
+            android:visibility="visible" />
+
+        <com.miaotu.view.CircleImageView
+            android:id="@+id/ci_userhead"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/iv_background"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="-15dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/chat_image_selector"
+            app:border_color="#f1f3f6"
+            app:border_width="2dp" />
+
+        <TextView
+            android:id="@+id/tv_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/ci_userhead"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/ci_userhead"
+            android:text="四小美"
+            android:textColor="#646464"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_introduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ci_userhead"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="沿着白云湖游章丘"
+            android:textColor="#646464"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_introduce"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text="259元"
+            android:textColor="#646464"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/tv_tag1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_introduce"
+            android:layout_below="@id/tv_introduce"
+            android:layout_marginTop="10dp"
+            android:text="开车露营"
+            android:textColor="#646464"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_tag2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_tag1"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tv_tag1"
+            android:text="白云湖"
+            android:textColor="#646464"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_tag3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_tag1"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tv_tag2"
+            android:text="自由行"
+            android:textColor="#646464"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_introduce"
+            android:layout_below="@id/tv_tag1"
+            android:layout_marginTop="10dp"
+            android:text="5月20日-5月25日"
+            android:textColor="#646464"
+            android:textSize="10sp" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignLeft="@id/tv_date"
+            android:layout_alignRight="@id/tv_price"
+            android:layout_below="@id/tv_date"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_line" />
+
+        <TextView
+            android:id="@+id/tv_golist"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/view1"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="@string/joinlist"
+            android:textColor="#4d99cb"
+            android:textSize="12sp" />
+    </RelativeLayout>
+</LinearLayout>

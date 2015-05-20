@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <com.miaotu.view.CircleImageView
+            android:id="@+id/ci_userhead"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/location_msg" />
+
+        <TextView
+            android:id="@+id/tv_introduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/ci_userhead"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/ci_userhead"
+            android:singleLine="true"
+            android:text="和朋友出去玩的时候需遇到了这种"
+            android:textColor="#b4b4b4"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/tv_introduce"
+            android:layout_alignLeft="@id/tv_introduce"
+            android:layout_marginBottom="12dp"
+            android:text="四小美"
+            android:textColor="#646464"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_guanzhu" />
+    </RelativeLayout>
+</LinearLayout>

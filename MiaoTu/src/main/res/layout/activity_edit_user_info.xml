@@ -22,7 +22,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <ImageView
                     android:layout_width="20dp"
@@ -44,7 +44,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -70,7 +70,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:background="@drawable/bg_edittext">
 
                 <TextView
@@ -108,7 +108,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:background="@drawable/bg_edittext">
 
                 <TextView

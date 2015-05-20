@@ -221,6 +221,10 @@
             android:name=".activity.PublishTogetherStep1Activity"
             android:label="@string/title_activity_publish_together_step1" >
         </activity>
+        <activity
+            android:name=".activity.PersonCenterActivity"
+            android:label="@string/title_activity_person_center" >
+        </activity>
     </application>
 
 </manifest>
