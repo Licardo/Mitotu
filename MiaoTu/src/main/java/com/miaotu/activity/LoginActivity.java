@@ -16,6 +16,7 @@ import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.model.RegisterInfo;
 import com.miaotu.result.BaseResult;
+import com.miaotu.result.LoginResult;
 import com.miaotu.util.LogUtil;
 import com.miaotu.util.StringUtil;
 
@@ -65,14 +66,21 @@ private void init(){
 }
     //登陆
     private void login(final RegisterInfo registerInfo, final boolean isTel) {
-        new BaseHttpAsyncTask<Void, Void, BaseResult>(this, true) {
+        new BaseHttpAsyncTask<Void, Void, LoginResult>(this, true) {
             @Override
-            protected void onCompleteTask(BaseResult result) {
+            protected void onCompleteTask(LoginResult result) {
                 if(btnLogin==null){
                     return;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     showToastMsg("登陆成功！");
+                    writePreference("uid",result.getUid());
+                    writePreference("token",result.getToken());
+                    writePreference("name",result.getName());
+                    writePreference("age",result.getAge());
+                    writePreference("gender",result.getGender());
+                    writePreference("headphoto",result.getHeadPhoto());
+                    writePreference("job",result.getJob());
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
                 } else {
@@ -89,7 +97,7 @@ private void init(){
             }
 
             @Override
-            protected BaseResult run(Void... params) {
+            protected LoginResult run(Void... params) {
                 return HttpRequestUtil.getInstance().login(registerInfo);
             }
 

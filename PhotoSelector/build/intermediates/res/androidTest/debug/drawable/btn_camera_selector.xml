@@ -5,4 +5,4 @@
     <item android:drawable="@drawable/ic_camera_pressed" android:state_focused="true"/>
     <item android:drawable="@drawable/ic_camera_normal"/>
 
-</selector><!-- From: file:/D:/miaotu-zh/workspace/MiaoTu3.0/PhotoSelector/src/main/res/drawable/btn_camera_selector.xml --><!-- From: file:/D:/miaotu-zh/workspace/MiaoTu3.0/PhotoSelector/build/intermediates/bundles/debug/res/drawable/btn_camera_selector.xml -->
+</selector><!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/src/main/res/drawable/btn_camera_selector.xml --><!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/build/intermediates/bundles/debug/res/drawable/btn_camera_selector.xml -->
