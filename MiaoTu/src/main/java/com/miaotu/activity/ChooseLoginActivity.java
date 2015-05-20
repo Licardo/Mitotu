@@ -242,14 +242,21 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
     }
     //登陆
     private void login(final RegisterInfo registerInfo) {
-        new BaseHttpAsyncTask<Void, Void, BaseResult>(ChooseLoginActivity.this, true) {
+        new BaseHttpAsyncTask<Void, Void, LoginResult>(ChooseLoginActivity.this, true) {
             @Override
-            protected void onCompleteTask(BaseResult result) {
+            protected void onCompleteTask(LoginResult result) {
                 if(btnLogin==null){
                     return;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     showToastMsg("登陆成功！");
+                    writePreference("uid",result.getUid());
+                    writePreference("token",result.getToken());
+                    writePreference("name",result.getName());
+                    writePreference("age",result.getAge());
+                    writePreference("gender",result.getGender());
+                    writePreference("headphoto",result.getHeadPhoto());
+                    writePreference("job",result.getJob());
                     Intent intent = new Intent(ChooseLoginActivity.this,MainActivity.class);
                     startActivity(intent);
                 } else {
@@ -259,7 +266,7 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
             }
 
             @Override
-            protected BaseResult run(Void... params) {
+            protected LoginResult run(Void... params) {
                 return HttpRequestUtil.getInstance().login(registerInfo);
             }
 

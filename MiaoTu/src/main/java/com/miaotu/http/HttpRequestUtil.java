@@ -16,6 +16,7 @@ import com.miaotu.annotation.FormProperty;
 import com.miaotu.annotation.Ignore;
 import com.miaotu.model.RegisterInfo;
 import com.miaotu.result.BaseResult;
+import com.miaotu.result.LoginResult;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 
@@ -59,7 +60,7 @@ public class HttpRequestUtil {
 	 * @param registerInfo
 	 * @return
 	 */
-    public BaseResult login (RegisterInfo registerInfo){
+    public LoginResult login (RegisterInfo registerInfo){
         List<NameValuePair> params = new ArrayList<NameValuePair>();
 		if(!StringUtil.isEmpty(registerInfo.getPhone())){
 			params.add(new BasicNameValuePair("phone", registerInfo.getPhone()));
@@ -77,7 +78,7 @@ public class HttpRequestUtil {
 			params.add(new BasicNameValuePair("openid", registerInfo.getOpenid()));
 		}
         return HttpDecoder.getForObject(
-				getUrl("base/user"), BaseResult.class,
+				getUrl("base/user"), LoginResult.class,
 				params);
 
     }

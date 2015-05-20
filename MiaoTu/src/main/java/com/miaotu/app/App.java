@@ -332,7 +332,7 @@ public class App extends Application implements
 //					+ amapLocation.getLongitude() + " 城市 " + amapLocation.getCity());
 			writePreference("latitude", amapLocation.getLatitude() + "");
 			writePreference("longitude",amapLocation.getLongitude() +"");
-			writePreference("city",amapLocation.getCity() +"");
+			writePreference("located_city",amapLocation.getCity() +"");
 //			mLocationCountyTextView.setText(amapLocation.getDistrict());
 //			mLocationRoadTextView.setText(amapLocation.getRoad());
 //			mLocationPOITextView.setText(amapLocation.getPoiName());

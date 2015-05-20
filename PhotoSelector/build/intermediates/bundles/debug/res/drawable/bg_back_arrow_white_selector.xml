@@ -5,4 +5,4 @@
     <item android:drawable="@drawable/arrow_left_grey" android:state_focused="true"/>
     <item android:drawable="@drawable/arrow_left_grey" />
 
-</selector><!-- From: file:/D:/miaotu-zh/workspace/MiaoTu3.0/PhotoSelector/src/main/res/drawable/bg_back_arrow_white_selector.xml -->
+</selector><!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/src/main/res/drawable/bg_back_arrow_white_selector.xml -->
