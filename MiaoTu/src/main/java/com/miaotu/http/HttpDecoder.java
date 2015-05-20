@@ -189,7 +189,10 @@ public class HttpDecoder {
 		HttpParams ps = new BasicHttpParams();
 		ConnManagerParams.setTimeout(ps, 5000);
 		ConnManagerParams.setMaxTotalConnections(ps, 10);
+
 		HttpProtocolParams.setVersion(ps, HttpVersion.HTTP_1_1);
+
+		HttpProtocolParams.setUserAgent(ps,"miaotu");
 
 		// Create and initialize scheme registry
 		SchemeRegistry schemeRegistry = new SchemeRegistry();
@@ -210,8 +213,22 @@ public class HttpDecoder {
 			HttpResponse response = mClient.execute(method, localcontext);
 			// 请求成功
 			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-				result = mapper.readValue(response
-						.getEntity().getContent(), clz);
+				BufferedReader reader = null;
+				StringBuffer sb = null;
+				reader = new BufferedReader(new InputStreamReader(response
+						.getEntity().getContent()));
+				sb = new StringBuffer();
+				String line = "";
+				// String NL = System.getProperty("line.separator");
+				while ((line = reader.readLine()) != null) {
+					sb.append(line);
+				}
+//				result = mapper.readValue(response
+//						.getEntity().getContent(), clz);
+				if (null != sb) {
+					result = mapper.readValue(sb.toString(), clz);
+				}
+				LogUtil.d(sb.toString());
 			}
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
@@ -301,8 +318,7 @@ public class HttpDecoder {
     	    // See this:
     	    // http://groups.google.com/group/twitter-development-talk/browse_thread/thread/e178b1d3d63d8e3b
     	    post.getParams().setBooleanParameter(
-    		    "http.protocol.expect-continue", false);
-
+					"http.protocol.expect-continue", false);
     		HttpEntity entity = null;
     		if (null != files) {
     		    List<String> filenames = new ArrayList<String>(files.size());

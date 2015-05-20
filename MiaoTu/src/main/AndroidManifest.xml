@@ -219,11 +219,18 @@
 
         <activity
             android:name=".activity.PublishTogetherStep1Activity"
-            android:label="@string/title_activity_publish_together_step1" >
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_publish_together_step1"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.PersonCenterActivity"
             android:label="@string/title_activity_person_center" >
+        </activity>
+        <activity
+            android:name=".activity.PublishTogetherStep2Activity"
+            android:label="@string/title_activity_publish_together_step2" >
         </activity>
     </application>
 
