@@ -13,4 +13,14 @@ import java.util.List;
  *
  */
 public class PhotoUploadResult extends BaseResult {
+    @JsonProperty("items")
+    private List<String>photoList;
+
+    public List<String> getPhotoList() {
+        return photoList;
+    }
+
+    public void setPhotoList(List<String> photoList) {
+        this.photoList = photoList;
+    }
 }

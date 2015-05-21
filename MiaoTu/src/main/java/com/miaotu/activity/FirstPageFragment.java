@@ -27,6 +27,7 @@ private View root;
         root = inflater.inflate(R.layout.fragment_first_page, container, false);
         findView();
         bindView();
+        init();
         return root;
     }
 
@@ -44,6 +45,7 @@ private View root;
 
     private void init() {
         fragmentManager = getChildFragmentManager();
+        setTabSelection(1);
     }
 
 
