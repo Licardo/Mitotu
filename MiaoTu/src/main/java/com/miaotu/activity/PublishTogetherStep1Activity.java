@@ -29,6 +29,7 @@ import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.form.PublishTogether;
 import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.result.BaseResult;
+import com.miaotu.result.PhotoUploadResult;
 import com.miaotu.util.LogUtil;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
@@ -65,6 +66,7 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
     private LinearLayout layoutNext;
     private Button btnTagAdd;
     private WheelTwoColumnDialog dialog;
+    PublishTogether publishTogether;
     public static DisplayImageOptions imageOptions = new DisplayImageOptions.Builder()
             .showImageOnLoading(com.photoselector.R.drawable.ic_picture_loading)
             .showImageOnFail(com.photoselector.R.drawable.ic_picture_loadfailed)
@@ -145,6 +147,7 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
         files = new ArrayList<>();
         tvStartDate.setText(Calendar.getInstance().get(Calendar.YEAR) + "-" + (Calendar.getInstance().get(Calendar.MONTH) + 1) + "-" + Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         tvEndDate.setText(Calendar.getInstance().get(Calendar.YEAR) + "-" + (Calendar.getInstance().get(Calendar.MONTH) + 1) + "-" + Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        publishTogether = new PublishTogether();
     }
 
     // 获取生日dialog
@@ -234,7 +237,7 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
     }
     private void next(){
         Intent intent = new Intent(PublishTogetherStep1Activity.this,PublishTogetherStep2Activity.class);
-        PublishTogether publishTogether = new PublishTogether();
+
         publishTogether.setDesCity(tvDesCity.getText().toString());
         publishTogether.setOriginCity(tvOriginCity.getText().toString());
         publishTogether.setOriginLocation(tvGatherLocation.getText().toString());
@@ -275,14 +278,21 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
         if(gifFlg){
             return;
         }
-        new BaseHttpAsyncTask<Void, Void, BaseResult>(PublishTogetherStep1Activity.this, true) {
+        new BaseHttpAsyncTask<Void, Void, PhotoUploadResult>(PublishTogetherStep1Activity.this, true) {
             @Override
-            protected void onCompleteTask(BaseResult result) {
+            protected void onCompleteTask(PhotoUploadResult result) {
                 if(tvPhotoNum==null){
                     return;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     showToastMsg("图片上传成功！");
+
+                    String img = "";
+                    for(String temp:result.getPhotoList()){
+                        img+=(temp+",");
+                    }
+                    img.substring(0,img.length()-1);
+                    publishTogether.setImg(img);
                     next();
                 } else {
                     if (StringUtil.isEmpty(result.getMsg())) {
@@ -294,7 +304,7 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
             }
 
             @Override
-            protected BaseResult run(Void... params) {
+            protected PhotoUploadResult run(Void... params) {
                 return HttpRequestUtil.getInstance().uploadPhoto(files);
             }
         }.execute();
