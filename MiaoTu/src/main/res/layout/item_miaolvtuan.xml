@@ -24,7 +24,6 @@
             android:layout_below="@id/iv_background"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="-15dp"
-            android:scaleType="fitCenter"
             android:src="@drawable/chat_image_selector"
             app:border_color="#f1f3f6"
             app:border_width="2dp" />

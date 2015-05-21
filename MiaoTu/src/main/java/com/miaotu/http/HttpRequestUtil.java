@@ -14,6 +14,7 @@ import android.util.Log;
 
 import com.miaotu.annotation.FormProperty;
 import com.miaotu.annotation.Ignore;
+import com.miaotu.model.PersonInfoResult;
 import com.miaotu.form.PublishTogether;
 import com.miaotu.model.RegisterInfo;
 import com.miaotu.model.Together;
@@ -21,7 +22,6 @@ import com.miaotu.result.BaseResult;
 import com.miaotu.result.LoginResult;
 import com.miaotu.result.PhotoUploadResult;
 import com.miaotu.util.StringUtil;
-import com.miaotu.util.Util;
 
 @SuppressLint("SimpleDateFormat")
 public class HttpRequestUtil {
@@ -254,6 +254,19 @@ public class HttpRequestUtil {
 			f.setAccessible(accessFlag);
 		}
 		return data;
+	}
+
+	/**
+	 * 获取用户个人信息
+	 * @param token
+	 * @param uid
+	 * @return
+	 */
+	public PersonInfoResult getPersonInfo(String token, String uid){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("uid", uid));
+		return HttpDecoder.getForObject(getUrl("user"), PersonInfoResult.class, params);
 	}
 
 }

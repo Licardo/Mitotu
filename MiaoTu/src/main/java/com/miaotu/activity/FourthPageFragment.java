@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.miaotu.R;
 import com.miaotu.util.Util;
@@ -18,10 +19,13 @@ private View root;
     private FirstPageTab1Fragment mTab01 ;
     private FirstPageTab1Fragment mTab02 ;
     private int curPage;
+
+    private RelativeLayout rl_userinfo;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_first_page, container, false);
+        root = inflater.inflate(R.layout.fragment_fourth_page, container, false);
         findView();
         bindView();
         return root;
@@ -35,6 +39,8 @@ private View root;
     private void bindView() {
             }
     private void findView() {
+        rl_userinfo = (RelativeLayout) root.findViewById(R.id.rl_userinfo);
+        rl_userinfo.setOnClickListener(this);
     }
 
     private void init() {
@@ -49,7 +55,13 @@ private View root;
             return;
         }
         switch (view.getId()) {
-
+            case R.id.rl_userinfo:
+                Intent intent = new Intent();
+                intent.setClass(FourthPageFragment.this.getActivity(), PersonCenterActivity.class);
+                startActivity(intent);
+                break;
+            default:
+                break;
         }
     }
     /**
