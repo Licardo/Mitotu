@@ -52,6 +52,8 @@ private void publish(){
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     showToastMsg("发布成功！");
+                    setResult(1);
+                    finish();
                 } else {
                     if (StringUtil.isEmpty(result.getMsg())) {
                         showToastMsg("发布失败！");

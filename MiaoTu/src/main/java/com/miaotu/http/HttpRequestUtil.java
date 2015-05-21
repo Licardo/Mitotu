@@ -150,6 +150,24 @@ public class HttpRequestUtil {
 				params);
 
 	}
+
+	/**
+	 * 获取约游列表
+	 * @param token
+	 * @param page
+	 * @param num
+	 * @return
+	 */
+    public BaseResult getTogetherList (String token,String page,String num){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("page", page));
+		params.add(new BasicNameValuePair("num", num));
+        return HttpDecoder.getForObject(
+				getUrl("yueyou/list"), BaseResult.class,
+				params);
+
+	}
 	/**
 	 * 发布一起去
 	 * @param together

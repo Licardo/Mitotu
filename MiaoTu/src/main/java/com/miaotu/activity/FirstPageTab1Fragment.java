@@ -16,6 +16,12 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.miaotu.R;
 import com.miaotu.adapter.TogetherlistAdapter;
+import com.miaotu.async.BaseHttpAsyncTask;
+import com.miaotu.http.HttpRequestUtil;
+import com.miaotu.model.RegisterInfo;
+import com.miaotu.result.BaseResult;
+import com.miaotu.result.LoginResult;
+import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 
 public class FirstPageTab1Fragment extends BaseFragment implements View.OnClickListener {
@@ -30,6 +36,7 @@ private View root;
         head = inflater.inflate(R.layout.together_head,null);
         findView();
         bindView();
+        init();
         return root;
     }
 
@@ -94,9 +101,33 @@ private View root;
         lvPull.getRefreshableView().addHeaderView(head);
 //        adapter = new TogetherlistAdapter();
         lvPull.setAdapter(adapter);
+        getTogether(true);
     }
+//获取一起去
+    private void getTogether(final boolean isShow) {
+        new BaseHttpAsyncTask<Void, Void, BaseResult>(getActivity(), isShow) {
+            @Override
+            protected void onCompleteTask(BaseResult result) {
+                if(root==null){
+                    return;
+                }
+                if (result.getCode() == BaseResult.SUCCESS) {
+                } else {
+                    if(StringUtil.isEmpty(result.getMsg())){
+                        showToastMsg("获取约游列表失败！");
+                    }else{
+                        showToastMsg(result.getMsg());
+                    }
+                }
+            }
 
+            @Override
+            protected BaseResult run(Void... params) {
+                return HttpRequestUtil.getInstance().getTogetherList(readPreference("token"),"1","2");
+            }
 
+        }.execute();
+    }
     @Override
     public void onClick(View view) {
         if(!Util.isNetworkConnected(getActivity())) {

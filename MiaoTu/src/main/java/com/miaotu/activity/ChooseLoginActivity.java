@@ -250,13 +250,13 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     showToastMsg("登陆成功！");
-                    writePreference("uid",result.getUid());
-                    writePreference("token",result.getToken());
-                    writePreference("name",result.getName());
-                    writePreference("age",result.getAge());
-                    writePreference("gender",result.getGender());
-                    writePreference("headphoto",result.getHeadPhoto());
-                    writePreference("job",result.getJob());
+                    writePreference("uid", result.getLogin().getUid());
+                    writePreference("token",result.getLogin().getToken());
+                    writePreference("name",result.getLogin().getName());
+                    writePreference("age",result.getLogin().getAge());
+                    writePreference("gender",result.getLogin().getGender());
+                    writePreference("headphoto",result.getLogin().getHeadPhoto());
+                    writePreference("job",result.getLogin().getJob());
                     Intent intent = new Intent(ChooseLoginActivity.this,MainActivity.class);
                     startActivity(intent);
                 } else {

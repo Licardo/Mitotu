@@ -256,7 +256,7 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
         publishTogether.setTags(tags);
 
         intent.putExtra("publishTogether",publishTogether);
-        startActivity(intent);
+        startActivityForResult(intent,4);
     }
     private void uploadPhoto(){
         files.clear();
@@ -285,8 +285,6 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
                     return;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
-                    showToastMsg("图片上传成功！");
-
                     String img = "";
                     for(String temp:result.getPhotoList()){
                         img+=(temp+",");
@@ -387,6 +385,9 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
 //                dgv.getChildAt(dgv.getChildCount()-1).setVisibility(View.VISIBLE);
             }
         }
+        if(requestCode==4&&resultCode==1){
+            finish();
+        }
 
     }
     @Override
@@ -438,7 +439,6 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
                 break;
             case R.id.layout_next:
                 //下一步
-                next();
                 if(validate()){
                     if(photoList.size()==0){
                         next();
