@@ -60,7 +60,7 @@ public class MainActivity extends BaseFragmentActivity implements
     private FirstPageFragment mTab01 ;
     private FirstPageFragment mTab02 ;
     private FirstPageFragment mTab03 ;
-    private FirstPageFragment mTab04 ;
+    private FourthPageFragment mTab04 ;
 
     private FragmentManager fragmentManager;
 
@@ -309,7 +309,7 @@ public class MainActivity extends BaseFragmentActivity implements
                                 R.color.text_orange));
                 if (mTab04 == null) {
                     // 如果SettingFragment为空，则创建一个并添加到界面上
-                    mTab04 = new FirstPageFragment();
+                    mTab04 = new FourthPageFragment();
                     transaction.add(R.id.id_content, mTab04);
                 } else {
                     // 如果SettingFragment不为空，则直接将它显示出来

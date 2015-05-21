@@ -55,12 +55,11 @@
                     android:textColor="#646464"
                     android:textSize="14sp" />
 
-                <ImageView
+                <com.miaotu.view.CircleImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="20dp"
-                    android:scaleType="fitCenter"
                     android:src="@drawable/chat_file_normal" />
             </RelativeLayout>
 

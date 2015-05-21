@@ -1,6 +1,5 @@
 package com.miaotu.http;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,15 +9,14 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
-import android.util.Log;
 
 import com.miaotu.annotation.FormProperty;
 import com.miaotu.annotation.Ignore;
+import com.miaotu.model.PersonInfoResult;
 import com.miaotu.model.RegisterInfo;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.LoginResult;
 import com.miaotu.util.StringUtil;
-import com.miaotu.util.Util;
 
 @SuppressLint("SimpleDateFormat")
 public class HttpRequestUtil {
@@ -230,6 +228,19 @@ public class HttpRequestUtil {
 			f.setAccessible(accessFlag);
 		}
 		return data;
+	}
+
+	/**
+	 * 获取用户个人信息
+	 * @param token
+	 * @param uid
+	 * @return
+	 */
+	public PersonInfoResult getPersonInfo(String token, String uid){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("uid", uid));
+		return HttpDecoder.getForObject(getUrl("user"), PersonInfoResult.class, params);
 	}
 
 }

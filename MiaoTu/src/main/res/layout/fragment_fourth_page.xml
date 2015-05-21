@@ -25,6 +25,7 @@
         android:background="@drawable/bg_line" />
 
     <RelativeLayout
+        android:id="@+id/rl_userinfo"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:background="@android:color/white">
@@ -35,7 +36,6 @@
             android:layout_height="60dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:scaleType="fitCenter"
             android:src="@drawable/location_msg" />
 
         <RelativeLayout
