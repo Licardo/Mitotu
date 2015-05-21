@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:f="http://schemas.android.com/tools"
     android:layout_height="match_parent"
     tools:context="com.miaotu.activity.PublishTogetherStep1Activity">
     <include layout="@layout/top_bar"
@@ -489,6 +490,7 @@
                     android:textSize="14sp"
                     android:textColor="#646464"
                     android:maxLength="10"
+                    android:paddingLeft="5dp"
                     />
                 <Button
                     android:id="@+id/btn_tag_add"
@@ -532,9 +534,10 @@
                     android:background="@drawable/icon_photo"
                     />
                 <TextView
+                    android:id="@+id/tv_photo_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="你还可以插入5张图片"
+                    android:text="你还可以插入9张图片"
                     android:textSize="14sp"
                     android:textColor="#646464"
                     />
