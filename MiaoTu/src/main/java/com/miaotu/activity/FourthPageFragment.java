@@ -2,6 +2,7 @@ package com.miaotu.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.miaotu.R;
 import com.miaotu.util.Util;
@@ -20,6 +22,7 @@ private View root;
     private FirstPageTab1Fragment mTab02 ;
     private int curPage;
 
+    private TextView tv_username,tv_userage,tv_iden;
     private RelativeLayout rl_userinfo;
 
     @Override
@@ -40,7 +43,16 @@ private View root;
             }
     private void findView() {
         rl_userinfo = (RelativeLayout) root.findViewById(R.id.rl_userinfo);
+        tv_iden = (TextView) root.findViewById(R.id.tv_iden);
+        tv_userage = (TextView) root.findViewById(R.id.tv_userage);
+        tv_username = (TextView) root.findViewById(R.id.tv_username);
         rl_userinfo.setOnClickListener(this);
+        String identity = readPreference("job");
+        String age = readPreference("age");
+        String name = readPreference("name");
+        tv_iden.setText(identity);
+        tv_userage.setText(age);
+        tv_username.setText(name);
     }
 
     private void init() {
@@ -120,5 +132,18 @@ private View root;
         if (requestCode == 3 && resultCode == 1) {
             ((MainActivity) getActivity()).writePreference("movement_city", data.getStringExtra("city"));
         }
+    }
+
+    /**
+     * SharedPreferences工具方法,用来读取一个值 如果没有读取到，会返回""
+     *
+     * @param key
+     * @return
+     */
+    public String readPreference(String key) {
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(BaseActivity.NAME_COMMON,
+                BaseActivity.MODE_PRIVATE);
+        String value = sharedPreferences.getString(key, "");
+        return value;
     }
 }

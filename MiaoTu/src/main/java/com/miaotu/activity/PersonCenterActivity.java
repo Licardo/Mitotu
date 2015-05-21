@@ -1,11 +1,7 @@
 package com.miaotu.activity;
 
-import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -17,13 +13,11 @@ import com.miaotu.result.BaseResult;
 import com.miaotu.util.StringUtil;
 import com.miaotu.view.FlowLayout;
 
-import static android.view.View.*;
-
-public class PersonCenterActivity extends BaseActivity implements OnClickListener {
+public class PersonCenterActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView tv_username,tv_identity,tv_content_gender,tv_content_age,
             tv_content_address,tv_content_emotion,tv_content_job,tv_content_wantgo,
-            tv_left,tv_title,tv_right;
+            tv_left,tv_title,tv_right,tv_top_emotion,tv_top_wantgo;
     private FlowLayout fl_tag;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +40,15 @@ public class PersonCenterActivity extends BaseActivity implements OnClickListene
         tv_content_job = (TextView) this.findViewById(R.id.tv_content_job);
         tv_content_wantgo = (TextView) this.findViewById(R.id.tv_content_wantgo);
         tv_username = (TextView) this.findViewById(R.id.tv_username);
+        tv_top_emotion = (TextView) this.findViewById(R.id.tv_top_emotion);
+        tv_top_wantgo = (TextView) this.findViewById(R.id.tv_top_wantgo);
         fl_tag = (FlowLayout) this.findViewById(R.id.fl_tag);
 
-        View view = this.findViewById(R.id.title);
-        tv_title = (TextView) view.findViewById(R.id.tv_title);
-        tv_left = (TextView) view.findViewById(R.id.tv_left);
-        tv_right = (TextView) view.findViewById(R.id.tv_right);
-        tv_right.setVisibility(GONE);
+//        View view = this.findViewById(R.id.title);
+        tv_title = (TextView) this.findViewById(R.id.tv_title);
+        tv_left = (TextView) this.findViewById(R.id.tv_left);
+        tv_right = (TextView) this.findViewById(R.id.tv_right);
+        tv_right.setVisibility(View.GONE);
         tv_title.setText("个人主页");
 //        tv_left.setOnClickListener(this);
     }
@@ -65,9 +61,11 @@ public class PersonCenterActivity extends BaseActivity implements OnClickListene
         tv_content_address.setText(personInfoResult.getAddress());
         tv_content_age.setText(personInfoResult.getAge());
         tv_content_emotion.setText(personInfoResult.getMaritalstatus());
+        tv_top_emotion.setText(personInfoResult.getMaritalstatus());
         tv_content_gender.setText(personInfoResult.getGender());
         tv_content_job.setText(personInfoResult.getWork());
         tv_content_wantgo.setText(personInfoResult.getWantgo());
+        tv_top_wantgo.setText(personInfoResult.getWantgo());
         tv_identity.setText(personInfoResult.getWork());
         tv_username.setText(personInfoResult.getNickname());
 

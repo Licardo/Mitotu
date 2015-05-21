@@ -78,6 +78,26 @@
                     android:text="学生"
                     android:textColor="#b4b4b4"
                     android:textSize="10sp" />
+                <TextView
+                    android:id="@+id/tv_top_emotion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/tv_identity"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/tv_identity"
+                    android:text="单身"
+                    android:textColor="#b4b4b4"
+                    android:textSize="10sp" />
+                <TextView
+                    android:id="@+id/tv_top_wantgo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/tv_top_emotion"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/tv_top_emotion"
+                    android:text="白云湖"
+                    android:textColor="#b4b4b4"
+                    android:textSize="10sp" />
             </RelativeLayout>
 
             <View
