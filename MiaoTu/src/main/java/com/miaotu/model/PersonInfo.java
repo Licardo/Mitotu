@@ -1,14 +1,11 @@
 package com.miaotu.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.miaotu.result.BaseResult;
-
-import java.io.Serializable;
 
 /**
- * Created by Jayden on 2015/5/20.
+ * Created by Jayden on 2015/5/21.
  */
-public class PersonInfoResult extends BaseResult implements Serializable {
+public class PersonInfo {
     @JsonProperty("Id")
     private String id;
     @JsonProperty("Phone")

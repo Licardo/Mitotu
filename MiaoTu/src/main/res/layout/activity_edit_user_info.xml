@@ -5,7 +5,7 @@
     android:background="#f1f3f6"
     android:orientation="vertical">
 
-    <include layout="@layout/layout_titlebar" />
+    <include layout="@layout/top_bar" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -94,7 +94,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/view1"
-                    android:background="#f1f3f6"
+                    android:background="#f1f1f1"
                     android:gravity="center_vertical"
                     android:text="卡莲"
                     android:textColor="#646464"
@@ -133,7 +133,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/view2"
-                    android:background="#f1f3f6"
+                    android:background="#f1f1f1"
                     android:gravity="center_vertical"
                     android:text="女"
                     android:textColor="#646464"
@@ -171,7 +171,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/view3"
-                    android:background="#f1f3f6"
+                    android:background="#f1f1f1"
                     android:gravity="center_vertical"
                     android:hint="请输入您的年龄"
                     android:text=""
@@ -210,7 +210,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/view4"
-                    android:background="#f1f3f6"
+                    android:background="#f1f1f1"
                     android:gravity="center_vertical"
                     android:text="杭州"
                     android:textColor="#646464"
@@ -254,7 +254,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/view5"
-                    android:background="#f1f3f6"
+                    android:background="#f1f1f1"
                     android:gravity="center_vertical"
                     android:hint="请输入您的情感状态"
                     android:textColor="#646464"
@@ -292,7 +292,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/view6"
-                    android:background="#f1f3f6"
+                    android:background="#f1f1f1"
                     android:gravity="center_vertical"
                     android:hint="请输入您的职业"
                     android:textColor="#646464"
@@ -330,7 +330,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/view7"
-                    android:background="#f1f3f6"
+                    android:background="#f1f1f1"
                     android:gravity="center_vertical"
                     android:hint="请输入您想去的地方"
                     android:textColor="#646464"
@@ -350,7 +350,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bg_edittext"
                     android:paddingLeft="10dp"
-                    android:text="请添加您的标签"
+                    android:hint="请添加您的标签"
                     android:textColor="#b4b4b4"
                     android:textSize="12sp" />
 
@@ -367,6 +367,7 @@
             </RelativeLayout>
 
             <com.miaotu.view.FlowLayout
+                android:id="@+id/fl_tags"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
@@ -376,15 +377,7 @@
                 f:layoutDirection="ltr"
                 f:weightDefault="1.0">
 
-                <include layout="@layout/item_tag" />
-                <include layout="@layout/item_tag" />
-                <include layout="@layout/item_tag" />
-                <include layout="@layout/item_tag" />
-                <include layout="@layout/item_tag" />
-                <include layout="@layout/item_tag" />
-                <include layout="@layout/item_tag" />
-
-                <include layout="@layout/item_tag" />
+                <!--<include layout="@layout/item_tag" />-->
             </com.miaotu.view.FlowLayout>
 
             <TextView
@@ -394,26 +387,19 @@
                 android:layout_marginTop="20dp"
                 android:text="热门标签"
                 android:textColor="#dcdcdc"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:visibility="gone"/>
 
-            <!--<LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="10dp">
-
-                <include layout="@layout/item_hottag" />
-            </LinearLayout>-->
             <com.miaotu.view.FlowLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="20dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
                 f:debugDraw="true"
                 f:layoutDirection="ltr"
-                f:weightDefault="1.0">
+                f:weightDefault="1.0"
+                android:visibility="gone">
                 <include layout="@layout/item_hottag" />
                 <include layout="@layout/item_hottag" />
 

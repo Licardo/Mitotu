@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/title"
-        layout="@layout/layout_titlebar" />
+        layout="@layout/top_bar" />
 
     <ScrollView
         android:id="@+id/sv_conent"
@@ -65,8 +65,8 @@
                     android:layout_alignLeft="@id/tv_username"
                     android:layout_below="@id/tv_username"
                     android:layout_marginTop="8dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/mine_girl" />
+                    android:scaleType="fitXY"
+                    android:background="@drawable/mine_girl" />
 
                 <TextView
                     android:id="@+id/tv_identity"
@@ -530,7 +530,8 @@
                 android:layout_height="1dp"
                 android:background="@drawable/bg_line" />
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/ll_tag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white">
@@ -538,8 +539,7 @@
                 <TextView
                     android:id="@+id/tv_tag"
                     android:layout_width="77dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_height="34dp"
                     android:gravity="center"
                     android:text="标签"
                     android:textColor="#b4b4b4"
@@ -548,23 +548,22 @@
                 <View
                     android:id="@+id/view7"
                     android:layout_width="1dp"
-                    android:layout_height="20dp"
-                    android:layout_centerVertical="true"
+                    android:layout_height="match_parent"
                     android:layout_toRightOf="@id/tv_tag"
+                    android:layout_marginTop="9dp"
+                    android:layout_marginBottom="9dp"
                     android:background="#dcdcdc" />
 
                 <com.miaotu.view.FlowLayout
                     android:id="@+id/fl_tag"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="9dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="9dp"
-                    android:layout_toRightOf="@id/view7"
+                    android:layout_toRightOf="@id/view7">
+                    <!--f:weightDefault="1.0"
                     f:debugDraw="true"
-                    f:layoutDirection="ltr"
-                    f:weightDefault="1.0">
-
+                    f:layoutDirection="ltr"-->
                     <!--<include layout="@layout/item_hottag" />
 
                     <include layout="@layout/item_hottag" />
@@ -572,7 +571,7 @@
                     <include layout="@layout/item_hottag" />-->
 
                 </com.miaotu.view.FlowLayout>
-            </RelativeLayout>
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"

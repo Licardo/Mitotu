@@ -3,12 +3,14 @@ package com.miaotu.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,8 +24,10 @@ private View root;
     private FirstPageTab1Fragment mTab02 ;
     private int curPage;
 
+    private ImageView iv_usergender;
     private TextView tv_username,tv_userage,tv_iden;
-    private RelativeLayout rl_userinfo;
+    private RelativeLayout rl_userinfo,rl_homepage;
+    private TextView tv_left, tv_title, tv_right;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,14 +46,27 @@ private View root;
     private void bindView() {
             }
     private void findView() {
+        tv_title = (TextView) root.findViewById(R.id.tv_title);
+        tv_left = (TextView) root.findViewById(R.id.tv_left);
+        tv_right = (TextView) root.findViewById(R.id.tv_right);
         rl_userinfo = (RelativeLayout) root.findViewById(R.id.rl_userinfo);
+        rl_homepage = (RelativeLayout) root.findViewById(R.id.rl_homepage);
         tv_iden = (TextView) root.findViewById(R.id.tv_iden);
         tv_userage = (TextView) root.findViewById(R.id.tv_userage);
         tv_username = (TextView) root.findViewById(R.id.tv_username);
+        iv_usergender = (ImageView) root.findViewById(R.id.iv_usergender);
         rl_userinfo.setOnClickListener(this);
+        rl_homepage.setOnClickListener(this);
+        tv_right.setVisibility(View.GONE);
+        tv_left.setVisibility(View.GONE);
+        tv_title.setText("我的");
         String identity = readPreference("job");
         String age = readPreference("age");
         String name = readPreference("name");
+        String gender = readPreference("gender");
+        if("男".equals(gender)){
+            iv_usergender.setBackgroundResource(R.drawable.mine_boy);
+        }
         tv_iden.setText(identity);
         tv_userage.setText(age);
         tv_username.setText(name);
@@ -66,15 +83,18 @@ private View root;
             showToastMsg("当前未联网，请检查网络设置");
             return;
         }
+        Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.rl_userinfo:
-                Intent intent = new Intent();
+                intent.setClass(FourthPageFragment.this.getActivity(), EditUserInfoActivity.class);
+                break;
+            case R.id.rl_homepage:
                 intent.setClass(FourthPageFragment.this.getActivity(), PersonCenterActivity.class);
-                startActivity(intent);
                 break;
             default:
                 break;
         }
+        startActivity(intent);
     }
     /**
      * 根据传入的index参数来设置选中的tab页。

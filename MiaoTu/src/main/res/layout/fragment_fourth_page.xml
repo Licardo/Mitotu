@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@drawable/bg_line"/>-->
-    <include layout="@layout/layout_titlebar"></include>
+    <include layout="@layout/top_bar"></include>
 
     <View
         android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                 android:layout_below="@id/tv_username"
                 android:layout_marginTop="6dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/mine_girl" />
+                android:background="@drawable/mine_girl" />
 
             <TextView
                 android:id="@+id/tv_userage"
@@ -117,17 +117,16 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="10dp"
         android:background="@drawable/bg_line" />
-
     <RelativeLayout
-        android:id="@+id/rl_yiqiqu"
+        android:id="@+id/rl_homepage"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:layout_marginTop="10dp"
         android:background="@android:color/white">
 
         <ImageView
-            android:id="@+id/iv_zhuye"
+            android:id="@+id/iv_homepage"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_centerVertical="true"
@@ -140,7 +139,53 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/iv_zhuye"
+            android:layout_toRightOf="@id/iv_homepage"
+            android:text="个人主页"
+            android:textColor="#646464"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_go" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/bg_line" />
+
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/bg_line" />
+
+    <RelativeLayout
+        android:id="@+id/rl_together"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@android:color/white">
+
+        <ImageView
+            android:id="@+id/iv_together"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/mine_faqide" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_together"
             android:text="一起去"
             android:textColor="#646464"
             android:textSize="14sp" />

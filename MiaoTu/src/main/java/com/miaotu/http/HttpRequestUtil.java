@@ -10,14 +10,13 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
-import android.util.Log;
 
 import com.miaotu.annotation.FormProperty;
 import com.miaotu.annotation.Ignore;
-import com.miaotu.model.PersonInfoResult;
+import com.miaotu.model.ModifyPersonInfo;
+import com.miaotu.result.PersonInfoResult;
 import com.miaotu.form.PublishTogether;
 import com.miaotu.model.RegisterInfo;
-import com.miaotu.model.Together;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.LoginResult;
 import com.miaotu.result.PhotoUploadResult;
@@ -285,6 +284,41 @@ public class HttpRequestUtil {
 		params.add(new BasicNameValuePair("token", token));
 		params.add(new BasicNameValuePair("uid", uid));
 		return HttpDecoder.getForObject(getUrl("user"), PersonInfoResult.class, params);
+	}
+
+	/**
+	 * 修改用户信息
+	 * @param info
+	 * @return
+	 */
+	public BaseResult modifyPersonInfo(ModifyPersonInfo info){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token", info.getToken()));
+		params.add(new BasicNameValuePair("nickname", info.getNickname()));
+		params.add(new BasicNameValuePair("age", info.getAge()));
+		params.add(new BasicNameValuePair("gender", info.getGender()));
+		params.add(new BasicNameValuePair("country", info.getCountry()));
+		params.add(new BasicNameValuePair("province", info.getProvince()));
+		params.add(new BasicNameValuePair("city", info.getCity()));
+		params.add(new BasicNameValuePair("email", info.getEmail()));
+		params.add(new BasicNameValuePair("about_me", info.getAbout_me()));
+		params.add(new BasicNameValuePair("high", info.getHigh()));
+		params.add(new BasicNameValuePair("education", info.getEducation()));
+		params.add(new BasicNameValuePair("marital_status", info.getMarital_status()));
+		params.add(new BasicNameValuePair("address", info.getAddress()));
+		params.add(new BasicNameValuePair("graduate_school", info.getGraduate_school()));
+		params.add(new BasicNameValuePair("work", info.getWork()));
+		params.add(new BasicNameValuePair("tags", info.getTags()));
+		params.add(new BasicNameValuePair("body_type", info.getBody_type()));
+		params.add(new BasicNameValuePair("want_go", info.getWant_go()));
+		params.add(new BasicNameValuePair("been_go", info.getBeen_go()));
+		params.add(new BasicNameValuePair("hobbies", info.getHobbies()));
+		params.add(new BasicNameValuePair("music", info.getMusic()));
+		params.add(new BasicNameValuePair("film", info.getFilm()));
+		params.add(new BasicNameValuePair("book", info.getBook()));
+		params.add(new BasicNameValuePair("food", info.getFood()));
+
+		return HttpDecoder.postForObject(getUrl(""), BaseResult.class, params);
 	}
 
 }
