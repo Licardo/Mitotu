@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
@@ -102,6 +103,7 @@ public class TogetherlistAdapter extends BaseAdapter {
                 holder.tvDistance.setVisibility(View.VISIBLE);
                 holder.ivLike.setVisibility(View.VISIBLE);
             }
+
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -142,7 +144,6 @@ public class TogetherlistAdapter extends BaseAdapter {
         holder.tvDate.setText(mList.get(position).getStartDate());
         holder.tvTime.setText(mList.get(position).getPublishDate());
         for(PhotoInfo photoInfo:mList.get(position).getPicList()){
-            
         }
         holder.tvDistance.setText(mList.get(position).getDistance()+"km");
 		return convertView;
