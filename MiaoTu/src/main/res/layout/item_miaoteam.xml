@@ -9,19 +9,48 @@
         android:layout_height="wrap_content"
         android:visibility="visible">
 
-        <ImageView
-            android:id="@+id/iv_background"
+        <RelativeLayout
+            android:id="@+id/rl_image"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/bg_choose_login"
-            android:visibility="visible" />
+            android:layout_height="150dp">
+
+            <ImageView
+                android:id="@+id/iv_background"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_choose_login"
+                android:visibility="visible" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="fitCenter"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_bglike"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:background="@drawable/bg_enddatel"
+                android:gravity="center"
+                android:textSize="10sp"
+                android:textColor="@android:color/white"
+                android:text="05-24截止报名"
+                />
+        </RelativeLayout>
 
         <com.miaotu.view.CircleImageView
             android:id="@+id/ci_userhead"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_below="@id/iv_background"
+            android:layout_below="@id/rl_image"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="-15dp"
             android:src="@drawable/chat_image_selector"

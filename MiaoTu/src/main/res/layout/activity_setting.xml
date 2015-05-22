@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#eeeeee"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <include
         android:id="@+id/layout_top_bar"
@@ -12,7 +12,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="10dp" />
+        android:layout_height="1dp" />
 
     <LinearLayout
         android:id="@+id/layout_account_safe"
@@ -20,7 +20,7 @@
         android:layout_height="40dp"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -28,12 +28,12 @@
             android:layout_weight="10"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            android:paddingLeft="15dp">
 
             <ImageView
                 android:layout_width="17.6dp"
                 android:layout_height="17.6dp"
-                android:src="@drawable/icon_account_safety" />
+                android:src="@drawable/icon_settingsafe" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -47,12 +47,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_vertical" >
+            android:gravity="center_vertical">
 
             <ImageView
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:src="@drawable/arrow_right" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_go" />
         </LinearLayout>
     </LinearLayout>
 
@@ -61,14 +61,19 @@
         android:layout_height="1px"
         android:src="@color/line_grey" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:src="@color/line_grey" />
+
     <LinearLayout
-        android:id="@+id/layout_message_remind"
+        android:id="@+id/ll_comment"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -76,31 +81,31 @@
             android:layout_weight="10"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            android:paddingLeft="15dp">
 
             <ImageView
                 android:layout_width="17.6dp"
                 android:layout_height="17.6dp"
-                android:src="@drawable/icon_message_remind" />
+                android:src="@drawable/icon_settingcomment" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"
-                android:text="消息提醒" />
+                android:text="去评分" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_vertical" >
+            android:gravity="center_vertical">
 
             <ImageView
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:src="@drawable/arrow_right" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_go" />
         </LinearLayout>
     </LinearLayout>
 
@@ -113,13 +118,18 @@
         android:layout_width="match_parent"
         android:layout_height="10dp" />
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:src="@color/line_grey" />
+
     <LinearLayout
-        android:id="@+id/layout_blacklist"
+        android:id="@+id/layout_use_msg"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -127,7 +137,54 @@
             android:layout_weight="10"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            android:paddingLeft="15dp">
+
+            <ImageView
+                android:layout_width="17.6dp"
+                android:layout_height="17.6dp"
+                android:src="@drawable/icon_settingmsg" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:text="新消息通知提醒" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_go" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:src="@color/line_grey" />
+
+    <LinearLayout
+        android:id="@+id/layout_blacklist"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp">
 
             <ImageView
                 android:layout_width="17.6dp"
@@ -146,12 +203,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_vertical" >
+            android:gravity="center_vertical">
 
             <ImageView
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:src="@drawable/arrow_right" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_go" />
         </LinearLayout>
     </LinearLayout>
 
@@ -159,13 +216,18 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:src="@color/line_grey" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
     <LinearLayout
-        android:id="@+id/layout_use_help"
+        android:id="@+id/layout_introduce"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -173,31 +235,31 @@
             android:layout_weight="10"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            android:paddingLeft="15dp">
 
             <ImageView
                 android:layout_width="17.6dp"
                 android:layout_height="17.6dp"
-                android:src="@drawable/icon_use_help" />
+                android:src="@drawable/icon_introduce" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"
-                android:text="使用帮助" />
+                android:text="妙途3.0介绍" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_vertical" >
+            android:gravity="center_vertical">
 
             <ImageView
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:src="@drawable/arrow_right" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_go" />
         </LinearLayout>
     </LinearLayout>
 
@@ -205,9 +267,57 @@
         android:layout_width="match_parent"
         android:layout_height="1px"
         android:src="@color/line_grey" />
+
+    <LinearLayout
+        android:id="@+id/layout_call"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="15dp">
+
+            <ImageView
+                android:layout_width="17.6dp"
+                android:layout_height="17.6dp"
+                android:src="@drawable/icon_call" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:text="联系妙途" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_go" />
+        </LinearLayout>
+    </LinearLayout>
+
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="10dp" />
+        android:layout_height="1px"
+        android:src="@color/line_grey" />
+
+    <!-- <ImageView
+         android:layout_width="match_parent"
+         android:layout_height="10dp" />-->
 
     <LinearLayout
         android:id="@+id/layout_feedback"
@@ -215,7 +325,7 @@
         android:layout_height="40dp"
         android:background="@color/white"
         android:gravity="center_vertical"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -223,128 +333,31 @@
             android:layout_weight="10"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="15dp" >
+            android:paddingLeft="15dp">
 
             <ImageView
                 android:layout_width="17.6dp"
                 android:layout_height="17.6dp"
-                android:src="@drawable/icon_feedback" />
+                android:src="@drawable/icon_help" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dp"
-                android:text="意见反馈" />
+                android:text="帮助与反馈" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center_vertical" >
+            android:gravity="center_vertical">
 
             <ImageView
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:src="@drawable/arrow_right" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:src="@color/line_grey" />
-    <LinearLayout
-        android:id="@+id/layout_about_miao"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp" >
-
-            <ImageView
-                android:layout_width="17.6dp"
-                android:layout_height="17.6dp"
-                android:src="@drawable/icon_about_miao" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="5dp"
-                android:text="关于妙途" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_vertical" >
-
-            <ImageView
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:src="@drawable/arrow_right" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:src="@color/line_grey" />
-    
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
-
-    <LinearLayout
-        android:id="@+id/layout_check_update"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal" >
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="10"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingLeft="15dp" >
-
-            <ImageView
-                android:layout_width="17.6dp"
-                android:layout_height="17.6dp"
-                android:src="@drawable/icon_check_update" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="5dp"
-                android:text="检查更新" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_vertical" >
-
-            <ImageView
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:src="@drawable/arrow_right" />
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/icon_go" />
         </LinearLayout>
     </LinearLayout>
 
@@ -357,20 +370,20 @@
         android:id="@+id/layout_exit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:paddingBottom="5dp"
-        >
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp">
 
         <Button
             android:id="@+id/btn_exit"
             android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_height="40dp"
             android:background="#ff6b50"
             android:text="退出登录"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:visibility="visible" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -81,6 +81,7 @@ private void init(){
                     writePreference("gender",result.getLogin().getGender());
                     writePreference("headphoto",result.getLogin().getHeadPhoto());
                     writePreference("job",result.getLogin().getJob());
+                    writePreference("login_state","in");
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     startActivity(intent);
                 } else {

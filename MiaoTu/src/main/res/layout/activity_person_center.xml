@@ -65,8 +65,8 @@
                     android:layout_alignLeft="@id/tv_username"
                     android:layout_below="@id/tv_username"
                     android:layout_marginTop="8dp"
-                    android:scaleType="fitXY"
-                    android:background="@drawable/mine_girl" />
+                    android:background="@drawable/mine_girl"
+                    android:scaleType="fitXY" />
 
                 <TextView
                     android:id="@+id/tv_identity"
@@ -78,6 +78,7 @@
                     android:text="学生"
                     android:textColor="#b4b4b4"
                     android:textSize="10sp" />
+
                 <TextView
                     android:id="@+id/tv_top_emotion"
                     android:layout_width="wrap_content"
@@ -88,6 +89,7 @@
                     android:text="单身"
                     android:textColor="#b4b4b4"
                     android:textSize="10sp" />
+
                 <TextView
                     android:id="@+id/tv_top_wantgo"
                     android:layout_width="wrap_content"
@@ -291,15 +293,18 @@
                 android:textColor="#b4b4b4"
                 android:textSize="12sp" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/bg_line" />
 
             <RelativeLayout
+                android:id="@+id/rl_gender"
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
-                android:background="@android:color/white">
+                android:background="@android:color/white"
+                android:visibility="gone">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@drawable/bg_line" />
 
                 <TextView
                     android:id="@+id/tv_gender"
@@ -328,17 +333,21 @@
                     android:text="女"
                     android:textColor="#646464"
                     android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/bg_line" />
             </RelativeLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/bg_line" />
 
             <RelativeLayout
+                android:id="@+id/rl_age"
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
-                android:background="@android:color/white">
+                android:background="@android:color/white"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_age"
@@ -367,17 +376,20 @@
                     android:text="27岁"
                     android:textColor="#646464"
                     android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/bg_line" />
             </RelativeLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/bg_line" />
-
             <RelativeLayout
+                android:id="@+id/rl_address"
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
-                android:background="@android:color/white">
+                android:background="@android:color/white"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_address"
@@ -406,17 +418,20 @@
                     android:text="杭州"
                     android:textColor="#646464"
                     android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/bg_line" />
             </RelativeLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/bg_line" />
-
             <RelativeLayout
+                android:id="@+id/rl_emotion"
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
-                android:background="@android:color/white">
+                android:background="@android:color/white"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_emotion"
@@ -445,17 +460,25 @@
                     android:text="单身"
                     android:textColor="#646464"
                     android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/bg_line" />
             </RelativeLayout>
 
-            <View
+            <!--<View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@drawable/bg_line" />
+                android:background="@drawable/bg_line" />-->
 
             <RelativeLayout
+                android:id="@+id/rl_job"
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
-                android:background="@android:color/white">
+                android:background="@android:color/white"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_job"
@@ -478,23 +501,32 @@
                     android:id="@+id/tv_content_job"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/view5"
                     android:gravity="center_vertical"
                     android:text="企业管理者"
                     android:textColor="#646464"
                     android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/bg_line" />
             </RelativeLayout>
 
-            <View
+            <!--<View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@drawable/bg_line" />
+                android:background="@drawable/bg_line" />-->
 
             <RelativeLayout
+                android:id="@+id/rl_wantgo"
                 android:layout_width="match_parent"
                 android:layout_height="34dp"
-                android:background="@android:color/white">
+                android:background="@android:color/white"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/tv_wantgo"
@@ -523,12 +555,18 @@
                     android:text="哥本哈根"
                     android:textColor="#646464"
                     android:textSize="14sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/bg_line" />
             </RelativeLayout>
 
-            <View
+            <!--<View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@drawable/bg_line" />
+                android:background="@drawable/bg_line" />-->
 
             <LinearLayout
                 android:id="@+id/ll_tag"
@@ -549,9 +587,9 @@
                     android:id="@+id/view7"
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:layout_toRightOf="@id/tv_tag"
-                    android:layout_marginTop="9dp"
                     android:layout_marginBottom="9dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_toRightOf="@id/tv_tag"
                     android:background="#dcdcdc" />
 
                 <com.miaotu.view.FlowLayout
@@ -574,6 +612,7 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/view_bottom"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@drawable/bg_line" />

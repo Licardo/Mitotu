@@ -26,7 +26,7 @@ private View root;
 
     private ImageView iv_usergender;
     private TextView tv_username,tv_userage,tv_iden;
-    private RelativeLayout rl_userinfo,rl_homepage;
+    private RelativeLayout rl_userinfo,rl_homepage,rl_setting;
     private TextView tv_left, tv_title, tv_right;
 
     @Override
@@ -35,6 +35,7 @@ private View root;
         root = inflater.inflate(R.layout.fragment_fourth_page, container, false);
         findView();
         bindView();
+        initUserInfo();
         return root;
     }
 
@@ -51,15 +52,23 @@ private View root;
         tv_right = (TextView) root.findViewById(R.id.tv_right);
         rl_userinfo = (RelativeLayout) root.findViewById(R.id.rl_userinfo);
         rl_homepage = (RelativeLayout) root.findViewById(R.id.rl_homepage);
+        rl_setting = (RelativeLayout) root.findViewById(R.id.rl_setting);
         tv_iden = (TextView) root.findViewById(R.id.tv_iden);
         tv_userage = (TextView) root.findViewById(R.id.tv_userage);
         tv_username = (TextView) root.findViewById(R.id.tv_username);
         iv_usergender = (ImageView) root.findViewById(R.id.iv_usergender);
         rl_userinfo.setOnClickListener(this);
         rl_homepage.setOnClickListener(this);
+        rl_setting.setOnClickListener(this);
         tv_right.setVisibility(View.GONE);
         tv_left.setVisibility(View.GONE);
         tv_title.setText("我的");
+    }
+
+    /**
+     * 初始化用户信息
+     */
+    private void initUserInfo(){
         String identity = readPreference("job");
         String age = readPreference("age");
         String name = readPreference("name");
@@ -90,6 +99,9 @@ private View root;
                 break;
             case R.id.rl_homepage:
                 intent.setClass(FourthPageFragment.this.getActivity(), PersonCenterActivity.class);
+                break;
+            case R.id.rl_setting:
+                intent.setClass(FourthPageFragment.this.getActivity(), SettingActivity.class);
                 break;
             default:
                 break;
@@ -165,5 +177,11 @@ private View root;
                 BaseActivity.MODE_PRIVATE);
         String value = sharedPreferences.getString(key, "");
         return value;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initUserInfo();
     }
 }

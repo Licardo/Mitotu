@@ -73,7 +73,7 @@
                 android:background="@drawable/bg_edittext">
 
                 <TextView
-                    android:id="@+id/tv_nicheng"
+                    android:id="@+id/tv_nickname"
                     android:layout_width="67dp"
                     android:layout_height="30dp"
                     android:gravity="center"
@@ -86,10 +86,11 @@
                     android:layout_width="1dp"
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/tv_nicheng"
+                    android:layout_toRightOf="@id/tv_nickname"
                     android:background="#dcdcdc" />
 
                 <EditText
+                    android:id="@+id/et_nickname"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
