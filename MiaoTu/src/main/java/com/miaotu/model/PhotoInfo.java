@@ -10,12 +10,18 @@ public class PhotoInfo implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@JsonProperty("url")
+	@JsonProperty("Url")
 	private String url;
 	@JsonProperty("width")
 	private String width;
 	@JsonProperty("height")
 	private String height;
+	@JsonProperty("Yid")
+	private String yid;
+	@JsonProperty("Id")
+	private String id;
+	@JsonProperty("Created")
+	private String created;
 	@JsonProperty("param")
 	private String param;
 	public String getUrl() {
@@ -42,5 +48,28 @@ public class PhotoInfo implements Serializable{
 	public void setParam(String param) {
 		this.param = param;
 	}
-	
+
+	public String getYid() {
+		return yid;
+	}
+
+	public void setYid(String yid) {
+		this.yid = yid;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getCreated() {
+		return created;
+	}
+
+	public void setCreated(String created) {
+		this.created = created;
+	}
 }

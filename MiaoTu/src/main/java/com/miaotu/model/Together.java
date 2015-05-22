@@ -1,105 +1,68 @@
 package com.miaotu.model;
 
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by ying on 2015/3/6.
+ * Created by ying on 2015/5/21.
  */
-public class Together implements Serializable{
-    @JsonProperty("id")
-    private String id;
-    @JsonProperty("create_time")
-    private String date;
-    @JsonProperty("title")
-    private String title;
-    @JsonProperty("content")
-    private String content;
-    @JsonProperty("imgs")
-    private List<PhotoInfo> pics;
-    @JsonProperty("activity_id")
-    private String movementId;
-    @JsonProperty("extend")
-    private String fromId;
-    @JsonProperty("activity_title")
-    private String movementTitle;
-    @JsonProperty("reply_count")
-    private String commentCount;
-    @JsonProperty("user_id")
+public class Together {
+    @JsonProperty("Uid")
     private String uid;
-    @JsonProperty("nickname")
+    @JsonProperty("Destination")
+    private String desCity;
+    @JsonProperty("From")
+    private String originCity;
+    @JsonProperty("FromMark")
+    private String originLocation;
+    @JsonProperty("StartDate")
+    private String startDate;
+    @JsonProperty("EndDate")
+    private String endDate;
+    @JsonProperty("EndTime")
+    private String endTime;
+    @JsonProperty("Require")
+    private String requirement;
+    @JsonProperty("Number")
+    private String num;
+    @JsonProperty("MoneyType")
+    private String fee;
+    @JsonProperty("Latitude")
+    private String latitude;
+    @JsonProperty("Longitude")
+    private String longitude;
+    @JsonProperty("Remark")
+    private String comment;
+    @JsonProperty("Tags")
+    private String tags;
+    @JsonProperty("YueyouJoinCount")
+    private String joinCount;
+    @JsonProperty("YueyouLikeCount")
+    private String likeCount;
+    @JsonProperty("YueyouReplyCount")
+    private String replyCount;
+    @JsonProperty("Status")
+    private String status;
+    @JsonProperty("Nickname")
     private String nickname;
-    @JsonProperty("avatar")
-    private PhotoInfo headPhoto;
-    @JsonProperty("img")
-    private PhotoInfo  singleImg;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public List<PhotoInfo> getPics() {
-        return pics;
-    }
-
-    public void setPics(List<PhotoInfo> pics) {
-        this.pics = pics;
-    }
-
-    public String getMovementId() {
-        return movementId;
-    }
-
-    public void setMovementId(String movementId) {
-        this.movementId = movementId;
-    }
-
-    public String getMovementTitle() {
-        return movementTitle;
-    }
-
-    public void setMovementTitle(String movementTitle) {
-        this.movementTitle = movementTitle;
-    }
-
-    public String getCommentCount() {
-        return commentCount;
-    }
-
-    public void setCommentCount(String commentCount) {
-        this.commentCount = commentCount;
-    }
+    @JsonProperty("HeadUrl")
+    private String headPhoto;
+    @JsonProperty("Created")
+    private String publishDate;
+    @JsonProperty("PicList")
+    private ArrayList<PhotoInfo> picList;
+    @JsonProperty("Age")
+    private String age;
+    @JsonProperty("Gender")
+    private String gender;
+    @JsonProperty("Work")
+    private String job;
+    @JsonProperty("IsLike")
+    private boolean isLike;
+    @JsonProperty("Distance")
+    private String distance;
 
     public String getUid() {
         return uid;
@@ -107,6 +70,142 @@ public class Together implements Serializable{
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getDesCity() {
+        return desCity;
+    }
+
+    public void setDesCity(String desCity) {
+        this.desCity = desCity;
+    }
+
+    public String getOriginCity() {
+        return originCity;
+    }
+
+    public void setOriginCity(String originCity) {
+        this.originCity = originCity;
+    }
+
+    public String getOriginLocation() {
+        return originLocation;
+    }
+
+    public void setOriginLocation(String originLocation) {
+        this.originLocation = originLocation;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getRequirement() {
+        return requirement;
+    }
+
+    public void setRequirement(String requirement) {
+        this.requirement = requirement;
+    }
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
+
+    public String getFee() {
+        return fee;
+    }
+
+    public void setFee(String fee) {
+        this.fee = fee;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    public String getJoinCount() {
+        return joinCount;
+    }
+
+    public void setJoinCount(String joinCount) {
+        this.joinCount = joinCount;
+    }
+
+    public String getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(String likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public String getReplyCount() {
+        return replyCount;
+    }
+
+    public void setReplyCount(String replyCount) {
+        this.replyCount = replyCount;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getNickname() {
@@ -117,27 +216,67 @@ public class Together implements Serializable{
         this.nickname = nickname;
     }
 
-    public PhotoInfo getHeadPhoto() {
+    public String getHeadPhoto() {
         return headPhoto;
     }
 
-    public void setHeadPhoto(PhotoInfo headPhoto) {
+    public void setHeadPhoto(String headPhoto) {
         this.headPhoto = headPhoto;
     }
 
-    public PhotoInfo getSingleImg() {
-        return singleImg;
+    public String getPublishDate() {
+        return publishDate;
     }
 
-    public void setSingleImg(PhotoInfo singleImg) {
-        this.singleImg = singleImg;
+    public void setPublishDate(String publishDate) {
+        this.publishDate = publishDate;
     }
 
-    public String getFromId() {
-        return fromId;
+    public String getAge() {
+        return age;
     }
 
-    public void setFromId(String fromId) {
-        this.fromId = fromId;
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public void setJob(String job) {
+        this.job = job;
+    }
+
+    public boolean isLike() {
+        return isLike;
+    }
+
+    public void setIsLike(boolean isLike) {
+        this.isLike = isLike;
+    }
+
+    public ArrayList<PhotoInfo> getPicList() {
+        return picList;
+    }
+
+    public void setPicList(ArrayList<PhotoInfo> picList) {
+        this.picList = picList;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
     }
 }

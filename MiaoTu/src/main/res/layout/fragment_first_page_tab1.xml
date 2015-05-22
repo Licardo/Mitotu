@@ -12,7 +12,10 @@
         android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@null"
+        android:divider="#f1f3f6"
+        android:dividerHeight="10dp"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
         android:listSelector="@android:color/transparent"
         >
     </com.handmark.pulltorefresh.library.PullToRefreshListView>

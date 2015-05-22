@@ -232,6 +232,10 @@
             android:name=".activity.PublishTogetherStep2Activity"
             android:label="@string/title_activity_publish_together_step2" >
         </activity>
+        <activity
+            android:name=".activity.TogetherDetailActivity"
+            android:label="@string/title_activity_together_detail" >
+        </activity>
     </application>
 
 </manifest>

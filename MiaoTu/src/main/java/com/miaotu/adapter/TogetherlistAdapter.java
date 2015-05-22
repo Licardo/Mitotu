@@ -64,19 +64,35 @@ public class TogetherlistAdapter extends BaseAdapter {
 			holder = new ViewHolder();
 			convertView = mLayoutInflater.inflate(
 					R.layout.item_together, null);
-			holder.tvNickname = (TextView) convertView.findViewById(R.id.tv_nickname);
+			holder.tvNickname = (TextView) convertView.findViewById(R.id.tv_name);
 			holder.ivHeadPhoto = (CircleImageView) convertView.findViewById(R.id.iv_head_photo);
-			holder.tvTitle = (TextView) convertView
-					.findViewById(R.id.tv_title);
-            holder.tvContent = (TextView) convertView
-					.findViewById(R.id.tv_content);
-			holder.layoutPhotos = (LinearLayout) convertView.findViewById(R.id.layout_photos);
-            holder.tvMovementName = (TextView) convertView
-                    .findViewById(R.id.tv_movement_name);
-            holder.tvCommentCounts = (TextView) convertView
-                    .findViewById(R.id.tv_comment_count);
-            holder.tvDate = (TextView) convertView
+			holder.ivGender = (ImageView) convertView
+					.findViewById(R.id.iv_gender);
+            holder.tvAge = (TextView) convertView
+					.findViewById(R.id.tv_age);
+			holder.tvJob = (TextView) convertView.findViewById(R.id.tv_identity);
+            holder.tvTime = (TextView) convertView
                     .findViewById(R.id.tv_date);
+            holder.tvDate = (TextView) convertView
+                    .findViewById(R.id.tv_tag_date);
+            holder.tvDesCity = (TextView) convertView
+                    .findViewById(R.id.tv_tag_des);
+            holder.tvNum = (TextView) convertView
+                    .findViewById(R.id.tv_tag_require);
+            holder.tvFee = (TextView) convertView
+                    .findViewById(R.id.tv_tag_price);
+            holder.tvComment = (TextView) convertView
+                    .findViewById(R.id.tv_introduce);
+            holder.tvDistance = (TextView) convertView
+                    .findViewById(R.id.tv_distance);
+            holder.tvJoinCount = (TextView) convertView
+                    .findViewById(R.id.tv_join_count);
+            holder.tvCommentCount = (TextView) convertView
+                    .findViewById(R.id.tv_comment_count);
+            holder.layoutImg = (LinearLayout) convertView
+                    .findViewById(R.id.layout_img);
+            holder.ivLike = (ImageView) convertView
+                    .findViewById(R.id.iv_like);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -84,7 +100,7 @@ public class TogetherlistAdapter extends BaseAdapter {
 
 		// 对ListView的Item中的控件的操作
 		UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto,
-                mList.get(position).getHeadPhoto().getUrl() + "&size=100x100",
+                mList.get(position).getHeadPhoto() + "&size=100x100",
                 R.drawable.icon_default_head_photo);
         holder.ivHeadPhoto.setOnClickListener(new OnClickListener() {
             @Override
@@ -95,68 +111,31 @@ public class TogetherlistAdapter extends BaseAdapter {
             }
         });
         holder.tvNickname.setText(mList.get(position).getNickname());
-        holder.tvTitle.setText(mList.get(position).getTitle());
-        holder.tvContent.setText(mList.get(position).getContent());
-        //添加图片
-        int limit = 0;
-        if(mList.get(position).getPics().size()>3){
-            limit=3;
+        holder.tvDesCity.setText(mList.get(position).getDesCity());
+        holder.tvDate.setText(mList.get(position).getStartDate());
+        holder.tvNum.setText("需要"+mList.get(position).getNum()+"人");
+        holder.tvFee.setText(mList.get(position).getFee());
+        holder.tvComment.setText(mList.get(position).getComment());
+        holder.tvJoinCount.setText("已报名"+mList.get(position).getJoinCount()+"人");
+        holder.tvCommentCount.setText("评论"+mList.get(position).getReplyCount()+"人");
+        if(mList.get(position).isLike()){
+            holder.ivLike.setBackgroundResource(R.drawable.icon_like);
         }else{
-            limit = mList.get(position).getPics().size();
+            holder.ivLike.setBackgroundResource(R.drawable.icon_unlike);
         }
-        if(limit==0){
-            holder.layoutPhotos.setVisibility(View.GONE);
+        holder.tvAge.setText(mList.get(position).getAge()+"岁");
+        holder.tvJob.setText(mList.get(position).getJob());
+        if(mList.get(position).getGender().equals("男")){
+            holder.ivGender.setBackgroundResource(R.drawable.icon_man);
         }else{
-            holder.layoutPhotos.setVisibility(View.VISIBLE);
+            holder.ivGender.setBackgroundResource(R.drawable.icon_woman);
         }
-        holder.layoutPhotos.removeAllViews();
-
-        final ArrayList<PhotoModel> photoList = new ArrayList<>();
-        for(PhotoInfo photoInfo:mList.get(position).getPics()){
-            PhotoModel photoModel = new PhotoModel();
-            photoModel.setOriginalPath(photoInfo.getUrl());
-            photoList.add(photoModel);
+        holder.tvDate.setText(mList.get(position).getStartDate());
+        holder.tvTime.setText(mList.get(position).getPublishDate());
+        for(PhotoInfo photoInfo:mList.get(position).getPicList()){
+            
         }
-
-        for(int i=0;i<limit;i++){
-            PhotoInfo photoInfo = mList.get(position).getPics().get(i);
-            ImageView imageView = new ImageView(mContext);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Util.dip2px(mContext,70),Util.dip2px(mContext,70));
-            params.leftMargin = Util.dip2px(mContext,10);
-            imageView.setLayoutParams(params);
-            holder.layoutPhotos.addView(imageView);
-            UrlImageViewHelper.setUrlDrawable(imageView,
-                    photoInfo.getUrl() + "&size=210x210",
-                    R.drawable.default_avatar);
-            final int p = i;
-            imageView.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //点击照片
-                    /** 预览照片 */
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("photos", photoList);
-                    bundle.putSerializable("position", p);
-                    CommonUtils.launchActivity(mContext, PhotoPreviewActivity.class, bundle);
-                }
-            });
-        }
-        if(StringUtil.isBlank(mList.get(position).getMovementTitle())){
-            holder.tvMovementName.setVisibility(View.GONE);
-        }else {
-            holder.tvMovementName.setVisibility(View.VISIBLE);
-        }
-        holder.tvMovementName.setText("@"+mList.get(position).getMovementTitle());
-        holder.tvMovementName.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(mContext, MovementDetailActivity.class);
-//                intent.putExtra("id",mList.get(position).getMovementId());
-//                mContext.startActivity(intent);
-            }
-        });
-        holder.tvCommentCounts.setText(mList.get(position).getCommentCount());
-        holder.tvDate.setText(mList.get(position).getDate());
+        holder.tvDistance.setText(mList.get(position).getDistance()+"km");
 		return convertView;
 	}
 
@@ -164,11 +143,19 @@ public class TogetherlistAdapter extends BaseAdapter {
 	public final class ViewHolder {
         private TextView tvNickname = null;
         private CircleImageView ivHeadPhoto = null;
-        private TextView tvTitle = null;
-        private TextView tvContent = null;
-        private LinearLayout layoutPhotos= null;
-        private TextView tvMovementName= null;
-        private TextView tvCommentCounts= null;
+        private ImageView ivGender = null;
+        private TextView tvAge = null;
+        private TextView tvJob= null;
+        private TextView tvTime= null;
         private TextView tvDate= null;
+        private TextView tvDesCity= null;
+        private TextView tvNum= null;
+        private TextView tvFee= null;
+        private TextView tvComment= null;
+        private TextView tvDistance= null;
+        private TextView tvJoinCount= null;
+        private TextView tvCommentCount= null;
+        private ImageView ivLike= null;
+        private LinearLayout layoutImg= null;
 	}
 }
