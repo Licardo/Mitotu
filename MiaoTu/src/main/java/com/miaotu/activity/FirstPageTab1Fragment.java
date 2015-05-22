@@ -109,7 +109,7 @@ private View root;
     private void init() {
         lvPull.getRefreshableView().addHeaderView(head);
         mList = new ArrayList<>();
-        adapter = new TogetherlistAdapter(getActivity(),mList);
+        adapter = new TogetherlistAdapter(getActivity(),mList,false);
         lvPull.setAdapter(adapter);
         getTogether(true);
     }
