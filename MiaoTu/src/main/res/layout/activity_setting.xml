@@ -10,7 +10,7 @@
         android:id="@+id/layout_top_bar"
         layout="@layout/top_bar" />
 
-    <!--<ImageView
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="10dp" />
 
@@ -371,6 +371,6 @@
             android:background="#ff6b50"
             android:text="退出登录"
             android:textColor="@color/white" />
-    </RelativeLayout>-->
+    </RelativeLayout>
 
 </LinearLayout>
