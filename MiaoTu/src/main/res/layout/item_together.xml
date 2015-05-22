@@ -1,138 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="de.hdodenhof.circleimageview.sample.MainActivity$PlaceholderFragment"
-    android:background="#f0f0f0"
-    android:paddingTop="10dp"
-    >
-    <LinearLayout
+    android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:orientation="vertical">
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#ffffff"
-        >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        >
-    <com.miaotu.view.CircleImageView
-        android:id="@+id/iv_head_photo"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/default_avatar"
-        app:border_width="0dp" />
-        <TextView
-            android:id="@+id/tv_nickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="12sp"
-            android:textColor="#b4b4b4"
-            android:text="小张"
-            />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:singleLine="true"
-        android:ellipsize="end"
-        android:textSize="17sp"
-        android:textColor="#313131"
-        android:text="asdfasdf"
-        />
-    <TextView
-        android:id="@+id/tv_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="15dp"
-        android:textColor="#646464"
-        android:textSize="14sp"
-        android:lineSpacingExtra="5dp"
-        android:maxLines="4"
-        android:ellipsize="end"
-        android:text="法定发送到阿斯达发送到山顶发法定发送到阿斯达发送到山顶发法定发送到阿斯达发送到山顶发法定发送到阿斯达发送到山顶发法定发送到阿斯达发送到山顶发法定发送到阿斯达发送到山顶发法定发送到阿斯达发送到山顶发法定发送到阿斯达发送到山顶发法定发送到阿斯达发送到山顶发法定发送到阿斯达发送到山顶发法定发送到阿斯达发送到山顶发法定发送到阿斯达发送到山顶发法定发送到阿斯达发送到山顶发法定发送到阿斯达发送到山顶发法定发送到阿斯达发送到山顶发法定发送到阿斯达发送到山顶发法定发送到阿斯达发送到山顶发法定发送到阿斯达发送到山顶发法定发送到阿斯达发送到山顶发"
-        />
-    <LinearLayout
-        android:id="@+id/layout_photos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
+        android:background="@android:color/white"
         >
 
-        </LinearLayout>
-    <TextView
-        android:id="@+id/tv_movement_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:textColor="#f5c790"
-        android:text="\@撒旦法师的萨达阿什顿发"
-        android:layout_marginLeft="20dp"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal"
-        >
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:paddingLeft="10dp"
-        >
+        <com.miaotu.view.CircleImageView
+            android:id="@+id/iv_head_photo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            app:border_width="0dp"
+            android:src="@drawable/location_msg" />
+
         <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:background="@drawable/default_avatar"
-            android:layout_gravity="center"
+            android:id="@+id/iv_gender"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_alignBottom="@id/iv_head_photo"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/iv_head_photo"
+            android:scaleType="fitCenter"
+            android:background="@drawable/mine_girl" />
+
+        <TextView
+            android:id="@+id/tv_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/iv_head_photo"
+            android:layout_marginLeft="6dp"
+            android:layout_toRightOf="@id/iv_gender"
+            android:text="18岁"
+            android:textColor="#b4b4b4"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_identity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/iv_head_photo"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tv_age"
+            android:text="学生"
+            android:textColor="#b4b4b4"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/iv_head_photo"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tv_identity"
+            android:text="刚刚"
+            android:textColor="#b4b4b4"
+            android:textSize="10sp" />
+        <ImageView
+            android:id="@+id/iv_like"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/icon_like"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
             />
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/iv_head_photo"
+            android:text="四小美"
+            android:textColor="#646464"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_tag_date"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_alignLeft="@id/iv_gender"
+            android:layout_below="@id/iv_head_photo"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/bg_tag_date"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:text="5月20日"
+            android:textColor="@android:color/white"
+            android:textSize="10sp"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/tv_tag_des"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_alignBottom="@id/tv_tag_date"
+            android:layout_marginLeft="6dp"
+            android:layout_toRightOf="@id/tv_tag_date"
+            android:background="@drawable/bg_tag_des"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:text="白云湖"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_tag_require"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_alignBottom="@id/tv_tag_date"
+            android:layout_marginLeft="6dp"
+            android:layout_toRightOf="@id/tv_tag_des"
+            android:background="@drawable/bg_tag_require"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:text="需要10人"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_tag_price"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_alignBottom="@id/tv_tag_date"
+            android:layout_marginLeft="6dp"
+            android:layout_toRightOf="@id/tv_tag_require"
+            android:background="@drawable/bg_tag_price"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:text="20000元"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_introduce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_tag_date"
+            android:layout_below="@id/tv_tag_date"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="6dp"
+            android:text="所提出的具体愿望或条件达到质量要求提出领土要求"
+            android:textColor="#646464"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/layout_img"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/tv_introduce"
+            android:layout_below="@id/tv_introduce"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/chat_image_selector"
+            android:orientation="horizontal"
+            />
+
         <TextView
             android:id="@+id/tv_comment_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:layout_gravity="center"
-            android:textColor="#969696"
-            android:text="100"
-            android:layout_marginLeft="6dp"
-            />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/layout_img"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:text="评论2人"
+            android:textColor="#b4b4b4"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_join_count"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:paddingRight="10dp"
-            >
-            <TextView
-                android:id="@+id/tv_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#b4b4b4"
-                android:textSize="12sp"
-                android:text="2月9号"
-                />
-            </LinearLayout>
-    </LinearLayout>
-  </LinearLayout>
+            android:layout_alignBottom="@id/tv_comment_count"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@id/tv_comment_count"
+            android:text="已报名2人"
+            android:textColor="#b4b4b4"
+            android:textSize="10sp" />
+        <TextView
+            android:id="@+id/tv_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.05km"
+            android:textColor="#b4b4b4"
+            android:textSize="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignBottom="@+id/tv_join_count"
+            android:layout_marginLeft="50dp"
+            />
+    </RelativeLayout>
 </LinearLayout>

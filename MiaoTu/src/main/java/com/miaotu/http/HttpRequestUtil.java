@@ -20,6 +20,7 @@ import com.miaotu.model.RegisterInfo;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.LoginResult;
 import com.miaotu.result.PhotoUploadResult;
+import com.miaotu.result.TogetherResult;
 import com.miaotu.util.StringUtil;
 
 @SuppressLint("SimpleDateFormat")
@@ -157,13 +158,15 @@ public class HttpRequestUtil {
 	 * @param num
 	 * @return
 	 */
-    public BaseResult getTogetherList (String token,String page,String num){
+    public TogetherResult getTogetherList (String token,String page,String num,String latitude,String longitude){
         List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("token", token));
 		params.add(new BasicNameValuePair("page", page));
 		params.add(new BasicNameValuePair("num", num));
+		params.add(new BasicNameValuePair("latitude", latitude));
+		params.add(new BasicNameValuePair("longitude", longitude));
         return HttpDecoder.getForObject(
-				getUrl("yueyou/list"), BaseResult.class,
+				getUrl("yueyou/list"), TogetherResult.class,
 				params);
 
 	}

@@ -129,4 +129,5 @@
     
     <string name="joinlist"><u>查看报名列表</u></string>
     <string name="title_activity_publish_together_step2">PublishTogetherStep2Activity</string>
+    <string name="title_activity_together_detail">TogetherDetailActivity</string>
 </resources>

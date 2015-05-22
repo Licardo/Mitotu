@@ -19,16 +19,25 @@ import com.miaotu.adapter.TogetherlistAdapter;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.model.RegisterInfo;
+import com.miaotu.model.Together;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.LoginResult;
+import com.miaotu.result.TogetherResult;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FirstPageTab1Fragment extends BaseFragment implements View.OnClickListener {
 private View root;
     private PullToRefreshListView lvPull;
     private View head;
     private TogetherlistAdapter adapter;
+    private List<Together> mList;
+    private int page=1;
+    private final int PAGECOUNT = 12;
+    private boolean isLoadMore = false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,7 +83,7 @@ private View root;
 
                 // Update the LastUpdatedLabel
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-//                getVisitors(false);
+                getTogether(false);
 
             }
 
@@ -89,9 +98,9 @@ private View root;
             @Override
             public void onLastItemVisible() {
 //                showToastMsg("滑动到底了");
-//                if (!isLoadMore&&visitorList.size()==offset) {
-//                    loadMore();
-//                }
+                if (!isLoadMore&&mList.size()==page*PAGECOUNT) {
+                    loadMore(false);
+                }
             }
 
         });
@@ -99,19 +108,26 @@ private View root;
 
     private void init() {
         lvPull.getRefreshableView().addHeaderView(head);
-//        adapter = new TogetherlistAdapter();
+        mList = new ArrayList<>();
+        adapter = new TogetherlistAdapter(getActivity(),mList);
         lvPull.setAdapter(adapter);
         getTogether(true);
     }
 //获取一起去
     private void getTogether(final boolean isShow) {
-        new BaseHttpAsyncTask<Void, Void, BaseResult>(getActivity(), isShow) {
+        new BaseHttpAsyncTask<Void, Void, TogetherResult>(getActivity(), isShow) {
             @Override
-            protected void onCompleteTask(BaseResult result) {
+            protected void onCompleteTask(TogetherResult result) {
                 if(root==null){
                     return;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
+                    mList.clear();
+                    mList.addAll(result.getTogetherList());
+                    adapter.notifyDataSetChanged();
+                    if(lvPull.getRefreshableView().getFooterViewsCount()==1&&mList.size()==PAGECOUNT*page){
+                        lvPull.getRefreshableView().addFooterView(head);
+                    }
                 } else {
                     if(StringUtil.isEmpty(result.getMsg())){
                         showToastMsg("获取约游列表失败！");
@@ -122,10 +138,54 @@ private View root;
             }
 
             @Override
-            protected BaseResult run(Void... params) {
-                return HttpRequestUtil.getInstance().getTogetherList(readPreference("token"),"1","2");
+            protected TogetherResult run(Void... params) {
+                page=1;
+                return HttpRequestUtil.getInstance().getTogetherList(readPreference("token"),page+"",PAGECOUNT+"",readPreference("latitude"),readPreference("longitude"));
             }
 
+            @Override
+            protected void finallyRun() {
+                super.finallyRun();
+                lvPull.onRefreshComplete();
+            }
+        }.execute();
+    }
+    //获取一起去
+    private void loadMore(final boolean isShow) {
+        new BaseHttpAsyncTask<Void, Void, TogetherResult>(getActivity(), isShow) {
+            @Override
+            protected void onCompleteTask(TogetherResult result) {
+                if(root==null){
+                    return;
+                }
+                if (result.getCode() == BaseResult.SUCCESS) {
+//                    mList.clear();
+                    mList.addAll(result.getTogetherList());
+                    adapter.notifyDataSetChanged();
+                    if(mList.size()!=PAGECOUNT*page){
+                        lvPull.getRefreshableView().removeFooterView(head);
+                    }
+                } else {
+                    if(StringUtil.isEmpty(result.getMsg())){
+                        showToastMsg("获取约游列表失败！");
+                    }else{
+                        showToastMsg(result.getMsg());
+                    }
+                }
+            }
+
+            @Override
+            protected TogetherResult run(Void... params) {
+                isLoadMore = true;
+                page+=1;
+                return HttpRequestUtil.getInstance().getTogetherList(readPreference("token"),page+"",PAGECOUNT+"",readPreference("latitude"),readPreference("longitude"));
+            }
+
+            @Override
+            protected void finallyRun() {
+                isLoadMore=false;
+                super.finallyRun();
+            }
         }.execute();
     }
     @Override
