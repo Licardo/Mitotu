@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
@@ -34,12 +35,13 @@ public class TogetherlistAdapter extends BaseAdapter {
 	private LayoutInflater mLayoutInflater = null;
 	private List<Together> mList = null;
 	private Context mContext;
+    private boolean isMine;
 
-	public TogetherlistAdapter(Context context, List<Together> list) {
+	public TogetherlistAdapter(Context context, List<Together> list,boolean isMine) {
 		mList = list;
 		mContext = context;
 		mLayoutInflater = LayoutInflater.from(context);
-
+        this.isMine = isMine;
 	}
 
 	@Override
@@ -85,6 +87,7 @@ public class TogetherlistAdapter extends BaseAdapter {
                     .findViewById(R.id.tv_introduce);
             holder.tvDistance = (TextView) convertView
                     .findViewById(R.id.tv_distance);
+
             holder.tvJoinCount = (TextView) convertView
                     .findViewById(R.id.tv_join_count);
             holder.tvCommentCount = (TextView) convertView
@@ -93,6 +96,14 @@ public class TogetherlistAdapter extends BaseAdapter {
                     .findViewById(R.id.layout_img);
             holder.ivLike = (ImageView) convertView
                     .findViewById(R.id.iv_like);
+            if(isMine){
+                holder.tvDistance.setVisibility(View.GONE);
+                holder.ivLike.setVisibility(View.GONE);
+            }else{
+                holder.tvDistance.setVisibility(View.VISIBLE);
+                holder.ivLike.setVisibility(View.VISIBLE);
+            }
+
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
@@ -133,7 +144,6 @@ public class TogetherlistAdapter extends BaseAdapter {
         holder.tvDate.setText(mList.get(position).getStartDate());
         holder.tvTime.setText(mList.get(position).getPublishDate());
         for(PhotoInfo photoInfo:mList.get(position).getPicList()){
-            
         }
         holder.tvDistance.setText(mList.get(position).getDistance()+"km");
 		return convertView;
