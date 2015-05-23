@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.miaotu.R;
@@ -23,8 +24,9 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
             tv_title,tv_left,tv_right,tv_top_emotion,tv_top_wantgo;
     private FlowLayout fl_tag;
     private ImageView iv_gender;
-    private View view7;
+    private View view7,view_bottom;
     private LinearLayout ll_tag;
+    private RelativeLayout rl_gender,rl_age,rl_address,rl_emotion,rl_job,rl_wantgo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,14 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initView(){
+        rl_gender = (RelativeLayout) this.findViewById(R.id.rl_gender);
+        rl_age = (RelativeLayout) this.findViewById(R.id.rl_age);
+        rl_address = (RelativeLayout) this.findViewById(R.id.rl_address);
+        rl_emotion = (RelativeLayout) this.findViewById(R.id.rl_emotion);
+        rl_job = (RelativeLayout) this.findViewById(R.id.rl_job);
+        rl_wantgo = (RelativeLayout) this.findViewById(R.id.rl_wantgo);
         view7 = this.findViewById(R.id.view7);
+        view_bottom = this.findViewById(R.id.view_bottom);
         tv_title = (TextView) this.findViewById(R.id.tv_title);
         tv_left = (TextView) this.findViewById(R.id.tv_left);
         tv_right = (TextView) this.findViewById(R.id.tv_right);
@@ -63,13 +72,31 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
      * @param personInfoResult
      */
     private void initPersonInfoData(PersonInfoResult personInfoResult){
-        tv_content_address.setText(personInfoResult.getPersonInfo().getAddress());
-        tv_content_age.setText(personInfoResult.getPersonInfo().getAge());
-        tv_content_emotion.setText(personInfoResult.getPersonInfo().getMaritalstatus());
         tv_top_emotion.setText(personInfoResult.getPersonInfo().getMaritalstatus());
-        tv_content_gender.setText(personInfoResult.getPersonInfo().getGender());
-        tv_content_job.setText(personInfoResult.getPersonInfo().getWork());
-        tv_content_wantgo.setText(personInfoResult.getPersonInfo().getWantgo());
+        if(!StringUtil.isBlank(personInfoResult.getPersonInfo().getAddress())){
+            rl_address.setVisibility(View.VISIBLE);
+            tv_content_address.setText(personInfoResult.getPersonInfo().getAddress());
+        }
+        if(!StringUtil.isBlank(personInfoResult.getPersonInfo().getAge())){
+            rl_age.setVisibility(View.VISIBLE);
+            tv_content_age.setText(personInfoResult.getPersonInfo().getAge());
+        }
+        if(!StringUtil.isBlank(personInfoResult.getPersonInfo().getMaritalstatus())){
+            rl_emotion.setVisibility(View.VISIBLE);
+            tv_content_emotion.setText(personInfoResult.getPersonInfo().getMaritalstatus());
+        }
+        if(!StringUtil.isBlank(personInfoResult.getPersonInfo().getGender())){
+            rl_gender.setVisibility(View.VISIBLE);
+            tv_content_gender.setText(personInfoResult.getPersonInfo().getGender());
+        }
+        if(!StringUtil.isBlank(personInfoResult.getPersonInfo().getWork())){
+            rl_job.setVisibility(View.VISIBLE);
+            tv_content_job.setText(personInfoResult.getPersonInfo().getWork());
+        }
+        if(!StringUtil.isBlank(personInfoResult.getPersonInfo().getWantgo())){
+            rl_wantgo.setVisibility(View.VISIBLE);
+            tv_content_wantgo.setText(personInfoResult.getPersonInfo().getWantgo());
+        }
         tv_top_wantgo.setText(personInfoResult.getPersonInfo().getWantgo());
         tv_identity.setText(personInfoResult.getPersonInfo().getWork());
         tv_username.setText(personInfoResult.getPersonInfo().getNickname());
@@ -96,7 +123,11 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
             }
             if(count == 0){
                 ll_tag.setVisibility(View.GONE);
+                view_bottom.setVisibility(View.GONE);
             }
+        }else {
+            view_bottom.setVisibility(View.GONE);
+            ll_tag.setVisibility(View.GONE);
         }
     }
 

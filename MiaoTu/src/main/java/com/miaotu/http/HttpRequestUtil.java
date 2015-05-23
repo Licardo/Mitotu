@@ -333,7 +333,7 @@ public class HttpRequestUtil {
 		params.add(new BasicNameValuePair("book", info.getBook()));
 		params.add(new BasicNameValuePair("food", info.getFood()));
 
-		return HttpDecoder.postForObject(getUrl(""), BaseResult.class, params);
+		return HttpDecoder.postForObject(getUrl("user"), BaseResult.class, params);
 	}
 
 }

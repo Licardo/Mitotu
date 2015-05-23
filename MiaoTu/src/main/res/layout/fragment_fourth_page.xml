@@ -114,10 +114,6 @@
         android:layout_height="1dp"
         android:background="@drawable/bg_line" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@drawable/bg_line" />
     <RelativeLayout
         android:id="@+id/rl_homepage"
         android:layout_width="match_parent"
