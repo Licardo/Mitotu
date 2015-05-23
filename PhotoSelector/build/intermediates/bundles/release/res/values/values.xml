@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/D:/miaotu-zh/workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/colors.xml -->
+    <!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="background_gradient_end">#DDDDDD</color>
     <color name="background_gradient_start">#000000</color>
@@ -18,7 +18,7 @@
     <color name="soft_opaque">#30000000</color>
     <color name="white">#FFFFFF</color>
     <color name="yellow">#EEFF41</color>
-    <!-- From: file:/D:/miaotu-zh/workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/dimens.xml -->
+    <!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="albumitem_content_height">80dp</dimen>
     <dimen name="albumitem_height">100dp</dimen>
@@ -30,10 +30,10 @@
     <dimen name="layout_title_mini_textsize">16sp</dimen>
     <dimen name="sticky_item_horizontalSpacing">2dp</dimen>
     <dimen name="sticky_item_verticalSpacing">2dp</dimen>
-    <!-- From: file:/D:/miaotu-zh/workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/strings.xml -->
+    <!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="app_name">PhotoSelector</string>
-    <!-- From: file:/D:/miaotu-zh/workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/styles.xml -->
+    <!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/btn_checkbox_selector</item>

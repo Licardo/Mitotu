@@ -20,6 +20,7 @@ import com.miaotu.model.RegisterInfo;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.LoginResult;
 import com.miaotu.result.PhotoUploadResult;
+import com.miaotu.result.TogetherDetailResult;
 import com.miaotu.result.TogetherResult;
 import com.miaotu.util.StringUtil;
 
@@ -181,6 +182,21 @@ public class HttpRequestUtil {
 				transformObject2Map(together));
 
 	}
+
+	/**
+	 * 获取一起去详情
+	 * @param token
+	 * @param id
+	 * @return
+	 */
+	public TogetherDetailResult getTogetherDetail (String token,String id){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("yid", id));
+        return HttpDecoder.getForObject(
+				getUrl("yueyou/"), TogetherDetailResult.class,params);
+
+	}
 	/**
 	 * 上传照片
 //	 * @param token
@@ -189,10 +205,6 @@ public class HttpRequestUtil {
 	 */
 	public PhotoUploadResult uploadPhoto (List<File> img){
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-//		params.add(new BasicNameValuePair("token",token));
-//		String ext = Util.getExtName(img);
-//		Log.d("图片格式", ext);
-//		params.add(new BasicNameValuePair("ext",ext));
 		return HttpDecoder.postForObject(
 				getImgUrl("upload/picture"), PhotoUploadResult.class,
 				params, img);

@@ -51,14 +51,14 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
 	private void findView() {
 		btnLeft = (Button) findViewById(R.id.btn_left);
 		tvTitle = (TextView) findViewById(R.id.tv_title);
-		layoutAccountSafe = (LinearLayout) findViewById(R.id.layout_account_safe);
-		layoutMessageRemind = (LinearLayout) findViewById(R.id.layout_message_remind);
-		layoutBlackList = (LinearLayout) findViewById(R.id.layout_blacklist);
-		layoutUseHelp = (LinearLayout) findViewById(R.id.layout_use_help);
-		layoutFeedback = (LinearLayout) findViewById(R.id.layout_feedback);
-		layoutAboutMiao = (LinearLayout) findViewById(R.id.layout_about_miao);
-		layoutCheckUpdate = (LinearLayout) findViewById(R.id.layout_check_update);
-		btnExit = (Button) findViewById(R.id.btn_exit);
+//		layoutAccountSafe = (LinearLayout) findViewById(R.id.layout_account_safe);
+//		layoutMessageRemind = (LinearLayout) findViewById(R.id.layout_message_remind);
+//		layoutBlackList = (LinearLayout) findViewById(R.id.layout_blacklist);
+//		layoutUseHelp = (LinearLayout) findViewById(R.id.layout_use_help);
+//		layoutFeedback = (LinearLayout) findViewById(R.id.layout_feedback);
+//		layoutAboutMiao = (LinearLayout) findViewById(R.id.layout_about_miao);
+//		layoutCheckUpdate = (LinearLayout) findViewById(R.id.layout_check_update);
+//		btnExit = (Button) findViewById(R.id.btn_exit);
 	}
 
 	private void bindView() {
@@ -85,90 +85,90 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.btn_left:
-			SettingActivity.this.finish();
-			break;
-		case R.id.layout_check_update:
-			// 版本更新
-			UmengUpdateAgent.setUpdateOnlyWifi(false);
-			UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
-				@Override
-				public void onUpdateReturned(int updateStatus,
-						UpdateResponse updateInfo) {
-					switch (updateStatus) {
-					case UpdateStatus.Yes: // has update
-						UmengUpdateAgent.showUpdateDialog(SettingActivity.this,
-								updateInfo);
-						break;
-					case UpdateStatus.No: // has no update
-						Toast.makeText(SettingActivity.this, "没有更新",
-								Toast.LENGTH_SHORT).show();
-						break;
-					case UpdateStatus.NoneWifi: // none wifi
-						// Toast.makeText(SettingActivity.this,
-						// "没有wifi连接， 只在wifi下更新", Toast.LENGTH_SHORT).show();
-						break;
-					case UpdateStatus.Timeout: // time out
-						Toast.makeText(SettingActivity.this, "超时",
-								Toast.LENGTH_SHORT).show();
-						break;
-					}
-				}
-			});
-			UmengUpdateAgent.forceUpdate(SettingActivity.this);
-			break;
-		case R.id.layout_feedback:
-//			Intent feedIntent = new Intent(this, FeedbackActivity.class);
-//			this.startActivity(feedIntent);
-//            FeedbackAgent agent = new FeedbackAgent(SettingActivity.this);
-//            agent.startFeedbackActivity();
-			break;
-		case R.id.layout_message_remind:
-//			Intent msgIntent = new Intent(this, MsgRemindActivity.class);
-//			this.startActivity(msgIntent);
-			break;
-		case R.id.layout_use_help:
-//			Intent helpIntent = new Intent(this, HelpActivity.class);
-//			this.startActivity(helpIntent);
-			break;
-		case R.id.layout_about_miao:
-//			Intent aboutIntent = new Intent(this, AboutActivity.class);
-//			this.startActivity(aboutIntent);
-			break;
-		case R.id.layout_account_safe:
-//			if(!readPreference("login_state").equals("in")){
-//				Intent loginIntent = new Intent(this,LoginActivity.class);
-//				this.startActivity(loginIntent);
-//				return;
-//			}
-//			Intent safeIntent = new Intent(this, AccountSafetyActivity.class);
-//			this.startActivity(safeIntent);
+//		switch (v.getId()) {
+//		case R.id.btn_left:
+//			SettingActivity.this.finish();
 //			break;
-		case R.id.layout_blacklist:
-//			if(!readPreference("login_state").equals("in")){
-//				Intent loginIntent = new Intent(this,LoginActivity.class);
-//				this.startActivity(loginIntent);
-//				return;
-//			}
-//			Intent blacklistIntent = new Intent(this, BlackListActivity.class);
-//			this.startActivity(blacklistIntent);
+//		case R.id.layout_check_update:
+//			// 版本更新
+//			UmengUpdateAgent.setUpdateOnlyWifi(false);
+//			UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
+//				@Override
+//				public void onUpdateReturned(int updateStatus,
+//						UpdateResponse updateInfo) {
+//					switch (updateStatus) {
+//					case UpdateStatus.Yes: // has update
+//						UmengUpdateAgent.showUpdateDialog(SettingActivity.this,
+//								updateInfo);
+//						break;
+//					case UpdateStatus.No: // has no update
+//						Toast.makeText(SettingActivity.this, "没有更新",
+//								Toast.LENGTH_SHORT).show();
+//						break;
+//					case UpdateStatus.NoneWifi: // none wifi
+//						// Toast.makeText(SettingActivity.this,
+//						// "没有wifi连接， 只在wifi下更新", Toast.LENGTH_SHORT).show();
+//						break;
+//					case UpdateStatus.Timeout: // time out
+//						Toast.makeText(SettingActivity.this, "超时",
+//								Toast.LENGTH_SHORT).show();
+//						break;
+//					}
+//				}
+//			});
+//			UmengUpdateAgent.forceUpdate(SettingActivity.this);
 //			break;
-		case R.id.btn_exit:
-			writePreference("login_state", "out");
-			writePreference("gender", "");
-			JPushInterface.stopPush(SettingActivity.this);
-			// XmppConnection.getInstance().closeConnection();
-			setResult(1);
-			Intent exitIntent = new Intent(JPushReceiver.ACTION_JPUSH_EXIT_MESSAGE_RECIEVE);
-			exitIntent.putExtra("exit_action","Done");
-			exitIntent.putExtras(new Bundle());
-			SettingActivity.this.sendOrderedBroadcast(exitIntent,null);
-			EMChatManager.getInstance().logout();// 此方法为同步方法
-			SettingActivity.this.finish();
-			break;
+//		case R.id.layout_feedback:
+////			Intent feedIntent = new Intent(this, FeedbackActivity.class);
+////			this.startActivity(feedIntent);
+////            FeedbackAgent agent = new FeedbackAgent(SettingActivity.this);
+////            agent.startFeedbackActivity();
+//			break;
+//		case R.id.layout_message_remind:
+////			Intent msgIntent = new Intent(this, MsgRemindActivity.class);
+////			this.startActivity(msgIntent);
+//			break;
+//		case R.id.layout_use_help:
+////			Intent helpIntent = new Intent(this, HelpActivity.class);
+////			this.startActivity(helpIntent);
+//			break;
+//		case R.id.layout_about_miao:
+////			Intent aboutIntent = new Intent(this, AboutActivity.class);
+////			this.startActivity(aboutIntent);
+//			break;
+//		case R.id.layout_account_safe:
+////			if(!readPreference("login_state").equals("in")){
+////				Intent loginIntent = new Intent(this,LoginActivity.class);
+////				this.startActivity(loginIntent);
+////				return;
+////			}
+////			Intent safeIntent = new Intent(this, AccountSafetyActivity.class);
+////			this.startActivity(safeIntent);
+////			break;
+//		case R.id.layout_blacklist:
+////			if(!readPreference("login_state").equals("in")){
+////				Intent loginIntent = new Intent(this,LoginActivity.class);
+////				this.startActivity(loginIntent);
+////				return;
+////			}
+////			Intent blacklistIntent = new Intent(this, BlackListActivity.class);
+////			this.startActivity(blacklistIntent);
+////			break;
+//		case R.id.btn_exit:
+//			writePreference("login_state", "out");
+//			writePreference("gender", "");
+//			JPushInterface.stopPush(SettingActivity.this);
+//			// XmppConnection.getInstance().closeConnection();
+//			setResult(1);
+//			Intent exitIntent = new Intent(JPushReceiver.ACTION_JPUSH_EXIT_MESSAGE_RECIEVE);
+//			exitIntent.putExtra("exit_action","Done");
+//			exitIntent.putExtras(new Bundle());
+//			SettingActivity.this.sendOrderedBroadcast(exitIntent,null);
+//			EMChatManager.getInstance().logout();// 此方法为同步方法
+//			SettingActivity.this.finish();
+//			break;
 
-		}
+//		}
 
 	}
 }

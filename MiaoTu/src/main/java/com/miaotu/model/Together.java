@@ -11,6 +11,8 @@ import java.util.List;
 public class Together {
     @JsonProperty("Uid")
     private String uid;
+    @JsonProperty("Id")
+    private String id;
     @JsonProperty("Destination")
     private String desCity;
     @JsonProperty("From")
@@ -63,6 +65,10 @@ public class Together {
     private boolean isLike;
     @JsonProperty("Distance")
     private String distance;
+    @JsonProperty("UserTags")
+    private String userTag;
+    @JsonProperty("LikeList")
+    private List<String> likeList;
 
     public String getUid() {
         return uid;
@@ -278,5 +284,29 @@ public class Together {
 
     public void setDistance(String distance) {
         this.distance = distance;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getUserTag() {
+        return userTag;
+    }
+
+    public void setUserTag(String userTag) {
+        this.userTag = userTag;
+    }
+
+    public List<String> getLikeList() {
+        return likeList;
+    }
+
+    public void setLikeList(List<String> likeList) {
+        this.likeList = likeList;
     }
 }

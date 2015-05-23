@@ -22,6 +22,7 @@
     <color name="my_order_status_paid">#8846b692</color>
     <color name="my_order_status_closed">#88b4b4b4</color>
     <color name="word_grey">#b4b4b4</color>
+    <color name="transparen_black">#7f000000</color>
 
     <color name="grey64">#646464</color>
     <color name="money_add">#efa12e</color>
@@ -36,6 +37,7 @@
     <color name="ffbab4a">#7ffbab4a</color>
     <color name="acc4bc">#acc4bc</color>
     <color name="c46b692">#46b692</color>
+    <color name="b4b4b4">#b4b4b4</color>
     <!-- 友盟 -->
     <color name="body_text_1">#ff000000</color>
     <color name="body_text_2">#99000000</color>
