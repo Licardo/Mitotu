@@ -10,10 +10,13 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
+import android.util.Log;
 
 import com.miaotu.annotation.FormProperty;
 import com.miaotu.annotation.Ignore;
+import com.miaotu.model.MFriendsInfo;
 import com.miaotu.model.ModifyPersonInfo;
+import com.miaotu.result.MovementListResult;
 import com.miaotu.result.PersonInfoResult;
 import com.miaotu.form.PublishTogether;
 import com.miaotu.model.RegisterInfo;
@@ -22,7 +25,13 @@ import com.miaotu.result.LoginResult;
 import com.miaotu.result.PhotoUploadResult;
 import com.miaotu.result.TogetherDetailResult;
 import com.miaotu.result.TogetherResult;
+import com.miaotu.result.TopicCommentsListResult;
+import com.miaotu.result.TopicListResult;
+import com.miaotu.result.TopicMessageListResult;
+import com.miaotu.result.TopicResult;
+import com.miaotu.result.UserInfoResult;
 import com.miaotu.util.StringUtil;
+import com.miaotu.util.Util;
 
 @SuppressLint("SimpleDateFormat")
 public class HttpRequestUtil {
@@ -247,7 +256,6 @@ public class HttpRequestUtil {
 		params.add(new BasicNameValuePair("phone", phone));
 		return HttpDecoder.postForObject(
 				getUrl("yueyou/join"), BaseResult.class, params);
-				getUrl("yueyou/"), TogetherDetailResult.class, params);
 
 	}
 	/**
