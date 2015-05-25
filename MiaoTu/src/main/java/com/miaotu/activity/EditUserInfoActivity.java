@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
@@ -22,6 +23,7 @@ import com.miaotu.result.BaseResult;
 import com.miaotu.util.LogUtil;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
+import com.miaotu.view.CircleImageView;
 import com.miaotu.view.FlowLayout;
 
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
     private ModifyPersonInfo userinfo;
     private EditText et_nickname,et_gender,et_age,et_address,et_emotion,et_job,et_wantgo;
     private List<String> alltags;
+    private CircleImageView iv_head_photo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initView(){
+        iv_head_photo = (CircleImageView) this.findViewById(R.id.iv_head_photo);
         et_wantgo = (EditText) this.findViewById(R.id.et_wantgo);
         et_job = (EditText) this.findViewById(R.id.et_job);
         et_address = (EditText) this.findViewById(R.id.et_address);
@@ -70,6 +74,8 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
     private void initData(){
         userinfo = new ModifyPersonInfo();
         alltags = new ArrayList<String>();
+        String headimg = readPreference("headphoto");
+        UrlImageViewHelper.setUrlDrawable(iv_head_photo, headimg);
     }
 
     private int position;

@@ -20,7 +20,10 @@ public class Login {
     private String gender;
     @JsonProperty("Work")
     private String job;
-
+    @JsonProperty("LikedCount")
+    private String fanscount;
+    @JsonProperty("LikeCount")
+    private String followcount;
     public String getUid() {
         return uid;
     }
@@ -75,5 +78,21 @@ public class Login {
 
     public void setJob(String job) {
         this.job = job;
+    }
+
+    public String getFanscount() {
+        return fanscount;
+    }
+
+    public void setFanscount(String fanscount) {
+        this.fanscount = fanscount;
+    }
+
+    public String getFollowcount() {
+        return followcount;
+    }
+
+    public void setFollowcount(String followcount) {
+        this.followcount = followcount;
     }
 }

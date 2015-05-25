@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical" >
+<TextView 
+    android:id="@+id/tv_id_type_id"
+    android:layout_height="30dp"
+    android:layout_width="match_parent"
+    android:text="身份证"
+    android:gravity="center"
+    />
+<ImageView 
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:background="@color/line_grey"
+        />
+<TextView 
+    android:id="@+id/tv_id_type_passport"
+    android:layout_height="30dp"
+    android:layout_width="match_parent"
+    android:text="护照"
+    android:gravity="center"
+    />
+</LinearLayout>
