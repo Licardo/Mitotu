@@ -17,7 +17,7 @@ public class FirstPageFragment extends BaseFragment implements View.OnClickListe
 private View root;
     private FragmentManager fragmentManager;
     private FirstPageTab1Fragment mTab01 ;
-    private FirstPageTab1Fragment mTab02 ;
+    private FirstPageTab2Fragment mTab02 ;
     private int curPage;
     private ImageView ivPublish;
     @Override
@@ -89,7 +89,7 @@ private View root;
                 curPage = 1;
                 if (mTab02 == null) {
                     // 如果MessageFragment为空，则创建一个并添加到界面上
-                    mTab02 = new FirstPageTab1Fragment();
+                    mTab02 = new FirstPageTab2Fragment();
                     transaction.add(R.id.id_content, mTab02);
                 } else {
                     // 如果MessageFragment不为空，则直接将它显示出来
