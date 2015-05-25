@@ -14,6 +14,7 @@ import android.util.Log;
 
 import com.miaotu.annotation.FormProperty;
 import com.miaotu.annotation.Ignore;
+import com.miaotu.model.MFriendsInfo;
 import com.miaotu.model.ModifyPersonInfo;
 import com.miaotu.model.User;
 import com.miaotu.result.MovementListResult;
@@ -203,7 +204,7 @@ public class HttpRequestUtil {
 		params.add(new BasicNameValuePair("token", token));
 		params.add(new BasicNameValuePair("yid", id));
         return HttpDecoder.getForObject(
-				getUrl("yueyou/"), TogetherDetailResult.class,params);
+				getUrl("yueyou/"), TogetherDetailResult.class, params);
 
 	}
 	/**
@@ -347,21 +348,21 @@ public class HttpRequestUtil {
 
 	/**
 	 * 获取话题列表
-	 * @param type hot nearby
+	 * @param info  info.type hot(热门)/nearby(身旁)
 	 * @return
 	 */
-	public TopicListResult getTopicList (String count, String token, String type){
+	public TopicListResult getTopicList (MFriendsInfo info){
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("token", token));
-		params.add(new BasicNameValuePair("page", "1"));
-		params.add(new BasicNameValuePair("latitude", "1"));
-		params.add(new BasicNameValuePair("longitude", "1"));
-		params.add(new BasicNameValuePair("num", count));
-		params.add(new BasicNameValuePair("type", type));
+		params.add(new BasicNameValuePair("token", info.getToken()));
+		params.add(new BasicNameValuePair("page", info.getPage()));
+		params.add(new BasicNameValuePair("latitude", info.getLatitude()));
+		params.add(new BasicNameValuePair("longitude", info.getLongitude()));
+		params.add(new BasicNameValuePair("num", info.getNum()));
+		params.add(new BasicNameValuePair("type", info.getType()));
 //		return HttpDecoder.postForObject(
 //				getUrl("topic"), TopicListResult.class,
 //				params);
-		return HttpDecoder.postForObject(
+		return HttpDecoder.getForObject(
 				getUrl("users"), TopicListResult.class,
 				params);
 	}
@@ -507,7 +508,7 @@ public class HttpRequestUtil {
 	public BaseResult like (String token,String toUser){
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("token",token));
-		params.add(new BasicNameValuePair("to_user",toUser));
+		params.add(new BasicNameValuePair("to_uid",toUser));
 		return HttpDecoder.postForObject(
 				getUrl("user/like"), BaseResult.class,
 				params);
@@ -523,9 +524,9 @@ public class HttpRequestUtil {
 	public BaseResult delLike (String token,String toUser){
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("token",token));
-		params.add(new BasicNameValuePair("to_user",toUser));
+		params.add(new BasicNameValuePair("to_uid",toUser));
 		return HttpDecoder.postForObject(
-				getUrl("user/unlike"), BaseResult.class,
+				getUrl("user/like"), BaseResult.class,
 				params);
 
 	}
@@ -542,24 +543,6 @@ public class HttpRequestUtil {
 		params.add(new BasicNameValuePair("id",photoId));
 		return HttpDecoder.getForObject(
 				getUrl("user/photo_del"), PhotoUploadResult.class,
-				params);
-
-	}
-
-	/**
-	 * 修改用户信息
-	 * @param user
-	 * @return
-	 */
-	public UserInfoResult updateUserInfo (User user){
-		List<NameValuePair> params = transformObject2Map(user);
-//		String ss = "";
-//		for(NameValuePair param:params){
-//			ss += param.getName()+"="+param.getValue()+"&";
-//		}
-//		LogUtil.d("url",getUrl("user/edit")+ss);
-		return HttpDecoder.postForObject(
-				getUrl("user/edit"), UserInfoResult.class,
 				params);
 
 	}

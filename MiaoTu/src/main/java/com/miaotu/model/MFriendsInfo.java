@@ -1,7 +1,7 @@
 package com.miaotu.model;
 
 /**
- * Created by Jayden on 2015/5/23.
+ * Created by zh on 2015/5/23.
  */
 public class MFriendsInfo {
     private String token;
@@ -9,14 +9,7 @@ public class MFriendsInfo {
     private String latitude;
     private String longitude;
     private String page;
-
-    public String getNum() {
-        return num;
-    }
-
-    public void setNum(String num) {
-        this.num = num;
-    }
+    private String num;
 
     public String getToken() {
         return token;
@@ -58,5 +51,11 @@ public class MFriendsInfo {
         this.page = page;
     }
 
-    private String num;
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
 }

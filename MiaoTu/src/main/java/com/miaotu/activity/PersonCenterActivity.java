@@ -138,7 +138,8 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
 
     private void initData(){
         String token = readPreference("token");
-        String uid = readPreference("uid");
+//        String uid = readPreference("uid");
+        String uid = getIntent().getStringExtra("uid");
         readPersonInfo(token, uid);
     }
 

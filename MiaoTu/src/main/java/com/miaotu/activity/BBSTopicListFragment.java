@@ -23,6 +23,7 @@ import com.miaotu.adapter.TopiclistAdapter;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.jpush.MessageCountDatabaseHelper;
+import com.miaotu.model.MFriendsInfo;
 import com.miaotu.model.Topic;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.MemberListResult;
@@ -44,10 +45,11 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
     private View layoutMore;
     private List<Topic> topicList;
     private TopiclistAdapter adapter;
-    private static int PAGECOUNT=8;
+    private static int PAGECOUNT=10;
     private int curPageCount = 0;
     private boolean isLoadMore = false;
     private ImageView ivDot;
+    private MFriendsInfo info;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.activity_bbs_topic_list,
@@ -80,7 +82,8 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
 
                 // Update the LastUpdatedLabel
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-                getTopics(false);
+
+                getTopics(false, info);
 
             }
 
@@ -138,7 +141,17 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
         lvTopics.setAdapter(adapter);
 
 //        getMessageCount();
-        getTopics(true);
+        info = new MFriendsInfo();
+        String lat = readPreference("latitude");    //纬度
+        String lon = readPreference("longitude");    //经度
+        String token = readPreference("token");
+        info.setLatitude(lat);
+        info.setLongitude(lon);
+        info.setToken(token);
+        info.setNum(PAGECOUNT+"");
+        info.setPage("1");
+        info.setType("nearby");
+        getTopics(true, info);
         
     }
     //刷新左上角提示
@@ -153,7 +166,7 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
     //刷新社区页面
     private void refresh(){
         try{
-            getTopics(false);
+            getTopics(false, info);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -166,7 +179,7 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
 //            ivDot.setVisibility(View.GONE);
 //        }
 //    }
-    private void getTopics(boolean isShow) {
+    private void getTopics(boolean isShow, final MFriendsInfo info) {
         new BaseHttpAsyncTask<Void, Void, TopicListResult>(getActivity(), isShow) {
             @Override
             protected void onCompleteTask(TopicListResult result) {
@@ -175,6 +188,9 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     topicList.clear();
+                    if(result.getTopics() == null){
+                        return;
+                    }
                     topicList.addAll(result.getTopics());
                     adapter.notifyDataSetChanged();
 //                    showToastMsg("lastvisibale:"+lvTopics.getRefreshableView().getLastVisiblePosition()+"  count: "+lvTopics.getRefreshableView().getCount()+" first:"+lvTopics.getRefreshableView().getFirstVisiblePosition());
@@ -193,7 +209,8 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
             @Override
             protected TopicListResult run(Void... params) {
                 curPageCount=PAGECOUNT;
-				return HttpRequestUtil.getInstance().getTopicList(curPageCount+"",""); //第二个参数表示活动id，主要用于线路详情中查看线路话题
+                info.setPage(curPageCount+"");
+				return HttpRequestUtil.getInstance().getTopicList(info); //第二个参数表示活动id，主要用于线路详情中查看线路话题
             }
 
             @Override
@@ -232,7 +249,8 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
             protected TopicListResult run(Void... params) {
                 isLoadMore = true;
                 curPageCount+=PAGECOUNT;
-                return HttpRequestUtil.getInstance().getTopicList(curPageCount+"","");
+                info.setPage(curPageCount+"");
+                return HttpRequestUtil.getInstance().getTopicList(info);
             }
 
             @Override

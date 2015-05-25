@@ -28,7 +28,7 @@ private View root;
 
     private ImageView iv_usergender;
     private CircleImageView iv_userhead;
-    private TextView tv_username,tv_userage,tv_iden;
+    private TextView tv_username,tv_userage,tv_iden,tv_userfans;
     private RelativeLayout rl_userinfo,rl_homepage,rl_setting;
     private TextView tv_left, tv_title, tv_right;
 
@@ -50,6 +50,7 @@ private View root;
     private void bindView() {
             }
     private void findView() {
+        tv_userfans = (TextView) root.findViewById(R.id.tv_userfans);
         iv_userhead = (CircleImageView) root.findViewById(R.id.iv_userhead);
         tv_title = (TextView) root.findViewById(R.id.tv_title);
         tv_left = (TextView) root.findViewById(R.id.tv_left);
@@ -78,6 +79,8 @@ private View root;
         String age = readPreference("age");
         String name = readPreference("name");
         String gender = readPreference("gender");
+        String followcount = readPreference("followcount");
+        String fanscount = readPreference("fanscount");
         UrlImageViewHelper.setUrlDrawable(iv_userhead, headimg);
         if("男".equals(gender)){
             iv_usergender.setBackgroundResource(R.drawable.mine_boy);
@@ -85,6 +88,7 @@ private View root;
         tv_iden.setText(identity);
         tv_userage.setText(age);
         tv_username.setText(name);
+        tv_userfans.setText(followcount+"个关注|"+fanscount+"个粉丝");
     }
 
     private void init() {
@@ -104,6 +108,8 @@ private View root;
                 intent.setClass(FourthPageFragment.this.getActivity(), EditUserInfoActivity.class);
                 break;
             case R.id.rl_homepage:
+                String uid = readPreference("uid");
+                intent.putExtra("uid", uid);
                 intent.setClass(FourthPageFragment.this.getActivity(), PersonCenterActivity.class);
                 break;
             case R.id.rl_setting:
