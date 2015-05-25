@@ -2,16 +2,17 @@ package com.miaotu.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by ying on 2015/5/21.
  */
-public class Together {
+public class Together implements Serializable{
     @JsonProperty("Uid")
     private String uid;
-    @JsonProperty("Id")
+    @JsonProperty("Yid")
     private String id;
     @JsonProperty("Destination")
     private String desCity;
@@ -68,7 +69,9 @@ public class Together {
     @JsonProperty("UserTags")
     private String userTag;
     @JsonProperty("LikeList")
-    private List<String> likeList;
+    private List<PersonInfo> likeList;
+    @JsonProperty("ReplyList")
+    private List<TogetherReply> replyList;
 
     public String getUid() {
         return uid;
@@ -302,11 +305,19 @@ public class Together {
         this.userTag = userTag;
     }
 
-    public List<String> getLikeList() {
+    public List<PersonInfo> getLikeList() {
         return likeList;
     }
 
-    public void setLikeList(List<String> likeList) {
+    public void setLikeList(List<PersonInfo> likeList) {
         this.likeList = likeList;
+    }
+
+    public List<TogetherReply> getReplyList() {
+        return replyList;
+    }
+
+    public void setReplyList(List<TogetherReply> replyList) {
+        this.replyList = replyList;
     }
 }

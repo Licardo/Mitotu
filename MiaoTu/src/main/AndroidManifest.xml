@@ -244,8 +244,19 @@
             android:name=".activity.SettingActivity"
             android:label="@string/SettingActivity" >
         </activity>
+        <activity android:name=".activity.AccountSafetyActivity" >
+        </activity>
         <activity
-            android:name=".activity.AccountSafetyActivity">
+            android:name=".activity.JoinTogetherStep1"
+            android:label="@string/title_activity_join_together_step1" >
+        </activity>
+        <activity
+            android:name=".activity.JoinTogetherStep2"
+            android:label="@string/title_activity_join_together_step2" >
+        </activity>
+        <activity
+            android:name=".activity.CustomTourDetailActivity"
+            android:label="@string/title_activity_custom_tour" >
         </activity>
     </application>
 

@@ -1,15 +1,24 @@
 package com.miaotu.activity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Point;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.TextPaint;
+import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Adapter;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,7 +30,10 @@ import com.miaotu.R;
 import com.miaotu.adapter.ImageItemAdapter;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
+import com.miaotu.model.PersonInfo;
 import com.miaotu.model.RegisterInfo;
+import com.miaotu.model.Together;
+import com.miaotu.model.TogetherReply;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.LoginResult;
 import com.miaotu.result.TogetherDetailResult;
@@ -29,20 +41,28 @@ import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 import com.miaotu.view.FlowLayout;
+import com.miaotu.view.GuideGallery;
 import com.miaotu.view.MyGridView;
+import com.umeng.analytics.MobclickAgent;
 
 public class TogetherDetailActivity extends BaseActivity implements View.OnClickListener{
 private String id;
+private Together together;
     private TextView tvTitle,tvName,tvAge,tvJob,tvComment;
     private CircleImageView ivHeadPhoto;
-    private ImageView ivGender;
+    private ImageView ivGender,ivLike;
     private FlowLayout personalTag,togetherTag;
     private MyGridView gvPhotos;
     private ImageItemAdapter adapter;
     private TextView tvJoined,tvLiked,tvStartDate,tvEndDate,tvDesCity,tvOrginCity,tvFee,tvRequirement;
-    private RelativeLayout layoutJoined,layoutLiked;
+    private RelativeLayout layoutJoined,layoutLiked,layoutPublishComment;
     private LinearLayout layoutJoinedPhotos,layoutInterestPhotos,layoutInterestPart,layoutJoinedPart;
     private ImageView ivJoinedTriangle,ivInterestTriangle;
+    private LinearLayout layoutLike,layoutComment,layoutJoin,layoutMenu,layoutCommentList;
+    private boolean islike;
+    private EditText etComment;
+    private TextView tvPublishComment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,14 +99,29 @@ private String id;
         ivInterestTriangle = (ImageView) findViewById(R.id.iv_interest_triangle);
         layoutInterestPart = (LinearLayout) findViewById(R.id.layout_interest_part);
         layoutJoinedPart = (LinearLayout) findViewById(R.id.layout_joined_part);
+        layoutLike = (LinearLayout) findViewById(R.id.layout_like);
+        layoutComment = (LinearLayout) findViewById(R.id.layout_comment);
+        layoutJoin = (LinearLayout) findViewById(R.id.layout_join);
+        ivLike = (ImageView) findViewById(R.id.iv_like);
+        layoutMenu = (LinearLayout) findViewById(R.id.layout_menu);
+        layoutPublishComment = (RelativeLayout) findViewById(R.id.layout_publish_comment);
+        etComment = (EditText) findViewById(R.id.et_comment);
+        tvPublishComment = (TextView) findViewById(R.id.tv_publish_comment);
+        layoutCommentList = (LinearLayout) findViewById(R.id.layout_comment_list);
+
     }
     private void bindView(){
         layoutLiked.setOnClickListener(this);
         layoutJoined.setOnClickListener(this);
+        layoutLike.setOnClickListener(this);
+        layoutComment.setOnClickListener(this);
+        layoutJoin.setOnClickListener(this);
+        tvPublishComment.setOnClickListener(this);
     }
     private void init(){
         id=getIntent().getStringExtra("id");
         tvTitle.setText("约游详情");
+
         getDetail();
     }
     //获取一起去详情
@@ -116,6 +151,7 @@ private String id;
         }.execute();
     }
     private void writeDetail(TogetherDetailResult result){
+        together = result.getTogether();
         UrlImageViewHelper.setUrlDrawable(ivHeadPhoto, result.getTogether().getHeadPhoto() + "", R.drawable.default_avatar);
         tvName.setText(result.getTogether().getNickname());
         if(result.getTogether().getGender().equals("男")){
@@ -168,7 +204,12 @@ private String id;
             textView.setPadding(Util.dip2px(this, 10), Util.dip2px(this, 4), Util.dip2px(this, 10), Util.dip2px(this, 4));
             togetherTag.addView(textView);
         }
-
+        islike=result.getTogether().isLike();
+        if(islike){
+            ivLike.setBackgroundResource(R.drawable.icon_like);
+        }else{
+            ivLike.setBackgroundResource(R.drawable.icon_unlike);
+        }
 
 //            for (int i = 0; i < detail.getJoinUsers().size(); i++) {
 //                Member m = detail.getJoinUsers().get(i);
@@ -204,41 +245,124 @@ private String id;
 //
 //                        m.getPhoto().getUrl() + "&size=100x100", R.drawable.icon_default_head_photo);
 //            }
-//            for (int i = 0; i < detail.getInterestUsers().size(); i++) {
-//                Member m = detail.getInterestUsers().get(i);
-//                CircleImageView imageView = new CircleImageView(
-//                        MovementDetailActivity.this);
-//                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-//                        Util.dip2px(MovementDetailActivity.this, 24),
-//                        Util.dip2px(MovementDetailActivity.this, 24));
-//                if (i == 0) {
-//                    params.leftMargin = Util.dip2px(
-//                            MovementDetailActivity.this, 10);
-//                }
-//                params.rightMargin = Util.dip2px(
-//                        MovementDetailActivity.this, 10);
-//                imageView.setLayoutParams(params);
-//                imageView.setTag(m.getUserId());
-//                imageView.setOnClickListener(new OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(View v) {
-//                        // TODO Auto-generated method stub
-//                        MobclickAgent.onEvent(MovementDetailActivity.this, "线路详情页-感兴趣的人");
-//                        Intent intent = new Intent(
-//                                MovementDetailActivity.this,
-//                                UserHomeActivity.class);
-//                        intent.putExtra("userId", (String) v.getTag());
-//                        startActivity(intent);
-//                    }
-//                });
-//                layoutInterestPhotos.addView(imageView);
-//                UrlImageViewHelper.setUrlDrawable(
-//                        imageView,
-//                        m.getPhoto().getUrl() + "&size=100x100", R.drawable.icon_default_head_photo);
-//            }
+        if(result.getTogether().getLikeList()!=null){
+            for (int i = 0; i < result.getTogether().getLikeList().size(); i++) {
+                PersonInfo m = result.getTogether().getLikeList().get(i);
+                CircleImageView imageView = new CircleImageView(
+                        this);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        Util.dip2px(this, 24),
+                        Util.dip2px(this, 24));
+                if (i == 0) {
+                    params.leftMargin = Util.dip2px(
+                            this, 10);
+                }
+                params.rightMargin = Util.dip2px(
+                        this, 10);
+                imageView.setLayoutParams(params);
+                imageView.setTag(m.getUid());
+                imageView.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        MobclickAgent.onEvent(TogetherDetailActivity.this, "线路详情页-感兴趣的人");
+                        Intent intent = new Intent(
+                                TogetherDetailActivity.this,
+                                PersonCenterActivity.class);
+                        intent.putExtra("uid", (String) v.getTag());
+                        startActivity(intent);
+                    }
+                });
+                layoutInterestPhotos.addView(imageView);
+                UrlImageViewHelper.setUrlDrawable(
+                        imageView,
+                        m.getHeadurl() + "100x100", R.drawable.icon_default_head_photo);
+            }
+        }
+        if(result.getTogether().getReplyList()!=null){
+            for(TogetherReply reply:result.getTogether().getReplyList()){
+                TextView textView = new TextView(this);
+                SpannableStringBuilder style=new SpannableStringBuilder(reply.getNickname()+" "+reply.getContent());
+                style.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.b4b4b4)), 0, reply.getNickname().length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+                style.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.grey64)), reply.getNickname().length(), reply.getNickname().length() + reply.getContent().length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+                textView.setText(style);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.bottomMargin = Util.dip2px(this,5);
+                textView.setLayoutParams(params);
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,14);
+                textView.setLineSpacing(0f,1.4f);
+                layoutCommentList.addView(textView);
+            }
+        }
+
     }
 
+
+    private void like() {
+        new BaseHttpAsyncTask<Void, Void, BaseResult>(this, true) {
+            @Override
+            protected void onCompleteTask(BaseResult result) {
+                if(tvLiked==null){
+                    return;
+                }
+                if (result.getCode() == BaseResult.SUCCESS) {
+                    if(islike){
+                        ivLike.setBackgroundResource(R.drawable.icon_unlike);
+                        showToastMsg("取消喜欢成功！");
+                        islike=false;
+                    }else{
+                        showToastMsg("喜欢成功！");
+                        ivLike.setBackgroundResource(R.drawable.icon_like);
+                        islike=true;
+                    }
+                } else {
+                    if(StringUtil.isEmpty(result.getMsg())){
+                        showToastMsg("失败！");
+                    }else{
+                        showToastMsg(result.getMsg());
+                    }
+                }
+            }
+
+            @Override
+            protected BaseResult run(Void... params) {
+                return HttpRequestUtil.getInstance().likeTogether(readPreference("token"),id);
+            }
+
+        }.execute();
+    }
+
+    /**
+     * 发表评论
+     */
+    private void publishComment() {
+        new BaseHttpAsyncTask<Void, Void, BaseResult>(this, true) {
+            @Override
+            protected void onCompleteTask(BaseResult result) {
+                if(tvLiked==null){
+                    return;
+                }
+                if (result.getCode() == BaseResult.SUCCESS) {
+                        showToastMsg("评论发表成功！");
+                    layoutMenu.setVisibility(View.VISIBLE);
+                    layoutPublishComment.setVisibility(View.GONE);
+                } else {
+                    if(StringUtil.isEmpty(result.getMsg())){
+                        showToastMsg("评论发表失败！");
+                    }else{
+                        showToastMsg(result.getMsg());
+                    }
+                }
+            }
+
+            @Override
+            protected BaseResult run(Void... params) {
+                return HttpRequestUtil.getInstance().publishTogetherComment(readPreference("token"), id, StringUtil.trimAll(etComment.getText().toString()));
+            }
+
+        }.execute();
+    }
     @Override
     public void onClick(View view) {
         switch(view.getId()){
@@ -246,7 +370,7 @@ private String id;
                 finish();
                 break;
             case R.id.layout_joined:
-                // 已参加
+                // 已参加的
                 layoutJoinedPhotos.setVisibility(View.VISIBLE);
                 layoutInterestPhotos.setVisibility(View.GONE);
                 ivJoinedTriangle.setVisibility(View.VISIBLE);
@@ -257,7 +381,7 @@ private String id;
                 layoutJoinedPart.setVisibility(View.VISIBLE);
                 break;
             case R.id.layout_interest:
-                // 感兴趣
+                // 感兴趣的
                 layoutJoinedPhotos.setVisibility(View.GONE);
                 layoutInterestPhotos.setVisibility(View.VISIBLE);
                 ivJoinedTriangle.setVisibility(View.INVISIBLE);
@@ -266,6 +390,30 @@ private String id;
                 tvJoined.setTextColor(getResources().getColor(R.color.invite_status_refuse_me));
                 layoutJoinedPart.setVisibility(View.GONE);
                 layoutInterestPart.setVisibility(View.VISIBLE);
+                break;
+            case R.id.layout_like:
+                // 感兴趣
+                like();
+                break;
+            case R.id.layout_join:
+                // 参加
+                Intent joinIntent = new Intent(TogetherDetailActivity.this,JoinTogetherStep1.class);
+                joinIntent.putExtra("together",together);
+                startActivity(joinIntent);
+                break;
+            case R.id.layout_comment:
+                // 评论
+                layoutMenu.setVisibility(View.GONE);
+                layoutPublishComment.setVisibility(View.VISIBLE);
+                break;
+            case R.id.tv_publish_comment:
+                //发表评论
+                if(StringUtil.isBlank(etComment.getText().toString())){
+                    layoutMenu.setVisibility(View.VISIBLE);
+                    layoutPublishComment.setVisibility(View.GONE);
+                }else{
+                    publishComment();
+                }
                 break;
         }
     }

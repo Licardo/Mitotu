@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.miaotu.R;
 import com.miaotu.util.Util;
@@ -58,7 +57,9 @@ private View root;
         switch (view.getId()) {
             case R.id.iv_publish:
                 //发布新的旅行
-                Intent publishTogetherIntent = new Intent(getActivity(),PublishTogetherStep1Activity.class);
+//                Intent publishTogetherIntent = new Intent(getActivity(),PublishTogetherStep1Activity.class);
+//                startActivity(publishTogetherIntent);
+                Intent publishTogetherIntent = new Intent(getActivity(),CustomTourDetailActivity.class);
                 startActivity(publishTogetherIntent);
                 break;
         }
