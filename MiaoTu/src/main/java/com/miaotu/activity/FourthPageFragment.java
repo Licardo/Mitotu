@@ -14,8 +14,10 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.util.Util;
+import com.miaotu.view.CircleImageView;
 
 public class FourthPageFragment extends BaseFragment implements View.OnClickListener {
 private View root;
@@ -25,6 +27,7 @@ private View root;
     private int curPage;
 
     private ImageView iv_usergender;
+    private CircleImageView iv_userhead;
     private TextView tv_username,tv_userage,tv_iden;
     private RelativeLayout rl_userinfo,rl_homepage,rl_setting;
     private TextView tv_left, tv_title, tv_right;
@@ -47,6 +50,7 @@ private View root;
     private void bindView() {
             }
     private void findView() {
+        iv_userhead = (CircleImageView) root.findViewById(R.id.iv_userhead);
         tv_title = (TextView) root.findViewById(R.id.tv_title);
         tv_left = (TextView) root.findViewById(R.id.tv_left);
         tv_right = (TextView) root.findViewById(R.id.tv_right);
@@ -69,10 +73,12 @@ private View root;
      * 初始化用户信息
      */
     private void initUserInfo(){
+        String headimg = readPreference("headphoto");
         String identity = readPreference("job");
         String age = readPreference("age");
         String name = readPreference("name");
         String gender = readPreference("gender");
+        UrlImageViewHelper.setUrlDrawable(iv_userhead, headimg);
         if("男".equals(gender)){
             iv_usergender.setBackgroundResource(R.drawable.mine_boy);
         }
@@ -164,19 +170,6 @@ private View root;
         if (requestCode == 3 && resultCode == 1) {
             ((MainActivity) getActivity()).writePreference("movement_city", data.getStringExtra("city"));
         }
-    }
-
-    /**
-     * SharedPreferences工具方法,用来读取一个值 如果没有读取到，会返回""
-     *
-     * @param key
-     * @return
-     */
-    public String readPreference(String key) {
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences(BaseActivity.NAME_COMMON,
-                BaseActivity.MODE_PRIVATE);
-        String value = sharedPreferences.getString(key, "");
-        return value;
     }
 
     @Override

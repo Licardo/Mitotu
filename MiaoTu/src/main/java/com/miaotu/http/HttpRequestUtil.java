@@ -10,10 +10,13 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
+import android.util.Log;
 
 import com.miaotu.annotation.FormProperty;
 import com.miaotu.annotation.Ignore;
 import com.miaotu.model.ModifyPersonInfo;
+import com.miaotu.model.User;
+import com.miaotu.result.MovementListResult;
 import com.miaotu.result.PersonInfoResult;
 import com.miaotu.form.PublishTogether;
 import com.miaotu.model.RegisterInfo;
@@ -21,7 +24,13 @@ import com.miaotu.result.BaseResult;
 import com.miaotu.result.LoginResult;
 import com.miaotu.result.PhotoUploadResult;
 import com.miaotu.result.TogetherResult;
+import com.miaotu.result.TopicCommentsListResult;
+import com.miaotu.result.TopicListResult;
+import com.miaotu.result.TopicMessageListResult;
+import com.miaotu.result.TopicResult;
+import com.miaotu.result.UserInfoResult;
 import com.miaotu.util.StringUtil;
+import com.miaotu.util.Util;
 
 @SuppressLint("SimpleDateFormat")
 public class HttpRequestUtil {
@@ -324,4 +333,242 @@ public class HttpRequestUtil {
 		return HttpDecoder.postForObject(getUrl("user"), BaseResult.class, params);
 	}
 
+	/**
+	 * 获取话题列表
+	 * @param type hot nearby
+	 * @return
+	 */
+	public TopicListResult getTopicList (String count, String token, String type){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("page", "1"));
+		params.add(new BasicNameValuePair("latitude", "1"));
+		params.add(new BasicNameValuePair("longitude", "1"));
+		params.add(new BasicNameValuePair("num", count));
+		params.add(new BasicNameValuePair("type", type));
+//		return HttpDecoder.postForObject(
+//				getUrl("topic"), TopicListResult.class,
+//				params);
+		return HttpDecoder.postForObject(
+				getUrl("users"), TopicListResult.class,
+				params);
+	}
+
+	/**
+	 * 获取话题评论列表
+	 * @param id
+	 * @param count
+	 * @return
+	 */
+	public TopicCommentsListResult getTopicComments (String id,String count){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("id", id));
+		params.add(new BasicNameValuePair("count", count));
+		params.add(new BasicNameValuePair("page", "1"));
+		return HttpDecoder.postForObject(
+				getUrl("topic/reply_list"), TopicCommentsListResult.class,
+				params);
+	}
+
+	/**
+	 * 获取话题详情
+	 * @return
+	 */
+	public TopicResult getTopicDetail (String id){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("id", id));
+		return HttpDecoder.postForObject(
+				getUrl("topic/detail"), TopicResult.class,
+				params);
+	}
+
+	//对帖子发表评论
+	public BaseResult publishComment (String pid,String token,String content){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("pid", pid));
+		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("content", content));
+		return HttpDecoder.postForObject(
+				getUrl("topic/insert"), BaseResult.class,
+				params);
+	}
+
+	/**
+	 * 发表话题
+	 * @param token
+	 * @param title
+	 * @param content
+	 * @param movementId
+	 * @param files
+	 * @return
+	 */
+	public BaseResult publishTopic (String token,String title,String content,String movementId,List<File>files){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("title", title));
+		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("content", content));
+		if(!StringUtil.isBlank(movementId)){
+			params.add(new BasicNameValuePair("extends", movementId));
+		}
+
+		if(files.size()>0){
+			return HttpDecoder.postForObject(
+					getUrl("topic/insert"), BaseResult.class,
+					params,files);
+		}else{
+			return HttpDecoder.postForObject(
+					getUrl("topic/insert"), BaseResult.class,
+					params);
+		}
+	}
+
+	/**
+	 * 获取用户参加的活动
+	 * @param uid
+	 * @param count
+	 * @return
+	 */
+	public MovementListResult getUserJoin (String uid,String count){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("uid",uid));
+		params.add(new BasicNameValuePair("count",count));
+		params.add(new BasicNameValuePair("page","1"));
+		return HttpDecoder.getForObject(
+				getUrl("member/join_activity_list"), MovementListResult.class,
+				params);
+
+	}
+
+	/**
+	 * 获取话题消息列表
+	 * @param count
+	 * @return
+	 */
+	public TopicMessageListResult getTopicMessage (String token,String count){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("count", count));
+		params.add(new BasicNameValuePair("page", "1"));
+		return HttpDecoder.postForObject(
+				getUrl("topic/message_list"), TopicMessageListResult.class,
+				params);
+
+	}
+
+	/**
+	 * 标记消息为已读状态
+	 * @param token
+	 * @param id
+	 * @return
+	 */
+	public BaseResult readTopicMessage (String token,String id){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("message_id", id));
+		return HttpDecoder.postForObject(
+				getUrl("topic/read_message"), BaseResult.class,
+				params);
+
+	}
+
+	/**
+	 * 获取用户信息
+	 * @param uid
+	 * @param token
+	 * @return
+	 */
+	public UserInfoResult getUserInfo(String uid, String token) {
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("uid", uid));
+		if(!"".equals(token)) { //如果token为空字符串，则不传递
+			params.add(new BasicNameValuePair("token", token));
+		}
+		return HttpDecoder.getForObject(getUrl("member/person"), UserInfoResult.class, params);
+	}
+
+	/**
+	 * 喜欢用户
+	 * @param token
+	 * @param toUser
+	 * @return
+	 */
+	public BaseResult like (String token,String toUser){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token",token));
+		params.add(new BasicNameValuePair("to_user",toUser));
+		return HttpDecoder.postForObject(
+				getUrl("user/like"), BaseResult.class,
+				params);
+
+	}
+
+	/**
+	 * 取消喜欢
+	 * @param token
+	 * @param toUser
+	 * @return
+	 */
+	public BaseResult delLike (String token,String toUser){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token",token));
+		params.add(new BasicNameValuePair("to_user",toUser));
+		return HttpDecoder.postForObject(
+				getUrl("user/unlike"), BaseResult.class,
+				params);
+
+	}
+
+	/**
+	 * 移除照片
+	 * @param token
+	 * @param photoId
+	 * @return
+	 */
+	public PhotoUploadResult removePhoto (String token,String photoId){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token",token));
+		params.add(new BasicNameValuePair("id",photoId));
+		return HttpDecoder.getForObject(
+				getUrl("user/photo_del"), PhotoUploadResult.class,
+				params);
+
+	}
+
+	/**
+	 * 修改用户信息
+	 * @param user
+	 * @return
+	 */
+	public UserInfoResult updateUserInfo (User user){
+		List<NameValuePair> params = transformObject2Map(user);
+//		String ss = "";
+//		for(NameValuePair param:params){
+//			ss += param.getName()+"="+param.getValue()+"&";
+//		}
+//		LogUtil.d("url",getUrl("user/edit")+ss);
+		return HttpDecoder.postForObject(
+				getUrl("user/edit"), UserInfoResult.class,
+				params);
+
+	}
+
+	/**
+	 * 修改用户头像
+	 * @param
+	 * @param
+	 * @return
+	 */
+	public PhotoUploadResult modifyUserPhoto (String token,File img){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token",token));
+		String ext = Util.getExtName(img);
+		Log.d("图片格式", ext);
+		params.add(new BasicNameValuePair("ext",ext));
+		List<File>files = new ArrayList<File>();
+		files.add(img);
+		return HttpDecoder.postForObject(
+				getUrl("user/avatar"), PhotoUploadResult.class,
+				params,files);
+
+	}
 }

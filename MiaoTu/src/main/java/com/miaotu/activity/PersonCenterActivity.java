@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
@@ -15,6 +16,7 @@ import com.miaotu.result.PersonInfoResult;
 import com.miaotu.result.BaseResult;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
+import com.miaotu.view.CircleImageView;
 import com.miaotu.view.FlowLayout;
 
 public class PersonCenterActivity extends BaseActivity implements View.OnClickListener {
@@ -27,6 +29,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     private View view7,view_bottom;
     private LinearLayout ll_tag;
     private RelativeLayout rl_gender,rl_age,rl_address,rl_emotion,rl_job,rl_wantgo;
+    private CircleImageView ci_userhead;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initView(){
+        ci_userhead = (CircleImageView) this.findViewById(R.id.ci_userhead);
         rl_gender = (RelativeLayout) this.findViewById(R.id.rl_gender);
         rl_age = (RelativeLayout) this.findViewById(R.id.rl_age);
         rl_address = (RelativeLayout) this.findViewById(R.id.rl_address);
@@ -72,6 +76,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
      * @param personInfoResult
      */
     private void initPersonInfoData(PersonInfoResult personInfoResult){
+        UrlImageViewHelper.setUrlDrawable(ci_userhead, personInfoResult.getPersonInfo().getHeadurl());
         tv_top_emotion.setText(personInfoResult.getPersonInfo().getMaritalstatus());
         if(!StringUtil.isBlank(personInfoResult.getPersonInfo().getAddress())){
             rl_address.setVisibility(View.VISIBLE);

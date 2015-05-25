@@ -247,6 +247,15 @@
         <activity
             android:name=".activity.AccountSafetyActivity">
         </activity>
+        <activity
+            android:name=".activity.BBSPublishTopicActivity">
+        </activity>
+        <activity
+            android:name=".activity.BBSMessageActivity">
+        </activity>
+        <activity
+            android:name=".activity.BBSTopicDetailActivity">
+        </activity>
     </application>
 
 </manifest>

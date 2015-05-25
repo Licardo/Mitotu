@@ -58,7 +58,7 @@ public class MainActivity extends BaseFragmentActivity implements
         OnClickListener {
     private static MainActivity instance;
     private FirstPageFragment mTab01 ;
-    private FirstPageFragment mTab02 ;
+    private BBSTopicListFragment mTab02 ;
     private FirstPageFragment mTab03 ;
     private FourthPageFragment mTab04 ;
 
@@ -271,7 +271,7 @@ public class MainActivity extends BaseFragmentActivity implements
                                 R.color.text_orange));
                 if (mTab02 == null) {
                     // 如果MessageFragment为空，则创建一个并添加到界面上
-                    mTab02 = new FirstPageFragment();
+                    mTab02 = new BBSTopicListFragment();
                     transaction.add(R.id.id_content, mTab02);
                 } else {
                     // 如果MessageFragment不为空，则直接将它显示出来

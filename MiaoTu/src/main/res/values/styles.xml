@@ -136,4 +136,11 @@
 
     <style name="nornal_style" parent="android:Theme.NoTitleBar"></style>
 
+    <!-- 修改头像 自定义dialog的样式 -->
+    <style name="dialog_modifyphoto">
+        <item name="android:background">#00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
 </resources>

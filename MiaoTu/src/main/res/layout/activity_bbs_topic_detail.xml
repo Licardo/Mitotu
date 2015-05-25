@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+<include
+    android:id="@+id/layout_top"
+    android:layout_alignParentTop="true"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    layout="@layout/top_bar"
+    />
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:layout_below="@+id/layout_top"
+        android:layout_marginBottom="47dp"
+        android:id="@+id/lv_topic_comments"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
+        ptr:ptrMode="pullFromStart"
+        ptr:ptrAnimationStyle = "flip"
+        ptr:ptrOverScroll = "false"
+        ptr:ptrShowIndicator = "false"
+        android:descendantFocusability="blocksDescendants"
+        android:scrollbars="none"
+        android:divider="@null"
+        android:listSelector="@android:color/transparent"
+        >
+
+        </com.handmark.pulltorefresh.library.PullToRefreshListView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        >
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@drawable/main_bottom_projection"
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:orientation="horizontal"
+            android:background="#ebebeb"
+            >
+            <EditText
+                android:id="@+id/et_comment"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="70dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:hint="写评论"
+                android:textColorHint="#dcdcdc"
+                android:textSize="14sp"
+                android:textColor="#646464"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:maxLength="60"
+                android:background="@drawable/bg_topic_comment"
+                />
+            <TextView
+                android:id="@+id/tv_publish_comment"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp"
+                android:background="#ffffff"
+                android:text="发送"
+                android:textSize="16sp"
+                android:textColor="#646464"
+                android:gravity="center"
+                />
+            </RelativeLayout>
+        </LinearLayout>
+</RelativeLayout>

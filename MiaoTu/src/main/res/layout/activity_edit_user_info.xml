@@ -56,6 +56,7 @@
                     android:textSize="14sp" />
 
                 <com.miaotu.view.CircleImageView
+                    android:id="@+id/iv_head_photo"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_alignParentRight="true"
