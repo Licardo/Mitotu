@@ -244,17 +244,17 @@
             android:name=".activity.SettingActivity"
             android:label="@string/SettingActivity" >
         </activity>
-        <activity
-            android:name=".activity.AccountSafetyActivity">
+        <activity android:name=".activity.AccountSafetyActivity" >
+        </activity>
+        <activity android:name=".activity.BBSPublishTopicActivity" >
+        </activity>
+        <activity android:name=".activity.BBSMessageActivity" >
+        </activity>
+        <activity android:name=".activity.BBSTopicDetailActivity" >
         </activity>
         <activity
-            android:name=".activity.BBSPublishTopicActivity">
-        </activity>
-        <activity
-            android:name=".activity.BBSMessageActivity">
-        </activity>
-        <activity
-            android:name=".activity.BBSTopicDetailActivity">
+            android:name=".activity.MyDatingTourActivity"
+            android:label="@string/title_activity_my_dating_tour" >
         </activity>
     </application>
 

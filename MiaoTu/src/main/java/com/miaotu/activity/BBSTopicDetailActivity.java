@@ -166,8 +166,8 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                     topic.getHeadPhoto().getUrl() + "&size=100x100",
                     R.drawable.icon_default_head_photo);
             view.findViewById(R.id.iv_head_photo).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+                    @Override
+                    public void onClick(View view) {
 //                    Intent intent = new Intent(BBSTopicDetailActivity.this, UserHomeActivity.class);
 //                    intent.putExtra("userId",topic.getUid());
 //                    startActivity(intent);
