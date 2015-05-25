@@ -2,10 +2,12 @@ package com.miaotu.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 /**
  * Created by Jayden on 2015/5/21.
  */
-public class PersonInfo {
+public class PersonInfo implements Serializable {
     @JsonProperty("Id")
     private String id;
     @JsonProperty("Phone")

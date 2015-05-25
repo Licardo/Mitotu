@@ -246,6 +246,8 @@
         </activity>
         <activity android:name=".activity.AccountSafetyActivity" >
         </activity>
+        <activity android:name=".activity.AccountSafetyActivity" >
+        </activity>
         <activity android:name=".activity.BBSPublishTopicActivity" >
         </activity>
         <activity android:name=".activity.BBSMessageActivity" >
@@ -253,6 +255,16 @@
         <activity android:name=".activity.BBSTopicDetailActivity" >
         </activity>
         <activity
+            android:name=".activity.JoinTogetherStep1"
+            android:label="@string/title_activity_join_together_step1" >
+        </activity>
+        <activity
+            android:name=".activity.JoinTogetherStep2"
+            android:label="@string/title_activity_join_together_step2" >
+        </activity>
+        <activity
+            android:name=".activity.CustomTourDetailActivity"
+            android:label="@string/title_activity_custom_tour" >
             android:name=".activity.MyDatingTourActivity"
             android:label="@string/title_activity_my_dating_tour" >
         </activity>

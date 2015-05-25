@@ -10,14 +10,10 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
-import android.util.Log;
 
 import com.miaotu.annotation.FormProperty;
 import com.miaotu.annotation.Ignore;
-import com.miaotu.model.MFriendsInfo;
 import com.miaotu.model.ModifyPersonInfo;
-import com.miaotu.model.User;
-import com.miaotu.result.MovementListResult;
 import com.miaotu.result.PersonInfoResult;
 import com.miaotu.form.PublishTogether;
 import com.miaotu.model.RegisterInfo;
@@ -26,13 +22,7 @@ import com.miaotu.result.LoginResult;
 import com.miaotu.result.PhotoUploadResult;
 import com.miaotu.result.TogetherDetailResult;
 import com.miaotu.result.TogetherResult;
-import com.miaotu.result.TopicCommentsListResult;
-import com.miaotu.result.TopicListResult;
-import com.miaotu.result.TopicMessageListResult;
-import com.miaotu.result.TopicResult;
-import com.miaotu.result.UserInfoResult;
 import com.miaotu.util.StringUtil;
-import com.miaotu.util.Util;
 
 @SuppressLint("SimpleDateFormat")
 public class HttpRequestUtil {
@@ -163,6 +153,39 @@ public class HttpRequestUtil {
 	}
 
 	/**
+	 * 喜欢约游
+	 * @param token
+	 * @param yid
+	 * @return
+	 */
+	public BaseResult likeTogether (String token,String yid){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("yid", yid));
+		return HttpDecoder.postForObject(
+				getUrl("yueyou/like"), BaseResult.class,
+				params);
+
+	}
+
+	/**
+	 * 对约游进行评论
+	 * @param token
+	 * @param yid
+	 * @param content
+	 * @return
+	 */
+	public BaseResult publishTogetherComment (String token,String yid,String content){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("yid", yid));
+		params.add(new BasicNameValuePair("content", content));
+		return HttpDecoder.postForObject(
+				getUrl("yueyou/reply"), BaseResult.class,
+				params);
+
+	}
+	/**
 	 * 获取约游列表
 	 * @param token
 	 * @param page
@@ -204,6 +227,26 @@ public class HttpRequestUtil {
 		params.add(new BasicNameValuePair("token", token));
 		params.add(new BasicNameValuePair("yid", id));
         return HttpDecoder.getForObject(
+				getUrl("yueyou/"), TogetherDetailResult.class, params);
+
+	}
+
+	/**
+	 * 参加约游
+	 * @param token
+	 * @param id
+	 * @param name
+	 * @param phone
+	 * @return
+	 */
+	public BaseResult joinTogether (String token,String id,String name,String phone){
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("yid", id));
+		params.add(new BasicNameValuePair("name", name));
+		params.add(new BasicNameValuePair("phone", phone));
+		return HttpDecoder.postForObject(
+				getUrl("yueyou/join"), BaseResult.class, params);
 				getUrl("yueyou/"), TogetherDetailResult.class, params);
 
 	}
