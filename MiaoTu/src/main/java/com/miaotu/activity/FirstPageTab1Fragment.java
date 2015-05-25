@@ -64,11 +64,10 @@ private View root;
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // TODO Auto-generated method stub
-//                Intent intent = new Intent(RecentVisitActivity.this,
-//                        UserHomeActivity.class);
-//                intent.putExtra("userId", visitorList.get(position - 1)
-//                        .getUserId());
-//                startActivityForResult(intent, 1);
+                Intent intent = new Intent(getActivity(),
+                        TogetherDetailActivity.class);
+                intent.putExtra("id", mList.get(position - 2).getId());
+                startActivityForResult(intent, 1);
             }
         });
         lvPull.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {

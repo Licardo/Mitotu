@@ -1,7 +1,10 @@
 package com.miaotu.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,12 +19,15 @@ import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.model.PhotoInfo;
 import com.miaotu.model.Together;
+import com.miaotu.util.LogUtil;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 import com.photoselector.model.PhotoModel;
 import com.photoselector.ui.PhotoPreviewActivity;
 import com.photoselector.util.CommonUtils;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -143,7 +149,57 @@ public class TogetherlistAdapter extends BaseAdapter {
         }
         holder.tvDate.setText(mList.get(position).getStartDate());
         holder.tvTime.setText(mList.get(position).getPublishDate());
-        for(PhotoInfo photoInfo:mList.get(position).getPicList()){
+        if(mList.get(position).getPicList().size()==0){
+            holder.layoutImg.setVisibility(View.GONE);
+        }else{
+            holder.layoutImg.setVisibility(View.VISIBLE);
+        }
+        //添加图片
+        int limit = 0;
+        if(mList.get(position).getPicList().size()>3){
+            limit=3;
+        }else{
+            limit = mList.get(position).getPicList().size();
+        }
+        if(limit==0){
+            holder.layoutImg.setVisibility(View.GONE);
+        }else{
+            holder.layoutImg.setVisibility(View.VISIBLE);
+        }
+        holder.layoutImg.removeAllViews();
+        for(int i=0;i<limit;i++) {
+            PhotoInfo photoInfo = mList.get(position).getPicList().get(i);
+            if(i==2){
+                //添加图片个数textview
+                ImageView imageView = new ImageView(mContext);
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(Util.dip2px(mContext, 80), Util.dip2px(mContext, 80));
+                imageView.setLayoutParams(params);
+                TextView tvCount = new TextView(mContext);
+                RelativeLayout.LayoutParams params1 = new RelativeLayout.LayoutParams(Util.dip2px(mContext, 80), Util.dip2px(mContext, 20));
+                params1.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                tvCount.setGravity(Gravity.CENTER);
+                tvCount.setTextSize(TypedValue.COMPLEX_UNIT_SP,10);
+                tvCount.setLayoutParams(params1);
+                tvCount.setText("共" + mList.get(position).getPicList().size() + "张图片");
+                tvCount.setTextColor(mContext.getResources().getColor(R.color.white));
+                tvCount.setBackgroundColor(mContext.getResources().getColor(R.color.transparen_black));
+                RelativeLayout relativeLayout = new RelativeLayout(mContext);
+                relativeLayout.addView(imageView);
+                relativeLayout.addView(tvCount);
+                holder.layoutImg.addView(relativeLayout);
+                UrlImageViewHelper.setUrlDrawable(imageView,
+                        photoInfo.getUrl() + "240x240",
+                        R.drawable.default_avatar);
+            }else{
+                ImageView imageView = new ImageView(mContext);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Util.dip2px(mContext, 80), Util.dip2px(mContext, 80));
+                params.rightMargin = Util.dip2px(mContext, 10);
+                imageView.setLayoutParams(params);
+                holder.layoutImg.addView(imageView);
+                UrlImageViewHelper.setUrlDrawable(imageView,
+                        photoInfo.getUrl() + "240x240",
+                        R.drawable.default_avatar);
+            }
         }
         holder.tvDistance.setText(mList.get(position).getDistance()+"km");
 		return convertView;
