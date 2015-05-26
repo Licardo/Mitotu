@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 
 import com.miaotu.R;
 import com.miaotu.util.Util;
@@ -20,6 +21,7 @@ private View root;
     private FirstPageTab2Fragment mTab02 ;
     private int curPage;
     private ImageView ivPublish;
+    private RadioGroup radioGroup;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -37,14 +39,28 @@ private View root;
 
     private void bindView() {
         ivPublish.setOnClickListener(this);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (i){
+                    case R.id.tab1:
+                        setTabSelection(0);
+                        break;
+                    case R.id.tab2:
+                        setTabSelection(1);
+                        break;
+                }
+            }
+        });
             }
     private void findView() {
         ivPublish = (ImageView) root.findViewById(R.id.iv_publish);
+        radioGroup = (RadioGroup) root.findViewById(R.id.rg_title);
     }
 
     private void init() {
         fragmentManager = getChildFragmentManager();
-        setTabSelection(1);
+        setTabSelection(0);
     }
 
 
@@ -57,10 +73,10 @@ private View root;
         switch (view.getId()) {
             case R.id.iv_publish:
                 //发布新的旅行
-//                Intent publishTogetherIntent = new Intent(getActivity(),PublishTogetherStep1Activity.class);
-//                startActivity(publishTogetherIntent);
-                Intent publishTogetherIntent = new Intent(getActivity(),CustomTourDetailActivity.class);
+                Intent publishTogetherIntent = new Intent(getActivity(),PublishTogetherStep1Activity.class);
                 startActivity(publishTogetherIntent);
+//                Intent publishTogetherIntent = new Intent(getActivity(),CustomTourDetailActivity.class);
+//                startActivity(publishTogetherIntent);
                 break;
         }
     }

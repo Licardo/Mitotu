@@ -22,13 +22,16 @@ import android.widget.RelativeLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.miaotu.R;
+import com.miaotu.adapter.CustomTourlistAdapter;
 import com.miaotu.adapter.FirstPageImageAdapter;
 import com.miaotu.adapter.TogetherlistAdapter;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.model.Banner;
+import com.miaotu.model.CustomTour;
 import com.miaotu.model.Together;
 import com.miaotu.result.BaseResult;
+import com.miaotu.result.CustomTourResult;
 import com.miaotu.result.TogetherResult;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
@@ -41,8 +44,8 @@ public class FirstPageTab2Fragment extends BaseFragment implements View.OnClickL
 private View root;
     private PullToRefreshListView lvPull;
     private View head;
-    private TogetherlistAdapter adapter;
-    private List<Together> mList;
+    private CustomTourlistAdapter adapter;
+    private List<CustomTour> mList;
     private int page=1;
     private final int PAGECOUNT = 12;
     private boolean isLoadMore = false;
@@ -55,7 +58,7 @@ private View root;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_first_page_tab1, container, false);
+        root = inflater.inflate(R.layout.fragment_first_page_tab2, container, false);
         head = inflater.inflate(R.layout.together_head, null);
         layoutMore = inflater.inflate(R.layout.pull_to_refresh_more, null);
         gallery = (GuideGallery) head.findViewById(R.id.default_gallery);
@@ -82,7 +85,7 @@ private View root;
                                     int position, long id) {
                 // TODO Auto-generated method stub
                 Intent intent = new Intent(getActivity(),
-                        TogetherDetailActivity.class);
+                        CustomTourDetailActivity.class);
                 intent.putExtra("id", mList.get(position - 2).getId());
                 startActivityForResult(intent, 1);
             }
@@ -126,7 +129,7 @@ private View root;
     private void init() {
         lvPull.getRefreshableView().addHeaderView(head,null,false);
         mList = new ArrayList<>();
-        adapter = new TogetherlistAdapter(getActivity(),mList,false);
+        adapter = new CustomTourlistAdapter(getActivity(),mList,false);
         lvPull.setAdapter(adapter);
         WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
         Point size = new Point();
@@ -139,15 +142,15 @@ private View root;
     }
 //获取一起去
     private void getTogether(final boolean isShow) {
-        new BaseHttpAsyncTask<Void, Void, TogetherResult>(getActivity(), isShow) {
+        new BaseHttpAsyncTask<Void, Void, CustomTourResult>(getActivity(), isShow) {
             @Override
-            protected void onCompleteTask(TogetherResult result) {
+            protected void onCompleteTask(CustomTourResult result) {
                 if(root==null){
                     return;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     mList.clear();
-                    mList.addAll(result.getTogetherList());
+                    mList.addAll(result.getCustomTourList());
                     adapter.notifyDataSetChanged();
                     if(lvPull.getRefreshableView().getFooterViewsCount()==1&&mList.size()==PAGECOUNT*page){
                         lvPull.getRefreshableView().addFooterView(layoutMore);
@@ -192,9 +195,9 @@ private View root;
             }
 
             @Override
-            protected TogetherResult run(Void... params) {
+            protected CustomTourResult run(Void... params) {
                 page=1;
-                return HttpRequestUtil.getInstance().getTogetherList(readPreference("token"),page+"",PAGECOUNT+"",readPreference("latitude"),readPreference("longitude"));
+                return HttpRequestUtil.getInstance().getCustomTourList(readPreference("token"), page + "", PAGECOUNT + "");
             }
 
             @Override
@@ -234,19 +237,19 @@ private View root;
 
         }
     }
-    //获取一起去
+    //获取秒旅团
     private void loadMore(final boolean isShow) {
-        new BaseHttpAsyncTask<Void, Void, TogetherResult>(getActivity(), isShow) {
+        new BaseHttpAsyncTask<Void, Void, CustomTourResult>(getActivity(), isShow) {
             @Override
-            protected void onCompleteTask(TogetherResult result) {
+            protected void onCompleteTask(CustomTourResult result) {
                 if(root==null){
                     return;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
-                    if(result.getTogetherList()==null){
+                    if(result.getCustomTourList()==null){
                         return;
                     }
-                    mList.addAll(result.getTogetherList());
+                    mList.addAll(result.getCustomTourList());
                     adapter.notifyDataSetChanged();
 
                 } else {
@@ -259,10 +262,10 @@ private View root;
             }
 
             @Override
-            protected TogetherResult run(Void... params) {
+            protected CustomTourResult run(Void... params) {
                 isLoadMore = true;
                 page+=1;
-                return HttpRequestUtil.getInstance().getTogetherList(readPreference("token"),page+"",PAGECOUNT+"",readPreference("latitude"),readPreference("longitude"));
+                return HttpRequestUtil.getInstance().getCustomTourList(readPreference("token"), page + "", PAGECOUNT + "");
             }
 
             @Override

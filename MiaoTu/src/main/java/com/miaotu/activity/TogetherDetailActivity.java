@@ -210,7 +210,7 @@ private Together together;
         }else{
             ivLike.setBackgroundResource(R.drawable.icon_unlike);
         }
-
+        if(result.getTogether().getLikeList()!=null) {
 //            for (int i = 0; i < detail.getJoinUsers().size(); i++) {
 //                Member m = detail.getJoinUsers().get(i);
 //                CircleImageView imageView = new CircleImageView(
@@ -245,6 +245,7 @@ private Together together;
 //
 //                        m.getPhoto().getUrl() + "&size=100x100", R.drawable.icon_default_head_photo);
 //            }
+        }
         if(result.getTogether().getLikeList()!=null){
             for (int i = 0; i < result.getTogether().getLikeList().size(); i++) {
                 PersonInfo m = result.getTogether().getLikeList().get(i);

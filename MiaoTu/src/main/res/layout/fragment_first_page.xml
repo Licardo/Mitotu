@@ -23,7 +23,7 @@
             android:background="@drawable/icon_search"
             />
         <RadioGroup
-            android:id="@+id/tv_title"
+            android:id="@+id/rg_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"

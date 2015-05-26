@@ -16,6 +16,7 @@ import com.miaotu.annotation.FormProperty;
 import com.miaotu.annotation.Ignore;
 import com.miaotu.model.MFriendsInfo;
 import com.miaotu.model.ModifyPersonInfo;
+import com.miaotu.result.CustomTourResult;
 import com.miaotu.result.MovementListResult;
 import com.miaotu.result.PersonInfoResult;
 import com.miaotu.form.PublishTogether;
@@ -210,6 +211,24 @@ public class HttpRequestUtil {
 		params.add(new BasicNameValuePair("longitude", longitude));
         return HttpDecoder.getForObject(
 				getUrl("yueyou/list"), TogetherResult.class,
+				params);
+
+	}
+
+	/**
+	 * 获取定制游列表
+	 * @param token
+	 * @param page
+	 * @param num
+	 * @return
+	 */
+	public CustomTourResult getCustomTourList (String token,String page,String num){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("page", page));
+		params.add(new BasicNameValuePair("num", num));
+        return HttpDecoder.getForObject(
+				getUrl("activity/list"), CustomTourResult.class,
 				params);
 
 	}
