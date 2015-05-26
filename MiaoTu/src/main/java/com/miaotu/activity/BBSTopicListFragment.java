@@ -144,12 +144,14 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
         info = new MFriendsInfo();
         String lat = readPreference("latitude");    //纬度
         String lon = readPreference("longitude");    //经度
+        lat = "30.312021";
+        lon = "120.255116";
         String token = readPreference("token");
         info.setLatitude(lat);
         info.setLongitude(lon);
         info.setToken(token);
-        info.setNum(PAGECOUNT+"");
-        info.setPage("1");
+        info.setNum("");
+        info.setPage("");
         info.setType("nearby");
         getTopics(true, info);
         
@@ -209,7 +211,7 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
             @Override
             protected TopicListResult run(Void... params) {
                 curPageCount=PAGECOUNT;
-                info.setPage(curPageCount+"");
+//                info.setNum(curPageCount+"");
 				return HttpRequestUtil.getInstance().getTopicList(info); //第二个参数表示活动id，主要用于线路详情中查看线路话题
             }
 
@@ -249,7 +251,7 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
             protected TopicListResult run(Void... params) {
                 isLoadMore = true;
                 curPageCount+=PAGECOUNT;
-                info.setPage(curPageCount+"");
+                info.setNum(curPageCount+"");
                 return HttpRequestUtil.getInstance().getTopicList(info);
             }
 

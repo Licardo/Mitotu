@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.miaotu" >
+    package="com.miaotu">
 
     <!-- mob权限 -->
     <uses-permission android:name="android.permission.GET_TASKS" />
@@ -20,11 +20,10 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="547c143ffd98c542c2000b6a" >
-        </meta-data>
+            android:value="547c143ffd98c542c2000b6a"></meta-data>
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
@@ -36,8 +35,7 @@
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:windowSoftInputMode="stateHidden|adjustResize" >
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -50,7 +48,7 @@
             android:label="@string/title_activity_choose_login"
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -62,62 +60,53 @@
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" >
-        </activity>
+            android:windowSoftInputMode="stateAlwaysHidden"></activity>
         <activity
             android:name=".activity.Register1Activity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_register1"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"></activity>
         <activity
             android:name=".activity.Register2Activity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_register2"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"></activity>
         <activity
             android:name=".activity.Register3Activity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_register3"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"></activity>
         <activity
             android:name=".activity.CityListActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_register3"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"></activity>
         <activity
             android:name=".activity.MainActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_register3"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"></activity>
         <activity
             android:name=".activity.ChatsActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_register3"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"></activity>
         <activity
             android:name=".activity.GroupDetailActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_register3"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"></activity>
         <activity
             android:name=".activity.EditUserInfoActivity"
-            android:label="@string/title_activity_edit_user_info" >
-        </activity>
+            android:label="@string/title_activity_edit_user_info"></activity>
 
         <!-- 极光推送 -->
         <!-- Required SDK核心功能 -->
@@ -125,7 +114,7 @@
             android:name="cn.jpush.android.ui.PushActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="cn.jpush.android.ui.PushActivity" />
 
@@ -137,14 +126,13 @@
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false" >
-        </service>
+            android:exported="false"></service>
 
         <!-- Required SDK 核心功能 -->
         <service
             android:name="cn.jpush.android.service.PushService"
             android:enabled="true"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTER" />
                 <action android:name="cn.jpush.android.intent.REPORT" />
@@ -156,8 +144,8 @@
         <!-- Required SDK核心功能 -->
         <receiver
             android:name="cn.jpush.android.service.PushReceiver"
-            android:enabled="true" >
-            <intent-filter android:priority="1000" >
+            android:enabled="true">
+            <intent-filter android:priority="1000">
                 <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
                 <!-- Required  显示通知栏 -->
                 <category android:name="com.miaotu" />
@@ -176,8 +164,8 @@
         </receiver>
         <receiver
             android:name=".receiver.JPushReceiver"
-            android:enabled="true" >
-            <intent-filter android:priority="2147483647" >
+            android:enabled="true">
+            <intent-filter android:priority="2147483647">
                 <action android:name="cn.jpush.android.intent.REGISTRATION" />
                 <!-- Required  用户注册SDK的intent -->
                 <action android:name="cn.jpush.android.intent.UNREGISTRATION" />
@@ -196,7 +184,7 @@
         </receiver>
         <receiver
             android:name=".receiver.ConnectionChangeReceiver"
-            android:label="NetworkConnection" >
+            android:label="NetworkConnection">
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
@@ -222,49 +210,35 @@
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/title_activity_publish_together_step1"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustPan|stateAlwaysHidden" >
-        </activity>
+            android:windowSoftInputMode="adjustPan|stateAlwaysHidden"></activity>
         <activity
             android:name=".activity.PersonCenterActivity"
-            android:label="@string/title_activity_person_center" >
-        </activity>
+            android:label="@string/title_activity_person_center"></activity>
         <activity
             android:name=".activity.PublishTogetherStep2Activity"
-            android:label="@string/title_activity_publish_together_step2" >
-        </activity>
+            android:label="@string/title_activity_publish_together_step2"></activity>
         <activity
             android:name=".activity.TogetherDetailActivity"
-            android:label="@string/title_activity_together_detail" >
-        </activity>
+            android:label="@string/title_activity_together_detail"></activity>
         <activity
             android:name=".activity.NewMessageRemind"
-            android:label="@string/title_activity_new_message_remind" >
-        </activity>
+            android:label="@string/title_activity_new_message_remind"></activity>
         <activity
             android:name=".activity.SettingActivity"
-            android:label="@string/SettingActivity" >
-        </activity>
-        <activity android:name=".activity.AccountSafetyActivity" >
-        </activity>
-        <activity android:name=".activity.AccountSafetyActivity" >
-        </activity>
-        <activity android:name=".activity.BBSPublishTopicActivity" >
-        </activity>
-        <activity android:name=".activity.BBSMessageActivity" >
-        </activity>
-        <activity android:name=".activity.BBSTopicDetailActivity" >
-        </activity>
+            android:label="@string/SettingActivity"></activity>
+        <activity android:name=".activity.AccountSafetyActivity"></activity>
+        <activity android:name=".activity.BBSPublishTopicActivity"></activity>
+        <activity android:name=".activity.BBSMessageActivity"></activity>
+        <activity android:name=".activity.BBSTopicDetailActivity"></activity>
         <activity
             android:name=".activity.JoinTogetherStep1"
-            android:label="@string/title_activity_join_together_step1" >
-        </activity>
+            android:label="@string/title_activity_join_together_step1"></activity>
         <activity
             android:name=".activity.JoinTogetherStep2"
-            android:label="@string/title_activity_join_together_step2" >
-        </activity>
+            android:label="@string/title_activity_join_together_step2"></activity>
         <activity
             android:name=".activity.CustomTourDetailActivity"
-            android:label="@string/title_activity_custom_tour" >
+            android:label="@string/title_activity_custom_tour">
             android:name=".activity.MyDatingTourActivity"
             android:label="@string/title_activity_my_dating_tour" >
         </activity>

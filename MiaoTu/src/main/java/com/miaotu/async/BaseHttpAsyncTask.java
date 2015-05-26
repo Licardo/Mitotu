@@ -116,7 +116,7 @@ public abstract class BaseHttpAsyncTask<Params, Progress, Result> extends
 		} catch (Exception e) {
 			e.printStackTrace();
 			throwable = e;
-			Log.e("networkError", e.getMessage());
+//			Log.e("networkError", e.getMessage());
 		}
 		return result;
 	}

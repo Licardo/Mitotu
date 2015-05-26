@@ -8,96 +8,56 @@ import java.util.List;
 /**
  * Created by ying on 2015/3/6.
  */
-public class Topic implements Serializable{
-    @JsonProperty("id")
-    private String id;
-    @JsonProperty("create_time")
-    private String date;
-    @JsonProperty("title")
-    private String title;
-    @JsonProperty("content")
-    private String content;
-    @JsonProperty("imgs")
-    private List<PhotoInfo> pics;
-    @JsonProperty("activity_id")
-    private String movementId;
-    @JsonProperty("extend")
-    private String fromId;
-    @JsonProperty("activity_title")
-    private String movementTitle;
-    @JsonProperty("reply_count")
-    private String commentCount;
-    @JsonProperty("user_id")
+public class Topic implements Serializable {
+    @JsonProperty("Sid")
+    private String sid;
+    @JsonProperty("Uid")
     private String uid;
-    @JsonProperty("nickname")
+    @JsonProperty("Created")
+    private String created;
+    @JsonProperty("Content")
+    private String content;
+    @JsonProperty("Status")
+    private String status;
+    @JsonProperty("StateReplyCount")
+    private String statereplycount;
+    @JsonProperty("StateLikeCount")
+    private String statelikecount;
+    @JsonProperty("StateClickCount")
+    private String stateclickcount;
+    @JsonProperty("AtUser")
+    private String atuser;
+    @JsonProperty("Latitude")
+    private String latitude;
+    @JsonProperty("Longitude")
+    private String longitude;
+    @JsonProperty("Distance")
+    private String distance;
+    @JsonProperty("Aid")
+    private String aid;
+    @JsonProperty("Nickname")
     private String nickname;
-    @JsonProperty("avatar")
-    private PhotoInfo headPhoto;
-    @JsonProperty("img")
-    private PhotoInfo  singleImg;
+    @JsonProperty("HeadUrl")
+    private String head_url;
+    @JsonProperty("Age")
+    private String age;
+    @JsonProperty("Gender")
+    private String Gender;
+    @JsonProperty("IsLike")
+    private String islike;
+    @JsonProperty("PicList")
+    private List<PhotoInfo> piclist;
+    @JsonProperty("LikeList")
+    private String likelist;
+    @JsonProperty("ReplyList")
+    private List<RelpyInfo> replylist;
 
-    public String getId() {
-        return id;
+    public String getSid() {
+        return sid;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public List<PhotoInfo> getPics() {
-        return pics;
-    }
-
-    public void setPics(List<PhotoInfo> pics) {
-        this.pics = pics;
-    }
-
-    public String getMovementId() {
-        return movementId;
-    }
-
-    public void setMovementId(String movementId) {
-        this.movementId = movementId;
-    }
-
-    public String getMovementTitle() {
-        return movementTitle;
-    }
-
-    public void setMovementTitle(String movementTitle) {
-        this.movementTitle = movementTitle;
-    }
-
-    public String getCommentCount() {
-        return commentCount;
-    }
-
-    public void setCommentCount(String commentCount) {
-        this.commentCount = commentCount;
+    public void setSid(String sid) {
+        this.sid = sid;
     }
 
     public String getUid() {
@@ -108,6 +68,94 @@ public class Topic implements Serializable{
         this.uid = uid;
     }
 
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatereplycount() {
+        return statereplycount;
+    }
+
+    public void setStatereplycount(String statereplycount) {
+        this.statereplycount = statereplycount;
+    }
+
+    public String getStatelikecount() {
+        return statelikecount;
+    }
+
+    public void setStatelikecount(String statelikecount) {
+        this.statelikecount = statelikecount;
+    }
+
+    public String getStateclickcount() {
+        return stateclickcount;
+    }
+
+    public void setStateclickcount(String stateclickcount) {
+        this.stateclickcount = stateclickcount;
+    }
+
+    public String getAtuser() {
+        return atuser;
+    }
+
+    public void setAtuser(String atuser) {
+        this.atuser = atuser;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
+
+    public String getAid() {
+        return aid;
+    }
+
+    public void setAid(String aid) {
+        this.aid = aid;
+    }
+
     public String getNickname() {
         return nickname;
     }
@@ -116,27 +164,59 @@ public class Topic implements Serializable{
         this.nickname = nickname;
     }
 
-    public PhotoInfo getHeadPhoto() {
-        return headPhoto;
+    public String getHead_url() {
+        return head_url;
     }
 
-    public void setHeadPhoto(PhotoInfo headPhoto) {
-        this.headPhoto = headPhoto;
+    public void setHead_url(String head_url) {
+        this.head_url = head_url;
     }
 
-    public PhotoInfo getSingleImg() {
-        return singleImg;
+    public String getAge() {
+        return age;
     }
 
-    public void setSingleImg(PhotoInfo singleImg) {
-        this.singleImg = singleImg;
+    public void setAge(String age) {
+        this.age = age;
     }
 
-    public String getFromId() {
-        return fromId;
+    public String getGender() {
+        return Gender;
     }
 
-    public void setFromId(String fromId) {
-        this.fromId = fromId;
+    public void setGender(String gender) {
+        Gender = gender;
+    }
+
+    public String getIslike() {
+        return islike;
+    }
+
+    public void setIslike(String islike) {
+        this.islike = islike;
+    }
+
+    public List<PhotoInfo> getPiclist() {
+        return piclist;
+    }
+
+    public void setPiclist(List<PhotoInfo> piclist) {
+        this.piclist = piclist;
+    }
+
+    public String getLikelist() {
+        return likelist;
+    }
+
+    public void setLikelist(String likelist) {
+        this.likelist = likelist;
+    }
+
+    public List<RelpyInfo> getReplylist() {
+        return replylist;
+    }
+
+    public void setReplylist(List<RelpyInfo> replylist) {
+        this.replylist = replylist;
     }
 }

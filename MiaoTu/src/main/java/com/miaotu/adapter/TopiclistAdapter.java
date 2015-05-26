@@ -79,8 +79,8 @@ public class TopiclistAdapter extends BaseAdapter {
 					R.layout.item_topic, null);
 			holder.tvNickname = (TextView) convertView.findViewById(R.id.tv_nickname);
 			holder.ivHeadPhoto = (CircleImageView) convertView.findViewById(R.id.iv_head_photo);
-			holder.tvTitle = (TextView) convertView
-					.findViewById(R.id.tv_title);
+//			holder.tvTitle = (TextView) convertView
+//					.findViewById(R.id.tv_title);
             holder.tvContent = (TextView) convertView
 					.findViewById(R.id.tv_content);
 			holder.layoutPhotos = (LinearLayout) convertView.findViewById(R.id.layout_photos);
@@ -97,7 +97,7 @@ public class TopiclistAdapter extends BaseAdapter {
 
 		// 对ListView的Item中的控件的操作
 		UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto,
-                mList.get(position).getHeadPhoto().getUrl() + "&size=100x100",
+                mList.get(position).getHead_url() + "&size=100x100",
                 R.drawable.icon_default_head_photo);
         holder.ivHeadPhoto.setOnClickListener(new OnClickListener() {
             @Override
@@ -108,14 +108,14 @@ public class TopiclistAdapter extends BaseAdapter {
             }
         });
         holder.tvNickname.setText(mList.get(position).getNickname());
-        holder.tvTitle.setText(mList.get(position).getTitle());
+//        holder.tvTitle.setText(mList.get(position).getTitle());
         holder.tvContent.setText(mList.get(position).getContent());
         //添加图片
         int limit = 0;
-        if(mList.get(position).getPics().size()>3){
+        if(mList.get(position).getPiclist().size()>3){
             limit=3;
         }else{
-            limit = mList.get(position).getPics().size();
+            limit = mList.get(position).getPiclist().size();
         }
         if(limit==0){
             holder.layoutPhotos.setVisibility(View.GONE);
@@ -125,18 +125,19 @@ public class TopiclistAdapter extends BaseAdapter {
         holder.layoutPhotos.removeAllViews();
 
         final ArrayList<PhotoModel> photoList = new ArrayList<>();
-        for(PhotoInfo photoInfo:mList.get(position).getPics()){
+        for(PhotoInfo photoInfo:mList.get(position).getPiclist()){
             PhotoModel photoModel = new PhotoModel();
             photoModel.setOriginalPath(photoInfo.getUrl());
             photoList.add(photoModel);
         }
 
         for(int i=0;i<limit;i++){
-            PhotoInfo photoInfo = mList.get(position).getPics().get(i);
+            PhotoInfo photoInfo = mList.get(position).getPiclist().get(i);
             ImageView imageView = new ImageView(mContext);
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Util.dip2px(mContext,70),Util.dip2px(mContext,70));
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Util.dip2px(mContext,80),Util.dip2px(mContext,80));
             params.leftMargin = Util.dip2px(mContext,10);
             imageView.setLayoutParams(params);
+            imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             holder.layoutPhotos.addView(imageView);
             UrlImageViewHelper.setUrlDrawable(imageView,
                     photoInfo.getUrl() + "&size=210x210",
@@ -154,12 +155,12 @@ public class TopiclistAdapter extends BaseAdapter {
                 }
             });
         }
-        if(StringUtil.isBlank(mList.get(position).getMovementTitle())){
+        /*if(StringUtil.isBlank(mList.get(position).getMovementTitle())){
             holder.tvMovementName.setVisibility(View.GONE);
         }else {
             holder.tvMovementName.setVisibility(View.VISIBLE);
         }
-        holder.tvMovementName.setText("@"+mList.get(position).getMovementTitle());
+        holder.tvMovementName.setText("@"+mList.get(position).getMovementTitle());*/
         holder.tvMovementName.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -168,8 +169,8 @@ public class TopiclistAdapter extends BaseAdapter {
 //                mContext.startActivity(intent);
             }
         });
-        holder.tvCommentCounts.setText(mList.get(position).getCommentCount());
-        holder.tvDate.setText(mList.get(position).getDate());
+        holder.tvCommentCounts.setText(mList.get(position).getStatereplycount());
+        holder.tvDate.setText(mList.get(position).getCreated());
 		return convertView;
 	}
 
@@ -177,7 +178,7 @@ public class TopiclistAdapter extends BaseAdapter {
 	public final class ViewHolder {
         private TextView tvNickname = null;
         private CircleImageView ivHeadPhoto = null;
-        private TextView tvTitle = null;
+//        private TextView tvTitle = null;
         private TextView tvContent = null;
         private LinearLayout layoutPhotos= null;
         private TextView tvMovementName= null;

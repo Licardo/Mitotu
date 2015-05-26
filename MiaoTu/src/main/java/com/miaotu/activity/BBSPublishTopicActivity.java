@@ -217,7 +217,8 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
 
                 @Override
                 protected BaseResult run(Void... params) {
-                    return HttpRequestUtil.getInstance().publishTopic(readPreference("token"),StringUtil.filterEmoji(etTitle.getText().toString()).trim(),StringUtil.filterEmoji(etContent.getText().toString()),(String)tvMovementName.getTag(),files);
+//                    return HttpRequestUtil.getInstance().publishTopic("aid",readPreference("token"),etContent.getText().toString(),files);
+                    return null;
                 }
 
 //                @Override

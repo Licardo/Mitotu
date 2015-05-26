@@ -12,7 +12,7 @@ import java.util.List;
  *
  */
 public class TopicListResult extends BaseResult{
-	@JsonProperty("items")
+	@JsonProperty("Items")
 	private List<Topic> topics;
 
     public List<Topic> getTopics() {

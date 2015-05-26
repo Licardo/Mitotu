@@ -420,17 +420,16 @@ public class HttpRequestUtil {
 
 	/**
 	 * 获取话题评论列表
-	 * @param id
-	 * @param count
+	 * @param sid
+	 * @param token
 	 * @return
 	 */
-	public TopicCommentsListResult getTopicComments (String id,String count){
+	public TopicCommentsListResult getTopicComments (String sid,String token){
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("id", id));
-		params.add(new BasicNameValuePair("count", count));
-		params.add(new BasicNameValuePair("page", "1"));
-		return HttpDecoder.postForObject(
-				getUrl("topic/reply_list"), TopicCommentsListResult.class,
+		params.add(new BasicNameValuePair("sid", sid));
+		params.add(new BasicNameValuePair("token", token));
+		return HttpDecoder.getForObject(
+				getUrl("user/state/reply"), TopicCommentsListResult.class,
 				params);
 	}
 
@@ -438,52 +437,43 @@ public class HttpRequestUtil {
 	 * 获取话题详情
 	 * @return
 	 */
-	public TopicResult getTopicDetail (String id){
+	public TopicResult getTopicDetail (String sid, String token){
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("id", id));
-		return HttpDecoder.postForObject(
-				getUrl("topic/detail"), TopicResult.class,
+		params.add(new BasicNameValuePair("id", sid));
+		params.add(new BasicNameValuePair("token", token));
+		return HttpDecoder.getForObject(
+				getUrl("user/state"), TopicResult.class,
 				params);
 	}
 
 	//对帖子发表评论
-	public BaseResult publishComment (String pid,String token,String content){
+	public BaseResult publishComment (String token,String content,String sid){
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("pid", pid));
+		params.add(new BasicNameValuePair("pid", sid));
 		params.add(new BasicNameValuePair("token", token));
 		params.add(new BasicNameValuePair("content", content));
 		return HttpDecoder.postForObject(
-				getUrl("topic/insert"), BaseResult.class,
+				getUrl("user/state/reply"), BaseResult.class,
 				params);
 	}
 
 	/**
 	 * 发表话题
+	 * @param aid
 	 * @param token
-	 * @param title
 	 * @param content
-	 * @param movementId
-	 * @param files
+	 * @param img
 	 * @return
 	 */
-	public BaseResult publishTopic (String token,String title,String content,String movementId,List<File>files){
+	public BaseResult publishTopic (String aid,String token,String content,String img){
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("title", title));
+		params.add(new BasicNameValuePair("pid", aid));
 		params.add(new BasicNameValuePair("token", token));
 		params.add(new BasicNameValuePair("content", content));
-		if(!StringUtil.isBlank(movementId)){
-			params.add(new BasicNameValuePair("extends", movementId));
-		}
-
-		if(files.size()>0){
-			return HttpDecoder.postForObject(
-					getUrl("topic/insert"), BaseResult.class,
-					params,files);
-		}else{
-			return HttpDecoder.postForObject(
-					getUrl("topic/insert"), BaseResult.class,
-					params);
-		}
+		params.add(new BasicNameValuePair("img", img));
+		return HttpDecoder.postForObject(
+				getUrl("user/state"), BaseResult.class,
+				params);
 	}
 
 	/**

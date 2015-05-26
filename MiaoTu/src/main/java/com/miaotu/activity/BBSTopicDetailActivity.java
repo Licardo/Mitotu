@@ -49,19 +49,21 @@ import java.util.List;
 /**
  * Created by ying on 2015/3/6.
  */
-public class BBSTopicDetailActivity extends BaseActivity implements View.OnClickListener{
+public class BBSTopicDetailActivity extends BaseActivity implements View.OnClickListener {
     private TextView tvTitle;
-    private Button btnLeft;
+    private TextView tvLeft;
     private PullToRefreshListView lvTopics;
     private List<TopicComment> commentList;
     private TopicCommentsAdapter adapter;
-    private static int PAGECOUNT=8;
+    private static int PAGECOUNT = 8;
     private int curPageCount = 0;
     private boolean isLoadMore = false;
     private View layoutMore;
     private Topic topic;
     private EditText etComment;
     private TextView tvPublishComment;
+    private String token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +75,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
 
     private void findView() {
         tvTitle = (TextView) findViewById(R.id.tv_title);
-        btnLeft = (Button) findViewById(R.id.btn_left);
+        tvLeft = (TextView) findViewById(R.id.tv_left);
         lvTopics = (PullToRefreshListView) findViewById(R.id.lv_topic_comments);
         etComment = (EditText) findViewById(R.id.et_comment);
         tvPublishComment = (TextView) findViewById(R.id.tv_publish_comment);
@@ -82,7 +84,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
     }
 
     private void bindView() {
-        btnLeft.setOnClickListener(this);
+        tvLeft.setOnClickListener(this);
         tvTitle.setSingleLine(true);
         tvTitle.setEllipsize(TextUtils.TruncateAt.MIDDLE);
         tvTitle.setMaxEms(8);
@@ -113,7 +115,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             @Override
             public void onLastItemVisible() {
 //                showToastMsg("滑动到底了");
-                if (!isLoadMore&&commentList.size()==curPageCount){
+                if (!isLoadMore && commentList.size() == curPageCount) {
                     loadMoreComments();
                 }
             }
@@ -148,50 +150,50 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
     }
 
     private void init() {
-
+        token = readPreference("token");
         topic = (Topic) getIntent().getSerializableExtra("topic");
 
         tvTitle.setVisibility(View.VISIBLE);
-        btnLeft.setVisibility(View.VISIBLE);
-        btnLeft.setBackgroundResource(R.drawable.icon_back);
-        commentList=new ArrayList<>();
-        adapter = new TopicCommentsAdapter(BBSTopicDetailActivity.this,commentList);
+        tvLeft.setVisibility(View.VISIBLE);
+        tvLeft.setBackgroundResource(R.drawable.icon_back);
+        commentList = new ArrayList<>();
+        adapter = new TopicCommentsAdapter(BBSTopicDetailActivity.this, commentList);
         lvTopics.setAdapter(adapter);
-        if(topic!=null){
+        if (topic != null) {
             LayoutInflater inflater = LayoutInflater.from(this);
-            View view = inflater.inflate(R.layout.item_topic_detail,null);
-            tvTitle.setText(topic.getTitle());
+            View view = inflater.inflate(R.layout.item_topic_detail, null);
+//            tvTitle.setText(topic.getTitle());
             ((TextView) view.findViewById(R.id.tv_nickname)).setText(topic.getNickname());
             UrlImageViewHelper.setUrlDrawable((CircleImageView) view.findViewById(R.id.iv_head_photo),
-                    topic.getHeadPhoto().getUrl() + "&size=100x100",
+                    topic.getHead_url() + "&size=100x100",
                     R.drawable.icon_default_head_photo);
             view.findViewById(R.id.iv_head_photo).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                @Override
+                public void onClick(View view) {
 //                    Intent intent = new Intent(BBSTopicDetailActivity.this, UserHomeActivity.class);
 //                    intent.putExtra("userId",topic.getUid());
 //                    startActivity(intent);
                 }
             });
             ((TextView) view
-                    .findViewById(R.id.tv_title)).setText(topic.getTitle());
+                    .findViewById(R.id.tv_title)).setText("身旁");
             ((TextView) view
                     .findViewById(R.id.tv_content)).setText(topic.getContent());
             LinearLayout layoutPhotos = (LinearLayout) view.findViewById(R.id.layout_photos);
             layoutPhotos.removeAllViews();
-            int j=0;
-            LinearLayout layoutTemp= new LinearLayout(this);
+            int j = 0;
+            LinearLayout layoutTemp = new LinearLayout(this);
             layoutTemp.setOrientation(LinearLayout.HORIZONTAL);
             layoutPhotos.addView(layoutTemp);
-            final ArrayList<PhotoModel>photoList = new ArrayList<>();
-            for(int i=0;i<topic.getPics().size();i++){
-                PhotoInfo photoInfo = topic.getPics().get(i);
+            final ArrayList<PhotoModel> photoList = new ArrayList<>();
+            for (int i = 0; i < topic.getPiclist().size(); i++) {
+                PhotoInfo photoInfo = topic.getPiclist().get(i);
                 PhotoModel photoModel = new PhotoModel();
                 photoModel.setOriginalPath(photoInfo.getUrl());
                 photoList.add(photoModel);
                 ImageView imageView = new ImageView(this);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Util.dip2px(this,70),Util.dip2px(this,70));
-                params.leftMargin = Util.dip2px(this,10);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Util.dip2px(this, 70), Util.dip2px(this, 70));
+                params.leftMargin = Util.dip2px(this, 10);
                 imageView.setLayoutParams(params);
                 UrlImageViewHelper.setUrlDrawable(imageView,
                         photoInfo.getUrl() + "&size=210x210",
@@ -208,53 +210,57 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                         CommonUtils.launchActivity(BBSTopicDetailActivity.this, PhotoPreviewActivity.class, bundle);
                     }
                 });
-                if(j==3){
+                if (j == 3) {
                     layoutTemp = new LinearLayout(this);
                     LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    params1.topMargin = Util.dip2px(this,10);
+                    params1.topMargin = Util.dip2px(this, 10);
                     layoutTemp.setLayoutParams(params1);
                     layoutTemp.setOrientation(LinearLayout.HORIZONTAL);
                     layoutPhotos.addView(layoutTemp);
-                    j=0;
+                    j = 0;
                 }
                 layoutTemp.addView(imageView);
                 j++;
             }
-            if(topic.getPics().size()==0){
+            if (topic.getPiclist().size() == 0) {
                 layoutPhotos.setVisibility(View.GONE);
             }
-            if(StringUtil.isBlank(topic.getMovementTitle())){
-                view.findViewById(R.id.tv_movement_name).setVisibility(View.GONE);
-            }
+//            if(StringUtil.isBlank(topic.getMovementTitle())){
+//                view.findViewById(R.id.tv_movement_name).setVisibility(View.GONE);
+//            }
+//            ((TextView) view
+//                    .findViewById(R.id.tv_movement_name)).setText("@"+topic.getMovementTitle());
+//            view.findViewById(R.id.tv_movement_name).setOnClickListener(this);
             ((TextView) view
-                    .findViewById(R.id.tv_movement_name)).setText("@"+topic.getMovementTitle());
-            view.findViewById(R.id.tv_movement_name).setOnClickListener(this);
+                    .findViewById(R.id.tv_comment_count)).setText(topic.getStatereplycount());
             ((TextView) view
-                    .findViewById(R.id.tv_comment_count)).setText(topic.getCommentCount());
-            ((TextView) view
-                    .findViewById(R.id.tv_date)).setText(topic.getDate());
+                    .findViewById(R.id.tv_date)).setText(topic.getCreated());
 
             lvTopics.getRefreshableView().addHeaderView(view);
             getComments(false);
-        }else{
+        } else {
             getDetail(true);
         }
 
 
     }
+
     private void getComments(boolean isShow) {
         new BaseHttpAsyncTask<Void, Void, TopicCommentsListResult>(BBSTopicDetailActivity.this, isShow) {
             @Override
             protected void onCompleteTask(TopicCommentsListResult result) {
-                    if(commentList==null){
-                        return;
-                    }
+                if (commentList == null) {
+                    return;
+                }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     commentList.clear();
+                    if(result.getComment() == null){
+                        return;
+                    }
                     commentList.addAll(result.getComment());
                     adapter.notifyDataSetChanged();
 
-                    if(lvTopics.getRefreshableView().getFooterViewsCount()==1&&commentList.size()==PAGECOUNT){
+                    if (lvTopics.getRefreshableView().getFooterViewsCount() == 1 && commentList.size() == PAGECOUNT) {
                         lvTopics.getRefreshableView().addFooterView(layoutMore);
                     }
                 } else {
@@ -268,8 +274,8 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
 
             @Override
             protected TopicCommentsListResult run(Void... params) {
-                curPageCount=PAGECOUNT;
-                return HttpRequestUtil.getInstance().getTopicComments(topic.getId(), curPageCount + "");
+                curPageCount = PAGECOUNT;
+                return HttpRequestUtil.getInstance().getTopicComments(topic.getSid(), token);
             }
 
 //            @Override
@@ -280,25 +286,26 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
 
             @Override
             protected void finallyRun() {
-                if(commentList==null){
+                if (commentList == null) {
                     return;
                 }
                 lvTopics.onRefreshComplete();
             }
         }.execute();
     }
+
     private void loadMoreComments() {
         new BaseHttpAsyncTask<Void, Void, TopicCommentsListResult>(BBSTopicDetailActivity.this, false) {
             @Override
             protected void onCompleteTask(TopicCommentsListResult result) {
-                if(commentList==null){
+                if (commentList == null) {
                     return;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     commentList.clear();
                     commentList.addAll(result.getComment());
                     adapter.notifyDataSetChanged();
-                    if(commentList.size()!=curPageCount){
+                    if (commentList.size() != curPageCount) {
                         lvTopics.getRefreshableView().removeFooterView(layoutMore);
                     }
                 } else {
@@ -313,8 +320,8 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             @Override
             protected TopicCommentsListResult run(Void... params) {
                 isLoadMore = true;
-                curPageCount+=PAGECOUNT;
-                return HttpRequestUtil.getInstance().getTopicComments(topic.getId(),curPageCount + "");
+                curPageCount += PAGECOUNT;
+                return HttpRequestUtil.getInstance().getTopicComments(topic.getSid(), curPageCount + "");
             }
 
 //            @Override
@@ -325,7 +332,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
 
             @Override
             protected void finallyRun() {
-                if(commentList==null){
+                if (commentList == null) {
                     return;
                 }
                 lvTopics.onRefreshComplete();
@@ -333,21 +340,22 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             }
         }.execute();
     }
+
     private void getDetail(boolean isShow) {
         new BaseHttpAsyncTask<Void, Void, TopicResult>(BBSTopicDetailActivity.this, isShow) {
             @Override
             protected void onCompleteTask(TopicResult result) {
-                    if(commentList==null){
-                        return;
-                    }
+                if (commentList == null) {
+                    return;
+                }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     topic = result.getTopic();
-                    tvTitle.setText(topic.getTitle());
+                    /*tvTitle.setText(topic.getTitle());*/
                     LayoutInflater inflater = LayoutInflater.from(BBSTopicDetailActivity.this);
-                    View view = inflater.inflate(R.layout.item_topic_detail,null);
+                    View view = inflater.inflate(R.layout.item_topic_detail, null);
                     ((TextView) view.findViewById(R.id.tv_nickname)).setText(topic.getNickname());
                     UrlImageViewHelper.setUrlDrawable((CircleImageView) view.findViewById(R.id.iv_head_photo),
-                            topic.getHeadPhoto().getUrl() + "&size=100x100",
+                            topic.getHead_url() + "&size=100x100",
                             R.drawable.icon_default_head_photo);
                     view.findViewById(R.id.iv_head_photo).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -357,25 +365,25 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
 //                            startActivity(intent);
                         }
                     });
-                    ((TextView) view
-                            .findViewById(R.id.tv_title)).setText(topic.getTitle());
+                    /*((TextView) view
+                            .findViewById(R.id.tv_title)).setText(topic.getTitle());*/
                     ((TextView) view
                             .findViewById(R.id.tv_content)).setText(topic.getContent());
                     LinearLayout layoutPhotos = (LinearLayout) view.findViewById(R.id.layout_photos);
                     layoutPhotos.removeAllViews();
-                    int j=0;
-                    LinearLayout layoutTemp= new LinearLayout(BBSTopicDetailActivity.this);
+                    int j = 0;
+                    LinearLayout layoutTemp = new LinearLayout(BBSTopicDetailActivity.this);
                     layoutTemp.setOrientation(LinearLayout.HORIZONTAL);
                     layoutPhotos.addView(layoutTemp);
-                    final ArrayList<PhotoModel>photoList = new ArrayList<>();
-                    for(int i=0;i<topic.getPics().size();i++){
-                        PhotoInfo photoInfo = topic.getPics().get(i);
+                    final ArrayList<PhotoModel> photoList = new ArrayList<>();
+                    for (int i = 0; i < topic.getPiclist().size(); i++) {
+                        PhotoInfo photoInfo = topic.getPiclist().get(i);
                         PhotoModel photoModel = new PhotoModel();
                         photoModel.setOriginalPath(photoInfo.getUrl());
                         photoList.add(photoModel);
                         ImageView imageView = new ImageView(BBSTopicDetailActivity.this);
-                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Util.dip2px(BBSTopicDetailActivity.this,70),Util.dip2px(BBSTopicDetailActivity.this,70));
-                        params.leftMargin = Util.dip2px(BBSTopicDetailActivity.this,10);
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Util.dip2px(BBSTopicDetailActivity.this, 70), Util.dip2px(BBSTopicDetailActivity.this, 70));
+                        params.leftMargin = Util.dip2px(BBSTopicDetailActivity.this, 10);
                         imageView.setLayoutParams(params);
                         UrlImageViewHelper.setUrlDrawable(imageView,
                                 photoInfo.getUrl() + "&size=210x210",
@@ -392,31 +400,31 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                                 CommonUtils.launchActivity(BBSTopicDetailActivity.this, PhotoPreviewActivity.class, bundle);
                             }
                         });
-                        if(j==3){
+                        if (j == 3) {
                             layoutTemp = new LinearLayout(BBSTopicDetailActivity.this);
                             LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                            params1.topMargin = Util.dip2px(BBSTopicDetailActivity.this,10);
+                            params1.topMargin = Util.dip2px(BBSTopicDetailActivity.this, 10);
                             layoutTemp.setLayoutParams(params1);
                             layoutTemp.setOrientation(LinearLayout.HORIZONTAL);
                             layoutPhotos.addView(layoutTemp);
-                            j=0;
+                            j = 0;
                         }
                         layoutTemp.addView(imageView);
                         j++;
                     }
-                    if(topic.getPics().size()==0){
+                    if (topic.getPiclist().size() == 0) {
                         layoutPhotos.setVisibility(View.GONE);
                     }
-                    if(StringUtil.isBlank(topic.getMovementTitle())){
+                    /*if(StringUtil.isBlank(topic.getMovementTitle())){
                         view.findViewById(R.id.tv_movement_name).setVisibility(View.GONE);
                     }
                     ((TextView) view
-                            .findViewById(R.id.tv_movement_name)).setText("@"+topic.getMovementTitle());
+                            .findViewById(R.id.tv_movement_name)).setText("@"+topic.getMovementTitle());*/
                     view.findViewById(R.id.tv_movement_name).setOnClickListener(BBSTopicDetailActivity.this);
                     ((TextView) view
-                            .findViewById(R.id.tv_comment_count)).setText(topic.getCommentCount());
+                            .findViewById(R.id.tv_comment_count)).setText(topic.getStatereplycount());
                     ((TextView) view
-                            .findViewById(R.id.tv_date)).setText(topic.getDate());
+                            .findViewById(R.id.tv_date)).setText(topic.getCreated());
 
                     lvTopics.getRefreshableView().addHeaderView(view);
                     getComments(false);
@@ -432,23 +440,24 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
 
             @Override
             protected TopicResult run(Void... params) {
-                return HttpRequestUtil.getInstance().getTopicDetail(getIntent().getStringExtra("id"));
+                return HttpRequestUtil.getInstance().getTopicDetail(topic.getSid(), token);
             }
 
             @Override
             protected void finallyRun() {
-                if(commentList==null){
+                if (commentList == null) {
                     return;
                 }
                 lvTopics.onRefreshComplete();
             }
         }.execute();
     }
+
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tv_publish_comment:
-                if(!StringUtil.isBlank(etComment.getText().toString())){
+                if (!StringUtil.isBlank(etComment.getText().toString())) {
                     publishComment();
                 }
                 break;
@@ -457,22 +466,23 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
 //                intent.putExtra("id",topic.getMovementId());
 //                startActivity(intent);
                 break;
-            case R.id.btn_left:
+            case R.id.tv_left:
                 this.finish();
                 break;
         }
     }
-    private void publishComment(){
+
+    private void publishComment() {
         //发表评论
-        if(!readPreference("login_state").equals("in")){
+        if (!readPreference("login_state").equals("in")) {
             Intent intent = new Intent(BBSTopicDetailActivity.this, LoginActivity.class);
             startActivity(intent);
             return;
-        }else{
+        } else {
             new BaseHttpAsyncTask<Void, Void, BaseResult>(BBSTopicDetailActivity.this, true) {
                 @Override
                 protected void onCompleteTask(BaseResult result) {
-                    if(commentList==null){
+                    if (commentList == null) {
                         return;
                     }
                     if (result.getCode() == BaseResult.SUCCESS) {
@@ -490,7 +500,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
 
                 @Override
                 protected BaseResult run(Void... params) {
-                    return HttpRequestUtil.getInstance().publishComment(topic.getId(), readPreference("token"), etComment.getText().toString());
+                    return HttpRequestUtil.getInstance().publishComment(topic.getSid(), readPreference("token"), etComment.getText().toString());
                 }
 
 //                @Override
