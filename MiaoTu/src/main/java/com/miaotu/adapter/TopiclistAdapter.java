@@ -242,11 +242,7 @@ public class TopiclistAdapter extends BaseAdapter {
 
             @Override
             protected BaseResult run(Void... params) {
-                if (!islike) {
-                    return HttpRequestUtil.getInstance().like(token, touser);
-                } else {
-                    return HttpRequestUtil.getInstance().delLike(token, touser);
-                }
+                return HttpRequestUtil.getInstance().like(token, touser);
             }
         }.execute();
     }
