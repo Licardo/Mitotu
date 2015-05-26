@@ -91,6 +91,7 @@ private LinearLayout layoutSearch,layoutClear,layoutResult;
                 } else {
                     // 如果MessageFragment不为空，则直接将它显示出来
                     transaction.show(mTab02);
+                    mTab02.search(true);
                 }
                 break;
         }
@@ -133,7 +134,7 @@ private LinearLayout layoutSearch,layoutClear,layoutResult;
                 ivInit.setVisibility(View.GONE);
                 layoutResult.setVisibility(View.VISIBLE);
                 setTabSelection(0);
-
+                rgTab.check(R.id.rb_search1);
                 break;
             case R.id.layout_clear:
                 //点击清除
