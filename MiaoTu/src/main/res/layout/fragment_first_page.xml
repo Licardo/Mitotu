@@ -14,22 +14,30 @@
             android:layout_alignParentBottom="true"
             android:background="#f6dfc5"
             />
-        <TextView
-            android:id="@+id/tv_left"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+        <LinearLayout
+            android:id="@+id/layout_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
-            android:background="@drawable/icon_search"
-            />
+            >
+            <TextView
+                android:id="@+id/tv_left"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/icon_search"
+                />
+        </LinearLayout>
+
         <RadioGroup
             android:id="@+id/rg_title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:layout_marginLeft="44dp"
-            android:layout_marginRight="44dp"
+            android:layout_marginLeft="54dp"
+            android:layout_marginRight="54dp"
             android:orientation="horizontal"
             >
             <RadioButton
@@ -61,8 +69,9 @@
         <TextView
             android:id="@+id/tv_right"
             android:layout_width="wrap_content"
-            android:layout_height="24dp"
+            android:layout_height="match_parent"
             android:layout_marginRight="10dp"
+            android:paddingLeft="10dp"
             android:textSize="14sp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"

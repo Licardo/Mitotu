@@ -24,13 +24,13 @@ import com.miaotu.model.RegisterInfo;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.LoginResult;
 import com.miaotu.result.PhotoUploadResult;
+import com.miaotu.result.SearchTourResult;
 import com.miaotu.result.TogetherDetailResult;
 import com.miaotu.result.TogetherResult;
 import com.miaotu.result.TopicCommentsListResult;
 import com.miaotu.result.TopicListResult;
 import com.miaotu.result.TopicMessageListResult;
 import com.miaotu.result.TopicResult;
-import com.miaotu.result.UserInfoResult;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 
@@ -211,6 +211,37 @@ public class HttpRequestUtil {
 		params.add(new BasicNameValuePair("longitude", longitude));
         return HttpDecoder.getForObject(
 				getUrl("yueyou/list"), TogetherResult.class,
+				params);
+
+	}
+
+	/**
+	 * 搜索线路
+	 * @param token
+	 * @param key
+	 * @param latitude
+	 * @param longitude
+	 * @return
+	 */
+	public SearchTourResult searchTour (String token,String key,String latitude,String longitude){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("keywords", key));
+		params.add(new BasicNameValuePair("latitude", latitude));
+		params.add(new BasicNameValuePair("longitude", longitude));
+        return HttpDecoder.getForObject(
+				getUrl("base/search"), SearchTourResult.class,
+				params);
+
+	}
+	public SearchTourResult searchUser (String token,String key,String page,String num){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("keywords", key));
+		params.add(new BasicNameValuePair("page", page));
+		params.add(new BasicNameValuePair("num", num));
+        return HttpDecoder.getForObject(
+				getUrl("users/search"), SearchTourResult.class,
 				params);
 
 	}
@@ -544,20 +575,6 @@ public class HttpRequestUtil {
 
 	}
 
-	/**
-	 * 获取用户信息
-	 * @param uid
-	 * @param token
-	 * @return
-	 */
-	public UserInfoResult getUserInfo(String uid, String token) {
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("uid", uid));
-		if(!"".equals(token)) { //如果token为空字符串，则不传递
-			params.add(new BasicNameValuePair("token", token));
-		}
-		return HttpDecoder.getForObject(getUrl("member/person"), UserInfoResult.class, params);
-	}
 
 	/**
 	 * 喜欢用户

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
 import com.miaotu.R;
@@ -22,6 +23,7 @@ private View root;
     private int curPage;
     private ImageView ivPublish;
     private RadioGroup radioGroup;
+    private LinearLayout layoutSearch;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,6 +41,7 @@ private View root;
 
     private void bindView() {
         ivPublish.setOnClickListener(this);
+        layoutSearch.setOnClickListener(this);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -56,6 +59,7 @@ private View root;
     private void findView() {
         ivPublish = (ImageView) root.findViewById(R.id.iv_publish);
         radioGroup = (RadioGroup) root.findViewById(R.id.rg_title);
+        layoutSearch = (LinearLayout) root.findViewById(R.id.layout_search);
     }
 
     private void init() {
@@ -77,6 +81,10 @@ private View root;
                 startActivity(publishTogetherIntent);
 //                Intent publishTogetherIntent = new Intent(getActivity(),CustomTourDetailActivity.class);
 //                startActivity(publishTogetherIntent);
+                break;
+            case R.id.layout_search:
+                Intent intent = new Intent(getActivity(),SearchActivity.class);
+                startActivity(intent);
                 break;
         }
     }
