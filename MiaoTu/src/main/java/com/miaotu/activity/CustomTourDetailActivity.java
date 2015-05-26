@@ -20,7 +20,7 @@ private WebView webView;
         WebSettings wSet = webView.getSettings();
         wSet.setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new JSInterface(), "native");
-        webView.loadUrl("http://m.miaotu.com/pages/dz_join.html");
+        webView.loadUrl("http://m.miaotu.com/pages/detail.html"+"&id="+getIntent().getStringExtra("id"));
     }
     /**
      * js调用java的接口ueq
