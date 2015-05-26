@@ -24,6 +24,7 @@ import com.miaotu.model.RegisterInfo;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.LoginResult;
 import com.miaotu.result.PhotoUploadResult;
+import com.miaotu.result.SearchTourResult;
 import com.miaotu.result.TogetherDetailResult;
 import com.miaotu.result.TogetherResult;
 import com.miaotu.result.TopicCommentsListResult;
@@ -210,6 +211,37 @@ public class HttpRequestUtil {
 		params.add(new BasicNameValuePair("longitude", longitude));
         return HttpDecoder.getForObject(
 				getUrl("yueyou/list"), TogetherResult.class,
+				params);
+
+	}
+
+	/**
+	 * 搜索线路
+	 * @param token
+	 * @param key
+	 * @param latitude
+	 * @param longitude
+	 * @return
+	 */
+	public SearchTourResult searchTour (String token,String key,String latitude,String longitude){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("keywords", key));
+		params.add(new BasicNameValuePair("latitude", latitude));
+		params.add(new BasicNameValuePair("longitude", longitude));
+        return HttpDecoder.getForObject(
+				getUrl("base/search"), SearchTourResult.class,
+				params);
+
+	}
+	public SearchTourResult searchUser (String token,String key,String page,String num){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("keywords", key));
+		params.add(new BasicNameValuePair("page", page));
+		params.add(new BasicNameValuePair("num", num));
+        return HttpDecoder.getForObject(
+				getUrl("users/search"), SearchTourResult.class,
 				params);
 
 	}
@@ -467,6 +499,7 @@ public class HttpRequestUtil {
 	//对帖子发表评论
 	public BaseResult publishComment (String token,String content,String sid){
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("pid", sid));
 		params.add(new BasicNameValuePair("token", token));
 		params.add(new BasicNameValuePair("sid", sid));
 		params.add(new BasicNameValuePair("content", content));
@@ -540,6 +573,8 @@ public class HttpRequestUtil {
 		return HttpDecoder.postForObject(
 				getUrl("topic/read_message"), BaseResult.class,
 				params);
+
+	}
 
 	}
 
