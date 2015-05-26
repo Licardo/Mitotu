@@ -14,7 +14,7 @@ import android.util.Log;
 
 import com.miaotu.annotation.FormProperty;
 import com.miaotu.annotation.Ignore;
-import com.miaotu.model.MFriendsInfo;
+import com.miaotu.form.MFriendsInfo;
 import com.miaotu.model.ModifyPersonInfo;
 import com.miaotu.result.CustomTourResult;
 import com.miaotu.result.MovementListResult;
@@ -30,7 +30,6 @@ import com.miaotu.result.TopicCommentsListResult;
 import com.miaotu.result.TopicListResult;
 import com.miaotu.result.TopicMessageListResult;
 import com.miaotu.result.TopicResult;
-import com.miaotu.result.UserInfoResult;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 
