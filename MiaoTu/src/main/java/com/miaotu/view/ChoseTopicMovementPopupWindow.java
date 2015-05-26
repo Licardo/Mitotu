@@ -26,7 +26,7 @@ public class ChoseTopicMovementPopupWindow extends PopupWindow {
     private View conentView;
     private View parent;
 
-    public ChoseTopicMovementPopupWindow(final Activity context, int width, final View v, final List<Movement>movementList) {
+    public ChoseTopicMovementPopupWindow(final Activity context, int width, final View v, final List<Movement> movementList) {
     	parent = v;
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);

@@ -137,7 +137,8 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
         btnLeft.setLayoutParams(params1);
         btnLeft.setVisibility(View.VISIBLE);
         topicList=new ArrayList<>();
-        adapter = new TopiclistAdapter(getActivity(),topicList);
+        String token = readPreference("token");
+        adapter = new TopiclistAdapter(getActivity(),topicList, token);
         lvTopics.setAdapter(adapter);
 
 //        getMessageCount();
@@ -146,7 +147,6 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
         String lon = readPreference("longitude");    //经度
         lat = "30.312021";
         lon = "120.255116";
-        String token = readPreference("token");
         info.setLatitude(lat);
         info.setLongitude(lon);
         info.setToken(token);

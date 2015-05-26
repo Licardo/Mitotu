@@ -15,7 +15,7 @@
         android:background="#ffffff"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -23,8 +23,8 @@
 
             <com.miaotu.view.CircleImageView
                 android:id="@+id/iv_head_photo"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/headphototest2"
@@ -35,10 +35,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_toRightOf="@id/iv_head_photo"
                 android:text="小张"
                 android:textColor="#b4b4b4"
                 android:textSize="12sp" />
-        </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_top_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/iv_head_photo"
+                android:layout_toRightOf="@id/iv_head_photo"
+                android:text="2月9号"
+                android:textColor="#b4b4b4"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/iv_like"
+                android:layout_width="50dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_friend_dislike" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_title"
@@ -72,7 +92,6 @@
             android:id="@+id/layout_photos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
@@ -84,8 +103,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
             android:text="\@撒旦法师的萨达阿什顿发"
-            android:textColor="#f5c790"
+            android:textColor="#ff8000"
             android:textSize="12sp" />
 
         <LinearLayout
@@ -106,32 +126,42 @@
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_gravity="center"
-                    android:background="@drawable/icon_comment_count" />
+                    android:background="@drawable/icon_comment_count"
+                    android:visibility="gone"/>
 
                 <TextView
-                    android:id="@+id/tv_comment_count"
+                    android:id="@+id/tv_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="6dp"
-                    android:text="100"
-                    android:textColor="#969696"
-                    android:textSize="12sp" />
+                    android:text="100km"
+                    android:textColor="#b4b4b4"
+                    android:textSize="10sp" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll_comment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
                 android:paddingRight="10dp">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/icon_friend_comment"
+                    />
 
                 <TextView
                     android:id="@+id/tv_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2月9号"
-                    android:textColor="#b4b4b4"
+                    android:layout_marginLeft="6dp"
+                    android:text="评论"
+                    android:textColor="#ff8000"
                     android:textSize="12sp" />
             </LinearLayout>
         </LinearLayout>

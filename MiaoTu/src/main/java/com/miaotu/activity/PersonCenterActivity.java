@@ -76,7 +76,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
      * @param personInfoResult
      */
     private void initPersonInfoData(PersonInfoResult personInfoResult){
-        UrlImageViewHelper.setUrlDrawable(ci_userhead, personInfoResult.getPersonInfo().getHeadurl());
+        UrlImageViewHelper.setUrlDrawable(ci_userhead, personInfoResult.getPersonInfo().getHeadurl(), R.drawable.icon_default_head_photo);
         tv_top_emotion.setText(personInfoResult.getPersonInfo().getMaritalstatus());
         if(!StringUtil.isBlank(personInfoResult.getPersonInfo().getAddress())){
             rl_address.setVisibility(View.VISIBLE);

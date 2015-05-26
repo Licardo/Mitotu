@@ -1,89 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/white"
-    >
+    android:orientation="vertical">
+
     <include
         android:id="@+id/layout_top"
-        android:layout_alignParentTop="true"
+        layout="@layout/top_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        layout="@layout/top_bar"
-        />
+        android:layout_alignParentTop="true" />
 
-   <EditText
-       android:id="@+id/et_title"
-       android:layout_width="match_parent"
-       android:layout_height="30dp"
-       android:layout_marginTop="10dp"
-       android:layout_marginBottom="10dp"
-       android:layout_marginLeft="5dp"
-       android:layout_marginRight="5dp"
-       android:paddingLeft="10dp"
-       android:textSize="12dp"
-       android:textColor="#646464"
-       android:gravity="center_vertical"
-       android:hint="标题"
-       android:maxLength="30"
-       android:singleLine="true"
-       android:textColorHint="#dbdbdb"
-       android:background="@drawable/bg_publish_topic_et"
-       />
-   <EditText
-       android:id="@+id/et_content"
-       android:layout_width="match_parent"
-       android:layout_height="150dp"
-       android:layout_marginLeft="5dp"
-       android:layout_marginRight="5dp"
-       android:layout_marginBottom="10dp"
-       android:background="@drawable/bg_publish_topic_et"
-       android:hint="话题内容"
-       android:textSize="12dp"
-       android:gravity="left|top"
-       android:textColor="#646464"
-       android:textColorHint="#dbdbdb"
-       android:maxLength="300"
-       android:padding="10dp"
-       />
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_publish_topic_et"
+        android:gravity="center_vertical"
+        android:hint="标题"
+        android:maxLength="30"
+        android:paddingLeft="10dp"
+        android:singleLine="true"
+        android:textColor="#646464"
+        android:textColorHint="#dbdbdb"
+        android:textSize="12dp" />
+
+    <EditText
+        android:id="@+id/et_content"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/bg_publish_topic_et"
+        android:gravity="left|top"
+        android:hint="话题内容"
+        android:maxLength="300"
+        android:padding="10dp"
+        android:textColor="#646464"
+        android:textColorHint="#dbdbdb"
+        android:textSize="12dp" />
+
     <RelativeLayout
         android:id="@+id/layout_movement"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:orientation="horizontal"
-        android:background="@drawable/bg_publish_topic_et"
+        android:layout_marginBottom="20dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_publish_topic_et"
+        android:orientation="horizontal"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:visibility="gone"
-        >
+        android:visibility="visible">
+
         <TextView
             android:id="@+id/tv_movement_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:ellipsize="end"
             android:hint="添加活动链接"
             android:singleLine="true"
-            android:ellipsize="end"
-            android:textColorHint="#f5c790"
-            android:textSize="14sp"
             android:textColor="#646464"
-            />
+            android:textColorHint="#f5c790"
+            android:textSize="14sp" />
+
         <ImageView
             android:id="@+id/iv_chose_movement"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/icon_chose_movement"
-            />
-        </RelativeLayout>
+            android:background="@drawable/icon_chose_movement" />
+    </RelativeLayout>
+
     <com.miaotu.view.DraggableGridView
         android:id="@+id/dgv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        </com.miaotu.view.DraggableGridView>
+        android:layout_height="wrap_content"></com.miaotu.view.DraggableGridView>
 </LinearLayout>

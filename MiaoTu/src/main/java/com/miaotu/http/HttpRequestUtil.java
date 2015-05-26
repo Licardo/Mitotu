@@ -445,8 +445,8 @@ public class HttpRequestUtil {
 	 */
 	public TopicCommentsListResult getTopicComments (String sid,String token){
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("sid", sid));
 		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("sid", sid));
 		return HttpDecoder.getForObject(
 				getUrl("user/state/reply"), TopicCommentsListResult.class,
 				params);
@@ -468,8 +468,8 @@ public class HttpRequestUtil {
 	//对帖子发表评论
 	public BaseResult publishComment (String token,String content,String sid){
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("pid", sid));
 		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("sid", sid));
 		params.add(new BasicNameValuePair("content", content));
 		return HttpDecoder.postForObject(
 				getUrl("user/state/reply"), BaseResult.class,
@@ -484,10 +484,10 @@ public class HttpRequestUtil {
 	 * @param img
 	 * @return
 	 */
-	public BaseResult publishTopic (String aid,String token,String content,String img){
+	public BaseResult publishTopic (String aid, String token, String content, String img){
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("pid", aid));
 		params.add(new BasicNameValuePair("token", token));
+		params.add(new BasicNameValuePair("aid", aid));
 		params.add(new BasicNameValuePair("content", content));
 		params.add(new BasicNameValuePair("img", img));
 		return HttpDecoder.postForObject(
@@ -542,21 +542,6 @@ public class HttpRequestUtil {
 				getUrl("topic/read_message"), BaseResult.class,
 				params);
 
-	}
-
-	/**
-	 * 获取用户信息
-	 * @param uid
-	 * @param token
-	 * @return
-	 */
-	public UserInfoResult getUserInfo(String uid, String token) {
-		List<NameValuePair> params = new ArrayList<NameValuePair>();
-		params.add(new BasicNameValuePair("uid", uid));
-		if(!"".equals(token)) { //如果token为空字符串，则不传递
-			params.add(new BasicNameValuePair("token", token));
-		}
-		return HttpDecoder.getForObject(getUrl("member/person"), UserInfoResult.class, params);
 	}
 
 	/**

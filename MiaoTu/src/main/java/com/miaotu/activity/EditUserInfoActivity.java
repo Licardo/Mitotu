@@ -75,7 +75,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
         userinfo = new ModifyPersonInfo();
         alltags = new ArrayList<String>();
         String headimg = readPreference("headphoto");
-        UrlImageViewHelper.setUrlDrawable(iv_head_photo, headimg);
+        UrlImageViewHelper.setUrlDrawable(iv_head_photo, headimg, R.drawable.icon_default_head_photo);
     }
 
     private int position;
@@ -137,7 +137,6 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                     userinfo.setTags(contenttag.substring(0, contenttag.length()-1));
                 }
                 modifyUserInfo(userinfo);
-                LogUtil.e("Error", userinfo.getTags());
                 break;
             default:
                 break;
