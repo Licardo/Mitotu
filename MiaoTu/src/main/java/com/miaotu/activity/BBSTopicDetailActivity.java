@@ -165,7 +165,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
 //            tvTitle.setText(topic.getTitle());
             ((TextView) view.findViewById(R.id.tv_nickname)).setText(topic.getNickname());
             UrlImageViewHelper.setUrlDrawable((CircleImageView) view.findViewById(R.id.iv_head_photo),
-                    topic.getHead_url() + "&size=100x100",
+                    topic.getHead_url() + "100x100",
                     R.drawable.icon_default_head_photo);
             view.findViewById(R.id.iv_head_photo).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -196,7 +196,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                 params.leftMargin = Util.dip2px(this, 10);
                 imageView.setLayoutParams(params);
                 UrlImageViewHelper.setUrlDrawable(imageView,
-                        photoInfo.getUrl() + "&size=210x210",
+                        photoInfo.getUrl() + "240x240",
                         R.drawable.icon_default_bbs_photo);
                 imageView.setTag(i);
                 imageView.setOnClickListener(new View.OnClickListener() {
@@ -355,7 +355,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                     View view = inflater.inflate(R.layout.item_topic_detail, null);
                     ((TextView) view.findViewById(R.id.tv_nickname)).setText(topic.getNickname());
                     UrlImageViewHelper.setUrlDrawable((CircleImageView) view.findViewById(R.id.iv_head_photo),
-                            topic.getHead_url() + "&size=100x100",
+                            topic.getHead_url() + "100x100",
                             R.drawable.icon_default_head_photo);
                     view.findViewById(R.id.iv_head_photo).setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -386,7 +386,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                         params.leftMargin = Util.dip2px(BBSTopicDetailActivity.this, 10);
                         imageView.setLayoutParams(params);
                         UrlImageViewHelper.setUrlDrawable(imageView,
-                                photoInfo.getUrl() + "&size=210x210",
+                                photoInfo.getUrl() + "240x240",
                                 R.drawable.icon_default_head_photo);
                         imageView.setTag(i);
                         imageView.setOnClickListener(new View.OnClickListener() {

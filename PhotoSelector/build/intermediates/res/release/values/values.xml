@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/colors.xml -->
+    <!-- From: file:/D:/miaotu-zh/workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/colors.xml -->
     <eat-comment/>
     <color name="background_gradient_end">#DDDDDD</color>
     <color name="background_gradient_start">#000000</color>
@@ -22,7 +22,7 @@
     <declare-styleable name="CircleProgress"><attr format="integer" name="circle_progress"/><attr format="integer" name="circle_max"/><attr format="color" name="circle_unfinished_color"/><attr format="color" name="circle_finished_color"/><attr format="dimension" name="circle_text_size"/><attr format="color" name="circle_text_color"/><attr format="string" name="circle_prefix_text"/><attr format="string" name="circle_suffix_text"/></declare-styleable>
     <declare-styleable name="DonutProgress"><attr format="integer" name="donut_progress"/><attr format="integer" name="donut_max"/><attr format="color" name="donut_unfinished_color"/><attr format="color" name="donut_finished_color"/><attr format="dimension" name="donut_finished_stroke_width"/><attr format="dimension" name="donut_unfinished_stroke_width"/><attr format="dimension" name="donut_text_size"/><attr format="color" name="donut_text_color"/><attr format="string" name="donut_prefix_text"/><attr format="string" name="donut_suffix_text"/><attr format="color" name="donut_background_color"/><attr format="string" name="donut_inner_bottom_text"/><attr format="dimension" name="donut_inner_bottom_text_size"/><attr format="color" name="donut_inner_bottom_text_color"/></declare-styleable>
     <declare-styleable name="Themes"><attr format="reference" name="circleProgressStyle"/><attr format="reference" name="donutProgressStyle"/><attr format="reference" name="arcProgressStyle"/></declare-styleable>
-    <!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/dimens.xml -->
+    <!-- From: file:/D:/miaotu-zh/workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/dimens.xml -->
     <eat-comment/>
     <dimen name="albumitem_content_height">80dp</dimen>
     <dimen name="albumitem_height">100dp</dimen>
@@ -34,10 +34,10 @@
     <dimen name="layout_title_mini_textsize">16sp</dimen>
     <dimen name="sticky_item_horizontalSpacing">2dp</dimen>
     <dimen name="sticky_item_verticalSpacing">2dp</dimen>
-    <!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/strings.xml -->
+    <!-- From: file:/D:/miaotu-zh/workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/strings.xml -->
     <eat-comment/>
     <string name="app_name">PhotoSelector</string>
-    <!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/styles.xml -->
+    <!-- From: file:/D:/miaotu-zh/workspace/MiaoTu3.0/PhotoSelector/src/main/res/values/styles.xml -->
     <eat-comment/>
     <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/btn_checkbox_selector</item>
