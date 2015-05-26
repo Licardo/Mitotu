@@ -59,7 +59,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/icon_friend_dislike" />
+                android:background="@drawable/icon_friend_dislike" />
         </RelativeLayout>
 
         <TextView

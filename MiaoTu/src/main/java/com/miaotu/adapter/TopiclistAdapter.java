@@ -130,8 +130,10 @@ public class TopiclistAdapter extends BaseAdapter {
                 int pos = (int) view.getTag();
                 if ("false".equals(mList.get(pos).getIslike())) {
                     like(token, mList.get(pos).getUid(), false, (ImageView) view);   //添加喜欢
+                    mList.get(pos).setIslike("true");
                 } else {
                     like(token, mList.get(pos).getUid(), true, (ImageView) view);    //取消喜欢
+                    mList.get(pos).setIslike("false");
                 }
             }
         });
@@ -216,7 +218,7 @@ public class TopiclistAdapter extends BaseAdapter {
 
 
 
-    private void like(final String token, final String touser, final boolean islike, final ImageView view) {
+    private void like(final String token, final String touser, final boolean islike, final ImageView iv) {
 
         new BaseHttpAsyncTask<Void, Void, BaseResult>((Activity) mContext, false) {
 
@@ -224,10 +226,10 @@ public class TopiclistAdapter extends BaseAdapter {
             protected void onCompleteTask(BaseResult baseResult) {
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
                     Toast.makeText(mContext, "操作成功", Toast.LENGTH_SHORT).show();
-                    if(islike){
-                        view.setBackgroundResource(R.drawable.icon_friend_like);
+                    if(!islike){
+                        iv.setBackgroundResource(R.drawable.icon_friend_like);
                     }else {
-                        view.setBackgroundResource(R.drawable.icon_friend_dislike);
+                        iv.setBackgroundResource(R.drawable.icon_friend_dislike);
                     }
                 } else {
                     if (StringUtil.isBlank(baseResult.getMsg())) {

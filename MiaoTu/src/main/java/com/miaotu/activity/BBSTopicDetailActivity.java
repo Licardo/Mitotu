@@ -249,8 +249,10 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                 public void onClick(View view) {
                     if ("false".equals(topic.getIslike())) {
                         like(token, topic.getUid(), false, ivLike);   //添加喜欢
+                        topic.setIslike("true");
                     } else {
                         like(token, topic.getUid(), true, ivLike);    //取消喜欢
+                        topic.setIslike("false");
                     }
                 }
             });
@@ -531,17 +533,17 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
         }
     }
 
-    private void like(final String token, final String touser, final boolean islike, final ImageView view) {
+    private void like(final String token, final String touser, final boolean islike, final ImageView iv) {
 
         new BaseHttpAsyncTask<Void, Void, BaseResult>(this, false) {
 
             @Override
             protected void onCompleteTask(BaseResult baseResult) {
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
-                    if(islike){
-                        view.setBackgroundResource(R.drawable.icon_friend_like);
+                    if(!islike){
+                        iv.setBackgroundResource(R.drawable.icon_friend_like);
                     }else {
-                        view.setBackgroundResource(R.drawable.icon_friend_dislike);
+                        iv.setBackgroundResource(R.drawable.icon_friend_dislike);
                     }
                 } else {
                     if (StringUtil.isBlank(baseResult.getMsg())) {

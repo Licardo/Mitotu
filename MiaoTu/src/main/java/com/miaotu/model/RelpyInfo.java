@@ -19,6 +19,8 @@ public class RelpyInfo implements Serializable {
     private String Srid;
     @JsonProperty("Content")
     private String Content;
+    @JsonProperty("HeadUrl")
+    private String hearurl;
 
     public String getUid() {
         return uid;
@@ -58,5 +60,13 @@ public class RelpyInfo implements Serializable {
 
     public void setContent(String content) {
         Content = content;
+    }
+
+    public String getHearurl() {
+        return hearurl;
+    }
+
+    public void setHearurl(String hearurl) {
+        this.hearurl = hearurl;
     }
 }

@@ -48,7 +48,7 @@ public class Topic implements Serializable {
     @JsonProperty("PicList")
     private List<PhotoInfo> piclist;
     @JsonProperty("LikeList")
-    private String likelist;
+    private List likelist;
     @JsonProperty("ReplyList")
     private List<RelpyInfo> replylist;
 
@@ -204,11 +204,11 @@ public class Topic implements Serializable {
         this.piclist = piclist;
     }
 
-    public String getLikelist() {
+    public List getLikelist() {
         return likelist;
     }
 
-    public void setLikelist(String likelist) {
+    public void setLikelist(List likelist) {
         this.likelist = likelist;
     }
 

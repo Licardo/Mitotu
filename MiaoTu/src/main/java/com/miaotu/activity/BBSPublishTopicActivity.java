@@ -43,7 +43,7 @@ import java.util.List;
  * Created by ying on 2015/3/6.
  */
 public class BBSPublishTopicActivity extends BaseActivity implements View.OnClickListener, View.OnFocusChangeListener {
-    private TextView tvTitle, tvMovementName;
+    private TextView tvTitle, tvMovementName, tvPublish;
     private TextView tvLeft, tvRight;
     private EditText etTitle, etContent;
     //    private Topic topic;
@@ -63,6 +63,7 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
     }
 
     private void findView() {
+        tvPublish = (TextView) findViewById(R.id.tv_publish);
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvLeft = (TextView) findViewById(R.id.tv_left);
         tvRight = (TextView) findViewById(R.id.tv_right);
@@ -113,10 +114,11 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
             }
         });
         layoutMovement.setOnClickListener(this);
-        tvRight.setOnClickListener(this);
+//        tvRight.setOnClickListener(this);
         tvLeft.setOnClickListener(this);
         etContent.setOnFocusChangeListener(this);
-        etTitle.setOnFocusChangeListener(this);
+//        etTitle.setOnFocusChangeListener(this);
+        tvRight.setOnClickListener(this);
     }
 
     private void init() {
@@ -153,7 +155,6 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
                 break;
             case R.id.tv_right:
                 if (validate()) {
-//                    publishTopic();
                     getPhotoUrl();
                 }
                 break;
@@ -164,10 +165,10 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
     }
 
     private boolean validate() {
-        if (StringUtil.isBlank(etTitle.getText().toString())) {
-            showToastMsg("请输入标题");
-            return false;
-        }
+//        if (StringUtil.isBlank(etTitle.getText().toString())) {
+//            showToastMsg("请输入标题");
+//            return false;
+//        }
         if (StringUtil.isBlank(etContent.getText().toString())) {
             showToastMsg("请输入内容");
             return false;

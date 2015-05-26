@@ -19,6 +19,8 @@ public class TopicComment implements Serializable {
     private String content;
     @JsonProperty("Srid")
     private String srid;
+    @JsonProperty("HeadUrl")
+    private String headurl;
 
     public String getUid() {
         return uid;
@@ -58,5 +60,13 @@ public class TopicComment implements Serializable {
 
     public void setSrid(String srid) {
         this.srid = srid;
+    }
+
+    public String getHeadurl() {
+        return headurl;
+    }
+
+    public void setHeadurl(String headurl) {
+        this.headurl = headurl;
     }
 }

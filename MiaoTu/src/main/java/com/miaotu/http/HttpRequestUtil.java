@@ -607,30 +607,13 @@ public class HttpRequestUtil {
     }
 
     /**
-     * 喜欢用户
+     * 喜欢/取消喜欢用户
      *
      * @param token
      * @param toUser
      * @return
      */
     public BaseResult like(String token, String toUser) {
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("token", token));
-        params.add(new BasicNameValuePair("to_uid", toUser));
-        return HttpDecoder.postForObject(
-                getUrl("user/like"), BaseResult.class,
-                params);
-
-    }
-
-    /**
-     * 取消喜欢
-     *
-     * @param token
-     * @param toUser
-     * @return
-     */
-    public BaseResult delLike(String token, String toUser) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
         params.add(new BasicNameValuePair("to_uid", toUser));
