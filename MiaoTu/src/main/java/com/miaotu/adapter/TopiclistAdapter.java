@@ -196,7 +196,7 @@ public class TopiclistAdapter extends BaseAdapter {
 //                mContext.startActivity(intent);
             }
         });
-        holder.tvDistance.setText(mList.get(position).getDistance()+"km");
+        holder.tvDistance.setText(mList.get(position).getDistance() + "km");
 //        holder.tvDate.setText(mList.get(position).getCreated());
         return convertView;
     }
@@ -210,12 +210,11 @@ public class TopiclistAdapter extends BaseAdapter {
         private LinearLayout layoutPhotos = null;
         private TextView tvMovementName = null;
         private TextView tvDistance = null;
-//        private TextView tvDate = null;
+        //        private TextView tvDate = null;
         private TextView tvTopDate;
         private LinearLayout llComment;
         private ImageView ivLike;
     }
-
 
 
     private void like(final String token, final String touser, final boolean islike, final ImageView iv) {
@@ -226,9 +225,9 @@ public class TopiclistAdapter extends BaseAdapter {
             protected void onCompleteTask(BaseResult baseResult) {
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
                     Toast.makeText(mContext, "操作成功", Toast.LENGTH_SHORT).show();
-                    if(!islike){
+                    if (!islike) {
                         iv.setBackgroundResource(R.drawable.icon_friend_like);
-                    }else {
+                    } else {
                         iv.setBackgroundResource(R.drawable.icon_friend_dislike);
                     }
                 } else {

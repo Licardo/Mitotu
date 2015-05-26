@@ -28,6 +28,7 @@ import com.miaotu.R;
 import com.miaotu.adapter.TopicCommentsAdapter;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
+import com.miaotu.model.LikeInfo;
 import com.miaotu.model.PhotoInfo;
 import com.miaotu.model.Topic;
 import com.miaotu.model.TopicComment;
@@ -39,6 +40,7 @@ import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 import com.miaotu.view.DraggableGridView;
+import com.miaotu.view.FlowLayout;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.photoselector.model.PhotoModel;
@@ -90,6 +92,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
         tvTitle.setSingleLine(true);
         tvTitle.setEllipsize(TextUtils.TruncateAt.MIDDLE);
         tvTitle.setMaxEms(8);
+        tvTitle.setText("动态正文");
         lvTopics.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
 
             @Override
@@ -256,6 +259,24 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                     }
                 }
             });
+
+            LinearLayout llLikeUser = (LinearLayout) view.findViewById(R.id.ll_likeuser);
+            if(topic.getLikelist().size() > 0){
+                for(int i=0;i<topic.getLikelist().size();i++){
+
+                    LinearLayout llLikePhoto = (LinearLayout) view.findViewById(R.id.ll_likephoto);
+                    CircleImageView imageView = new CircleImageView(this);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Util.dip2px(this, 30), Util.dip2px(this, 30));
+                    params.rightMargin = Util.dip2px(this, 10);
+                    imageView.setLayoutParams(params);
+                    UrlImageViewHelper.setUrlDrawable(imageView,
+                            topic.getLikelist().get(i).getHeadurl() + "100×100",
+                            R.drawable.icon_default_bbs_photo);
+                    llLikePhoto.addView(imageView);
+                }
+            }else{
+                llLikeUser.setVisibility(View.GONE);
+            }
 
             lvTopics.getRefreshableView().addHeaderView(view);
             getComments(false);
