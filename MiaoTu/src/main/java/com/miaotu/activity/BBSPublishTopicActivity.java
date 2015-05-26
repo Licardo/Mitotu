@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -18,7 +17,7 @@ import android.widget.TextView;
 import com.miaotu.R;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
-import com.miaotu.model.Movement;
+import com.miaotu.model.CustomTour;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.MovementListResult;
 import com.miaotu.result.PhotoUploadResult;
@@ -50,7 +49,7 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
     //    private Topic topic;
     DraggableGridView dgv;
     private ArrayList<PhotoModel> photoList;
-    private List<Movement> movementList;
+    private List<CustomTour> movementList;
     private RelativeLayout layoutMovement;
     private List<File> files;
 
@@ -254,8 +253,8 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
                     } else {
                         layoutMovement.setVisibility(View.VISIBLE);
                         movementList.addAll(result.getResults());
-                        Movement frakeMovement = new Movement();
-                        frakeMovement.setName("不选择");
+                        CustomTour frakeMovement = new CustomTour();
+                        frakeMovement.setNickname("不选择");
                         movementList.add(frakeMovement);
                     }
                 } else {

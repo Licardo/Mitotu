@@ -4,7 +4,7 @@ import java.util.List;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.miaotu.model.Movement;
+import com.miaotu.model.CustomTour;
 
 /**
  * 
@@ -13,11 +13,11 @@ import com.miaotu.model.Movement;
  */
 public class MovementListResult extends BaseResult{
 	@JsonProperty("items")
-	private List<Movement> results;
-	public List<Movement> getResults() {
+	private List<CustomTour> results;
+	public List<CustomTour> getResults() {
 		return results;
 	}
-	public void setResults(List<Movement> results) {
+	public void setResults(List<CustomTour> results) {
 		this.results = results;
 	}
 	
