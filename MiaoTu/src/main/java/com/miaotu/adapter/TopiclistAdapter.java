@@ -140,7 +140,7 @@ public class TopiclistAdapter extends BaseAdapter {
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             holder.layoutPhotos.addView(imageView);
             UrlImageViewHelper.setUrlDrawable(imageView,
-                    photoInfo.getUrl() + "&size=210x210",
+                    photoInfo.getUrl() + "240x240",
                     R.drawable.icon_default_bbs_photo);
             final int p = i;
             imageView.setOnClickListener(new OnClickListener() {
