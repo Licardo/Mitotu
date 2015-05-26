@@ -1,89 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f1f3f6"
+    android:orientation="vertical">
+
     <include
         android:id="@+id/layout_top"
-        android:layout_alignParentTop="true"
+        layout="@layout/top_bar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        layout="@layout/top_bar"
-        />
+        android:layout_alignParentTop="true" />
 
-   <EditText
-       android:id="@+id/et_title"
-       android:layout_width="match_parent"
-       android:layout_height="30dp"
-       android:layout_marginTop="10dp"
-       android:layout_marginBottom="10dp"
-       android:layout_marginLeft="5dp"
-       android:layout_marginRight="5dp"
-       android:paddingLeft="10dp"
-       android:textSize="12dp"
-       android:textColor="#646464"
-       android:gravity="center_vertical"
-       android:hint="标题"
-       android:maxLength="30"
-       android:singleLine="true"
-       android:textColorHint="#dbdbdb"
-       android:background="@drawable/bg_publish_topic_et"
-       />
-   <EditText
-       android:id="@+id/et_content"
-       android:layout_width="match_parent"
-       android:layout_height="150dp"
-       android:layout_marginLeft="5dp"
-       android:layout_marginRight="5dp"
-       android:layout_marginBottom="10dp"
-       android:background="@drawable/bg_publish_topic_et"
-       android:hint="话题内容"
-       android:textSize="12dp"
-       android:gravity="left|top"
-       android:textColor="#646464"
-       android:textColorHint="#dbdbdb"
-       android:maxLength="300"
-       android:padding="10dp"
-       />
-    <RelativeLayout
-        android:id="@+id/layout_movement"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:orientation="horizontal"
-        android:background="@drawable/bg_publish_topic_et"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginBottom="20dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:visibility="gone"
-        >
-        <TextView
-            android:id="@+id/tv_movement_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:hint="添加活动链接"
-            android:singleLine="true"
-            android:ellipsize="end"
-            android:textColorHint="#f5c790"
-            android:textSize="14sp"
-            android:textColor="#646464"
-            />
-        <ImageView
-            android:id="@+id/iv_chose_movement"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/icon_chose_movement"
-            />
-        </RelativeLayout>
-    <com.miaotu.view.DraggableGridView
-        android:id="@+id/dgv"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
-        </com.miaotu.view.DraggableGridView>
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_edit_userinfo"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_publish_topic_et"
+            android:gravity="center_vertical"
+            android:hint="标题"
+            android:maxLength="30"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textColor="#646464"
+            android:textColorHint="#dbdbdb"
+            android:textSize="12dp"
+            android:visibility="gone" />
+
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/bg_publish_topic_et"
+            android:gravity="left|top"
+            android:hint="写下你想说的吧"
+            android:maxLength="300"
+            android:padding="10dp"
+            android:textColor="#f1f1f1"
+            android:textColorHint="#b4b4b4"
+            android:textSize="12dp" />
+
+        <RelativeLayout
+            android:id="@+id/layout_movement"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/bg_publish_topic_et"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/tv_movement_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_publish_topic_et"
+                android:ellipsize="end"
+                android:hint="添加链接"
+                android:singleLine="true"
+                android:textColorHint="#b4b4b4"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/iv_chose_movement"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_addurl"
+                android:scaleType="fitCenter" />
+        </RelativeLayout>
+
+        <com.miaotu.view.DraggableGridView
+            android:id="@+id/dgv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_publish"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_confirm"
+        android:gravity="center"
+        android:text="发布"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:visibility="gone" />
 </LinearLayout>

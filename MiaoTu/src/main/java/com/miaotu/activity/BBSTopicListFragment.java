@@ -7,14 +7,11 @@ import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -23,10 +20,9 @@ import com.miaotu.adapter.TopiclistAdapter;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.jpush.MessageCountDatabaseHelper;
-import com.miaotu.model.MFriendsInfo;
+import com.miaotu.form.MFriendsInfo;
 import com.miaotu.model.Topic;
 import com.miaotu.result.BaseResult;
-import com.miaotu.result.MemberListResult;
 import com.miaotu.result.TopicListResult;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
@@ -137,7 +133,8 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
         btnLeft.setLayoutParams(params1);
         btnLeft.setVisibility(View.VISIBLE);
         topicList=new ArrayList<>();
-        adapter = new TopiclistAdapter(getActivity(),topicList);
+        String token = readPreference("token");
+        adapter = new TopiclistAdapter(getActivity(),topicList, token);
         lvTopics.setAdapter(adapter);
 
 //        getMessageCount();
@@ -146,7 +143,6 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
         String lon = readPreference("longitude");    //经度
         lat = "30.312021";
         lon = "120.255116";
-        String token = readPreference("token");
         info.setLatitude(lat);
         info.setLongitude(lon);
         info.setToken(token);

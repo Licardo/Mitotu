@@ -74,7 +74,7 @@ public class TopicCommentsAdapter extends BaseAdapter {
 		// 对ListView的Item中的控件的操作
             //话题评论
             UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto,
-                    mList.get(position).getHeadPhoto().getUrl() + "&size=100x100",
+                    mList.get(position).getHeadurl(),
                     R.drawable.icon_default_head_photo);
             holder.ivHeadPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +86,7 @@ public class TopicCommentsAdapter extends BaseAdapter {
         });
             holder.tvNickname.setText(mList.get(position).getNickname());
             holder.tvContent.setText(mList.get(position).getContent());
-            holder.tvDate.setText(mList.get(position).getDate());
+            holder.tvDate.setText(mList.get(position).getCreated());
 		return convertView;
 	}
 

@@ -13,7 +13,7 @@ import java.util.List;
  *
  */
 public class TopicCommentsListResult extends BaseResult{
-	@JsonProperty("items")
+	@JsonProperty("Items")
 	private List<TopicComment> comment;
 
     public List<TopicComment> getComment() {

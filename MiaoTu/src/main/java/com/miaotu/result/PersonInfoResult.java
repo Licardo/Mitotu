@@ -7,7 +7,7 @@ import com.miaotu.result.BaseResult;
 import java.io.Serializable;
 
 /**
- * Created by Jayden on 2015/5/20.
+ * Created by hao on 2015/5/20.
  */
 public class PersonInfoResult extends BaseResult implements Serializable {
     @JsonProperty("Items")

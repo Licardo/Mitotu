@@ -1,4 +1,4 @@
-package com.miaotu.model;
+package com.miaotu.form;
 
 /**
  * Created by zh on 2015/5/23.

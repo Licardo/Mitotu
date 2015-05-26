@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 
 import com.miaotu.R;
 import com.miaotu.adapter.PopMovementListAdapter;
-import com.miaotu.model.Movement;
+import com.miaotu.model.CustomTour;
 import com.miaotu.util.StringUtil;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class ChoseTopicMovementPopupWindow extends PopupWindow {
     private View conentView;
     private View parent;
 
-    public ChoseTopicMovementPopupWindow(final Activity context, int width, final View v, final List<Movement>movementList) {
+    public ChoseTopicMovementPopupWindow(final Activity context, int width, final View v, final List<CustomTour> movementList) {
     	parent = v;
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -38,7 +37,7 @@ public class ChoseTopicMovementPopupWindow extends PopupWindow {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(!StringUtil.isEmpty(movementList.get(i).getId())){
-                    ((TextView)v.findViewById(R.id.tv_movement_name)).setText(movementList.get(i).getName());
+                    ((TextView)v.findViewById(R.id.tv_movement_name)).setText(movementList.get(i).getNickname());
                     v.findViewById(R.id.tv_movement_name).setTag(movementList.get(i).getId());
                 }else{
                     ((TextView)v.findViewById(R.id.tv_movement_name)).setText("");

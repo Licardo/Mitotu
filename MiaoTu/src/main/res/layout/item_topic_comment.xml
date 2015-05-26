@@ -40,7 +40,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
             android:textSize="12sp"
-            android:textColor="#b4b4b4"
             android:text="小张"
             />
         <TextView

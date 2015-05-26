@@ -81,7 +81,7 @@ private View root;
         String gender = readPreference("gender");
         String followcount = readPreference("followcount");
         String fanscount = readPreference("fanscount");
-        UrlImageViewHelper.setUrlDrawable(iv_userhead, headimg);
+        UrlImageViewHelper.setUrlDrawable(iv_userhead, headimg, R.drawable.icon_default_head_photo);
         if("男".equals(gender)){
             iv_usergender.setBackgroundResource(R.drawable.mine_boy);
         }

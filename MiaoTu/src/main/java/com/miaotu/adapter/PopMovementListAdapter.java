@@ -5,19 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
-import com.miaotu.activity.BaseActivity;
-import com.miaotu.async.BaseHttpAsyncTask;
-import com.miaotu.http.HttpRequestUtil;
-import com.miaotu.model.MemberInfo;
-import com.miaotu.model.Movement;
-import com.miaotu.result.BaseResult;
-import com.miaotu.util.StringUtil;
+import com.miaotu.model.CustomTour;
 
 import java.util.List;
 
@@ -28,8 +19,8 @@ import java.util.List;
  */
 public class PopMovementListAdapter extends BaseAdapter {
 	private LayoutInflater mLayoutInflater = null;
-	private List<Movement> mList = null;
-	public PopMovementListAdapter(Context context, List<Movement> list) {
+	private List<CustomTour> mList = null;
+	public PopMovementListAdapter(Context context, List<CustomTour> list) {
 		mList = list;
 		mLayoutInflater = LayoutInflater.from(context);
 	}
@@ -67,7 +58,7 @@ public class PopMovementListAdapter extends BaseAdapter {
 		}
 
 		// 对ListView的Item中的控件的操作
-		holder.name.setText(mList.get(position).getName());
+		holder.name.setText(mList.get(position).getNickname());
 		return convertView;
 	}
 	

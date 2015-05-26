@@ -1,5 +1,6 @@
 package com.miaotu.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -196,7 +198,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                 params.leftMargin = Util.dip2px(this, 10);
                 imageView.setLayoutParams(params);
                 UrlImageViewHelper.setUrlDrawable(imageView,
-                        photoInfo.getUrl() + "240x240",
+                        photoInfo.getUrl() + "210x210",
                         R.drawable.icon_default_bbs_photo);
                 imageView.setTag(i);
                 imageView.setOnClickListener(new View.OnClickListener() {
@@ -232,9 +234,28 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
 //                    .findViewById(R.id.tv_movement_name)).setText("@"+topic.getMovementTitle());
 //            view.findViewById(R.id.tv_movement_name).setOnClickListener(this);
             ((TextView) view
-                    .findViewById(R.id.tv_comment_count)).setText(topic.getStatereplycount());
+                    .findViewById(R.id.tv_comment_count)).setText(topic.getDistance()+"km");
             ((TextView) view
-                    .findViewById(R.id.tv_date)).setText(topic.getCreated());
+                    .findViewById(R.id.tv_top_date)).setText(topic.getCreated());
+            final ImageView ivLike = (ImageView) view.findViewById(R.id.iv_like);
+
+            if ("false".equals(topic.getIslike())) {
+                ivLike.setBackgroundResource(R.drawable.icon_friend_dislike);
+            } else {
+                ivLike.setBackgroundResource(R.drawable.icon_friend_like);
+            }
+            ivLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if ("false".equals(topic.getIslike())) {
+                        like(token, topic.getUid(), false, ivLike);   //添加喜欢
+                        topic.setIslike("true");
+                    } else {
+                        like(token, topic.getUid(), true, ivLike);    //取消喜欢
+                        topic.setIslike("false");
+                    }
+                }
+            });
 
             lvTopics.getRefreshableView().addHeaderView(view);
             getComments(false);
@@ -386,7 +407,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                         params.leftMargin = Util.dip2px(BBSTopicDetailActivity.this, 10);
                         imageView.setLayoutParams(params);
                         UrlImageViewHelper.setUrlDrawable(imageView,
-                                photoInfo.getUrl() + "240x240",
+                                photoInfo.getUrl() + "210x210",
                                 R.drawable.icon_default_head_photo);
                         imageView.setTag(i);
                         imageView.setOnClickListener(new View.OnClickListener() {
@@ -500,7 +521,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
 
                 @Override
                 protected BaseResult run(Void... params) {
-                    return HttpRequestUtil.getInstance().publishComment(topic.getSid(), readPreference("token"), etComment.getText().toString());
+                    return HttpRequestUtil.getInstance().publishComment(readPreference("token"), etComment.getText().toString(), topic.getSid());
                 }
 
 //                @Override
@@ -510,5 +531,33 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
 //                }
             }.execute();
         }
+    }
+
+    private void like(final String token, final String touser, final boolean islike, final ImageView iv) {
+
+        new BaseHttpAsyncTask<Void, Void, BaseResult>(this, false) {
+
+            @Override
+            protected void onCompleteTask(BaseResult baseResult) {
+                if (baseResult.getCode() == BaseResult.SUCCESS) {
+                    if(!islike){
+                        iv.setBackgroundResource(R.drawable.icon_friend_like);
+                    }else {
+                        iv.setBackgroundResource(R.drawable.icon_friend_dislike);
+                    }
+                } else {
+                    if (StringUtil.isBlank(baseResult.getMsg())) {
+                        showToastMsg("操作失败");
+                    } else {
+                        showToastMsg(baseResult.getMsg());
+                    }
+                }
+            }
+
+            @Override
+            protected BaseResult run(Void... params) {
+                return HttpRequestUtil.getInstance().like(token, touser);
+            }
+        }.execute();
     }
 }
