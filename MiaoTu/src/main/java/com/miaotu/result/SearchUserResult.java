@@ -14,4 +14,12 @@ import java.util.List;
 public class SearchUserResult extends BaseResult{
     @JsonProperty("Items")
     private List<PersonInfo> personInfo;
+
+    public List<PersonInfo> getPersonInfo() {
+        return personInfo;
+    }
+
+    public void setPersonInfo(List<PersonInfo> personInfo) {
+        this.personInfo = personInfo;
+    }
 }

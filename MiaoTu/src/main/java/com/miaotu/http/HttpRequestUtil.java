@@ -25,6 +25,7 @@ import com.miaotu.result.BaseResult;
 import com.miaotu.result.LoginResult;
 import com.miaotu.result.PhotoUploadResult;
 import com.miaotu.result.SearchTourResult;
+import com.miaotu.result.SearchUserResult;
 import com.miaotu.result.TogetherDetailResult;
 import com.miaotu.result.TogetherResult;
 import com.miaotu.result.TopicCommentsListResult;
@@ -247,6 +248,17 @@ public class HttpRequestUtil {
     }
 
     public SearchTourResult searchUser(String token, String key, String page, String num) {
+	}
+
+	/**
+	 * 搜索用户
+	 * @param token
+	 * @param key
+	 * @param page
+	 * @param num
+	 * @return
+	 */
+	public SearchUserResult searchUser (String token,String key,String page,String num){
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
         params.add(new BasicNameValuePair("keywords", key));
@@ -255,6 +267,8 @@ public class HttpRequestUtil {
         return HttpDecoder.getForObject(
                 getUrl("users/search"), SearchTourResult.class,
                 params);
+				getUrl("users/search"), SearchUserResult.class,
+				params);
 
     }
 
