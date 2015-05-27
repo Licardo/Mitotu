@@ -59,7 +59,7 @@ public class MainActivity extends BaseFragmentActivity implements
     private static MainActivity instance;
     private FirstPageFragment mTab01 ;
     private BBSTopicListFragment mTab02 ;
-    private FirstPageFragment mTab03 ;
+    private MessageFragment mTab03 ;
     private FourthPageFragment mTab04 ;
 
     private FragmentManager fragmentManager;
@@ -290,7 +290,7 @@ public class MainActivity extends BaseFragmentActivity implements
                 ivMsgFlg.setVisibility(View.INVISIBLE);
                 if (mTab03 == null) {
                     // 如果NewsFragment为空，则创建一个并添加到界面上
-                    mTab03 = new FirstPageFragment();
+                    mTab03 = new MessageFragment();
                     transaction.add(R.id.id_content, mTab03);
                 } else {
 //                    mTab03.registerReceiver();
