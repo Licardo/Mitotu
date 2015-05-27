@@ -71,8 +71,8 @@ public class TopicMessageAdapter extends BaseAdapter {
                 //已读
                 holder.ivDot.setVisibility(View.GONE);
             }
-            holder.tvTitle.setText(mList.get(position).getTitle());
-            holder.tvDate.setText(mList.get(position).getDate());
+            holder.tvTitle.setText(mList.get(position).getRemark());
+            holder.tvDate.setText(mList.get(position).getCreated());
 		return convertView;
 	}
 

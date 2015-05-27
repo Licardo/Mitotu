@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#f0f0f0"
-    >
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
-        android:background="@color/white" >
+        android:background="@color/white">
 
         <Button
             android:id="@+id/btn_left"
@@ -19,17 +20,18 @@
             android:layout_marginLeft="5dp"
             android:background="@drawable/icon_topic_message"
             android:textColor="#505050" />
+
         <ImageView
             android:id="@+id/iv_msg_flg"
             android:layout_width="10dp"
             android:layout_height="10dp"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
             android:layout_marginLeft="22dp"
             android:layout_marginTop="6dp"
             android:background="@drawable/icon_msg_dot"
-            android:visibility="gone"
-            />
+            android:visibility="gone" />
+
         <Button
             android:id="@+id/btn_right"
             android:layout_width="24dp"
@@ -38,8 +40,8 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:background="@android:color/transparent"
-            android:textColor="#505050"
-            android:gravity="right|center_vertical"/>
+            android:gravity="right|center_vertical"
+            android:textColor="#505050" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -47,30 +49,30 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:textColor="#505050"
-            android:textSize="17sp"/>
+            android:textSize="17sp" />
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="#b4b4b4"
             android:layout_alignParentBottom="true"
-            />
+            android:background="#b4b4b4" />
 
     </RelativeLayout>
+
     <com.handmark.pulltorefresh.library.PullToRefreshListView
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/lv_topics"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:ptr="http://schemas.android.com/apk/res-auto"
-        ptr:ptrMode="pullFromStart"
-        ptr:ptrAnimationStyle = "flip"
-        ptr:ptrOverScroll = "false"
-        ptr:ptrShowIndicator = "false"
         android:descendantFocusability="blocksDescendants"
-        android:scrollbars="none"
         android:divider="@null"
         android:listSelector="@android:color/transparent"
-        >
+        android:scrollbars="none"
+        ptr:ptrAnimationStyle="flip"
+        ptr:ptrMode="pullFromStart"
+        ptr:ptrOverScroll="false"
+        ptr:ptrShowIndicator="false">
         <!--ptr:ptrMode="pullDownFromTop"-->
 
-        </com.handmark.pulltorefresh.library.PullToRefreshListView>
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
 </LinearLayout>
