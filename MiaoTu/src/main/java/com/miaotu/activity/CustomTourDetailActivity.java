@@ -2,29 +2,43 @@ package com.miaotu.activity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.miaotu.R;
 
 
 public class CustomTourDetailActivity extends BaseActivity {
 private WebView webView;
+    private TextView tvTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_tour);
         webView = (WebView) findViewById(R.id.webview);
+        tvTitle = (TextView) findViewById(R.id.tv_title);
+        tvTitle.setText("线路详情");
         WebSettings wSet = webView.getSettings();
         wSet.setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new JSInterface(), "native");
 
-        webView.loadUrl("http://m.miaotu.com/pages/detail.html"+"&id="+getIntent().getStringExtra("id"));
+        webView.setWebViewClient(new WebViewClient() {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) { //  重写此方法表明点击网页里面的链接还是在当前的webview里跳转，不跳到浏览器那边
+                view.loadUrl(url);
+                return true;
+            }
+        });
+
+
+                webView.loadUrl("http://m.miaotu.com/App/detail/?aid=" + getIntent().getStringExtra("id"));
     }
     /**
-     * js调用java的接口ueq
+     * js调用java的接口
      * @author ying
      *
      */
@@ -34,5 +48,16 @@ private WebView webView;
         public void click(String action) {
             showToastMsg("点击了"+action);
         }
+        @android.webkit.JavascriptInterface
+        public void setTitle(String title) {
+            tvTitle.setText(title);
+        }
+    }
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK) &&   webView .canGoBack()) {
+            webView.goBack();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
