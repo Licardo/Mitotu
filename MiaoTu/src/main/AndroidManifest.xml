@@ -257,6 +257,9 @@
         <activity
             android:name=".activity.AboutActivity" >
         </activity>
+        <activity
+            android:name=".activity.RedPackageActivity">
+        </activity>
     </application>
 
 </manifest>

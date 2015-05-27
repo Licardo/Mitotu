@@ -29,7 +29,7 @@ private View root;
     private ImageView iv_usergender;
     private CircleImageView iv_userhead;
     private TextView tv_username,tv_userage,tv_iden,tv_userfans;
-    private RelativeLayout rl_userinfo,rl_homepage,rl_setting;
+    private RelativeLayout rl_userinfo,rl_homepage,rl_setting,rl_hongbao;
     private TextView tv_left, tv_title, tv_right;
 
     @Override
@@ -55,6 +55,7 @@ private View root;
         tv_title = (TextView) root.findViewById(R.id.tv_title);
         tv_left = (TextView) root.findViewById(R.id.tv_left);
         tv_right = (TextView) root.findViewById(R.id.tv_right);
+        rl_hongbao = (RelativeLayout) root.findViewById(R.id.rl_hongbao);
         rl_userinfo = (RelativeLayout) root.findViewById(R.id.rl_userinfo);
         rl_homepage = (RelativeLayout) root.findViewById(R.id.rl_homepage);
         rl_setting = (RelativeLayout) root.findViewById(R.id.rl_setting);
@@ -65,6 +66,7 @@ private View root;
         rl_userinfo.setOnClickListener(this);
         rl_homepage.setOnClickListener(this);
         rl_setting.setOnClickListener(this);
+        rl_hongbao.setOnClickListener(this);
         tv_right.setVisibility(View.GONE);
         tv_left.setVisibility(View.GONE);
         tv_title.setText("我的");
@@ -114,6 +116,9 @@ private View root;
                 break;
             case R.id.rl_setting:
                 intent.setClass(FourthPageFragment.this.getActivity(), SettingActivity.class);
+                break;
+            case R.id.rl_hongbao:
+                intent.setClass(FourthPageFragment.this.getActivity(), RedPackageActivity.class);
                 break;
             default:
                 break;
