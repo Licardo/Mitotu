@@ -15,4 +15,12 @@ import java.util.List;
 public class SearchTourResult extends BaseResult{
     @JsonProperty("Items")
     private SearchTour searchTour;
+
+    public SearchTour getSearchTour() {
+        return searchTour;
+    }
+
+    public void setSearchTour(SearchTour searchTour) {
+        this.searchTour = searchTour;
+    }
 }

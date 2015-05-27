@@ -247,6 +247,7 @@ public class HttpRequestUtil {
 
     }
 
+
 	/**
 	 * 搜索用户
 	 * @param token
@@ -262,9 +263,8 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("page", page));
         params.add(new BasicNameValuePair("num", num));
         return HttpDecoder.getForObject(
-				getUrl("users/search"), SearchUserResult.class,
-				params);
-
+                getUrl("users/search"), SearchUserResult.class,
+                params);
     }
 
     /**
