@@ -125,6 +125,7 @@
                     android:src="@drawable/mine_faqide" />
 
                 <TextView
+                    android:id="@+id/tv_start"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -166,6 +167,7 @@
                     android:src="@drawable/mine_yibaomingde" />
 
                 <TextView
+                    android:id="@+id/tv_sign"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -207,6 +209,7 @@
                     android:src="@drawable/mine_xihuande" />
 
                 <TextView
+                    android:id="@+id/tv_like"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -232,6 +235,7 @@
                 android:background="@drawable/bg_line" />
 
             <TextView
+                android:id="@+id/tv_tip_trends"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -261,6 +265,7 @@
                     android:src="@drawable/mine_dongtai" />
 
                 <TextView
+                    android:id="@+id/tv_trends"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -621,6 +626,7 @@
     </ScrollView>
 
     <RelativeLayout
+        android:id="@+id/rl_bottom"
         android:layout_width="match_parent"
         android:layout_height="49dp"
         android:layout_alignParentBottom="true"
@@ -634,6 +640,7 @@
             android:background="#dcdcdc" />
 
         <RelativeLayout
+            android:id="@+id/rl_follow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_toLeftOf="@id/view8">
@@ -662,6 +669,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_chating"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_toRightOf="@id/view8">

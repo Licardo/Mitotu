@@ -137,4 +137,5 @@
     <string name="title_activity_join_together_step2">JoinTogetherStep2</string>
     <string name="title_activity_custom_tour">CustomTour</string>
     <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_introduce">IntroduceActivity</string>
 </resources>

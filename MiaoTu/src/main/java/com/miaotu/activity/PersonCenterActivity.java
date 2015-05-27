@@ -30,6 +30,8 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     private LinearLayout ll_tag;
     private RelativeLayout rl_gender,rl_age,rl_address,rl_emotion,rl_job,rl_wantgo;
     private CircleImageView ci_userhead;
+    private TextView tv_start,tv_sign,tv_like,tv_trends,tv_tip_trends;
+    private RelativeLayout rl_follow,rl_chating,rl_bottom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,14 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initView(){
+        tv_start = (TextView) this.findViewById(R.id.tv_start);
+        tv_sign = (TextView) this.findViewById(R.id.tv_sign);
+        tv_like = (TextView) this.findViewById(R.id.tv_like);
+        tv_trends = (TextView) this.findViewById(R.id.tv_trends);
+        tv_tip_trends = (TextView) this.findViewById(R.id.tv_tip_trends);
+        rl_follow = (RelativeLayout) this.findViewById(R.id.rl_follow);
+        rl_chating = (RelativeLayout) this.findViewById(R.id.rl_chating);
+        rl_bottom = (RelativeLayout) this.findViewById(R.id.rl_bottom);
         ci_userhead = (CircleImageView) this.findViewById(R.id.ci_userhead);
         rl_gender = (RelativeLayout) this.findViewById(R.id.rl_gender);
         rl_age = (RelativeLayout) this.findViewById(R.id.rl_age);
@@ -66,6 +76,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         iv_gender = (ImageView) this.findViewById(R.id.iv_gender);
         fl_tag = (FlowLayout) this.findViewById(R.id.fl_tag);
         ll_tag = (LinearLayout) this.findViewById(R.id.ll_tag);
+
         tv_right.setVisibility(View.GONE);
         tv_title.setText("个人主页");
         tv_left.setOnClickListener(this);
@@ -138,8 +149,11 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
 
     private void initData(){
         String token = readPreference("token");
-//        String uid = readPreference("uid");
+        String id = readPreference("uid");
         String uid = getIntent().getStringExtra("uid");
+        if(id.equals(uid)){
+            showMyPage(true);
+        }
         readPersonInfo(token, uid);
     }
 
@@ -180,6 +194,21 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                 break;
             default:
                 break;
+        }
+    }
+
+    /**
+     * 自己看自己的个人信息
+     * @param isShow
+     */
+    private void showMyPage(boolean isShow){
+        if(isShow){
+            rl_bottom.setVisibility(View.GONE);
+            tv_start.setText("我发起的约游");
+            tv_sign.setText("我报名的约游");
+            tv_like.setText("我喜欢的约游");
+            tv_trends.setText("我发布的动态");
+            tv_tip_trends.setText("发布的动态");
         }
     }
 }
