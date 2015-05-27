@@ -13,6 +13,7 @@ import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.model.TopicComment;
 import com.miaotu.model.TopicMessage;
+import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 
 import java.util.List;
@@ -20,66 +21,73 @@ import java.util.List;
 
 /**
  * @author Jayden
- *
  */
 public class TopicMessageAdapter extends BaseAdapter {
-	private LayoutInflater mLayoutInflater = null;
-	private List<TopicMessage> mList = null;
+    private LayoutInflater mLayoutInflater = null;
+    private List<TopicMessage> mList = null;
 
-	public TopicMessageAdapter(Context context, List<TopicMessage> list) {
-		mList = list;
-		mLayoutInflater = LayoutInflater.from(context);
-	}
+    public TopicMessageAdapter(Context context, List<TopicMessage> list) {
+        mList = list;
+        mLayoutInflater = LayoutInflater.from(context);
+    }
 
-	@Override
-	public int getCount() {
-		return this.mList != null ? this.mList.size() : 0;
-	}
+    @Override
+    public int getCount() {
+        return this.mList != null ? this.mList.size() : 0;
+    }
 
-	@Override
-	public Object getItem(int position) {
-		    return this.mList.get(position);
-	}
+    @Override
+    public Object getItem(int position) {
+        return this.mList.get(position);
+    }
 
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
-	@Override
-	public View getView(final int position, View convertView, ViewGroup parent) {
-		ViewHolder holder = null;
-		if (convertView == null) {
-			holder = new ViewHolder();
-                //话题评论
-                convertView = mLayoutInflater.inflate(
-                        R.layout.item_topic_message, null);
-                holder.ivDot = (ImageView) convertView.findViewById(R.id.iv_read_flg);
-                holder.tvTitle = (TextView) convertView
-                        .findViewById(R.id.tv_title);
-                holder.tvDate = (TextView) convertView
-                        .findViewById(R.id.tv_date);
+    @Override
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        ViewHolder holder = null;
+        if (convertView == null) {
+            holder = new ViewHolder();
+            //话题评论
+            convertView = mLayoutInflater.inflate(
+                    R.layout.item_topic_message, null);
+            holder.ivHeadPhoto = (ImageView) convertView.findViewById(R.id.iv_head_photo);
+            holder.ivPhoto = (ImageView) convertView.findViewById(R.id.iv_right);
+            holder.tvName = (TextView) convertView
+                    .findViewById(R.id.tv_name);
+            holder.tvStatus = (TextView) convertView
+                    .findViewById(R.id.tv_status);
+            holder.tvTime = (TextView) convertView
+                    .findViewById(R.id.tv_time);
 
-			convertView.setTag(holder);
-		} else {
-			holder = (ViewHolder) convertView.getTag();
-		}
-            if(mList.get(position).getStatus().equals("0")){
-                //未读
-                holder.ivDot.setVisibility(View.VISIBLE);
-            }else{
-                //已读
-                holder.ivDot.setVisibility(View.GONE);
-            }
-            holder.tvTitle.setText(mList.get(position).getRemark());
-            holder.tvDate.setText(mList.get(position).getCreated());
-		return convertView;
-	}
+            convertView.setTag(holder);
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
+        if (mList.get(position).getStatus().equals("0")) {
+            //未读
+//            holder.ivDot.setVisibility(View.VISIBLE);
+        } else {
+            //已读
+//            holder.ivDot.setVisibility(View.GONE);
+        }
+        UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto, mList.get(position).getHeadurl(), R.drawable.icon_default_head);
+        UrlImageViewHelper.setUrlDrawable(holder.ivPhoto, mList.get(position).getPicurl(), R.drawable.icon_default_head);
+        holder.tvName.setText(mList.get(position).getNickname());
+        holder.tvStatus.setText(mList.get(position).getRemark());
+        holder.tvTime.setText(mList.get(position).getCreated());
+        return convertView;
+    }
 
 
-	public final class ViewHolder {
-        private ImageView ivDot = null;
-        private TextView tvTitle = null;
-        private TextView tvDate= null;
-	}
+    public final class ViewHolder {
+        private ImageView ivHeadPhoto = null;
+        private ImageView ivPhoto = null;
+        private TextView tvName = null;
+        private TextView tvTime = null;
+        private TextView tvStatus = null;
+    }
 }

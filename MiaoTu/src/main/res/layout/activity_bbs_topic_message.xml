@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-<include
-    android:id="@+id/layout_top"
-    android:layout_alignParentTop="true"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    layout="@layout/top_bar"
-    />
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/layout_top"
+        layout="@layout/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true" />
+
     <com.handmark.pulltorefresh.library.PullToRefreshListView
-        android:layout_below="@+id/layout_top"
+        xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/lv_topic_message"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:ptr="http://schemas.android.com/apk/res-auto"
-        ptr:ptrMode="pullDownFromTop"
-        ptr:ptrAnimationStyle = "flip"
-        ptr:ptrOverScroll = "false"
-        ptr:ptrShowIndicator = "false"
+        android:layout_below="@+id/layout_top"
         android:descendantFocusability="blocksDescendants"
-        android:scrollbars="none"
         android:listSelector="@android:color/transparent"
-        >
+        android:scrollbars="none"
+        ptr:ptrAnimationStyle="flip"
+        ptr:ptrMode="pullDownFromTop"
+        ptr:ptrOverScroll="false"
+        ptr:ptrShowIndicator="false">
 
-        </com.handmark.pulltorefresh.library.PullToRefreshListView>
+    </com.handmark.pulltorefresh.library.PullToRefreshListView>
 </RelativeLayout>

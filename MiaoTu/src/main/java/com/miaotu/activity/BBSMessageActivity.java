@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
-import com.miaotu.R;
 import com.miaotu.adapter.TopicCommentsAdapter;
 import com.miaotu.adapter.TopicMessageAdapter;
 import com.miaotu.async.BaseHttpAsyncTask;

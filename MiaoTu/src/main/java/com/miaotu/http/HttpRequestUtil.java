@@ -605,13 +605,13 @@ public class HttpRequestUtil {
      * 标记消息为已读状态
      *
      * @param token
-     * @param id
+     * @param smid
      * @return
      */
-    public BaseResult readTopicMessage(String token, String id) {
+    public BaseResult readTopicMessage(String token, String smid) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
-        params.add(new BasicNameValuePair("message_id", id));
+        params.add(new BasicNameValuePair("smid", smid));
         return HttpDecoder.postForObject(
                 getUrl("topic/read_message"), BaseResult.class,
                 params);
