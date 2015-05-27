@@ -247,8 +247,6 @@ public class HttpRequestUtil {
 
     }
 
-    public SearchTourResult searchUser(String token, String key, String page, String num) {
-	}
 
 	/**
 	 * 搜索用户
@@ -265,11 +263,8 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("page", page));
         params.add(new BasicNameValuePair("num", num));
         return HttpDecoder.getForObject(
-                getUrl("users/search"), SearchTourResult.class,
+                getUrl("users/search"), SearchUserResult.class,
                 params);
-				getUrl("users/search"), SearchUserResult.class,
-				params);
-
     }
 
     /**

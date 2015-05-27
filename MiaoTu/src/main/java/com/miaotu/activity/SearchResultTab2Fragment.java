@@ -126,6 +126,7 @@ private View root;
                 if (result.getCode() == BaseResult.SUCCESS) {
                     mList.clear();
                     if(result.getPersonInfo()==null){
+                        adapter.notifyDataSetChanged();
                         return;
                     }
                     mList.addAll(result.getPersonInfo());
