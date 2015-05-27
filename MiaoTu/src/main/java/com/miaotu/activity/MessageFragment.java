@@ -53,6 +53,8 @@ public class MessageFragment extends BaseFragment {
         tvLikeDate = (TextView) root.findViewById(R.id.tv_like_date);
 
     }
-    private void bindView(){}
+    private void bindView(){
+//        as?
+    }
     private void init(){}
 }
