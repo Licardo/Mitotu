@@ -53,4 +53,5 @@
     <color name="block_column_2">#ffdf1831</color>
     <color name="block_column_3">#ff009939</color>
     <color name="text_color">#323232</color>
+    <color name="text_href">#4d99cb</color>
 </resources>

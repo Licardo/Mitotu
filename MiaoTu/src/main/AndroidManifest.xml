@@ -250,6 +250,16 @@
             android:name=".activity.IntroduceActivity"
             android:label="@string/title_activity_introduce" >
         </activity>
+        <activity
+            android:name=".activity.FeedBackActivity"
+            android:label="@string/title_activity_feed_back" >
+        </activity>
+        <activity
+            android:name=".activity.AboutActivity" >
+        </activity>
+        <activity
+            android:name=".activity.RedPackageActivity">
+        </activity>
     </application>
 
 </manifest>

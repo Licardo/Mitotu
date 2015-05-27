@@ -17,6 +17,7 @@ import com.miaotu.annotation.Ignore;
 import com.miaotu.form.MFriendsInfo;
 import com.miaotu.model.ModifyPersonInfo;
 import com.miaotu.result.CustomTourResult;
+import com.miaotu.result.MoneyResult;
 import com.miaotu.result.MovementListResult;
 import com.miaotu.result.PersonInfoResult;
 import com.miaotu.form.PublishTogether;
@@ -24,8 +25,10 @@ import com.miaotu.model.RegisterInfo;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.LoginResult;
 import com.miaotu.result.PhotoUploadResult;
+import com.miaotu.result.RedPackageListResult;
 import com.miaotu.result.SearchTourResult;
 import com.miaotu.result.SearchUserResult;
+import com.miaotu.result.SymbolResult;
 import com.miaotu.result.TogetherDetailResult;
 import com.miaotu.result.TogetherResult;
 import com.miaotu.result.TopicCommentsListResult;
@@ -670,4 +673,59 @@ public class HttpRequestUtil {
 
     }
 
+    /**
+     * 获取红包记录
+     *
+     * @return
+     */
+    public RedPackageListResult getLuckyList (String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("page","1"));
+        return HttpDecoder.getForObject(
+                getUrl("user/lucky_list"), RedPackageListResult.class,
+                params);
+    }
+
+    /**
+     * 获取卦象
+     *
+     * @return
+     */
+    public SymbolResult getSymbol (String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+//		params.add(new BasicNameValuePair("origin","5"));
+        return HttpDecoder.getForObject(
+                getUrl("user/check_sign"), SymbolResult.class,
+                params);
+    }
+
+    /**
+     * 获取红包金额
+     *
+     * @return
+     */
+    public MoneyResult getLuckyMoney (String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        return HttpDecoder.getForObject(
+                getUrl("user/lucky_money"), MoneyResult.class,
+                params);
+    }
+
+    /**
+     * 优惠码兑换红包
+     * @param token
+     * @param code
+     * @return
+     */
+    public BaseResult exchangeCouponCode (String token,String code){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("code",code));
+        return HttpDecoder.getForObject(
+                getUrl("user/lucky_exchange"), BaseResult.class,
+                params);
+    }
 }
