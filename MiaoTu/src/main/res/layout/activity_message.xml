@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="de.hdodenhof.circleimageview.sample.MainActivity$PlaceholderFragment">
+    >
+
+    <include layout="@layout/top_bar"></include>
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/lv_conversation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:clipToPadding="false"
+        android:divider="#b4b4b4"
+        android:dividerHeight="1px"
+        android:listSelector="@android:color/transparent"
+        android:descendantFocusability="afterDescendants"
+        android:background="@color/white"
+        android:scrollbars="none"></com.baoyz.swipemenulistview.SwipeMenuListView>
+</LinearLayout>
