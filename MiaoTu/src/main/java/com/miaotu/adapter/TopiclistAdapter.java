@@ -24,6 +24,8 @@ import android.widget.Toast;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.activity.BaseActivity;
+import com.miaotu.activity.CustomTourDetailActivity;
+import com.miaotu.activity.PersonCenterActivity;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.model.PhotoInfo;
@@ -106,12 +108,15 @@ public class TopiclistAdapter extends BaseAdapter {
         UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto,
                 mList.get(position).getHead_url() + "100x100",
                 R.drawable.icon_default_head_photo);
+
+        holder.ivHeadPhoto.setTag(position);
         holder.ivHeadPhoto.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(mContext, UserHomeActivity.class);
-//                intent.putExtra("userId",mList.get(position).getUid());
-//                mContext.startActivity(intent);
+                int pos = (int) view.getTag();
+                Intent intent = new Intent(mContext, PersonCenterActivity.class);
+                intent.putExtra("uid",mList.get(pos).getUid());
+                mContext.startActivity(intent);
             }
         });
         holder.tvNickname.setText(mList.get(position).getNickname());
@@ -182,18 +187,18 @@ public class TopiclistAdapter extends BaseAdapter {
                 }
             });
         }
-        /*if(StringUtil.isBlank(mList.get(position).getMovementTitle())){
+        if(StringUtil.isBlank(mList.get(position).getTitle())){
             holder.tvMovementName.setVisibility(View.GONE);
         }else {
             holder.tvMovementName.setVisibility(View.VISIBLE);
         }
-        holder.tvMovementName.setText("@"+mList.get(position).getMovementTitle());*/
+        holder.tvMovementName.setText("@"+mList.get(position).getTitle());
         holder.tvMovementName.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(mContext, MovementDetailActivity.class);
-//                intent.putExtra("id",mList.get(position).getMovementId());
-//                mContext.startActivity(intent);
+                Intent intent = new Intent(mContext, CustomTourDetailActivity.class);
+                intent.putExtra("id",mList.get(position).getAid());
+                mContext.startActivity(intent);
             }
         });
         holder.tvDistance.setText(mList.get(position).getDistance() + "km");

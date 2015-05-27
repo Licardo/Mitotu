@@ -35,6 +35,8 @@ public class Topic implements Serializable {
     private String distance;
     @JsonProperty("Aid")
     private String aid;
+    @JsonProperty("Title")
+    private String title;
     @JsonProperty("Nickname")
     private String nickname;
     @JsonProperty("HeadUrl")
@@ -218,5 +220,13 @@ public class Topic implements Serializable {
 
     public void setReplylist(List<RelpyInfo> replylist) {
         this.replylist = replylist;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

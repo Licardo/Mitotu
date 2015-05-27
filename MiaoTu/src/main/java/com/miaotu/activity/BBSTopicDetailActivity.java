@@ -175,13 +175,13 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             view.findViewById(R.id.iv_head_photo).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Intent intent = new Intent(BBSTopicDetailActivity.this, UserHomeActivity.class);
-//                    intent.putExtra("userId",topic.getUid());
-//                    startActivity(intent);
+                    Intent intent = new Intent(BBSTopicDetailActivity.this, PersonCenterActivity.class);
+                    intent.putExtra("uid",topic.getUid());
+                    startActivity(intent);
                 }
             });
             ((TextView) view
-                    .findViewById(R.id.tv_title)).setText("身旁");
+                    .findViewById(R.id.tv_title)).setText("标题");
             ((TextView) view
                     .findViewById(R.id.tv_content)).setText(topic.getContent());
             LinearLayout layoutPhotos = (LinearLayout) view.findViewById(R.id.layout_photos);
@@ -230,12 +230,12 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             if (topic.getPiclist().size() == 0) {
                 layoutPhotos.setVisibility(View.GONE);
             }
-//            if(StringUtil.isBlank(topic.getMovementTitle())){
-//                view.findViewById(R.id.tv_movement_name).setVisibility(View.GONE);
-//            }
-//            ((TextView) view
-//                    .findViewById(R.id.tv_movement_name)).setText("@"+topic.getMovementTitle());
-//            view.findViewById(R.id.tv_movement_name).setOnClickListener(this);
+            if(StringUtil.isBlank(topic.getTitle())){
+                view.findViewById(R.id.tv_movement_name).setVisibility(View.GONE);
+            }
+            ((TextView) view
+                    .findViewById(R.id.tv_movement_name)).setText("@"+topic.getTitle());
+            view.findViewById(R.id.tv_movement_name).setOnClickListener(this);
             ((TextView) view
                     .findViewById(R.id.tv_comment_count)).setText(topic.getDistance()+"km");
             ((TextView) view
@@ -272,6 +272,17 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                     UrlImageViewHelper.setUrlDrawable(imageView,
                             topic.getLikelist().get(i).getHeadurl() + "100×100",
                             R.drawable.icon_default_bbs_photo);
+                    imageView.setTag(i);
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            int pos = (int) view.getTag();
+                            Intent intent = new Intent();
+                            intent.setClass(BBSTopicDetailActivity.this, PersonCenterActivity.class);
+                            intent.putExtra("uid", topic.getLikelist().get(pos).getUid());
+                            startActivity(intent);
+                        }
+                    });
                     llLikePhoto.addView(imageView);
                 }
             }else{
@@ -457,11 +468,11 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                     if (topic.getPiclist().size() == 0) {
                         layoutPhotos.setVisibility(View.GONE);
                     }
-                    /*if(StringUtil.isBlank(topic.getMovementTitle())){
+                    if(StringUtil.isBlank(topic.getTitle())){
                         view.findViewById(R.id.tv_movement_name).setVisibility(View.GONE);
                     }
                     ((TextView) view
-                            .findViewById(R.id.tv_movement_name)).setText("@"+topic.getMovementTitle());*/
+                            .findViewById(R.id.tv_movement_name)).setText("@"+topic.getTitle());
                     view.findViewById(R.id.tv_movement_name).setOnClickListener(BBSTopicDetailActivity.this);
                     ((TextView) view
                             .findViewById(R.id.tv_comment_count)).setText(topic.getStatereplycount());
@@ -504,9 +515,9 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                 }
                 break;
             case R.id.tv_movement_name:
-//                Intent intent = new Intent(BBSTopicDetailActivity.this,MovementDetailActivity.class);
-//                intent.putExtra("id",topic.getMovementId());
-//                startActivity(intent);
+                Intent intent = new Intent(BBSTopicDetailActivity.this,CustomTourDetailActivity.class);
+                intent.putExtra("id",topic.getAid());
+                startActivity(intent);
                 break;
             case R.id.tv_left:
                 this.finish();
