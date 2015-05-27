@@ -593,10 +593,10 @@ public class HttpRequestUtil {
     public TopicMessageListResult getTopicMessage(String token, String count) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
-        params.add(new BasicNameValuePair("count", count));
+        params.add(new BasicNameValuePair("num", count));
         params.add(new BasicNameValuePair("page", "1"));
-        return HttpDecoder.postForObject(
-                getUrl("topic/message_list"), TopicMessageListResult.class,
+        return HttpDecoder.getForObject(
+                getUrl("user/state/msg"), TopicMessageListResult.class,
                 params);
 
     }

@@ -51,7 +51,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by ying on 2015/3/6.
+ * Created by hao on 2015/3/6.
  */
 public class BBSTopicDetailActivity extends BaseActivity implements View.OnClickListener {
     private TextView tvTitle;
@@ -292,7 +292,8 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             lvTopics.getRefreshableView().addHeaderView(view);
             getComments(false);
         } else {
-            getDetail(true);
+            String sid = getIntent().getStringExtra("sid");
+            getDetail(true, sid);
         }
 
 
@@ -394,7 +395,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
         }.execute();
     }
 
-    private void getDetail(boolean isShow) {
+    private void getDetail(boolean isShow, final String sid) {
         new BaseHttpAsyncTask<Void, Void, TopicResult>(BBSTopicDetailActivity.this, isShow) {
             @Override
             protected void onCompleteTask(TopicResult result) {
@@ -493,7 +494,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
 
             @Override
             protected TopicResult run(Void... params) {
-                return HttpRequestUtil.getInstance().getTopicDetail(topic.getSid(), token);
+                return HttpRequestUtil.getInstance().getTopicDetail(sid, token);
             }
 
             @Override

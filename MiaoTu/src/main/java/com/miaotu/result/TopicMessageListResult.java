@@ -13,7 +13,7 @@ import java.util.List;
  *
  */
 public class TopicMessageListResult extends BaseResult{
-	@JsonProperty("items")
+	@JsonProperty("Items")
 	private List<TopicMessage> messages;
 
     public List<TopicMessage> getMessages() {

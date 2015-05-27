@@ -42,6 +42,7 @@ import com.photoselector.ui.PhotoPreviewActivity;
 import com.photoselector.util.CommonUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -86,7 +87,7 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
 
                 // Update the LastUpdatedLabel
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-                getComments(false);
+                getMessages(false);
 
             }
 
@@ -111,10 +112,10 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(BBSMessageActivity.this, BBSTopicDetailActivity.class);
-                intent.putExtra("id", mList.get(i - 1).getId());
+                intent.putExtra("sid", mList.get(i - 1).getSid());
                 startActivity(intent);
                 //设置已读状态
-                read(false, mList.get(i - 1).getMessageId(), i - 1);
+                read(false, mList.get(i - 1).getSmid(), i - 1);
             }
         });
         tvLeft.setOnClickListener(this);
@@ -128,10 +129,10 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
         mList=new ArrayList<>();
         adapter = new TopicMessageAdapter(BBSMessageActivity.this,mList);
         lvTopicMessage.setAdapter(adapter);
-        getComments(false);
+        getMessages(false);
         
     }
-    private void getComments(boolean isShow) {
+    private void getMessages(boolean isShow) {
         new BaseHttpAsyncTask<Void, Void, TopicMessageListResult>(BBSMessageActivity.this, isShow) {
             @Override
             protected void onCompleteTask(TopicMessageListResult result) {
@@ -141,6 +142,15 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                 if (result.getCode() == BaseResult.SUCCESS) {
                     mList.clear();
                     mList.addAll(result.getMessages());
+                    TopicMessage mes = new TopicMessage();
+                    mes.setContent("你好啊");
+                    mes.setCreated(new Date().toString());
+                    mes.setNickname("四小美");
+                    mes.setRemark("hi");
+                    mes.setStatus("0");
+                    mes.setSid("1");
+                    mes.setSmid("1");
+                    mList.add(mes);
                     adapter.notifyDataSetChanged();
 //                    showToastMsg("lastvisibale:"+lvTopicMessage.getRefreshableView().getLastVisiblePosition()+"  count: "+lvTopicMessage.getRefreshableView().getCount()+" first:"+lvTopicMessage.getRefreshableView().getFirstVisiblePosition());
                     if(lvTopicMessage.getRefreshableView().getFooterViewsCount()==1&&mList.size()==PAGECOUNT){
