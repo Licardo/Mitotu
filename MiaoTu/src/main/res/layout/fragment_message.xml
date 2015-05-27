@@ -26,6 +26,7 @@
             android:orientation="vertical"
             >
 <LinearLayout
+    android:id="@+id/layout_sys"
     android:layout_width="match_parent"
     android:layout_height="70dp"
     android:orientation="horizontal"
@@ -40,6 +41,7 @@
         android:src="@drawable/icon_system_msg"
         />
         <ImageView
+            android:id="@+id/iv_sys_count"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_alignParentRight="true"
@@ -63,6 +65,7 @@
             android:layout_marginTop="20dp"
             />
         <TextView
+            android:id="@+id/tv_sys_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -76,6 +79,7 @@
             android:layout_marginRight="40dp"
             />
         <TextView
+            android:id="@+id/tv_sys_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -94,6 +98,7 @@
         android:background="#b4b4b4"
         ></View>
             <LinearLayout
+                android:id="@+id/layout_like_tour"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:orientation="horizontal"
@@ -108,6 +113,7 @@
                         android:src="@drawable/icon_like_msg"
                         />
                     <ImageView
+                        android:id="@+id/iv_like_tour_msg"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
@@ -132,6 +138,7 @@
                         android:layout_marginTop="20dp"
                         />
                     <TextView
+                        android:id="@+id/tv_like_tour_content"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -145,6 +152,7 @@
                         android:layout_marginRight="40dp"
                         />
                     <TextView
+                        android:id="@+id/tv_like_tour_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
@@ -163,6 +171,7 @@
                 android:background="#b4b4b4"
                 ></View>
             <LinearLayout
+                android:id="@+id/layout_join"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:orientation="horizontal"
@@ -177,6 +186,7 @@
                         android:src="@drawable/icon_join_msg"
                         />
                     <ImageView
+                        android:id="@+id/iv_join_count"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
@@ -201,6 +211,7 @@
                         android:layout_marginTop="20dp"
                         />
                     <TextView
+                        android:id="@+id/tv_join_content"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -214,6 +225,7 @@
                         android:layout_marginRight="40dp"
                         />
                     <TextView
+                        android:id="@+id/tv_join_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
@@ -232,6 +244,7 @@
                 android:background="#b4b4b4"
                 ></View>
             <LinearLayout
+                android:id="@+id/layout_chat"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:orientation="horizontal"
@@ -246,6 +259,7 @@
                         android:src="@drawable/icon_chat_msg"
                         />
                     <ImageView
+                        android:id="@+id/iv_chat_count"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
@@ -270,6 +284,7 @@
                         android:layout_marginTop="20dp"
                         />
                     <TextView
+                        android:id="@+id/tv_chat_content"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -283,6 +298,7 @@
                         android:layout_marginRight="40dp"
                         />
                     <TextView
+                        android:id="@+id/tv_chat_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
@@ -301,6 +317,7 @@
                 android:background="#b4b4b4"
                 ></View>
             <LinearLayout
+                android:id="@+id/layout_like"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:orientation="horizontal"
@@ -316,6 +333,7 @@
                         android:src="@drawable/icon_like2_msg"
                         />
                     <ImageView
+                        android:id="@+id/iv_like_count"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
@@ -340,6 +358,7 @@
                         android:layout_marginTop="20dp"
                         />
                     <TextView
+                        android:id="@+id/tv_like_content"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -353,6 +372,7 @@
                         android:layout_marginRight="40dp"
                         />
                     <TextView
+                        android:id="@+id/tv_like_date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"

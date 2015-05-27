@@ -1,1 +1,1 @@
-include ':MiaoTu', ':PullToRefreshLib', ':PhotoSelector', ':SupportV4Lib', ':PhotoSelectorLib', ':WheelViewLib'
+include ':MiaoTu', ':PullToRefreshLib', ':PhotoSelector', ':SupportV4Lib', ':PhotoSelectorLib', ':WheelViewLib', ':SwipeMenuListView'
