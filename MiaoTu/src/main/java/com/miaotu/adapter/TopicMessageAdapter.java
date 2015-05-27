@@ -54,7 +54,7 @@ public class TopicMessageAdapter extends BaseAdapter {
                 //话题评论
                 convertView = mLayoutInflater.inflate(
                         R.layout.item_topic_message, null);
-                holder.ivDot = (ImageView) convertView.findViewById(R.id.iv_read_flg);
+//                holder.ivDot = (ImageView) convertView.findViewById(R.id.iv_read_flg);
                 holder.tvTitle = (TextView) convertView
                         .findViewById(R.id.tv_title);
                 holder.tvDate = (TextView) convertView
@@ -64,13 +64,13 @@ public class TopicMessageAdapter extends BaseAdapter {
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-            if(mList.get(position).getStatus().equals("0")){
-                //未读
-                holder.ivDot.setVisibility(View.VISIBLE);
-            }else{
-                //已读
-                holder.ivDot.setVisibility(View.GONE);
-            }
+//            if(mList.get(position).getStatus().equals("0")){
+//                //未读
+//                holder.ivDot.setVisibility(View.VISIBLE);
+//            }else{
+//                //已读
+//                holder.ivDot.setVisibility(View.GONE);
+//            }
             holder.tvTitle.setText(mList.get(position).getRemark());
             holder.tvDate.setText(mList.get(position).getCreated());
 		return convertView;
@@ -78,7 +78,7 @@ public class TopicMessageAdapter extends BaseAdapter {
 
 
 	public final class ViewHolder {
-        private ImageView ivDot = null;
+//        private ImageView ivDot = null;
         private TextView tvTitle = null;
         private TextView tvDate= null;
 	}

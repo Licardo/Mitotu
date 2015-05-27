@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<translate xmlns:android="http://schemas.android.com/apk/res/android"
-    android:duration="150"
-    android:fromYDelta="0%"
-    android:interpolator="@android:anim/linear_interpolator"
-    android:toYDelta="-100%" />
-<!-- From: file:/D:/Users/Administrator/Android%20studio%20workspace/MiaoTu3.0/PhotoSelector/src/main/res/anim/translate_up.xml -->
