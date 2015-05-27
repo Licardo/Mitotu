@@ -74,7 +74,7 @@ public class TopicCommentsAdapter extends BaseAdapter {
 		// 对ListView的Item中的控件的操作
             //话题评论
             UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto,
-                    mList.get(position).getHeadurl(),
+                    mList.get(position).getHeadurl() + "100×100",
                     R.drawable.icon_default_head_photo);
             holder.ivHeadPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
