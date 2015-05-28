@@ -1,5 +1,6 @@
 package com.miaotu.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -38,7 +39,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
     private EditText et_tag;
     private FlowLayout fl_tags;
     private ModifyPersonInfo userinfo;
-    private EditText et_nickname,et_gender,et_age,et_address,et_emotion,et_job,et_wantgo;
+    private EditText et_nickname, et_gender, et_age, et_address, et_emotion, et_job, et_wantgo;
     private RelativeLayout rl_changephoto;
     private List<String> alltags;
     private CircleImageView iv_head_photo;
@@ -56,7 +57,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
         initData();
     }
 
-    private void initView(){
+    private void initView() {
         rl_changephoto = (RelativeLayout) this.findViewById(R.id.rl_changephoto);
         iv_head_photo = (CircleImageView) this.findViewById(R.id.iv_head_photo);
         et_wantgo = (EditText) this.findViewById(R.id.et_wantgo);
@@ -80,7 +81,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
         rl_changephoto.setOnClickListener(this);
     }
 
-    private void clearEditText(){
+    private void clearEditText() {
         et_wantgo.setText("");
         et_job.setText("");
         et_address.setText("");
@@ -91,7 +92,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
         et_tag.setText("");
     }
 
-    private void initData(){
+    private void initData() {
         File myDir = new File(Environment
                 .getExternalStorageDirectory().getAbsolutePath() + "/miaotu");
         myDir.mkdirs();
@@ -106,13 +107,13 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tv_left:
                 finish();
                 break;
             case R.id.btn_add:
                 String content = et_tag.getText().toString().trim();
-                if(!StringUtil.isBlank(content)){
+                if (!StringUtil.isBlank(content)) {
                     final View tagview = LayoutInflater.from(EditUserInfoActivity.this).inflate(
                             R.layout.item_tag, null);
                     TextView tv_tag = (TextView) tagview.findViewById(R.id.tv_tag);
@@ -126,7 +127,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                             fl_tags.removeView(tagview);
                             fl_tags.requestLayout();
                             int pos = (int) tagview.getTag();
-                            if(pos < alltags.size()){
+                            if (pos < alltags.size()) {
                                 alltags.remove(pos);
                             }
                         }
@@ -152,14 +153,14 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                 userinfo.setMarital_status(et_emotion.getText().toString().trim());
                 userinfo.setWork(et_job.getText().toString().trim());
                 userinfo.setWant_go(et_wantgo.getText().toString().trim());
-                userinfo.setHear_url(photourl);
-                LogUtil.e("修改头像", "路径// "+photourl);
+                userinfo.setHear_url("");
+                LogUtil.e("修改头像", "路径// " + photourl);
                 String contenttag = "";
-                for(String tag:alltags){
+                for (String tag : alltags) {
                     contenttag += tag + ",";
                 }
-                if(!StringUtil.isBlank(contenttag)){
-                    userinfo.setTags(contenttag.substring(0, contenttag.length()-1));
+                if (!StringUtil.isBlank(contenttag)) {
+                    userinfo.setTags(contenttag.substring(0, contenttag.length() - 1));
                 }
                 modifyUserInfo(userinfo);
                 clearEditText();
@@ -175,34 +176,34 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
     /**
      * 修改用户信息
      */
-    private void modifyUserInfo(final ModifyPersonInfo info){
-        new BaseHttpAsyncTask<Void, Void, BaseResult>(this, true){
+    private void modifyUserInfo(final ModifyPersonInfo info) {
+        new BaseHttpAsyncTask<Void, Void, BaseResult>(this, true) {
 
             @Override
             protected void onCompleteTask(BaseResult baseResult) {
-                if(baseResult.getCode() == BaseResult.SUCCESS){
+                if (baseResult.getCode() == BaseResult.SUCCESS) {
                     showToastMsg("修改成功");
-                    if(!StringUtil.isBlank(info.getHear_url())){
+                    if (!StringUtil.isBlank(info.getHear_url())) {
                         writePreference("headphoto", info.getHear_url());
                     }
-                    if(!StringUtil.isBlank(info.getWork())){
+                    if (!StringUtil.isBlank(info.getWork())) {
                         writePreference("job", info.getWork());
                     }
-                    if(!StringUtil.isBlank(info.getWork())){
+                    if (!StringUtil.isBlank(info.getWork())) {
                         writePreference("age", info.getAge());
                     }
-                    if(!StringUtil.isBlank(info.getWork())){
+                    if (!StringUtil.isBlank(info.getWork())) {
                         writePreference("name", info.getNickname());
                     }
-                    if(!StringUtil.isBlank(info.getWork())){
+                    if (!StringUtil.isBlank(info.getWork())) {
                         writePreference("gender", info.getGender());
                     }
 //                    UrlImageViewHelper.setUrlDrawable(iv_head_photo, info.getHear_url(),
 //                            R.drawable.icon_default_head_photo);
-                }else{
-                    if(StringUtil.isBlank(baseResult.getMsg())){
+                } else {
+                    if (StringUtil.isBlank(baseResult.getMsg())) {
                         showToastMsg("修改信息失败");
-                    }else{
+                    } else {
                         showToastMsg(baseResult.getMsg());
                     }
                 }
@@ -246,22 +247,25 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
-            case 22:
-                if (imageUri != null) {
-                    File file = new File(imageUri.getPath());
-                    List<File> imgs = new ArrayList<File>();
-                    imgs.add(file);
-                    addPhoto(imgs);
-                }
-                break;
-            default:
-                break;
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case 22:
+                    if (imageUri != null) {
+                        File file = new File(imageUri.getPath());
+                        List<File> imgs = new ArrayList<File>();
+                        imgs.add(file);
+                        addPhoto(imgs);
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
     /**
      * 向服务器添加照片
+     *
      * @param imgs
      */
     private void addPhoto(final List<File> imgs) {
@@ -269,14 +273,17 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
 
             @Override
             protected void onCompleteTask(final PhotoUploadResult result) {
-                if(result.getCode() == BaseResult.SUCCESS){
+                if (result.getCode() == BaseResult.SUCCESS) {
                     photourl = result.getPhotoList().get(0);
                     UrlImageViewHelper.setUrlDrawable(iv_head_photo, photourl,
                             R.drawable.icon_default_head_photo);
-                }else{
-                    if(StringUtil.isBlank(result.getMsg())){
+                    ModifyPersonInfo info = new ModifyPersonInfo();
+                    info.setHear_url(photourl);
+                    modifyUserInfo(info);
+                } else {
+                    if (StringUtil.isBlank(result.getMsg())) {
                         showToastMsg("操作失败");
-                    }else {
+                    } else {
                         showToastMsg(result.getMsg());
                     }
                 }
