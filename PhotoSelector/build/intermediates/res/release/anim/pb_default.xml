@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<animated-rotate xmlns:android="http://schemas.android.com/apk/res/android"
-    android:drawable="@drawable/ic_loading_white"
-    android:pivotX="50%"
-    android:pivotY="50%" />
-<!-- From: file:/D:/miaotu-zh/workspace/MiaoTu3.0/PhotoSelector/src/main/res/anim/pb_default.xml -->
