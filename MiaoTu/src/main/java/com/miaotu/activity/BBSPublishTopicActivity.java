@@ -176,33 +176,11 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
         return true;
     }
 
+    /**
+     * 发布妙友动态
+     * @param imgs
+     */
     private void publishTopic(final List<String> imgs) {
-
-        //发表话题
-        /*if (!readPreference("login_state").equals("in")) {
-            Intent intent = new Intent(BBSPublishTopicActivity.this, LoginActivity.class);
-            startActivity(intent);
-            return;
-        } else {
-            files.clear();
-            for (PhotoModel photo : photoList) {
-                File file = new File(photo.getOriginalPath());
-                files.add(file);
-            }
-            LogUtil.d("图片个数：" + photoList.size());
-            boolean gifFlg = false;
-            for (File file : files) {
-                String ext = Util.getExtName(file);
-                LogUtil.d("后缀名" + ext);
-                if (ext.equals("gif") || ext.equals("GIF")) {
-                    showToastMsg("暂时不支持上传gif动图(⊙o⊙)");
-                    gifFlg = true;
-                    break;
-                }
-            }
-            if (gifFlg) {
-                return;
-            }*/
         new BaseHttpAsyncTask<Void, Void, BaseResult>(BBSPublishTopicActivity.this, true) {
             @Override
             protected void onCompleteTask(BaseResult result) {

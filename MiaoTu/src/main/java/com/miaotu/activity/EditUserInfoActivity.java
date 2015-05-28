@@ -85,6 +85,9 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
         alltags = new ArrayList<String>();
         String headimg = readPreference("headphoto");
         UrlImageViewHelper.setUrlDrawable(iv_head_photo, headimg, R.drawable.icon_default_head_photo);
+        File myDir = new File(Environment
+                .getExternalStorageDirectory().getAbsolutePath() + "/miaotu");
+        myDir.mkdirs();
     }
 
     private int position;
@@ -167,6 +170,9 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
             protected void onCompleteTask(BaseResult baseResult) {
                 if(baseResult.getCode() == BaseResult.SUCCESS){
                     showToastMsg("修改成功");
+                    writePreference("headphoto", info.getHear_url());
+//                    UrlImageViewHelper.setUrlDrawable(iv_head_photo, info.getHear_url(),
+//                            R.drawable.icon_default_head_photo);
                 }else{
                     if(StringUtil.isBlank(baseResult.getMsg())){
                         showToastMsg("修改信息失败");
@@ -239,6 +245,8 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
             protected void onCompleteTask(final PhotoUploadResult result) {
                 if(result.getCode() == BaseResult.SUCCESS){
                     photourl = result.getPhotoList().get(0);
+                    UrlImageViewHelper.setUrlDrawable(iv_head_photo, photourl,
+                            R.drawable.icon_default_head_photo);
                 }else{
                     if(StringUtil.isBlank(result.getMsg())){
                         showToastMsg("操作失败");
