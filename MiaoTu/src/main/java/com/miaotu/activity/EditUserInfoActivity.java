@@ -80,14 +80,25 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
         rl_changephoto.setOnClickListener(this);
     }
 
+    private void clearEditText(){
+        et_wantgo.setText("");
+        et_job.setText("");
+        et_address.setText("");
+        et_emotion.setText("");
+        et_age.setText("");
+        et_gender.setText("");
+        et_nickname.setText("");
+        et_tag.setText("");
+    }
+
     private void initData(){
+        File myDir = new File(Environment
+                .getExternalStorageDirectory().getAbsolutePath() + "/miaotu");
+        myDir.mkdirs();
         userinfo = new ModifyPersonInfo();
         alltags = new ArrayList<String>();
         String headimg = readPreference("headphoto");
         UrlImageViewHelper.setUrlDrawable(iv_head_photo, headimg, R.drawable.icon_default_head_photo);
-        File myDir = new File(Environment
-                .getExternalStorageDirectory().getAbsolutePath() + "/miaotu");
-        myDir.mkdirs();
     }
 
     private int position;
@@ -151,6 +162,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                     userinfo.setTags(contenttag.substring(0, contenttag.length()-1));
                 }
                 modifyUserInfo(userinfo);
+                clearEditText();
                 break;
             case R.id.rl_changephoto:
                 chosePhoto(2);
