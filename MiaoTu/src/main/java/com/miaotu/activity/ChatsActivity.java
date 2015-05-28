@@ -138,7 +138,7 @@ public class ChatsActivity extends BaseActivity implements OnClickListener{
 	private String uid;
 	private String headPhoto;
 	private TextView tvTitle;
-	private Button btnleft,btnRight;
+	private TextView btnleft,btnRight;
 //	private MyDatabaseHelper helper;
 	private ListView lvChat;
 //	private ListView RefreshableView;
@@ -279,7 +279,7 @@ public class ChatsActivity extends BaseActivity implements OnClickListener{
 		btnleft.setWidth(Util.dip2px(this, 13f));
 		btnleft.setBackgroundResource(R.drawable.icon_back);
 		btnleft.setVisibility(View.VISIBLE);
-            btnRight = (Button) findViewById(R.id.tv_right);
+            btnRight = (TextView) findViewById(R.id.tv_right);
             RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(Util.dip2px(this,25),Util.dip2px(this,25));
             params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             params.addRule(RelativeLayout.CENTER_VERTICAL);

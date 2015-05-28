@@ -52,6 +52,10 @@ private WebView webView;
         public void setTitle(String title) {
             tvTitle.setText(title);
         }
+        @android.webkit.JavascriptInterface
+        public void showTip(String text) {
+            showToastMsg(text);
+        }
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK) &&   webView .canGoBack()) {
