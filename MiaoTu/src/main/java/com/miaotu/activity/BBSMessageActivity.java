@@ -1,6 +1,9 @@
 package com.miaotu.activity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -16,6 +19,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
@@ -29,6 +36,7 @@ import com.miaotu.model.Topic;
 import com.miaotu.model.TopicComment;
 import com.miaotu.model.TopicMessage;
 import com.miaotu.result.BaseResult;
+import com.miaotu.result.MessageResult;
 import com.miaotu.result.TopicCommentsListResult;
 import com.miaotu.result.TopicMessageListResult;
 import com.miaotu.util.LogUtil;
@@ -51,7 +59,7 @@ import java.util.List;
 public class BBSMessageActivity extends BaseActivity implements View.OnClickListener{
     private TextView tvTitle;
     private TextView tvLeft,tvRight;
-    private PullToRefreshListView lvTopicMessage;
+    private SwipeMenuListView lvTopicMessage;
     private List<TopicMessage> mList;
     private TopicMessageAdapter adapter;
     private static int PAGECOUNT=15;
@@ -72,13 +80,27 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvLeft = (TextView) findViewById(R.id.tv_left);
         tvRight = (TextView) findViewById(R.id.tv_right);
-        lvTopicMessage = (PullToRefreshListView) findViewById(R.id.lv_topic_message);
+        lvTopicMessage = (SwipeMenuListView) findViewById(R.id.lv_topic_message);
     }
 
     private void bindView() {
         tvRight.setOnClickListener(this);
         tvLeft.setOnClickListener(this);
-        lvTopicMessage.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
+        lvTopicMessage.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                switch (index){
+                    case 0:
+                        deleteMessage(readPreference("token"), mList.get(position).getSmid(), position);
+                        break;
+                    default:
+                        break;
+                }
+
+                return false;
+            }
+        });
+        /*lvTopicMessage.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
 
             @Override
             public void onPullDownToRefresh(
@@ -110,15 +132,15 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                 }
             }
 
-        });
+        });*/
         lvTopicMessage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(BBSMessageActivity.this, BBSTopicDetailActivity.class);
-                intent.putExtra("sid", mList.get(i - 1).getSid());
+                intent.putExtra("sid", mList.get(i).getSid());
                 startActivity(intent);
                 //设置已读状态
-                read(false, mList.get(i - 1).getSmid(), i - 1);
+                read(false, mList.get(i).getSmid(), i);
             }
         });
         tvLeft.setOnClickListener(this);
@@ -133,8 +155,23 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
         mList=new ArrayList<>();
         adapter = new TopicMessageAdapter(BBSMessageActivity.this,mList);
         lvTopicMessage.setAdapter(adapter);
+
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+            @Override
+            public void create(SwipeMenu menu) {
+                SwipeMenuItem deleteItem = new SwipeMenuItem(BBSMessageActivity.this);
+                deleteItem.setBackground(new ColorDrawable(getResources().getColor(R.color.swipe_delete)));
+//                deleteItem.setBackground(R.drawable.icon_msg_delete);
+                deleteItem.setWidth(Util.dip2px(BBSMessageActivity.this, 80));
+                deleteItem.setTitle("删除");
+                deleteItem.setTitleColor(getResources().getColor(R.color.white));
+                deleteItem.setTitleSize(14);
+                menu.addMenuItem(deleteItem);
+            }
+        };
+        lvTopicMessage.setMenuCreator(creator);
+
         getMessages(false);
-        
     }
 
     /**
@@ -162,9 +199,9 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                     mList.add(mes);
                     adapter.notifyDataSetChanged();
 //                    showToastMsg("lastvisibale:"+lvTopicMessage.getRefreshableView().getLastVisiblePosition()+"  count: "+lvTopicMessage.getRefreshableView().getCount()+" first:"+lvTopicMessage.getRefreshableView().getFirstVisiblePosition());
-                    if(lvTopicMessage.getRefreshableView().getFooterViewsCount()==1&&mList.size()==PAGECOUNT){
+                    /*if(lvTopicMessage.getRefreshableView().getFooterViewsCount()==1&&mList.size()==PAGECOUNT){
                         lvTopicMessage.getRefreshableView().addFooterView(layoutMore);
-                    }
+                    }*/
                 } else {
                     if (StringUtil.isEmpty(result.getMsg())) {
                         showToastMsg("获取话题失败！");
@@ -192,7 +229,7 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                 if(mList==null){
                     return;
                 }
-                lvTopicMessage.onRefreshComplete();
+                /*lvTopicMessage.onRefreshComplete();*/
             }
         }.execute();
     }
@@ -212,7 +249,7 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                     mList.addAll(result.getMessages());
                     adapter.notifyDataSetChanged();
                     if(mList.size()!=curPageCount){
-                        lvTopicMessage.getRefreshableView().removeFooterView(layoutMore);
+                        /*lvTopicMessage.getRefreshableView().removeFooterView(layoutMore);*/
                     }
                 } else {
                     if (StringUtil.isEmpty(result.getMsg())) {
@@ -241,32 +278,36 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                 if(mList==null){
                     return;
                 }
-                lvTopicMessage.onRefreshComplete();
+                /*lvTopicMessage.onRefreshComplete();*/
                 isLoadMore = false;
             }
         }.execute();
     }
     //标记消息为已读
     private void read(boolean isShow,final String meesageId,final int position) {
-        new BaseHttpAsyncTask<Void, Void, BaseResult>(BBSMessageActivity.this, isShow) {
+        new BaseHttpAsyncTask<Void, Void, MessageResult>(BBSMessageActivity.this, isShow) {
             @Override
-            protected void onCompleteTask(BaseResult result) {
+            protected void onCompleteTask(MessageResult result) {
                     if(mList==null){
                         return;
                     }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     //标记成功
-                    mList.get(position).setStatus("1");
-                    adapter.notifyDataSetChanged();
+                    if("1".equals(result.getMessage().getStatus())){
+                        adapter.notifyDataSetChanged();
+                    }
+//                    mList.get(position).setStatus("1");
                 } else {
                     if (StringUtil.isEmpty(result.getMsg())) {
+                        showToastMsg("读取失败");
                     } else {
+                        showToastMsg(result.getMsg());
                     }
                 }
             }
 
             @Override
-            protected BaseResult run(Void... params) {
+            protected MessageResult run(Void... params) {
                 curPageCount=PAGECOUNT;
                 return HttpRequestUtil.getInstance().readTopicMessage(readPreference("token"), meesageId);
             }
@@ -285,11 +326,33 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.tv_right: //清空
-                emptyMessages(readPreference("token"));
+                final Dialog dialog = new AlertDialog.Builder(BBSMessageActivity.this).create();
+                dialog.setCancelable(true);
+                dialog.show();
+                dialog.setContentView(R.layout.dialog_message_empty);
+                Button btnCancle = (Button) dialog.findViewById(R.id.btn_cancel);
+                Button btnConfirm = (Button) dialog.findViewById(R.id.btn_confirm);
+                btnConfirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        emptyMessages(readPreference("token"));
+                        dialog.dismiss();
+                    }
+                });
+                btnCancle.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
                 break;
         }
     }
 
+    /**
+     * 清空消息
+     * @param token
+     */
     private void emptyMessages(final String token){
         new BaseHttpAsyncTask<Void, Void, BaseResult>(this, false){
 
@@ -297,6 +360,8 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
             protected void onCompleteTask(BaseResult baseResult) {
                 if(baseResult.getCode() == BaseResult.SUCCESS){
                     showToastMsg("操作成功");
+                    mList.clear();
+                    adapter.notifyDataSetChanged();
                 }else {
                     if(StringUtil.isBlank(baseResult.getMsg())){
                         showToastMsg("操作失败");
@@ -309,6 +374,38 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
             @Override
             protected BaseResult run(Void... params) {
                 return HttpRequestUtil.getInstance().emptyTopicMessage(token);
+            }
+        }.execute();
+    }
+
+    /**
+     * 删除消息
+     * @param token
+     * @param smid
+     */
+    private void deleteMessage(final String token, final String smid, final int postion){
+        new BaseHttpAsyncTask<Void, Void, MessageResult>(BBSMessageActivity.this, false){
+
+            @Override
+            protected void onCompleteTask(MessageResult baseResult) {
+                if(baseResult.getCode() == 100){
+                    if("-1".equals(baseResult.getMessage().getStatus())){
+                        mList.remove(postion);
+                        adapter.notifyDataSetChanged();
+                    }
+                    showToastMsg("操作成功");
+                }else {
+                    if(StringUtil.isBlank(baseResult.getMsg())){
+                        showToastMsg("操作失败");
+                    }else {
+                        showToastMsg(baseResult.getMsg());
+                    }
+                }
+            }
+
+            @Override
+            protected MessageResult run(Void... params) {
+                return HttpRequestUtil.getInstance().deleteTopicMessage(token, smid);
             }
         }.execute();
     }

@@ -12,6 +12,7 @@ public class ModifyPersonInfo {
     private String province;
     private String city;
     private String email;
+    private String hear_url;
     private String about_me;
     private String high;
     private String education;
@@ -219,5 +220,13 @@ public class ModifyPersonInfo {
 
     public void setFood(String food) {
         this.food = food;
+    }
+
+    public String getHear_url() {
+        return hear_url;
+    }
+
+    public void setHear_url(String hear_url) {
+        this.hear_url = hear_url;
     }
 }

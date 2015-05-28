@@ -1,18 +1,18 @@
 package com.miaotu.activity;
 
-import android.app.Activity;
-import android.content.DialogInterface;
-import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
@@ -20,12 +20,14 @@ import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.model.ModifyPersonInfo;
 import com.miaotu.result.BaseResult;
+import com.miaotu.result.PhotoUploadResult;
 import com.miaotu.util.LogUtil;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 import com.miaotu.view.FlowLayout;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,8 +39,13 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
     private FlowLayout fl_tags;
     private ModifyPersonInfo userinfo;
     private EditText et_nickname,et_gender,et_age,et_address,et_emotion,et_job,et_wantgo;
+    private RelativeLayout rl_changephoto;
     private List<String> alltags;
     private CircleImageView iv_head_photo;
+    private static final String IMAGE_FILE_LOCATION = Environment
+            .getExternalStorageDirectory().getAbsolutePath() + "/miaotu/temp.jpg";
+    Uri imageUri = Uri.parse(IMAGE_FILE_LOCATION);//
+    private String photourl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +57,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initView(){
+        rl_changephoto = (RelativeLayout) this.findViewById(R.id.rl_changephoto);
         iv_head_photo = (CircleImageView) this.findViewById(R.id.iv_head_photo);
         et_wantgo = (EditText) this.findViewById(R.id.et_wantgo);
         et_job = (EditText) this.findViewById(R.id.et_job);
@@ -69,6 +77,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
         tv_left.setOnClickListener(this);
         tv_right.setOnClickListener(this);
         btn_add.setOnClickListener(this);
+        rl_changephoto.setOnClickListener(this);
     }
 
     private void initData(){
@@ -129,6 +138,8 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                 userinfo.setMarital_status(et_emotion.getText().toString().trim());
                 userinfo.setWork(et_job.getText().toString().trim());
                 userinfo.setWant_go(et_wantgo.getText().toString().trim());
+                userinfo.setHear_url(photourl);
+                LogUtil.e("修改头像", photourl);
                 String contenttag = "";
                 for(String tag:alltags){
                     contenttag += tag + ",";
@@ -137,6 +148,9 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                     userinfo.setTags(contenttag.substring(0, contenttag.length()-1));
                 }
                 modifyUserInfo(userinfo);
+                break;
+            case R.id.rl_changephoto:
+                chosePhoto(2);
                 break;
             default:
                 break;
@@ -169,4 +183,77 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
         }.execute();
     }
 
+    public void chosePhoto(int index) {
+        File fos = null;
+        try {
+            fos = new File(IMAGE_FILE_LOCATION);
+            fos.createNewFile();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        imageUri = Uri.fromFile(fos);
+        Intent intent = new Intent(Intent.ACTION_PICK, null);
+        intent.setType("image/*");
+        intent.putExtra("crop", "true");
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("outputX", 300);
+        intent.putExtra("outputY", 300);
+        intent.putExtra("scale", true);
+        intent.putExtra("return-data", true);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        intent.putExtra("noFaceDetection", true); // no face detection
+        if (index == 1) {
+            startActivityForResult(intent, 3); // 如果requestCode=3，是修改头像
+        } else if (index == 2) {
+            startActivityForResult(intent, 22); // requestCode=22,是相册添加照片
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+            case 22:
+                if (imageUri != null) {
+                    File file = new File(imageUri.getPath());
+                    List<File> imgs = new ArrayList<File>();
+                    imgs.add(file);
+                    addPhoto(imgs);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * 向服务器添加照片
+     * @param imgs
+     */
+    private void addPhoto(final List<File> imgs) {
+        new BaseHttpAsyncTask<Void, Void, PhotoUploadResult>(this) {
+
+            @Override
+            protected void onCompleteTask(final PhotoUploadResult result) {
+                if(result.getCode() == BaseResult.SUCCESS){
+                    photourl = result.getPhotoList().get(0);
+                }else{
+                    if(StringUtil.isBlank(result.getMsg())){
+                        showToastMsg("操作失败");
+                    }else {
+                        showToastMsg(result.getMsg());
+                    }
+                }
+            }
+
+            @Override
+            protected PhotoUploadResult run(Void... params) {
+                return HttpRequestUtil.getInstance().uploadPhoto(imgs);
+            }
+
+        }.execute();
+
+    }
 }

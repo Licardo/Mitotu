@@ -11,7 +11,7 @@
         android:layout_height="50dp"
         android:layout_alignParentTop="true" />
 
-    <com.handmark.pulltorefresh.library.PullToRefreshListView
+    <com.baoyz.swipemenulistview.SwipeMenuListView
         xmlns:ptr="http://schemas.android.com/apk/res-auto"
         android:id="@+id/lv_topic_message"
         android:layout_width="match_parent"
@@ -25,6 +25,12 @@
         ptr:ptrMode="pullDownFromTop"
         ptr:ptrOverScroll="false"
         ptr:ptrShowIndicator="false">
+    </com.baoyz.swipemenulistview.SwipeMenuListView>
 
-    </com.handmark.pulltorefresh.library.PullToRefreshListView>
+
+    <!--xmlns:ptr="http://schemas.android.com/apk/res-auto"
+    ptr:ptrAnimationStyle="flip"
+    ptr:ptrMode="pullDownFromTop"
+    ptr:ptrOverScroll="false"
+    ptr:ptrShowIndicator="false"-->
 </RelativeLayout>

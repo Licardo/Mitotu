@@ -22,9 +22,18 @@ public class PersonInfo implements Serializable {
     private String nickname;
     @JsonProperty("Status")
     private String status;
-
     @JsonProperty("Code")
     private String usercode;
+    @JsonProperty("IsLike")
+    private String islike;
+
+    public String getIslike() {
+        return islike;
+    }
+
+    public void setIslike(String islike) {
+        this.islike = islike;
+    }
 
     public String getUsercode() {
         return usercode;

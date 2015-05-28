@@ -177,6 +177,12 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
 //            ivDot.setVisibility(View.GONE);
 //        }
 //    }
+
+    /**
+     * 获取妙友动态
+     * @param isShow
+     * @param info
+     */
     private void getTopics(boolean isShow, final MFriendsInfo info) {
         new BaseHttpAsyncTask<Void, Void, TopicListResult>(getActivity(), isShow) {
             @Override
