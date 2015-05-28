@@ -54,4 +54,5 @@
     <color name="block_column_3">#ff009939</color>
     <color name="text_color">#323232</color>
     <color name="text_href">#4d99cb</color>
+    <color name="swipe_delete">#ff6138</color>
 </resources>

@@ -34,6 +34,8 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     private CircleImageView ci_userhead;
     private TextView tv_start,tv_sign,tv_like,tv_trends,tv_tip_trends;
     private RelativeLayout rl_follow,rl_chating,rl_bottom;
+    private TextView tv_follow;
+    private ImageView iv_follow;
     private PersonInfoResult result;
     private String token;
 
@@ -47,6 +49,8 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initView(){
+        tv_follow = (TextView) this.findViewById(R.id.tv_follow);
+        iv_follow = (ImageView) this.findViewById(R.id.iv_follow);
         tv_start = (TextView) this.findViewById(R.id.tv_start);
         tv_sign = (TextView) this.findViewById(R.id.tv_sign);
         tv_like = (TextView) this.findViewById(R.id.tv_like);
@@ -93,6 +97,11 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
      * @param personInfoResult
      */
     private void initPersonInfoData(PersonInfoResult personInfoResult){
+        if("true".equals(personInfoResult.getPersonInfo().getIslike())){    //是否关注此人
+            iv_follow.setVisibility(View.GONE);
+            tv_follow.setText("取消关注");
+            tv_follow.setTextColor(getResources().getColor(R.color.grey64));
+        }
         UrlImageViewHelper.setUrlDrawable(ci_userhead, personInfoResult.getPersonInfo().getHeadurl(), R.drawable.icon_default_head_photo);
         tv_top_emotion.setText(personInfoResult.getPersonInfo().getMaritalstatus());
         if(!StringUtil.isBlank(personInfoResult.getPersonInfo().getAddress())){
@@ -231,6 +240,8 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
+//    private void change
+
     /**
      * 添加/取消喜欢接口
      * @param token
@@ -243,6 +254,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
             @Override
             protected void onCompleteTask(BaseResult baseResult) {
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
+
                     showToastMsg("操作成功");
                 } else {
                     if (StringUtil.isBlank(baseResult.getMsg())) {

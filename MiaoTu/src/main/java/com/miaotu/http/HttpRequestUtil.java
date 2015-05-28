@@ -17,6 +17,7 @@ import com.miaotu.annotation.Ignore;
 import com.miaotu.form.MFriendsInfo;
 import com.miaotu.model.ModifyPersonInfo;
 import com.miaotu.result.CustomTourResult;
+import com.miaotu.result.MessageResult;
 import com.miaotu.result.MoneyResult;
 import com.miaotu.result.MovementListResult;
 import com.miaotu.result.PersonInfoResult;
@@ -35,6 +36,7 @@ import com.miaotu.result.TopicCommentsListResult;
 import com.miaotu.result.TopicListResult;
 import com.miaotu.result.TopicMessageListResult;
 import com.miaotu.result.TopicResult;
+import com.miaotu.util.LogUtil;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 
@@ -462,6 +464,7 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("province", info.getProvince()));
         params.add(new BasicNameValuePair("city", info.getCity()));
         params.add(new BasicNameValuePair("email", info.getEmail()));
+        params.add(new BasicNameValuePair("head_url", info.getHear_url()));
         params.add(new BasicNameValuePair("about_me", info.getAbout_me()));
         params.add(new BasicNameValuePair("high", info.getHigh()));
         params.add(new BasicNameValuePair("education", info.getEducation()));
@@ -561,6 +564,7 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("aid", aid));
         params.add(new BasicNameValuePair("content", content));
         params.add(new BasicNameValuePair("img", img));
+        LogUtil.e("上传的图片", "img: "+img);
         return HttpDecoder.postForObject(
                 getUrl("user/state"), BaseResult.class,
                 params);
@@ -608,12 +612,12 @@ public class HttpRequestUtil {
      * @param smid
      * @return
      */
-    public BaseResult readTopicMessage(String token, String smid) {
+    public MessageResult readTopicMessage(String token, String smid) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
         params.add(new BasicNameValuePair("smid", smid));
         return HttpDecoder.postForObject(
-                getUrl("user/state/msg"), BaseResult.class,
+                getUrl("user/state/msg"), MessageResult.class,
                 params);
     }
 
@@ -624,12 +628,12 @@ public class HttpRequestUtil {
      * @param smid
      * @return
      */
-    public BaseResult deleteTopicMessage(String token, String smid) {
+    public MessageResult deleteTopicMessage(String token, String smid) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
         params.add(new BasicNameValuePair("smid", smid));
         return HttpDecoder.postForObject(
-                getUrl("user/state/msg/delete"), BaseResult.class,
+                getUrl("user/state/msg/delete"), MessageResult.class,
                 params);
     }
 
