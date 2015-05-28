@@ -187,7 +187,6 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
         File fos = null;
         try {
             fos = new File(IMAGE_FILE_LOCATION);
-            fos.mkdir();
             fos.createNewFile();
         } catch (Exception e) {
             e.printStackTrace();
