@@ -99,7 +99,7 @@
                     android:layout_toRightOf="@id/view1"
                     android:background="#f1f1f1"
                     android:gravity="center_vertical"
-                    android:text="卡莲"
+                    android:hint="请输入您的昵称"
                     android:textColor="#646464"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -138,7 +138,7 @@
                     android:layout_toRightOf="@id/view2"
                     android:background="#f1f1f1"
                     android:gravity="center_vertical"
-                    android:text="女"
+                    android:text="请输入您的性别"
                     android:textColor="#646464"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -179,7 +179,7 @@
                     android:hint="请输入您的年龄"
                     android:text=""
                     android:textColor="#646464"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -215,7 +215,7 @@
                     android:layout_toRightOf="@id/view4"
                     android:background="#f1f1f1"
                     android:gravity="center_vertical"
-                    android:text="杭州"
+                    android:hint="请输入您的所在地"
                     android:textColor="#646464"
                     android:textSize="14sp" />
             </RelativeLayout>
@@ -261,7 +261,7 @@
                     android:gravity="center_vertical"
                     android:hint="请输入您的情感状态"
                     android:textColor="#646464"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -299,7 +299,7 @@
                     android:gravity="center_vertical"
                     android:hint="请输入您的职业"
                     android:textColor="#646464"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -337,7 +337,7 @@
                     android:gravity="center_vertical"
                     android:hint="请输入您想去的地方"
                     android:textColor="#646464"
-                    android:textSize="12sp" />
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <RelativeLayout
