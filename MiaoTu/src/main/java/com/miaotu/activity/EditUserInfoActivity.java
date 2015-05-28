@@ -183,9 +183,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
             protected void onCompleteTask(BaseResult baseResult) {
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
                     showToastMsg("修改成功");
-                    if (!StringUtil.isBlank(info.getHear_url())) {
-                        writePreference("headphoto", info.getHear_url());
-                    }
+
                     if (!StringUtil.isBlank(info.getWork())) {
                         writePreference("job", info.getWork());
                     }
@@ -278,7 +276,11 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                     UrlImageViewHelper.setUrlDrawable(iv_head_photo, photourl,
                             R.drawable.icon_default_head_photo);
                     ModifyPersonInfo info = new ModifyPersonInfo();
+                    info.setToken(readPreference("token"));
                     info.setHear_url(photourl);
+                    if (!StringUtil.isBlank(info.getHear_url())) {
+                        writePreference("headphoto", info.getHear_url());
+                    }
                     modifyUserInfo(info);
                 } else {
                     if (StringUtil.isBlank(result.getMsg())) {
