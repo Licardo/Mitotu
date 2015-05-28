@@ -52,7 +52,7 @@
             android:hint="写下你想说的吧"
             android:maxLength="300"
             android:padding="10dp"
-            android:textColor="#f1f1f1"
+            android:textColor="#646464"
             android:textColorHint="#b4b4b4"
             android:textSize="12dp" />
 
