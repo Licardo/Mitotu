@@ -120,7 +120,7 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
 
     private void init() {
         tvTitle.setVisibility(View.VISIBLE);
-        tvTitle.setText("社区");
+        tvTitle.setText("身旁");
         btnRight.setText("写话题");
         btnRight.setVisibility(View.VISIBLE);
         ViewGroup.LayoutParams params = btnRight.getLayoutParams();
@@ -214,7 +214,7 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
             protected TopicListResult run(Void... params) {
                 curPageCount=PAGECOUNT;
 //                info.setNum(curPageCount+"");
-				return HttpRequestUtil.getInstance().getTopicList(info); //第二个参数表示活动id，主要用于线路详情中查看线路话题
+				return HttpRequestUtil.getInstance().getTopicList(info);
             }
 
             @Override
