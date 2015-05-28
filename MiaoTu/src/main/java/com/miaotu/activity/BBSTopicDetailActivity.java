@@ -566,6 +566,13 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
         }
     }
 
+    /**
+     * 添加/取消喜欢接口
+     * @param token
+     * @param touser
+     * @param islike
+     * @param iv
+     */
     private void like(final String token, final String touser, final boolean islike, final ImageView iv) {
 
         new BaseHttpAsyncTask<Void, Void, BaseResult>(this, false) {

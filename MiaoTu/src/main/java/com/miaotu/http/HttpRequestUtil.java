@@ -613,9 +613,38 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("token", token));
         params.add(new BasicNameValuePair("smid", smid));
         return HttpDecoder.postForObject(
-                getUrl("topic/read_message"), BaseResult.class,
+                getUrl("user/state/msg"), BaseResult.class,
                 params);
+    }
 
+    /**
+     * 删除消息
+     *
+     * @param token
+     * @param smid
+     * @return
+     */
+    public BaseResult deleteTopicMessage(String token, String smid) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token", token));
+        params.add(new BasicNameValuePair("smid", smid));
+        return HttpDecoder.postForObject(
+                getUrl("user/state/msg/delete"), BaseResult.class,
+                params);
+    }
+
+    /**
+     * 清空所有消息
+     *
+     * @param token
+     * @return
+     */
+    public BaseResult emptyTopicMessage(String token) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token", token));
+        return HttpDecoder.postForObject(
+                getUrl("user/state/msg/delete/all"), BaseResult.class,
+                params);
     }
 
     /**

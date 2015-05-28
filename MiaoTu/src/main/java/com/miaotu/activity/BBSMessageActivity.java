@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
+import com.miaotu.R;
 import com.miaotu.adapter.TopicCommentsAdapter;
 import com.miaotu.adapter.TopicMessageAdapter;
 import com.miaotu.async.BaseHttpAsyncTask;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class BBSMessageActivity extends BaseActivity implements View.OnClickListener{
     private TextView tvTitle;
-    private TextView tvLeft;
+    private TextView tvLeft,tvRight;
     private PullToRefreshListView lvTopicMessage;
     private List<TopicMessage> mList;
     private TopicMessageAdapter adapter;
@@ -70,10 +71,13 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
     private void findView() {
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvLeft = (TextView) findViewById(R.id.tv_left);
+        tvRight = (TextView) findViewById(R.id.tv_right);
         lvTopicMessage = (PullToRefreshListView) findViewById(R.id.lv_topic_message);
     }
 
     private void bindView() {
+        tvRight.setOnClickListener(this);
+        tvLeft.setOnClickListener(this);
         lvTopicMessage.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
 
             @Override
@@ -123,6 +127,7 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
     private void init() {
         tvTitle.setVisibility(View.VISIBLE);
         tvTitle.setText("话题回复");
+        tvRight.setText("清空");
         tvLeft.setVisibility(View.VISIBLE);
         tvLeft.setBackgroundResource(R.drawable.icon_back);
         mList=new ArrayList<>();
@@ -131,6 +136,11 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
         getMessages(false);
         
     }
+
+    /**
+     * 获取消息接口
+     * @param isShow
+     */
     private void getMessages(boolean isShow) {
         new BaseHttpAsyncTask<Void, Void, TopicMessageListResult>(BBSMessageActivity.this, isShow) {
             @Override
@@ -186,6 +196,10 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
             }
         }.execute();
     }
+
+    /**
+     * 加载更多消息
+     */
     private void loadMoreComments() {
         new BaseHttpAsyncTask<Void, Void, TopicMessageListResult>(BBSMessageActivity.this, false) {
             @Override
@@ -233,7 +247,7 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
         }.execute();
     }
     //标记消息为已读
-        private void read(boolean isShow,final String meesageId,final int position) {
+    private void read(boolean isShow,final String meesageId,final int position) {
         new BaseHttpAsyncTask<Void, Void, BaseResult>(BBSMessageActivity.this, isShow) {
             @Override
             protected void onCompleteTask(BaseResult result) {
@@ -270,6 +284,32 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
             case R.id.tv_left:
                 finish();
                 break;
+            case R.id.tv_right: //清空
+                emptyMessages(readPreference("token"));
+                break;
         }
+    }
+
+    private void emptyMessages(final String token){
+        new BaseHttpAsyncTask<Void, Void, BaseResult>(this, false){
+
+            @Override
+            protected void onCompleteTask(BaseResult baseResult) {
+                if(baseResult.getCode() == BaseResult.SUCCESS){
+                    showToastMsg("操作成功");
+                }else {
+                    if(StringUtil.isBlank(baseResult.getMsg())){
+                        showToastMsg("操作失败");
+                    }else{
+                        showToastMsg(baseResult.getMsg());
+                    }
+                }
+            }
+
+            @Override
+            protected BaseResult run(Void... params) {
+                return HttpRequestUtil.getInstance().emptyTopicMessage(token);
+            }
+        }.execute();
     }
 }

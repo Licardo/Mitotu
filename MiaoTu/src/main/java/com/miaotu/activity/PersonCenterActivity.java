@@ -1,5 +1,6 @@
 package com.miaotu.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,8 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     private CircleImageView ci_userhead;
     private TextView tv_start,tv_sign,tv_like,tv_trends,tv_tip_trends;
     private RelativeLayout rl_follow,rl_chating,rl_bottom;
+    private PersonInfoResult result;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +83,8 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         tv_right.setVisibility(View.GONE);
         tv_title.setText("个人主页");
         tv_left.setOnClickListener(this);
+        rl_chating.setOnClickListener(this);
+        rl_follow.setOnClickListener(this);
     }
 
     /**
@@ -148,7 +153,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initData(){
-        String token = readPreference("token");
+        token = readPreference("token");
         String id = readPreference("uid");
         String uid = getIntent().getStringExtra("uid");
         if(id.equals(uid)){
@@ -169,6 +174,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
             @Override
             protected void onCompleteTask(PersonInfoResult personInfoResult) {
                 if(personInfoResult.getCode() == BaseResult.SUCCESS){
+                    result = personInfoResult;
                     initPersonInfoData(personInfoResult);
                 }else{
                     if(StringUtil.isEmpty(personInfoResult.getMsg())){
@@ -192,6 +198,18 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
             case R.id.tv_left:
                 finish();
                 break;
+            case R.id.rl_chating:
+                Intent chatIntent = new Intent(PersonCenterActivity.this, ChatsActivity.class);
+                chatIntent.putExtra("chatType", ChatsActivity.CHATTYPE_SINGLE);
+                chatIntent.putExtra("id", result.getPersonInfo().getId());
+                chatIntent.putExtra("uid", result.getPersonInfo().getUid());
+                chatIntent.putExtra("name", result.getPersonInfo().getNickname());
+                chatIntent.putExtra("headphoto", result.getPersonInfo().getHeadurl());
+                startActivity(chatIntent);
+                break;
+            case R.id.rl_follow:
+                like(token, result.getPersonInfo().getUid());
+                break;
             default:
                 break;
         }
@@ -210,5 +228,34 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
             tv_trends.setText("我发布的动态");
             tv_tip_trends.setText("发布的动态");
         }
+    }
+
+    /**
+     * 添加/取消喜欢接口
+     * @param token
+     * @param touser
+     */
+    private void like(final String token, final String touser) {
+
+        new BaseHttpAsyncTask<Void, Void, BaseResult>(this, false) {
+
+            @Override
+            protected void onCompleteTask(BaseResult baseResult) {
+                if (baseResult.getCode() == BaseResult.SUCCESS) {
+                    showToastMsg("操作成功");
+                } else {
+                    if (StringUtil.isBlank(baseResult.getMsg())) {
+                        showToastMsg("操作失败");
+                    } else {
+                        showToastMsg(baseResult.getMsg());
+                    }
+                }
+            }
+
+            @Override
+            protected BaseResult run(Void... params) {
+                return HttpRequestUtil.getInstance().like(token, touser);
+            }
+        }.execute();
     }
 }

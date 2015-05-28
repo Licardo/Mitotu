@@ -19,6 +19,7 @@
         android:layout_below="@+id/layout_top"
         android:descendantFocusability="blocksDescendants"
         android:listSelector="@android:color/transparent"
+        android:background="@android:color/white"
         android:scrollbars="none"
         ptr:ptrAnimationStyle="flip"
         ptr:ptrMode="pullDownFromTop"
