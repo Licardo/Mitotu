@@ -142,8 +142,6 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
 
     @Override
     public void onComplete(Platform platform, int i, HashMap<String, Object> res) {
-        LogUtil.d("登陆成功！");
-
         if(platform.getName().equals(QZone.NAME)){
             try{
                 String info = "qq登陆信息：";
