@@ -44,7 +44,7 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
     private static int PAGECOUNT=10;
     private int curPageCount = 0;
     private boolean isLoadMore = false;
-    private ImageView ivDot;
+    private ImageView ivDot,ivPublish;
     private MFriendsInfo info;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,6 +58,7 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
     }
 
     private void findView() {
+        ivPublish = (ImageView) root.findViewById(R.id.iv_publish);
         tvTitle = (TextView) root.findViewById(R.id.tv_title);
         btnRight = (Button) root.findViewById(R.id.btn_right);
         btnLeft = (Button) root.findViewById(R.id.btn_left);
@@ -114,14 +115,16 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
             }
         });
 //
-        btnRight.setOnClickListener(this);
+//        btnRight.setOnClickListener(this);
         btnLeft.setOnClickListener(this);
+        ivPublish.setOnClickListener(this);
     }
 
     private void init() {
         tvTitle.setVisibility(View.VISIBLE);
         tvTitle.setText("身旁");
-        btnRight.setText("写话题");
+//        btnRight.setText("写话题");
+        btnRight.setVisibility(View.GONE);
         btnRight.setVisibility(View.VISIBLE);
         ViewGroup.LayoutParams params = btnRight.getLayoutParams();
         params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -271,7 +274,7 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.btn_right:
+            case R.id.iv_publish:
                 //发表新话题
                 Intent intent = new Intent(getActivity(),BBSPublishTopicActivity.class);
                 startActivityForResult(intent,1);

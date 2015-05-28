@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f0f0f0"
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/rl_top"
         android:layout_width="fill_parent"
         android:layout_height="50dp"
         android:layout_alignParentTop="true"
@@ -64,6 +65,7 @@
         android:id="@+id/lv_topics"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/rl_top"
         android:descendantFocusability="blocksDescendants"
         android:divider="@null"
         android:listSelector="@android:color/transparent"
@@ -75,17 +77,14 @@
         <!--ptr:ptrMode="pullDownFromTop"-->
 
     </com.handmark.pulltorefresh.library.PullToRefreshListView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="right|bottom"
-        android:orientation="vertical">
-        <ImageView
-            android:id="@+id/iv_publish"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="-20dp"
-            android:background="@drawable/icon_publish"
-            />
-    </LinearLayout>
-</LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_publish"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/icon_publish"
+        />
+</RelativeLayout>

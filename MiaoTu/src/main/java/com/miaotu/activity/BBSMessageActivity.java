@@ -188,15 +188,15 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                 if (result.getCode() == BaseResult.SUCCESS) {
                     mList.clear();
                     mList.addAll(result.getMessages());
-                    TopicMessage mes = new TopicMessage();
-                    mes.setContent("你好啊");
-                    mes.setCreated(new Date().toString());
-                    mes.setNickname("四小美");
-                    mes.setRemark("hi");
-                    mes.setStatus("0");
-                    mes.setSid("1");
-                    mes.setSmid("1");
-                    mList.add(mes);
+//                    TopicMessage mes = new TopicMessage();
+//                    mes.setContent("你好啊");
+//                    mes.setCreated(new Date().toString());
+//                    mes.setNickname("四小美");
+//                    mes.setRemark("hi");
+//                    mes.setStatus("0");
+//                    mes.setSid("1");
+//                    mes.setSmid("1");
+//                    mList.add(mes);
                     adapter.notifyDataSetChanged();
 //                    showToastMsg("lastvisibale:"+lvTopicMessage.getRefreshableView().getLastVisiblePosition()+"  count: "+lvTopicMessage.getRefreshableView().getCount()+" first:"+lvTopicMessage.getRefreshableView().getFirstVisiblePosition());
                     /*if(lvTopicMessage.getRefreshableView().getFooterViewsCount()==1&&mList.size()==PAGECOUNT){
