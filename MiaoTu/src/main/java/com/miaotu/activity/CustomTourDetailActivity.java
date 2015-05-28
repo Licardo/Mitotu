@@ -1,5 +1,6 @@
 package com.miaotu.activity;
 
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -16,6 +17,7 @@ import com.miaotu.R;
 public class CustomTourDetailActivity extends BaseActivity {
 private WebView webView;
     private TextView tvTitle;
+    Handler mHandler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +37,7 @@ private WebView webView;
         });
 
 
-                webView.loadUrl("http://m.miaotu.com/App/detail/?aid=" + getIntent().getStringExtra("id"));
+                webView.loadUrl("http://m.miaotu.com/App/detail/?aid=" + getIntent().getStringExtra("id")+"&token="+readPreference("token"));
     }
     /**
      * js调用java的接口
@@ -49,12 +51,34 @@ private WebView webView;
             showToastMsg("点击了"+action);
         }
         @android.webkit.JavascriptInterface
-        public void setTitle(String title) {
-            tvTitle.setText(title);
+        public void setTitle(final String title) {
+            mHandler.post(new Runnable() {
+
+                public void run() {
+
+                    // Code in here
+                    tvTitle.setText(title);
+
+                }
+
+            });
         }
         @android.webkit.JavascriptInterface
-        public void showTip(String text) {
-            showToastMsg(text);
+        public void showTip(final String text) {
+            mHandler.post(new Runnable() {
+
+                public void run() {
+
+                    // Code in here
+                    showToastMsg(text);
+
+                }
+
+            });
+        }
+        @android.webkit.JavascriptInterface
+        public String getToken() {
+            return readPreference("token");
         }
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {

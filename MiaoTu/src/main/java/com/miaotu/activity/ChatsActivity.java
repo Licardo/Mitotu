@@ -274,7 +274,7 @@ public class ChatsActivity extends BaseActivity implements OnClickListener{
 		tvTitle = (TextView) findViewById(R.id.tv_title);
 		tvTitle.setVisibility(View.VISIBLE);
 		tvTitle.setText(name);
-		btnleft = (Button) findViewById(R.id.btn_left);
+		btnleft = (TextView) findViewById(R.id.tv_left);
 		btnleft.setHeight(Util.dip2px(this, 19.5f));
 		btnleft.setWidth(Util.dip2px(this, 13f));
 		btnleft.setBackgroundResource(R.drawable.icon_back);
@@ -605,10 +605,10 @@ private void sendMsg(){
 	//设置消息body、
 	TextMessageBody txtBody = new TextMessageBody(mEditTextContent.getText().toString());
 	message.addBody(txtBody);
-	message.setAttribute("uid", readPreference("id"));
-	message.setAttribute("nick_name", readPreference("nick_name"));
+	message.setAttribute("uid", readPreference("uid"));
+	message.setAttribute("nick_name", readPreference("name"));
 	message.setAttribute("headphoto", readPreference("url")
-			+ "&size=100x100");
+			+ "100x100");
 	//设置接收人
 	message.setReceipt(toChatUsername);
 	//把消息加入到此会话对象中

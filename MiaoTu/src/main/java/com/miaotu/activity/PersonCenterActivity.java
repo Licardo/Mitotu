@@ -15,6 +15,7 @@ import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.result.PersonInfoResult;
 import com.miaotu.result.BaseResult;
+import com.miaotu.util.MD5;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
@@ -201,7 +202,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
             case R.id.rl_chating:
                 Intent chatIntent = new Intent(PersonCenterActivity.this, ChatsActivity.class);
                 chatIntent.putExtra("chatType", ChatsActivity.CHATTYPE_SINGLE);
-                chatIntent.putExtra("id", result.getPersonInfo().getId());
+                chatIntent.putExtra("id", MD5.md5(result.getPersonInfo().getUid()));
                 chatIntent.putExtra("uid", result.getPersonInfo().getUid());
                 chatIntent.putExtra("name", result.getPersonInfo().getNickname());
                 chatIntent.putExtra("headphoto", result.getPersonInfo().getHeadurl());
