@@ -17,6 +17,7 @@ import com.miaotu.annotation.Ignore;
 import com.miaotu.form.MFriendsInfo;
 import com.miaotu.model.ModifyPersonInfo;
 import com.miaotu.result.CustomTourResult;
+import com.miaotu.result.LuckyResult;
 import com.miaotu.result.MessageResult;
 import com.miaotu.result.MoneyResult;
 import com.miaotu.result.MovementListResult;
@@ -514,10 +515,12 @@ public class HttpRequestUtil {
      * @param token
      * @return
      */
-    public TopicCommentsListResult getTopicComments(String sid, String token) {
+    public TopicCommentsListResult getTopicComments(String sid, String token, String num) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
         params.add(new BasicNameValuePair("sid", sid));
+        params.add(new BasicNameValuePair("page", "1"));
+        params.add(new BasicNameValuePair("num", num));
         return HttpDecoder.getForObject(
                 getUrl("user/state/reply"), TopicCommentsListResult.class,
                 params);
@@ -753,12 +756,12 @@ public class HttpRequestUtil {
      * @param code
      * @return
      */
-    public BaseResult exchangeCouponCode (String token,String code){
+    public LuckyResult exchangeCouponCode (String token,String code){
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token",token));
         params.add(new BasicNameValuePair("code",code));
         return HttpDecoder.getForObject(
-                getUrl("user/lucky_exchange"), BaseResult.class,
+                getUrl("user/lucky"), LuckyResult.class,
                 params);
     }
 }

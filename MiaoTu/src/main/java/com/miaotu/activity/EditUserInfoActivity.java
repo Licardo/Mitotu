@@ -153,7 +153,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                 userinfo.setWork(et_job.getText().toString().trim());
                 userinfo.setWant_go(et_wantgo.getText().toString().trim());
                 userinfo.setHear_url(photourl);
-                LogUtil.e("修改头像", photourl);
+                LogUtil.e("修改头像", "路径// "+photourl);
                 String contenttag = "";
                 for(String tag:alltags){
                     contenttag += tag + ",";
@@ -182,7 +182,21 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
             protected void onCompleteTask(BaseResult baseResult) {
                 if(baseResult.getCode() == BaseResult.SUCCESS){
                     showToastMsg("修改成功");
-                    writePreference("headphoto", info.getHear_url());
+                    if(!StringUtil.isBlank(info.getHear_url())){
+                        writePreference("headphoto", info.getHear_url());
+                    }
+                    if(!StringUtil.isBlank(info.getWork())){
+                        writePreference("job", info.getWork());
+                    }
+                    if(!StringUtil.isBlank(info.getWork())){
+                        writePreference("age", info.getAge());
+                    }
+                    if(!StringUtil.isBlank(info.getWork())){
+                        writePreference("name", info.getNickname());
+                    }
+                    if(!StringUtil.isBlank(info.getWork())){
+                        writePreference("gender", info.getGender());
+                    }
 //                    UrlImageViewHelper.setUrlDrawable(iv_head_photo, info.getHear_url(),
 //                            R.drawable.icon_default_head_photo);
                 }else{

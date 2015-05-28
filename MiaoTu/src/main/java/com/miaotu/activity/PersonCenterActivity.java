@@ -98,9 +98,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
      */
     private void initPersonInfoData(PersonInfoResult personInfoResult){
         if("true".equals(personInfoResult.getPersonInfo().getIslike())){    //是否关注此人
-            iv_follow.setVisibility(View.GONE);
-            tv_follow.setText("取消关注");
-            tv_follow.setTextColor(getResources().getColor(R.color.grey64));
+            changeBtnFollow(true);
         }
         UrlImageViewHelper.setUrlDrawable(ci_userhead, personInfoResult.getPersonInfo().getHeadurl(), R.drawable.icon_default_head_photo);
         tv_top_emotion.setText(personInfoResult.getPersonInfo().getMaritalstatus());
@@ -240,7 +238,21 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
-//    private void change
+    /**
+     * 切换关注/取消关注按钮
+     * @param isfollow
+     */
+    private void changeBtnFollow(boolean isfollow){
+        if(isfollow){
+            iv_follow.setVisibility(View.GONE);
+            tv_follow.setText("取消关注");
+            tv_follow.setTextColor(getResources().getColor(R.color.grey64));
+        }else{
+            iv_follow.setVisibility(View.VISIBLE);
+            tv_follow.setText("关注");
+            tv_follow.setTextColor(getResources().getColor(R.color.text_orange));
+        }
+    }
 
     /**
      * 添加/取消喜欢接口
@@ -254,7 +266,13 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
             @Override
             protected void onCompleteTask(BaseResult baseResult) {
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
-
+                    if("true".equals(result.getPersonInfo().getIslike())){
+                        changeBtnFollow(false);
+                        result.getPersonInfo().setIslike("false");
+                    }else{
+                        changeBtnFollow(true);
+                        result.getPersonInfo().setIslike("true");
+                    }
                     showToastMsg("操作成功");
                 } else {
                     if (StringUtil.isBlank(baseResult.getMsg())) {

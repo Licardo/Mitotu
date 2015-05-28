@@ -59,7 +59,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
     private PullToRefreshListView lvTopics;
     private List<TopicComment> commentList;
     private TopicCommentsAdapter adapter;
-    private static int PAGECOUNT = 8;
+    private static int PAGECOUNT = 10;
     private int curPageCount = 0;
     private boolean isLoadMore = false;
     private View layoutMore;
@@ -329,7 +329,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             @Override
             protected TopicCommentsListResult run(Void... params) {
                 curPageCount = PAGECOUNT;
-                return HttpRequestUtil.getInstance().getTopicComments(topic.getSid(), token);
+                return HttpRequestUtil.getInstance().getTopicComments(topic.getSid(), token, curPageCount+"");
             }
 
 //            @Override
@@ -375,7 +375,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             protected TopicCommentsListResult run(Void... params) {
                 isLoadMore = true;
                 curPageCount += PAGECOUNT;
-                return HttpRequestUtil.getInstance().getTopicComments(topic.getSid(), curPageCount + "");
+                return HttpRequestUtil.getInstance().getTopicComments(topic.getSid(), token, curPageCount + "");
             }
 
 //            @Override
