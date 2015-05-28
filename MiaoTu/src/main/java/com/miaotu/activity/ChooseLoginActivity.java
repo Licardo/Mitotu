@@ -16,6 +16,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.easemob.EMCallBack;
+import com.easemob.chat.EMChatManager;
+import com.easemob.chat.EMGroupManager;
+import com.easemob.exceptions.EaseMobException;
 import com.miaotu.R;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
@@ -23,6 +27,7 @@ import com.miaotu.model.RegisterInfo;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.LoginResult;
 import com.miaotu.util.LogUtil;
+import com.miaotu.util.MD5;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 
@@ -255,6 +260,30 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
                     writePreference("gender",result.getLogin().getGender());
                     writePreference("headphoto",result.getLogin().getHeadPhoto());
                     writePreference("job",result.getLogin().getJob());
+                    writePreference("login_state","in");
+                    EMChatManager.getInstance().login(MD5.md5(readPreference("uid")), readPreference("token"),
+                            new EMCallBack() {//回调
+                                @Override
+                                public void onSuccess() {
+//                                    runOnUiThread(new Runnable() {
+//                                        public void run() {
+//
+//                                        }
+//                                    });
+                                    new LoadIMInfoThread().start();
+                                }
+
+                                @Override
+                                public void onProgress(int progress, String status) {
+
+                                }
+
+                                @Override
+                                public void onError(int code, String message) {
+                                    Log.d("main", "登录聊天服务器失败！");
+                                }
+
+                            });
                     Intent intent = new Intent(ChooseLoginActivity.this,MainActivity.class);
                     startActivity(intent);
                 } else {
@@ -269,6 +298,31 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
             }
 
         }.execute();
+    }
+    class LoadIMInfoThread extends Thread{
+        @Override
+        public void run() {
+            super.run();
+            LogUtil.d("main", "登录聊天服务器成功！");
+            long start = System.currentTimeMillis();
+            EMChatManager.getInstance().loadAllConversations();
+            try {
+                EMGroupManager.getInstance().getGroupsFromServer();
+            } catch (EaseMobException e) {
+                e.printStackTrace();
+            }
+            EMGroupManager.getInstance().loadAllGroups();
+
+//            long costTime = System.currentTimeMillis() - start;
+//            //等待sleeptime时长
+//            if (sleepTime - costTime > 0) {
+//                try {
+//                    Thread.sleep(sleepTime - costTime);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+        }
     }
 
     /**

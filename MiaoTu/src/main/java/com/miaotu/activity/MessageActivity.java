@@ -220,19 +220,19 @@ public class MessageActivity extends BaseActivity implements
     public void onItemClick(AdapterView<?> parent, View view, int position,
                             long id) {
         // TODO Auto-generated method stub
-        if(position<=0){
+        if(position<0){
             return;
         }
         Intent intent = new Intent();
-        intent.putExtra("id", mList.get(position-1).getUserName());
-        if (mList.get(position-1).getIsGroup()) {
+        intent.putExtra("id", mList.get(position).getUserName());
+        if (mList.get(position).getIsGroup()) {
             intent.putExtra("chatType", 2);
-            intent.putExtra("groupImId", mList.get(position-1).getUserName());
+            intent.putExtra("groupImId", mList.get(position).getUserName());
         } else {
             intent.putExtra("chatType", 1);
-            intent.putExtra("name", conversationList.get(position-1).getContactInfo().getNickName());
-            intent.putExtra("uid", conversationList.get(position-1).getContactInfo().getUid());
-            intent.putExtra("headphoto", conversationList.get(position-1).getContactInfo().getHeadPhoto());
+            intent.putExtra("name", conversationList.get(position).getContactInfo().getNickName());
+            intent.putExtra("uid", conversationList.get(position).getContactInfo().getUid());
+            intent.putExtra("headphoto", conversationList.get(position).getContactInfo().getHeadPhoto());
         }
 
         intent.setClass(MessageActivity.this, ChatsActivity.class);
