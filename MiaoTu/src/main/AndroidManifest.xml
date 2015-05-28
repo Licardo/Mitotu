@@ -105,6 +105,12 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
         <activity
+            android:name=".activity.MessageActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/title_activity_register3"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" />
+        <activity
             android:name=".activity.EditUserInfoActivity"
             android:label="@string/title_activity_edit_user_info" />
 
@@ -201,7 +207,8 @@
         <!-- Required. AppKey copied from Portal -->
         <meta-data
             android:name="EASEMOB_APPKEY"
-            android:value="miaotu#miaotu" />
+            android:value="miaotu#merryutest" />
+            <!--android:value="miaotu#miaotu" />-->
         <!-- Required SDK核心功能 -->
         <service android:name="com.easemob.chat.EMChatService" />
 

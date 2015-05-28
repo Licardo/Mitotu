@@ -1,5 +1,6 @@
 package com.miaotu.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -14,7 +15,7 @@ import com.miaotu.R;
 /**
  * Created by ying on 2015/5/27.
  */
-public class MessageFragment extends BaseFragment {
+public class MessageFragment extends BaseFragment implements View.OnClickListener{
     private View root;
     private LinearLayout layoutSys,layoutLikeTour,layoutJoin,layoutChat,layoutLike;
     private ImageView ivSysCount,ivLikeTourCount,ivJoinCount,ivChatCount,ivLikeCount;
@@ -54,7 +55,17 @@ public class MessageFragment extends BaseFragment {
 
     }
     private void bindView(){
-//        as?
+        layoutChat.setOnClickListener(this);
     }
     private void init(){}
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.layout_chat:
+                Intent intent = new Intent(getActivity(),MessageActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
 }
