@@ -322,6 +322,11 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
         }
     }
 
+    /**
+     * 显示身旁/最热的pop框
+     * @param context
+     * @param parent
+     */
     private void showPopWindow(Context context, View parent)
     {
         LayoutInflater inflater = (LayoutInflater)
