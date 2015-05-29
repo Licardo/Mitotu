@@ -607,7 +607,7 @@ private void sendMsg(){
 	message.addBody(txtBody);
 	message.setAttribute("uid", readPreference("uid"));
 	message.setAttribute("nick_name", readPreference("name"));
-	message.setAttribute("headphoto", readPreference("url")
+	message.setAttribute("headphoto", readPreference("headphoto")
 			+ "100x100");
 	//设置接收人
 	message.setReceipt(toChatUsername);
