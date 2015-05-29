@@ -30,7 +30,16 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="7435c47cc25c1897d779d4dc74e69b22" />
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
 
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
         <activity
             android:name="com.mob.tools.MobUIShell"
             android:configChanges="keyboardHidden|orientation|screenSize"
