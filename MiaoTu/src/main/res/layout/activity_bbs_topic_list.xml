@@ -5,58 +5,87 @@
     android:background="#f0f0f0"
     android:orientation="vertical">
 
+
     <RelativeLayout
         android:id="@+id/rl_top"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
         android:layout_alignParentTop="true"
-        android:background="@color/white">
-
-        <Button
-            android:id="@+id/btn_left"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/icon_topic_message"
-            android:textColor="#505050" />
-
-        <ImageView
-            android:id="@+id/iv_msg_flg"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="22dp"
-            android:layout_marginTop="6dp"
-            android:background="@drawable/icon_msg_dot"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/btn_right"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:background="@android:color/transparent"
-            android:gravity="right|center_vertical"
-            android:textColor="#505050" />
-
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textColor="#505050"
-            android:textSize="17sp" />
+        android:background="@android:color/white">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="1px"
+            android:layout_height="2dp"
             android:layout_alignParentBottom="true"
-            android:background="#b4b4b4" />
+            android:background="#f6dfc5" />
+
+        <LinearLayout
+            android:id="@+id/layout_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp">
+
+            <Button
+                android:id="@+id/btn_left"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/icon_topic_message"
+                android:textColor="#505050" />
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/rg_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="54dp"
+            android:layout_marginRight="54dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/tab1"
+                android:layout_width="72dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_firstpage_tab"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:text="身旁"
+                android:drawableRight="@drawable/icon_top_pull"
+                android:textColor="@color/selector_firstpage_tab_color"
+                android:textSize="17sp" />
+
+            <RadioButton
+                android:id="@+id/tab2"
+                android:layout_width="72dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/selector_firstpage_tab"
+                android:button="@null"
+                android:checked="false"
+                android:gravity="center"
+                android:text="好友"
+                android:textColor="@color/selector_firstpage_tab_color"
+                android:textSize="17sp" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/tv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:drawableRight="@drawable/arrow_down"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:text="杭州"
+            android:visibility="gone"
+            android:textSize="14sp" />
 
     </RelativeLayout>
 
@@ -82,9 +111,8 @@
         android:id="@+id/iv_publish"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:layout_margin="10dp"
-        android:background="@drawable/icon_publish"
-        />
+        android:background="@drawable/icon_publish" />
 </RelativeLayout>

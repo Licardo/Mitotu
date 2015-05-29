@@ -1,16 +1,22 @@
 package com.miaotu.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.format.DateUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
@@ -35,8 +41,7 @@ import java.util.List;
  */
 public class BBSTopicListFragment extends BaseFragment implements View.OnClickListener{
     private View root;
-    private TextView tvTitle;
-    private Button btnRight,btnLeft;
+    private Button btnLeft;
     private PullToRefreshListView lvTopics;
     private View layoutMore;
     private List<Topic> topicList;
@@ -44,8 +49,10 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
     private static int PAGECOUNT=10;
     private int curPageCount = 0;
     private boolean isLoadMore = false;
-    private ImageView ivDot,ivPublish;
+    private ImageView ivPublish;
     private MFriendsInfo info;
+    private RadioGroup rgTitle;
+    private RadioButton tab1,tab2;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.activity_bbs_topic_list,
@@ -59,11 +66,12 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
 
     private void findView() {
         ivPublish = (ImageView) root.findViewById(R.id.iv_publish);
-        tvTitle = (TextView) root.findViewById(R.id.tv_title);
-        btnRight = (Button) root.findViewById(R.id.btn_right);
         btnLeft = (Button) root.findViewById(R.id.btn_left);
         lvTopics = (PullToRefreshListView) root.findViewById(R.id.lv_topics);
-        ivDot = (ImageView) root.findViewById(R.id.iv_msg_flg);
+        rgTitle = (RadioGroup) root.findViewById(R.id.rg_title);
+        tab1 = (RadioButton) root.findViewById(R.id.tab1);
+        tab2 = (RadioButton) root.findViewById(R.id.tab2);
+//        ivDot = (ImageView) root.findViewById(R.id.iv_msg_flg);
     }
 
     private void bindView() {
@@ -118,17 +126,11 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
 //        btnRight.setOnClickListener(this);
         btnLeft.setOnClickListener(this);
         ivPublish.setOnClickListener(this);
+        tab1.setOnClickListener(this);
+        tab2.setOnClickListener(this);
     }
 
     private void init() {
-        tvTitle.setVisibility(View.VISIBLE);
-        tvTitle.setText("身旁");
-//        btnRight.setText("写话题");
-        btnRight.setVisibility(View.GONE);
-        btnRight.setVisibility(View.VISIBLE);
-        ViewGroup.LayoutParams params = btnRight.getLayoutParams();
-        params.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-        btnRight.setLayoutParams(params);
         btnLeft.setBackgroundResource(R.drawable.icon_topic_message);
         ViewGroup.LayoutParams params1 = btnLeft.getLayoutParams();
         params1.width =  Util.dip2px(getActivity(),24);
@@ -139,6 +141,20 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
         String token = readPreference("token");
         adapter = new TopiclistAdapter(getActivity(),topicList, token);
         lvTopics.setAdapter(adapter);
+
+        View emptyview = LayoutInflater.from(BBSTopicListFragment.this.getActivity()).
+                inflate(R.layout.activity_empty, null);
+        Button btnSearch = (Button) emptyview.findViewById(R.id.btn_search);
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tab1.setChecked(true);
+                tab1.setText("身旁");
+                info.setType("nearby");
+                getTopics(true, info);
+            }
+        });
+        lvTopics.setEmptyView(emptyview);
 
 //        getMessageCount();
         info = new MFriendsInfo();
@@ -153,12 +169,10 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
         info.setPage("");
         info.setType("nearby");
         getTopics(true, info);
-        
     }
     //刷新左上角提示
     public void refreshMessage(){
         try{
-            ivDot.setVisibility(View.VISIBLE);
 
         }catch (Exception e){
             e.printStackTrace();
@@ -196,6 +210,8 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
                 if (result.getCode() == BaseResult.SUCCESS) {
                     topicList.clear();
                     if(result.getTopics() == null){
+                        adapter.notifyDataSetChanged();
+                        lvTopics.getRefreshableView().removeFooterView(layoutMore);
                         return;
                     }
                     topicList.addAll(result.getTopics());
@@ -283,9 +299,17 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
                 //社区提醒
                 MessageCountDatabaseHelper helper = new MessageCountDatabaseHelper(getActivity());
                 long l = helper.resetMessageNo("topic");
-                ivDot.setVisibility(View.GONE);
                 Intent intent1 = new Intent(getActivity(),BBSMessageActivity.class);
                 startActivity(intent1);
+                break;
+            case R.id.tab1:
+                showPopWindow(this.getActivity(), tab1);
+                break;
+            case R.id.tab2:
+                info.setType("like");
+                getTopics(true, info);
+                break;
+            default:
                 break;
         }
     }
@@ -297,4 +321,41 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
             refresh();
         }
     }
+
+    private void showPopWindow(Context context, View parent)
+    {
+        LayoutInflater inflater = (LayoutInflater)
+                context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        final View vPopWindow=inflater.inflate(R.layout.pop_friends, null, false);
+        final PopupWindow popWindow = new PopupWindow(vPopWindow,
+                LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT,true);
+        TextView tvNearby = (TextView)vPopWindow.findViewById(R.id.tv_beside);
+        TextView tvHot = (TextView)vPopWindow.findViewById(R.id.tv_hot);
+        tvNearby.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                tab1.setText("身旁");
+                info.setType("nearby");
+                getTopics(true, info);
+                popWindow.dismiss();
+            }
+        });
+
+        tvHot.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                tab1.setText("最热");
+                info.setType("hot");
+                getTopics(true, info);
+                popWindow.dismiss();
+            }
+        });
+        popWindow.setBackgroundDrawable(getResources().getDrawable(R.drawable.icon_dialog));
+        popWindow.setFocusable(true);
+        popWindow.setOutsideTouchable(true);
+        popWindow.showAsDropDown(parent);
+    }
+
 }
