@@ -49,7 +49,7 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
     private static int PAGECOUNT=10;
     private int curPageCount = 0;
     private boolean isLoadMore = false;
-    private ImageView ivPublish;
+    private ImageView ivPublish, ivDot;
     private MFriendsInfo info;
     private RadioGroup rgTitle;
     private RadioButton tab1,tab2;
@@ -65,6 +65,7 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
     }
 
     private void findView() {
+        ivDot = (ImageView) root.findViewById(R.id.iv_dot);
         ivPublish = (ImageView) root.findViewById(R.id.iv_publish);
         btnLeft = (Button) root.findViewById(R.id.btn_left);
         lvTopics = (PullToRefreshListView) root.findViewById(R.id.lv_topics);
@@ -156,7 +157,7 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
         });
         lvTopics.setEmptyView(emptyview);
 
-//        getMessageCount();
+        getMessageCount();
         info = new MFriendsInfo();
         String lat = readPreference("latitude");    //纬度
         String lon = readPreference("longitude");    //经度
@@ -186,14 +187,18 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
             e.printStackTrace();
         }
     }
-//    private void getMessageCount(){
-//        MessageCountDatabaseHelper helper = new MessageCountDatabaseHelper(getActivity());
-//        if(helper.getMessageNum("topic")>0){
-//            ivDot.setVisibility(View.VISIBLE);
-//        }else{
-//            ivDot.setVisibility(View.GONE);
-//        }
-//    }
+
+    /**
+     * 获取消息数量
+     */
+    private void getMessageCount(){
+        MessageCountDatabaseHelper helper = new MessageCountDatabaseHelper(getActivity());
+        if(helper.getMessageNum("topic")>0){
+            ivDot.setVisibility(View.VISIBLE);
+        }else{
+            ivDot.setVisibility(View.GONE);
+        }
+    }
 
     /**
      * 获取妙友动态

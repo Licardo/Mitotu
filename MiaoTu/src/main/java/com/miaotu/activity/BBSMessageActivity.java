@@ -100,39 +100,6 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                 return false;
             }
         });
-        /*lvTopicMessage.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
-
-            @Override
-            public void onPullDownToRefresh(
-                    PullToRefreshBase<ListView> refreshView) {
-                String label = DateUtils.formatDateTime(
-                        BBSMessageActivity.this, System.currentTimeMillis(),
-                        DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE
-                                | DateUtils.FORMAT_ABBREV_ALL);
-
-                // Update the LastUpdatedLabel
-                refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-                getMessages(false);
-
-            }
-
-            @Override
-            public void onPullUpToRefresh(
-                    PullToRefreshBase<ListView> refreshView) {
-//                loadMore();
-            }
-
-        });
-        lvTopicMessage.setOnLastItemVisibleListener(new PullToRefreshBase.OnLastItemVisibleListener() {
-            @Override
-            public void onLastItemVisible() {
-//                showToastMsg("滑动到底了");
-                if (!isLoadMore&&mList.size()==curPageCount) {
-                    loadMoreComments();
-                }
-            }
-
-        });*/
         lvTopicMessage.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -199,9 +166,6 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
 //                    mList.add(mes);
                     adapter.notifyDataSetChanged();
 //                    showToastMsg("lastvisibale:"+lvTopicMessage.getRefreshableView().getLastVisiblePosition()+"  count: "+lvTopicMessage.getRefreshableView().getCount()+" first:"+lvTopicMessage.getRefreshableView().getFirstVisiblePosition());
-                    /*if(lvTopicMessage.getRefreshableView().getFooterViewsCount()==1&&mList.size()==PAGECOUNT){
-                        lvTopicMessage.getRefreshableView().addFooterView(layoutMore);
-                    }*/
                 } else {
                     if (StringUtil.isEmpty(result.getMsg())) {
                         showToastMsg("获取话题失败！");
@@ -217,19 +181,12 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
 				return HttpRequestUtil.getInstance().getTopicMessage(readPreference("token"), curPageCount + "");
             }
 
-//            @Override
-//            protected void onError() {
-//                // TODO Auto-generated method stub
-//
-//            }
-
             @Override
             protected void finallyRun() {
 
                 if(mList==null){
                     return;
                 }
-                /*lvTopicMessage.onRefreshComplete();*/
             }
         }.execute();
     }
@@ -249,7 +206,6 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                     mList.addAll(result.getMessages());
                     adapter.notifyDataSetChanged();
                     if(mList.size()!=curPageCount){
-                        /*lvTopicMessage.getRefreshableView().removeFooterView(layoutMore);*/
                     }
                 } else {
                     if (StringUtil.isEmpty(result.getMsg())) {
@@ -267,18 +223,11 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                 return HttpRequestUtil.getInstance().getTopicMessage(readPreference("token"), curPageCount + "");
             }
 
-//            @Override
-//            protected void onError() {
-//                // TODO Auto-generated method stub
-//
-//            }
-
             @Override
             protected void finallyRun() {
                 if(mList==null){
                     return;
                 }
-                /*lvTopicMessage.onRefreshComplete();*/
                 isLoadMore = false;
             }
         }.execute();
@@ -311,12 +260,6 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                 curPageCount=PAGECOUNT;
                 return HttpRequestUtil.getInstance().readTopicMessage(readPreference("token"), meesageId);
             }
-
-//            @Override
-//            protected void onError() {
-//                // TODO Auto-generated method stub
-//
-//            }
         }.execute();
     }
     @Override
