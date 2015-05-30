@@ -40,6 +40,7 @@ import com.miaotu.jpush.MessageDatabaseHelper;
 import com.miaotu.receiver.ConnectionChangeReceiver;
 import com.miaotu.receiver.JPushReceiver;
 import com.miaotu.util.LogUtil;
+import com.miaotu.util.MD5;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
@@ -126,7 +127,8 @@ public class MainActivity extends BaseFragmentActivity implements
                         .imageDownloader(new BaseImageDownloader(this, 5000, 30000)).build());
 
         if (readPreference("login_state").equals("in")) {
-            JPushInterface.setAliasAndTags(this, readPreference("phone"), null);
+            JPushInterface.setDebugMode(true);
+            JPushInterface.setAliasAndTags(this, MD5.md5(readPreference("id")), null);
             JPushInterface.init(getApplicationContext());
             JPushInterface.resumePush(getApplicationContext());
 
@@ -497,7 +499,7 @@ public class MainActivity extends BaseFragmentActivity implements
             System.exit(0);
         }
     }
-    //社区回复提醒
+    //社区回复提醒0
     private TopicMessageBroadcastReceiver topicReceiver;
     private void initTopicMessageReceiver() {
         topicReceiver = new TopicMessageBroadcastReceiver();
@@ -680,7 +682,7 @@ public class MainActivity extends BaseFragmentActivity implements
         }
         if (inMsgFlag) {
             if(mTab03 != null){
-//                mTab03.refresh();
+                mTab03.refresh();
             }
         } else {
             int count = 0;

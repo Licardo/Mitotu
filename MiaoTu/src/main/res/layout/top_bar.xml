@@ -33,4 +33,10 @@
         android:textSize="14sp"
         android:text=""
         />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#b4b4b4"
+        android:layout_alignParentBottom="true"
+        ></View>
 </RelativeLayout>

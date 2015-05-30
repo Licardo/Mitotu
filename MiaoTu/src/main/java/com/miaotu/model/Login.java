@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Login {
     @JsonProperty("Uid")
     private String uid;
+    @JsonProperty("Id")
+    private String id;
     @JsonProperty("Token")
     private String token;
     @JsonProperty("Nickname")
@@ -94,5 +96,13 @@ public class Login {
 
     public void setFollowcount(String followcount) {
         this.followcount = followcount;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

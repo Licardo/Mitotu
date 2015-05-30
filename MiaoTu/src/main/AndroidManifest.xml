@@ -15,6 +15,24 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <!-- 极光Required  一些系统要求的权限，如访问网络等-->
+    <uses-permission android:name="com.miaotu.permission.JPUSH_MESSAGE" />
+    <permission
+        android:name="com.miaotu.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+
+
     <application
         android:name=".app.App"
         android:allowBackup="true"
@@ -131,6 +149,7 @@
             android:label="@string/title_activity_edit_user_info" />
 
         <!-- 极光推送 -->
+
         <!-- Required SDK核心功能 -->
         <activity
             android:name="cn.jpush.android.ui.PushActivity"
@@ -184,6 +203,8 @@
                 <data android:scheme="package" />
             </intent-filter>
         </receiver>
+        <!-- Required SDK核心功能-->
+        <receiver android:name="cn.jpush.android.service.AlarmReceiver" />
         <receiver
             android:name=".receiver.JPushReceiver"
             android:enabled="true" >
@@ -219,7 +240,7 @@
             android:value="developer-default" />
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="3abcbadd27f9b3bd9f9a935c" />
+            android:value="b5fbc63a6854cb57b73b3f4a" />
         <!-- Required. AppKey copied from Portal -->
         <meta-data
             android:name="EASEMOB_APPKEY"

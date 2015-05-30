@@ -381,6 +381,7 @@ public class ChatsActivity extends BaseActivity implements OnClickListener{
 
 	private void init() {
 
+		MessageFragment.getInstance().refresh();
 
 
 
