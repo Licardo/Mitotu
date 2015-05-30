@@ -31,7 +31,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
             layoutBlackList, layoutUseHelp, layoutFeedback, layoutAboutMiao,
             layoutCheckUpdate; // 检查更新*/
     private LinearLayout layout_account_safe, layout_use_msg,
-            layout_call, layout_introduce, layout_feedback;
+            layout_call, layout_introduce, layout_feedback,layout_blacklist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
         layout_call = (LinearLayout) findViewById(R.id.layout_call);
         layout_introduce = (LinearLayout) findViewById(R.id.layout_introduce);
         layout_feedback = (LinearLayout) findViewById(R.id.layout_feedback);
-//		layoutBlackList = (LinearLayout) findViewById(R.id.layout_blacklist);
+        layout_blacklist = (LinearLayout) findViewById(R.id.layout_blacklist);
 //		layoutCheckUpdate = (LinearLayout) findViewById(R.id.layout_check_update);
         btnExit = (Button) findViewById(R.id.btn_exit);
     }
@@ -72,7 +72,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
         layout_call.setOnClickListener(this);
         layout_introduce.setOnClickListener(this);
         layout_feedback.setOnClickListener(this);
-//		layoutBlackList.setOnClickListener(this);
+        layout_blacklist.setOnClickListener(this);
 //		layoutCheckUpdate.setOnClickListener(this);
         btnExit.setOnClickListener(this);
     }
@@ -146,14 +146,14 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
                 this.startActivity(safeIntent);
                 break;
             case R.id.layout_blacklist:
-//			if(!readPreference("login_state").equals("in")){
-//				Intent loginIntent = new Intent(this,LoginActivity.class);
-//				this.startActivity(loginIntent);
-//				return;
-//			}
-//			Intent blacklistIntent = new Intent(this, BlackListActivity.class);
-//			this.startActivity(blacklistIntent);
-//			break;
+			if(!readPreference("login_state").equals("in")){
+				Intent loginIntent = new Intent(this,LoginActivity.class);
+				this.startActivity(loginIntent);
+				return;
+			}
+			Intent blacklistIntent = new Intent(this, BlackListActivity.class);
+			this.startActivity(blacklistIntent);
+			break;
             case R.id.btn_exit:
                 writePreference("login_state", "out");
                 writePreference("gender", "");

@@ -16,11 +16,13 @@ import com.miaotu.annotation.FormProperty;
 import com.miaotu.annotation.Ignore;
 import com.miaotu.form.MFriendsInfo;
 import com.miaotu.model.ModifyPersonInfo;
+import com.miaotu.result.BlackResult;
 import com.miaotu.result.CustomTourResult;
 import com.miaotu.result.LuckyResult;
 import com.miaotu.result.MessageResult;
 import com.miaotu.result.MoneyResult;
 import com.miaotu.result.MovementListResult;
+import com.miaotu.result.MyCustomTourResult;
 import com.miaotu.result.PersonInfoResult;
 import com.miaotu.form.PublishTogether;
 import com.miaotu.model.RegisterInfo;
@@ -567,7 +569,7 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("aid", aid));
         params.add(new BasicNameValuePair("content", content));
         params.add(new BasicNameValuePair("img", img));
-        LogUtil.e("上传的图片", "img: "+img);
+        LogUtil.e("上传的图片", "img: " + img);
         return HttpDecoder.postForObject(
                 getUrl("user/state"), BaseResult.class,
                 params);
@@ -714,12 +716,13 @@ public class HttpRequestUtil {
      *
      * @return
      */
-    public RedPackageListResult getLuckyList (String token){
+    public RedPackageListResult getLuckyList (String token, String num){
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("token", token));
         params.add(new BasicNameValuePair("page","1"));
+        params.add(new BasicNameValuePair("num",num));
         return HttpDecoder.getForObject(
-                getUrl("user/lucky_list"), RedPackageListResult.class,
+                getUrl("user/lucky"), RedPackageListResult.class,
                 params);
     }
 
@@ -763,5 +766,54 @@ public class HttpRequestUtil {
         return HttpDecoder.getForObject(
                 getUrl("user/lucky"), LuckyResult.class,
                 params);
+    }
+
+    /**
+     * 获取黑名单列表
+     * @param token
+     * @param uid
+     * @return
+     */
+    public BlackResult getBlackList(String token, String uid){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("uid",uid));
+        params.add(new BasicNameValuePair("page","1"));
+        params.add(new BasicNameValuePair("num","10"));
+        return HttpDecoder.getForObject(getUrl("user/blocks"),
+                BlackResult.class, params);
+    }
+/**
+     * 加入/解除黑名单
+     * @param token
+     * @param to_uid
+     * @return
+     */
+    public BaseResult setBlackList(String token, String to_uid){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("uid",to_uid));
+        return HttpDecoder.postForObject(getUrl("user/Blocks"),
+                BaseResult.class, params);
+    }
+
+    /**
+     * 获取我的秒旅团
+     * @param token
+     * @param uid
+     * @param type  owner(我发起的)/join(我参加的)/like(我喜欢的)
+     * @param num
+     * @return
+     */
+    public MyCustomTourResult getOwnerCustomerTour(String token, String uid, String type, String num){
+
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token", token));
+        params.add(new BasicNameValuePair("uid", uid));
+        params.add(new BasicNameValuePair("type", type));
+        params.add(new BasicNameValuePair("page", "1"));
+        params.add(new BasicNameValuePair("num", num));
+        return HttpDecoder.getForObject(getUrl("user/activity/"+type),
+                MyCustomTourResult.class, params);
     }
 }

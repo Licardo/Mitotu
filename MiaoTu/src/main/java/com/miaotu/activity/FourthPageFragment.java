@@ -29,7 +29,7 @@ private View root;
     private ImageView iv_usergender;
     private CircleImageView iv_userhead;
     private TextView tv_username,tv_userage,tv_iden,tv_userfans;
-    private RelativeLayout rl_userinfo,rl_homepage,rl_setting,rl_hongbao;
+    private RelativeLayout rl_userinfo,rl_homepage,rl_setting,rl_hongbao,rl_miaolvtuan;
     private TextView tv_left, tv_title, tv_right;
 
     @Override
@@ -59,6 +59,7 @@ private View root;
         rl_userinfo = (RelativeLayout) root.findViewById(R.id.rl_userinfo);
         rl_homepage = (RelativeLayout) root.findViewById(R.id.rl_homepage);
         rl_setting = (RelativeLayout) root.findViewById(R.id.rl_setting);
+        rl_miaolvtuan = (RelativeLayout) root.findViewById(R.id.rl_miaolvtuan);
         tv_iden = (TextView) root.findViewById(R.id.tv_iden);
         tv_userage = (TextView) root.findViewById(R.id.tv_userage);
         tv_username = (TextView) root.findViewById(R.id.tv_username);
@@ -67,6 +68,7 @@ private View root;
         rl_homepage.setOnClickListener(this);
         rl_setting.setOnClickListener(this);
         rl_hongbao.setOnClickListener(this);
+        rl_miaolvtuan.setOnClickListener(this);
         tv_right.setVisibility(View.GONE);
         tv_left.setVisibility(View.GONE);
         tv_title.setText("我的");
@@ -119,6 +121,9 @@ private View root;
                 break;
             case R.id.rl_hongbao:
                 intent.setClass(FourthPageFragment.this.getActivity(), RedPackageActivity.class);
+                break;
+            case R.id.rl_miaolvtuan:
+                intent.setClass(FourthPageFragment.this.getActivity(), MyCustomTourActivity.class);
                 break;
             default:
                 break;

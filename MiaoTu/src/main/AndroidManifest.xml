@@ -30,6 +30,7 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="7435c47cc25c1897d779d4dc74e69b22" />
+
         <service
             android:name="com.umeng.update.net.DownloadingService"
             android:process=":DownloadingService" >
@@ -58,7 +59,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
-
         </activity>
         <activity
             android:name=".activity.LoginActivity"
@@ -224,7 +224,7 @@
         <meta-data
             android:name="EASEMOB_APPKEY"
             android:value="miaotu#merryutest" />
-            <!--android:value="miaotu#miaotu" />-->
+        <!-- android:value="miaotu#miaotu" /> -->
         <!-- Required SDK核心功能 -->
         <service android:name="com.easemob.chat.EMChatService" />
 
@@ -277,11 +277,17 @@
             android:name=".activity.FeedBackActivity"
             android:label="@string/title_activity_feed_back" >
         </activity>
-        <activity
-            android:name=".activity.AboutActivity" >
+        <activity android:name=".activity.AboutActivity" >
+        </activity>
+        <activity android:name=".activity.RedPackageActivity" >
         </activity>
         <activity
-            android:name=".activity.RedPackageActivity">
+            android:name=".activity.BlackListActivity"
+            android:label="@string/title_activity_black_list" >
+        </activity>
+        <activity
+            android:name=".activity.MyCustomTourActivity"
+            android:label="@string/title_activity_my_custom_tour" >
         </activity>
     </application>
 

@@ -139,4 +139,6 @@
     <string name="title_activity_search">SearchActivity</string>
     <string name="title_activity_introduce">IntroduceActivity</string>
     <string name="title_activity_feed_back">FeedBackActivity</string>
+    <string name="title_activity_black_list">BlackListActivity</string>
+    <string name="title_activity_my_custom_tour">MyCustomTourActivity</string>
 </resources>

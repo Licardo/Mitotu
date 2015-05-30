@@ -170,7 +170,7 @@ public class RedPackageActivity extends BaseActivity implements OnClickListener 
             protected RedPackageListResult run(Void... params) {
                 return HttpRequestUtil
                         .getInstance().
-                                getLuckyList(readPreference("token"));
+                                getLuckyList(readPreference("token"), "10");
             }
 
         }.execute();

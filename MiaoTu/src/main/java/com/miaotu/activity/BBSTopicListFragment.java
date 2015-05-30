@@ -157,7 +157,7 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
         });
         lvTopics.setEmptyView(emptyview);
 
-        getMessageCount();
+//        getMessageCount();
         info = new MFriendsInfo();
         String lat = readPreference("latitude");    //纬度
         String lon = readPreference("longitude");    //经度
