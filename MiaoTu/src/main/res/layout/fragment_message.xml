@@ -40,7 +40,7 @@
         android:layout_margin="10dp"
         android:src="@drawable/icon_system_msg"
         />
-        <ImageView
+        <TextView
             android:id="@+id/iv_sys_count"
             android:layout_width="20dp"
             android:layout_height="20dp"
@@ -48,6 +48,8 @@
             android:layout_alignParentTop="true"
             android:layout_margin="7dp"
             android:background="@drawable/icon_msg_dot"
+            android:gravity="center"
+            android:textColor="#ffffff"
             android:visibility="gone"
             />
     </RelativeLayout>
@@ -112,13 +114,15 @@
                         android:layout_margin="10dp"
                         android:src="@drawable/icon_like_msg"
                         />
-                    <ImageView
+                    <TextView
                         android:id="@+id/iv_like_tour_msg"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
                         android:layout_margin="7dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
                         android:background="@drawable/icon_msg_dot"
                         android:visibility="gone"
                         />
@@ -185,13 +189,15 @@
                         android:layout_margin="10dp"
                         android:src="@drawable/icon_join_msg"
                         />
-                    <ImageView
+                    <TextView
                         android:id="@+id/iv_join_count"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
                         android:layout_margin="7dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
                         android:background="@drawable/icon_msg_dot"
                         android:visibility="gone"
                         />
@@ -258,10 +264,12 @@
                         android:layout_margin="10dp"
                         android:src="@drawable/icon_chat_msg"
                         />
-                    <ImageView
+                    <TextView
                         android:id="@+id/iv_chat_count"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
                         android:layout_margin="7dp"
@@ -332,10 +340,12 @@
                         android:layout_margin="10dp"
                         android:src="@drawable/icon_like2_msg"
                         />
-                    <ImageView
+                    <TextView
                         android:id="@+id/iv_like_count"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
+                        android:gravity="center"
+                        android:textColor="#ffffff"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentTop="true"
                         android:layout_margin="7dp"

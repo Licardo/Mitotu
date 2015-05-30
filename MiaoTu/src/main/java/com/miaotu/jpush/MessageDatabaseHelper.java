@@ -37,7 +37,7 @@ public class MessageDatabaseHelper {
 	/**
 	 * 保存邀请信息
 	 * 
-	 * @param chatInfo
+	 * @param
 	 * @return
 	 */
 	public long saveInviteMessage(InviteMessage inviteMessage) {

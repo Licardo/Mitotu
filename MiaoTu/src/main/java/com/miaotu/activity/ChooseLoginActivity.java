@@ -254,6 +254,7 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
                 if (result.getCode() == BaseResult.SUCCESS) {
                     showToastMsg("登陆成功！");
                     writePreference("uid", result.getLogin().getUid());
+                    writePreference("id", result.getLogin().getId());
                     writePreference("token",result.getLogin().getToken());
                     writePreference("name",result.getLogin().getName());
                     writePreference("age",result.getLogin().getAge());
