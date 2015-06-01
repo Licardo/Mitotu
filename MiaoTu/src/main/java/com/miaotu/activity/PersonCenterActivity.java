@@ -22,6 +22,8 @@ import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 import com.miaotu.view.FlowLayout;
 
+import java.util.Date;
+
 public class PersonCenterActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView tv_username,tv_identity,tv_content_gender,tv_content_age,
@@ -34,11 +36,12 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     private RelativeLayout rl_gender,rl_age,rl_address,rl_emotion,rl_job,rl_wantgo;
     private CircleImageView ci_userhead;
     private TextView tv_start,tv_sign,tv_like,tv_trends,tv_tip_trends;
-    private RelativeLayout rl_follow,rl_chating,rl_bottom;
+    private RelativeLayout rl_follow,rl_chating,rl_bottom,rl_join,rl_like,rl_start;
     private TextView tv_follow;
     private ImageView iv_follow;
     private PersonInfoResult result;
-    private String token;
+    private String token,uid;
+    private boolean isMine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,9 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         rl_emotion = (RelativeLayout) this.findViewById(R.id.rl_emotion);
         rl_job = (RelativeLayout) this.findViewById(R.id.rl_job);
         rl_wantgo = (RelativeLayout) this.findViewById(R.id.rl_wantgo);
+        rl_join = (RelativeLayout) this.findViewById(R.id.rl_join);
+        rl_like = (RelativeLayout) this.findViewById(R.id.rl_like);
+        rl_start = (RelativeLayout) this.findViewById(R.id.rl_start);
         view7 = this.findViewById(R.id.view7);
         view_bottom = this.findViewById(R.id.view_bottom);
         tv_title = (TextView) this.findViewById(R.id.tv_title);
@@ -91,6 +97,9 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         tv_left.setOnClickListener(this);
         rl_chating.setOnClickListener(this);
         rl_follow.setOnClickListener(this);
+        rl_like.setOnClickListener(this);
+        rl_join.setOnClickListener(this);
+        rl_start.setOnClickListener(this);
     }
 
     /**
@@ -164,9 +173,10 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     private void initData(){
         token = readPreference("token");
         String id = readPreference("uid");
-        String uid = getIntent().getStringExtra("uid");
+        uid = getIntent().getStringExtra("uid");
         if(id.equals(uid)){
             showMyPage(true);
+            isMine = true;
         }
         readPersonInfo(token, uid);
     }
@@ -218,6 +228,36 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.rl_follow:
                 like(token, result.getPersonInfo().getUid());
+                break;
+            case R.id.rl_like:
+                Intent likeIntent = new Intent(PersonCenterActivity.this, DateTourActivity.class);
+                likeIntent.putExtra("type","like");
+                likeIntent.putExtra("uid",uid);
+                likeIntent.putExtra("title","喜欢的约游");
+                if (!isMine){
+                    likeIntent.putExtra("title","TA喜欢的约游");
+                }
+                startActivity(likeIntent);
+                break;
+            case R.id.rl_join:
+                Intent joinIntent = new Intent(PersonCenterActivity.this, DateTourActivity.class);
+                joinIntent.putExtra("type","join");
+                joinIntent.putExtra("uid",uid);
+                joinIntent.putExtra("title","已报名的约游");
+                if (!isMine){
+                    joinIntent.putExtra("title","TA报名的约游");
+                }
+                startActivity(joinIntent);
+                break;
+            case R.id.rl_start:
+                Intent startIntent = new Intent(PersonCenterActivity.this, DateTourActivity.class);
+                startIntent.putExtra("type","owner");
+                startIntent.putExtra("uid",uid);
+                startIntent.putExtra("title","发起的约游");
+                if (!isMine){
+                    startIntent.putExtra("title","TA发起的约游");
+                }
+                startActivity(startIntent);
                 break;
             default:
                 break;

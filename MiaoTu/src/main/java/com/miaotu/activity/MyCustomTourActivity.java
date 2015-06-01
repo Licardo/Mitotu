@@ -15,6 +15,7 @@ import com.miaotu.R;
 import com.miaotu.adapter.MyCustomTourAdapter;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
+import com.miaotu.model.CustomTour;
 import com.miaotu.model.CustomTourInfo;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.MyCustomTourResult;
@@ -30,7 +31,7 @@ public class MyCustomTourActivity extends BaseActivity {
     private static int PAGECOUNT=10;
     private int curPageCount = 0;
     private boolean isLoadMore = false;
-    private List<CustomTourInfo> customTourInfoList;
+    private List<CustomTour> customTourInfoList;
     private MyCustomTourAdapter adapter;
     private View layoutMore;
     private String token,uid,type;
@@ -68,7 +69,7 @@ public class MyCustomTourActivity extends BaseActivity {
     }
 
     private void initData(){
-        customTourInfoList = new ArrayList<CustomTourInfo>();
+        customTourInfoList = new ArrayList<CustomTour>();
         adapter = new MyCustomTourAdapter(this, customTourInfoList);
         lvCustomTour.setAdapter(adapter);
 
@@ -99,20 +100,18 @@ public class MyCustomTourActivity extends BaseActivity {
                     }
 
                     //测试
-                    CustomTourInfo info = new CustomTourInfo();
-                    info.setHeadurl("");
-                    info.setEnddate("5月30号");
-                    info.setStartdate("4月30号");
+                    CustomTour info = new CustomTour();
+                    info.setEndDate("5月30号");
+                    info.setStartDate("4月30号");
                     info.setNickname("四小美");
-                    info.setMtprice("199元");
+                    info.setMtPrice("199元");
                     info.setTitle("中华人民共和国");
                     myCustomTourResult.getCustomTourInfolist().add(info);
-                    CustomTourInfo info1 = new CustomTourInfo();
-                    info1.setHeadurl("");
-                    info1.setEnddate("5月30号");
-                    info1.setStartdate("4月30号");
+                    CustomTour info1 = new CustomTour();
+                    info1.setEndDate("5月30号");
+                    info1.setStartDate("4月30号");
                     info1.setNickname("四小美");
-                    info1.setMtprice("199元");
+                    info1.setMtPrice("199元");
                     info1.setTags("贝克汉姆,卡卡,罗纳尔迪尼奥");
                     info1.setTitle("中华人民共和国");
                     myCustomTourResult.getCustomTourInfolist().add(info1);

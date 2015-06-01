@@ -1,7 +1,6 @@
 package com.miaotu.result;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.miaotu.model.DateTourInfo;
 import com.miaotu.model.LikeInfo;
 
 import java.util.List;

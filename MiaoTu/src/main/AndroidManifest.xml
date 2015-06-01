@@ -310,6 +310,9 @@
             android:name=".activity.MyCustomTourActivity"
             android:label="@string/title_activity_my_custom_tour" >
         </activity>
+        <activity
+            android:name=".activity.DateTourActivity" >
+        </activity>
     </application>
 
 </manifest>

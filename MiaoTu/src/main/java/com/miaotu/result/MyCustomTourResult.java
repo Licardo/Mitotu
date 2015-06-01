@@ -1,6 +1,7 @@
 package com.miaotu.result;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.miaotu.model.CustomTour;
 import com.miaotu.model.CustomTourInfo;
 
 import java.util.List;
@@ -10,13 +11,13 @@ import java.util.List;
  */
 public class MyCustomTourResult extends BaseResult {
     @JsonProperty("Items")
-    private List<CustomTourInfo> customTourInfolist;
+    private List<CustomTour> customTourInfolist;
 
-    public List<CustomTourInfo> getCustomTourInfolist() {
+    public List<CustomTour> getCustomTourInfolist() {
         return customTourInfolist;
     }
 
-    public void setCustomTourInfolist(List<CustomTourInfo> customTourInfolist) {
+    public void setCustomTourInfolist(List<CustomTour> customTourInfolist) {
         this.customTourInfolist = customTourInfolist;
     }
 }

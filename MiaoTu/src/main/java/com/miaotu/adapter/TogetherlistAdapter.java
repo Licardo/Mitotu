@@ -202,6 +202,9 @@ public class TogetherlistAdapter extends BaseAdapter {
             }
         }
         holder.tvDistance.setText(mList.get(position).getDistance()+"km");
+
+        holder.ivLike.setVisibility(View.GONE);
+        holder.tvDistance.setVisibility(View.GONE);
 		return convertView;
 	}
 

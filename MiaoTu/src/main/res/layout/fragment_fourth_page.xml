@@ -291,13 +291,13 @@
                 android:background="@drawable/bg_line" />
 
             <RelativeLayout
-                android:id="@+id/rl_xihuande"
+                android:id="@+id/rl_like"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@android:color/white">
 
                 <ImageView
-                    android:id="@+id/iv_xihuande"
+                    android:id="@+id/iv_like"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_centerVertical="true"
@@ -310,7 +310,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/iv_xihuande"
+                    android:layout_toRightOf="@id/iv_like"
                     android:text="喜欢的约游"
                     android:textColor="#646464"
                     android:textSize="14sp" />

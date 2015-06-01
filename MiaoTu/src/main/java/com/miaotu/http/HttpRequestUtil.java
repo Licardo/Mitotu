@@ -18,7 +18,7 @@ import com.miaotu.form.MFriendsInfo;
 import com.miaotu.model.ModifyPersonInfo;
 import com.miaotu.result.BlackResult;
 import com.miaotu.result.CustomTourResult;
-import com.miaotu.result.DateTourResult;
+import com.miaotu.result.MyTogetherResult;
 import com.miaotu.result.LikeResult;
 import com.miaotu.result.LuckyResult;
 import com.miaotu.result.MessageResult;
@@ -827,7 +827,7 @@ public class HttpRequestUtil {
      * @param num
      * @return
      */
-    public DateTourResult getDateTourList(String token, String uid, String type, String num){
+    public MyTogetherResult getMyTogetherList(String token, String uid, String type, String num){
 
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
@@ -836,7 +836,7 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("page", "1"));
         params.add(new BasicNameValuePair("num", num));
         return HttpDecoder.getForObject(getUrl("user/yueyou/"+type),
-                DateTourResult.class, params);
+                MyTogetherResult.class, params);
     }
 
 }

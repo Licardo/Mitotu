@@ -2,8 +2,6 @@ package com.miaotu.activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -29,7 +27,8 @@ private View root;
     private ImageView iv_usergender;
     private CircleImageView iv_userhead;
     private TextView tv_username,tv_userage,tv_iden,tv_userfans;
-    private RelativeLayout rl_userinfo,rl_homepage,rl_setting,rl_hongbao,rl_miaolvtuan;
+    private RelativeLayout rl_userinfo,rl_homepage,rl_setting,rl_hongbao,
+            rl_miaolvtuan,rl_yibaomingde,rl_like;
     private TextView tv_left, tv_title, tv_right;
 
     @Override
@@ -60,6 +59,8 @@ private View root;
         rl_homepage = (RelativeLayout) root.findViewById(R.id.rl_homepage);
         rl_setting = (RelativeLayout) root.findViewById(R.id.rl_setting);
         rl_miaolvtuan = (RelativeLayout) root.findViewById(R.id.rl_miaolvtuan);
+        rl_yibaomingde = (RelativeLayout) root.findViewById(R.id.rl_yibaomingde);
+        rl_like = (RelativeLayout) root.findViewById(R.id.rl_like);
         tv_iden = (TextView) root.findViewById(R.id.tv_iden);
         tv_userage = (TextView) root.findViewById(R.id.tv_userage);
         tv_username = (TextView) root.findViewById(R.id.tv_username);
@@ -69,6 +70,8 @@ private View root;
         rl_setting.setOnClickListener(this);
         rl_hongbao.setOnClickListener(this);
         rl_miaolvtuan.setOnClickListener(this);
+        rl_yibaomingde.setOnClickListener(this);
+        rl_like.setOnClickListener(this);
         tv_right.setVisibility(View.GONE);
         tv_left.setVisibility(View.GONE);
         tv_title.setText("我的");
@@ -124,6 +127,16 @@ private View root;
                 break;
             case R.id.rl_miaolvtuan:
                 intent.setClass(FourthPageFragment.this.getActivity(), MyCustomTourActivity.class);
+                break;
+            case R.id.rl_yibaomingde:
+                intent.setClass(FourthPageFragment.this.getActivity(), DateTourActivity.class);
+                intent.putExtra("type", "join");
+                intent.putExtra("title","已报名的约游");
+                break;
+            case R.id.rl_like:
+                intent.setClass(FourthPageFragment.this.getActivity(), DateTourActivity.class);
+                intent.putExtra("type", "like");
+                intent.putExtra("title","喜欢的约游");
                 break;
             default:
                 break;

@@ -17,24 +17,25 @@ import android.widget.ListView;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.miaotu.R;
+import com.miaotu.adapter.CustomTourlistAdapter;
 import com.miaotu.adapter.TogetherlistAdapter;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
-import com.miaotu.model.Together;
+import com.miaotu.model.CustomTour;
 import com.miaotu.result.BaseResult;
-import com.miaotu.result.MyTogetherResult;
+import com.miaotu.result.MyCustomTourResult;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyTogetherFragment extends BaseFragment implements View.OnClickListener {
+public class MyCustomTourFragment extends BaseFragment implements View.OnClickListener {
     private View root;
     private PullToRefreshListView lvPull;
     private View head;
-    private TogetherlistAdapter adapter;
-    private List<Together> mList;
+    private CustomTourlistAdapter adapter;
+    private List<CustomTour> mList;
     private int page = 1;
     private final int PAGECOUNT = 12;
     private boolean isLoadMore = false;
@@ -44,7 +45,7 @@ public class MyTogetherFragment extends BaseFragment implements View.OnClickList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        root = inflater.inflate(R.layout.fragment_my_together, container, false);
+        root = inflater.inflate(R.layout.fragment_my_customtour, container, false);
         layoutMore = inflater.inflate(R.layout.pull_to_refresh_more, null);
         findView();
         bindView();
@@ -67,9 +68,8 @@ public class MyTogetherFragment extends BaseFragment implements View.OnClickList
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                // TODO Auto-generated method stub
                 Intent intent = new Intent(getActivity(),
-                        TogetherDetailActivity.class);
+                        CustomTourDetailActivity.class);
                 intent.putExtra("id", mList.get(position - 1).getId());
                 startActivityForResult(intent, 1);
             }
@@ -86,14 +86,14 @@ public class MyTogetherFragment extends BaseFragment implements View.OnClickList
 
                 // Update the LastUpdatedLabel
                 refreshView.getLoadingLayoutProxy().setLastUpdatedLabel(label);
-                getTogether(type, uid, false);
+                getCustomTour(type, uid, false);
 
             }
 
             @Override
             public void onPullUpToRefresh(
                     PullToRefreshBase<ListView> refreshView) {
-                loadMore(false);
+//                loadMore();
             }
 
         });
@@ -116,30 +116,30 @@ public class MyTogetherFragment extends BaseFragment implements View.OnClickList
             uid = getArguments().getString("uid");
         }
         mList = new ArrayList<>();
-        adapter = new TogetherlistAdapter(getActivity(), mList, false);
+        adapter = new CustomTourlistAdapter(getActivity(), mList, false);
         lvPull.setAdapter(adapter);
         WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
         Point size = new Point();
         wm.getDefaultDisplay().getSize(size);
         int width = size.x;
-        getTogether(type, uid, true);
+        getCustomTour(type, uid, true);
     }
 
     //获取一起去
-    private void getTogether(final String type, final String uid, final boolean isShow) {
-        new BaseHttpAsyncTask<Void, Void, MyTogetherResult>(getActivity(), isShow) {
+    private void getCustomTour(final String type, final String uid, final boolean isShow) {
+        new BaseHttpAsyncTask<Void, Void, MyCustomTourResult>(getActivity(), isShow) {
             @Override
-            protected void onCompleteTask(MyTogetherResult result) {
+            protected void onCompleteTask(MyCustomTourResult result) {
                 if (root == null) {
                     return;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     mList.clear();
-                    if(result.getDateTourInfoList() == null){
+                    if(result.getCustomTourInfolist() == null){
                         adapter.notifyDataSetChanged();
                         return;
                     }
-                    mList.addAll(result.getDateTourInfoList());
+                    mList.addAll(result.getCustomTourInfolist());
                     adapter.notifyDataSetChanged();
                     if (lvPull.getRefreshableView().getFooterViewsCount() == 1 && mList.size() == PAGECOUNT * page) {
                         lvPull.getRefreshableView().addFooterView(layoutMore);
@@ -154,9 +154,9 @@ public class MyTogetherFragment extends BaseFragment implements View.OnClickList
             }
 
             @Override
-            protected MyTogetherResult run(Void... params) {
+            protected MyCustomTourResult run(Void... params) {
                 page = 1;
-                return HttpRequestUtil.getInstance().getMyTogetherList(readPreference("token"),
+                return HttpRequestUtil.getInstance().getOwnerCustomerTour(readPreference("token"),
                         uid, type, page * PAGECOUNT + "");
             }
 
@@ -170,17 +170,17 @@ public class MyTogetherFragment extends BaseFragment implements View.OnClickList
 
     //获取一起去
     private void loadMore(final boolean isShow) {
-        new BaseHttpAsyncTask<Void, Void, MyTogetherResult>(getActivity(), isShow) {
+        new BaseHttpAsyncTask<Void, Void, MyCustomTourResult>(getActivity(), isShow) {
             @Override
-            protected void onCompleteTask(MyTogetherResult result) {
+            protected void onCompleteTask(MyCustomTourResult result) {
                 if (root == null) {
                     return;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
-                    if (result.getDateTourInfoList() == null) {
+                    if (result.getCustomTourInfolist() == null) {
                         return;
                     }
-                    mList.addAll(result.getDateTourInfoList());
+                    mList.addAll(result.getCustomTourInfolist());
                     adapter.notifyDataSetChanged();
 
                 } else {
@@ -193,11 +193,11 @@ public class MyTogetherFragment extends BaseFragment implements View.OnClickList
             }
 
             @Override
-            protected MyTogetherResult run(Void... params) {
+            protected MyCustomTourResult run(Void... params) {
                 isLoadMore = true;
                 page += 1;
-                return HttpRequestUtil.getInstance().getMyTogetherList(readPreference("token"),
-                        uid, type, page*PAGECOUNT+"");
+                return HttpRequestUtil.getInstance().getOwnerCustomerTour(readPreference("token"),
+                        uid, type, page * PAGECOUNT + "");
             }
 
             @Override

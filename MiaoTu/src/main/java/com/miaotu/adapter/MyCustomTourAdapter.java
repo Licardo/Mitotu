@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
+import com.miaotu.model.CustomTour;
 import com.miaotu.model.CustomTourInfo;
 import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
@@ -23,10 +24,10 @@ import java.util.List;
  */
 public class MyCustomTourAdapter extends BaseAdapter{
     private LayoutInflater inflater;
-    private List<CustomTourInfo> customTourInfoList;
+    private List<CustomTour> customTourInfoList;
     private Context mContext;
 
-    public MyCustomTourAdapter(Context mContext, List<CustomTourInfo> customTourInfoList){
+    public MyCustomTourAdapter(Context mContext, List<CustomTour> customTourInfoList){
         this.mContext = mContext;
         this.customTourInfoList = customTourInfoList;
         inflater = LayoutInflater.from(mContext);
@@ -72,14 +73,14 @@ public class MyCustomTourAdapter extends BaseAdapter{
         holder.tvCount.setVisibility(View.GONE);
         holder.ivLike.setVisibility(View.GONE);
         holder.tvJoin.setVisibility(View.VISIBLE);
-        CustomTourInfo info = customTourInfoList.get(i);
-        holder.tvDate.setText(info.getStartdate()+"-"+info.getEnddate());
+        CustomTour info = customTourInfoList.get(i);
+        holder.tvDate.setText(info.getStartDate()+"-"+info.getEndDate());
         holder.tvTitle.setText(info.getTitle());
-        holder.tvPrice.setText(info.getMtprice());
+        holder.tvPrice.setText(info.getMtPrice());
         holder.tvName.setText(info.getNickname());
-        holder.tvEndDate.setText(info.getEnddate()+"截止报名");
-        UrlImageViewHelper.setUrlDrawable(holder.ivBackground, info.getPicurl(), R.drawable.bg_choose_login);
-        UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto, info.getHeadurl(), R.drawable.icon_default_head);
+        holder.tvEndDate.setText(info.getEndDate()+"截止报名");
+        UrlImageViewHelper.setUrlDrawable(holder.ivBackground, info.getPicUrl(), R.drawable.bg_choose_login);
+        UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto, info.getHeadUrl(), R.drawable.icon_default_head);
         holder.tvJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
