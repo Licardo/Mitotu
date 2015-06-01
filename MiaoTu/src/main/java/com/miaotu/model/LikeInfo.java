@@ -12,6 +12,8 @@ public class LikeInfo {
     private String nickname;
     @JsonProperty("HeadUrl")
     private String headurl;
+    @JsonProperty("IsLiked")
+    private String isliked;
 
     public String getUid() {
         return uid;
@@ -35,5 +37,13 @@ public class LikeInfo {
 
     public void setHeadurl(String headurl) {
         this.headurl = headurl;
+    }
+
+    public String getIsliked() {
+        return isliked;
+    }
+
+    public void setIsliked(String isliked) {
+        this.isliked = isliked;
     }
 }

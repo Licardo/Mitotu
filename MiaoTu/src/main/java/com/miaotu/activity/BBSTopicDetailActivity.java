@@ -33,6 +33,7 @@ import com.miaotu.model.PhotoInfo;
 import com.miaotu.model.Topic;
 import com.miaotu.model.TopicComment;
 import com.miaotu.result.BaseResult;
+import com.miaotu.result.LikeResult;
 import com.miaotu.result.TopicCommentsListResult;
 import com.miaotu.result.TopicResult;
 import com.miaotu.util.LogUtil;
@@ -575,10 +576,10 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
      */
     private void like(final String token, final String touser, final boolean islike, final ImageView iv) {
 
-        new BaseHttpAsyncTask<Void, Void, BaseResult>(this, false) {
+        new BaseHttpAsyncTask<Void, Void, LikeResult>(this, false) {
 
             @Override
-            protected void onCompleteTask(BaseResult baseResult) {
+            protected void onCompleteTask(LikeResult baseResult) {
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
                     if(!islike){
                         iv.setBackgroundResource(R.drawable.icon_friend_like);
@@ -595,7 +596,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             }
 
             @Override
-            protected BaseResult run(Void... params) {
+            protected LikeResult run(Void... params) {
                 return HttpRequestUtil.getInstance().like(token, touser);
             }
         }.execute();

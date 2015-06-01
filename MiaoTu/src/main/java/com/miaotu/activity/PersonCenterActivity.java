@@ -13,6 +13,7 @@ import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
+import com.miaotu.result.LikeResult;
 import com.miaotu.result.PersonInfoResult;
 import com.miaotu.result.BaseResult;
 import com.miaotu.util.MD5;
@@ -261,10 +262,10 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
      */
     private void like(final String token, final String touser) {
 
-        new BaseHttpAsyncTask<Void, Void, BaseResult>(this, false) {
+        new BaseHttpAsyncTask<Void, Void, LikeResult>(this, false) {
 
             @Override
-            protected void onCompleteTask(BaseResult baseResult) {
+            protected void onCompleteTask(LikeResult baseResult) {
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
                     if("true".equals(result.getPersonInfo().getIslike())){
                         changeBtnFollow(false);
@@ -284,7 +285,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
             }
 
             @Override
-            protected BaseResult run(Void... params) {
+            protected LikeResult run(Void... params) {
                 return HttpRequestUtil.getInstance().like(token, touser);
             }
         }.execute();

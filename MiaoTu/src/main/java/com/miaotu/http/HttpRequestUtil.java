@@ -18,6 +18,8 @@ import com.miaotu.form.MFriendsInfo;
 import com.miaotu.model.ModifyPersonInfo;
 import com.miaotu.result.BlackResult;
 import com.miaotu.result.CustomTourResult;
+import com.miaotu.result.DateTourResult;
+import com.miaotu.result.LikeResult;
 import com.miaotu.result.LuckyResult;
 import com.miaotu.result.MessageResult;
 import com.miaotu.result.MoneyResult;
@@ -663,12 +665,12 @@ public class HttpRequestUtil {
      * @param toUser
      * @return
      */
-    public BaseResult like(String token, String toUser) {
+    public LikeResult like(String token, String toUser) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
         params.add(new BasicNameValuePair("to_uid", toUser));
         return HttpDecoder.postForObject(
-                getUrl("user/like"), BaseResult.class,
+                getUrl("user/like"), LikeResult.class,
                 params);
 
     }
@@ -813,7 +815,28 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("type", type));
         params.add(new BasicNameValuePair("page", "1"));
         params.add(new BasicNameValuePair("num", num));
-        return HttpDecoder.getForObject(getUrl("user/activity/"+type),
+        return HttpDecoder.getForObject(getUrl("user/activity/" + type),
                 MyCustomTourResult.class, params);
     }
+
+/**
+     * 获取我的约游
+     * @param token
+     * @param uid
+     * @param type  owner(我发起的)/join(我参加的)/like(我喜欢的)
+     * @param num
+     * @return
+     */
+    public DateTourResult getDateTourList(String token, String uid, String type, String num){
+
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token", token));
+        params.add(new BasicNameValuePair("uid", uid));
+        params.add(new BasicNameValuePair("type", type));
+        params.add(new BasicNameValuePair("page", "1"));
+        params.add(new BasicNameValuePair("num", num));
+        return HttpDecoder.getForObject(getUrl("user/yueyou/"+type),
+                DateTourResult.class, params);
+    }
+
 }

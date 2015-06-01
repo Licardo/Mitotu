@@ -31,6 +31,7 @@ import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.model.PhotoInfo;
 import com.miaotu.model.Topic;
 import com.miaotu.result.BaseResult;
+import com.miaotu.result.LikeResult;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
@@ -224,10 +225,10 @@ public class TopiclistAdapter extends BaseAdapter {
 
     private void like(final String token, final String touser, final boolean islike, final ImageView iv) {
 
-        new BaseHttpAsyncTask<Void, Void, BaseResult>((Activity) mContext, false) {
+        new BaseHttpAsyncTask<Void, Void, LikeResult>((Activity) mContext, false) {
 
             @Override
-            protected void onCompleteTask(BaseResult baseResult) {
+            protected void onCompleteTask(LikeResult baseResult) {
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
                     Toast.makeText(mContext, "操作成功", Toast.LENGTH_SHORT).show();
                     if (!islike) {
@@ -245,7 +246,7 @@ public class TopiclistAdapter extends BaseAdapter {
             }
 
             @Override
-            protected BaseResult run(Void... params) {
+            protected LikeResult run(Void... params) {
                 return HttpRequestUtil.getInstance().like(token, touser);
             }
         }.execute();
