@@ -6,12 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.model.CustomTourInfo;
+import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
+import com.miaotu.view.FlowLayout;
 
 import java.util.List;
 
@@ -60,6 +63,7 @@ public class MyCustomTourAdapter extends BaseAdapter{
             holder.ivBackground = (ImageView) view.findViewById(R.id.iv_background);
             holder.ivLike = (ImageView) view.findViewById(R.id.iv_like);
             holder.ivHeadPhoto = (CircleImageView) view.findViewById(R.id.iv_head_photo);
+            holder.flTags = (FlowLayout) view.findViewById(R.id.fl_tag);
             view.setTag(holder);
         }else {
             holder = (ViewHolder) view.getTag();
@@ -73,7 +77,7 @@ public class MyCustomTourAdapter extends BaseAdapter{
         holder.tvTitle.setText(info.getTitle());
         holder.tvPrice.setText(info.getMtprice());
         holder.tvName.setText(info.getNickname());
-        holder.tvEndDate.setText(info.getEnddate());
+        holder.tvEndDate.setText(info.getEnddate()+"截止报名");
         UrlImageViewHelper.setUrlDrawable(holder.ivBackground, info.getPicurl(), R.drawable.bg_choose_login);
         UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto, info.getHeadurl(), R.drawable.icon_default_head);
         holder.tvJoin.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +86,24 @@ public class MyCustomTourAdapter extends BaseAdapter{
                 //查看报名列表
             }
         });
+        String[] tags = null;
+        if(info.getTags()!=null) {
+            tags = info.getTags().split(",");
+
+            for (String tag : tags) {
+                TextView tvTag = new TextView(mContext);
+                tvTag.setText(tag);
+                FlowLayout.LayoutParams layoutParams = new FlowLayout.
+                        LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT,
+                        FlowLayout.LayoutParams.WRAP_CONTENT);
+                layoutParams.rightMargin = Util.dip2px(mContext, 10);
+                tvTag.setTextSize(10);
+                tvTag.setLayoutParams(layoutParams);
+                holder.flTags.addView(tvTag);
+            }
+        }else {
+            holder.flTags.setVisibility(View.GONE);
+        }
         return view;
     }
 
@@ -96,5 +118,6 @@ public class MyCustomTourAdapter extends BaseAdapter{
         ImageView ivBackground;
         ImageView ivLike;
         CircleImageView ivHeadPhoto;
+        FlowLayout flTags;
     }
 }

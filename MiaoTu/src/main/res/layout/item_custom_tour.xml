@@ -101,6 +101,7 @@
         <com.miaotu.view.FlowLayout
             android:id="@+id/fl_tag"
             android:layout_width="240dp"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@id/tv_title"
             android:layout_below="@id/tv_title">
