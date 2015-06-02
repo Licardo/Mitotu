@@ -90,6 +90,10 @@ private void init(){
                     writePreference("job",result.getLogin().getJob());
                     writePreference("fanscount", result.getLogin().getFanscount());
                     writePreference("followcount", result.getLogin().getFollowcount());
+                    writePreference("wxid", result.getLogin().getWxunionid());
+                    writePreference("qqid", result.getLogin().getQqopenid());
+                    writePreference("sinaid", result.getLogin().getSinauid());
+                    writePreference("luckmoney", result.getLogin().getLuckymoney());
                     writePreference("login_state","in");
 
                     EMChatManager.getInstance().login(MD5.md5(readPreference("uid")), readPreference("token"),

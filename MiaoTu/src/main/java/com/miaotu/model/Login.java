@@ -26,6 +26,15 @@ public class Login {
     private String fanscount;
     @JsonProperty("LikeCount")
     private String followcount;
+    @JsonProperty("WxUnionid")
+    private String wxunionid;
+    @JsonProperty("QqOpenid")
+    private String qqopenid;
+    @JsonProperty("SinaUid")
+    private String sinauid;
+    @JsonProperty("LuckyMoney")
+    private String luckymoney;
+
     public String getUid() {
         return uid;
     }
@@ -104,5 +113,37 @@ public class Login {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getWxunionid() {
+        return wxunionid;
+    }
+
+    public void setWxunionid(String wxunionid) {
+        this.wxunionid = wxunionid;
+    }
+
+    public String getQqopenid() {
+        return qqopenid;
+    }
+
+    public void setQqopenid(String qqopenid) {
+        this.qqopenid = qqopenid;
+    }
+
+    public String getSinauid() {
+        return sinauid;
+    }
+
+    public void setSinauid(String sinauid) {
+        this.sinauid = sinauid;
+    }
+
+    public String getLuckymoney() {
+        return luckymoney;
+    }
+
+    public void setLuckymoney(String luckymoney) {
+        this.luckymoney = luckymoney;
     }
 }
