@@ -10,7 +10,7 @@ import com.miaotu.model.Symbol;
  *
  */
 public class SymbolResult extends BaseResult{
-	@JsonProperty("items")
+	@JsonProperty("Items")
 	private Symbol symbol;
 
     public Symbol getSymbol() {

@@ -4,73 +4,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent">
+
     <RelativeLayout
         android:id="@+id/layout_tell_forture"
         android:layout_width="305dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="142dp"
         android:layout_centerHorizontal="true"
-        >
+        android:layout_marginTop="142dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:background="@drawable/tell_forture_bg"
-            android:paddingLeft="28dp"
+            android:orientation="vertical"
             android:paddingBottom="30dp"
-            android:paddingRight="28dp"
-            >
+            android:paddingLeft="28dp"
+            android:paddingRight="28dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="33dp"
                 android:text="您的今天抽到的卦象——"
                 android:textColor="#646464"
-                android:textSize="17sp"
-                />
+                android:textSize="17sp" />
+
             <TextView
                 android:id="@+id/tv_symbol_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#ff6b50"
-                android:textSize="17sp"
                 android:layout_marginTop="9dp"
                 android:text="乾为天"
-                />
+                android:textColor="#ff6b50"
+                android:textSize="17sp" />
+
             <TextView
                 android:id="@+id/tv_symbol_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="这是个需要不断努力的卦象，只要努力都达到了，萌妹子或小鲜肉对你来说简直手到擒来！"
                 android:layout_marginTop="9dp"
-                android:textSize="12sp"
+                android:text="这是个需要不断努力的卦象，只要努力都达到了，萌妹子或小鲜肉对你来说简直手到擒来！"
                 android:textColor="#969696"
-                />
+                android:textSize="12sp" />
+
             <TextView
                 android:id="@+id/tv_symbol_statement"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="9dp"
                 android:text="此卦象为上上签，得到妙途奖励红包￥10元"
                 android:textColor="#646464"
-                android:layout_marginTop="9dp"
-                android:textSize="17sp"/>
+                android:textSize="17sp" />
 
             <RelativeLayout
                 android:id="@+id/layout_share"
                 android:layout_width="205dp"
                 android:layout_height="45dp"
-                android:background="@drawable/red_package_share_bg"
-                android:layout_marginTop="30dp"
                 android:layout_gravity="center_horizontal"
-                >
+                android:layout_marginTop="30dp"
+                android:background="@drawable/red_package_share_bg">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="分享结果领卜卦红包"
                     android:layout_centerInParent="true"
-                    android:textColor="@color/white"
-                    />
+                    android:text="分享结果领卜卦红包"
+                    android:textColor="@color/white" />
             </RelativeLayout>
 
         </LinearLayout>
@@ -79,10 +78,9 @@
             android:id="@+id/iv_close"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
             android:layout_alignParentRight="true"
-            android:background="@drawable/icon_tell_forture_close"
-            />
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/icon_tell_forture_close" />
     </RelativeLayout>
 </RelativeLayout>

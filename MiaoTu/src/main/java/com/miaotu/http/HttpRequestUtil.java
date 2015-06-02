@@ -663,12 +663,12 @@ public class HttpRequestUtil {
      * @param toUser
      * @return
      */
-    public LikeResult like(String token, String toUser) {
+    public BaseResult like(String token, String toUser) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
         params.add(new BasicNameValuePair("to_uid", toUser));
         return HttpDecoder.postForObject(
-                getUrl("user/like"), LikeResult.class,
+                getUrl("user/like"), BaseResult.class,
                 params);
 
     }

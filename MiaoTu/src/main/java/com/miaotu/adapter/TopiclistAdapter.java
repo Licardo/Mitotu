@@ -243,10 +243,10 @@ public class TopiclistAdapter extends BaseAdapter {
 
     private void like(final String token, final String touser, final boolean islike, final ImageView iv) {
 
-        new BaseHttpAsyncTask<Void, Void, LikeResult>((Activity) mContext, false) {
+        new BaseHttpAsyncTask<Void, Void, BaseResult>((Activity) mContext, false) {
 
             @Override
-            protected void onCompleteTask(LikeResult baseResult) {
+            protected void onCompleteTask(BaseResult baseResult) {
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
                     Toast.makeText(mContext, "操作成功", Toast.LENGTH_SHORT).show();
                     if (!islike) {
@@ -264,7 +264,7 @@ public class TopiclistAdapter extends BaseAdapter {
             }
 
             @Override
-            protected LikeResult run(Void... params) {
+            protected BaseResult run(Void... params) {
                 return HttpRequestUtil.getInstance().like(token, touser);
             }
         }.execute();

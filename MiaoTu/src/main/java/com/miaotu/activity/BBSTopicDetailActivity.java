@@ -579,10 +579,10 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
      */
     private void like(final String token, final String touser, final boolean islike, final ImageView iv) {
 
-        new BaseHttpAsyncTask<Void, Void, LikeResult>(this, false) {
+        new BaseHttpAsyncTask<Void, Void, BaseResult>(this, false) {
 
             @Override
-            protected void onCompleteTask(LikeResult baseResult) {
+            protected void onCompleteTask(BaseResult baseResult) {
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
                     if(!islike){
                         iv.setBackgroundResource(R.drawable.icon_friend_like);
@@ -599,7 +599,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             }
 
             @Override
-            protected LikeResult run(Void... params) {
+            protected BaseResult run(Void... params) {
                 return HttpRequestUtil.getInstance().like(token, touser);
             }
         }.execute();

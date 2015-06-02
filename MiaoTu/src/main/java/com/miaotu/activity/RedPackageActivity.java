@@ -274,7 +274,7 @@ public class RedPackageActivity extends BaseActivity implements OnClickListener 
     }
 
     /**
-     * 获取卦象
+     * 每日一卦
      */
     private void getSymbol() {
         ivTellForture.setBackgroundResource(R.drawable.icon_tell_fortunes_grey);

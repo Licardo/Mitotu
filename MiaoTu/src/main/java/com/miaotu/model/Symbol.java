@@ -7,21 +7,28 @@ import java.io.Serializable;
 
 /**
  * @author Jayden
- *
  */
 public class Symbol implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	@JsonProperty("title")
-	private String title;
-	@JsonProperty("content")
-	private String content;
-	@JsonProperty("type")
-	private String type;
-	@JsonProperty("money")
-	private String money;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    @JsonProperty("Id")
+    private String id;
+    @JsonProperty("Title")
+    private String title;
+    @JsonProperty("Content")
+    private String content;
+    @JsonProperty("Type")
+    private String type;
+    @JsonProperty("Status")
+    private String status;
+    @JsonProperty("Created")
+    private String created;
+    @JsonProperty("Money")
+    private String money;
+    @JsonProperty("Probability")
+    private String probability;
 
     public String getContent() {
         return content;
@@ -53,5 +60,37 @@ public class Symbol implements Serializable {
 
     public void setMoney(String money) {
         this.money = money;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
+    }
+
+    public String getProbability() {
+        return probability;
+    }
+
+    public void setProbability(String probability) {
+        this.probability = probability;
     }
 }

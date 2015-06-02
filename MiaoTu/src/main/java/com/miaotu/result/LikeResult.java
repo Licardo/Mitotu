@@ -10,13 +10,13 @@ import java.util.List;
  */
 public class LikeResult extends BaseResult {
     @JsonProperty("Items")
-    private List<LikeInfo> likeInfoList;
+    private LikeInfo likeInfo;
 
-    public List<LikeInfo> getLikeInfoList() {
-        return likeInfoList;
+    public LikeInfo getLikeInfo() {
+        return likeInfo;
     }
 
-    public void setLikeInfoList(List<LikeInfo> likeInfoList) {
-        this.likeInfoList = likeInfoList;
+    public void setLikeInfo(LikeInfo likeInfo) {
+        this.likeInfo = likeInfo;
     }
 }
