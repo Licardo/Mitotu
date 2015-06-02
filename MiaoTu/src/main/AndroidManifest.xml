@@ -285,8 +285,7 @@
         <activity
             android:name=".activity.CustomTourDetailActivity"
             android:label="@string/title_activity_custom_tour"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-            >
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
             android:name=".activity.MyDatingTourActivity"
             android:label="@string/title_activity_my_dating_tour" >
         </activity>
@@ -323,6 +322,14 @@
         <activity
             android:name=".activity.TogetherActivity"
             android:label="@string/title_activity_together" >
+        </activity>
+        <activity
+            android:name=".activity.GiftMoneyIntroduceActivity"
+            android:label="@string/title_activity_gift_money_introduce" >
+        </activity>
+        <activity
+            android:name=".activity.FunctionIntroduceActivity"
+            android:label="@string/title_activity_function_introduce" >
         </activity>
     </application>
 

@@ -793,7 +793,7 @@ public class HttpRequestUtil {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token",token));
         params.add(new BasicNameValuePair("to_uid",to_uid));
-        return HttpDecoder.postForObject(getUrl("user/Blocks"),
+        return HttpDecoder.postForObject(getUrl("user/blocks"),
                 BaseResult.class, params);
     }
 
