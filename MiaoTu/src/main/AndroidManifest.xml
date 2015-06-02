@@ -284,7 +284,9 @@
             android:label="@string/title_activity_join_together_step2" />
         <activity
             android:name=".activity.CustomTourDetailActivity"
-            android:label="@string/title_activity_custom_tour" >
+            android:label="@string/title_activity_custom_tour"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
+            >
             android:name=".activity.MyDatingTourActivity"
             android:label="@string/title_activity_my_dating_tour" >
         </activity>
