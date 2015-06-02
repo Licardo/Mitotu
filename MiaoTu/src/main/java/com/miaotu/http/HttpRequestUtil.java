@@ -792,7 +792,7 @@ public class HttpRequestUtil {
     public BaseResult setBlackList(String token, String to_uid){
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token",token));
-        params.add(new BasicNameValuePair("uid",to_uid));
+        params.add(new BasicNameValuePair("to_uid",to_uid));
         return HttpDecoder.postForObject(getUrl("user/Blocks"),
                 BaseResult.class, params);
     }

@@ -9,16 +9,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.miaotu.R;
+import com.miaotu.util.StringUtil;
 
 /**
  * @author zhanglei
  * 
- *         账号与安全界面
+ * 账号与安全界面
  * 
  */
 public class AccountSafetyActivity extends BaseActivity implements
 		OnClickListener {
 	private TextView tvTitle, tvLeft;
+	private TextView tvIdentity,tvEmail,tvPhone,tvAccount;
 //	private LinearLayout layoutModifyPwd,layoutBindPhone;
 
 	@Override
@@ -40,6 +42,10 @@ public class AccountSafetyActivity extends BaseActivity implements
 	private void findView() {
 		tvLeft = (TextView) findViewById(R.id.tv_left);
 		tvTitle = (TextView) findViewById(R.id.tv_title);
+		tvIdentity = (TextView) findViewById(R.id.tv_identity);
+		tvEmail = (TextView) findViewById(R.id.tv_email);
+		tvAccount = (TextView) findViewById(R.id.tv_account);
+		tvPhone = (TextView) findViewById(R.id.tv_phone);
 //		layoutModifyPwd = (LinearLayout) findViewById(R.id.layout_modify_pwd);
 //		layoutBindPhone = (LinearLayout) findViewById(R.id.layout_bind_phone);
 	}
@@ -55,6 +61,17 @@ public class AccountSafetyActivity extends BaseActivity implements
 	private void init() {
 //		btnLeft.setBackgroundResource(R.drawable.arrow_white_left);
 		tvTitle.setText("账号与安全");
+		if("1".equals(readPreference("status"))){
+			tvIdentity.setText("已认证");
+		}
+		if(!StringUtil.isBlank(readPreference("email"))){
+			tvEmail.setText(readPreference("email"));
+		}
+		if(!StringUtil.isBlank(readPreference("phone"))){
+			tvPhone.setText(readPreference("phone"));
+			tvAccount.setText(readPreference("phone"));
+		}
+
 	}
 
 	@Override

@@ -442,6 +442,10 @@ public class RedPackageActivity extends BaseActivity implements OnClickListener 
         dialog.show();
     }
 
+    /**
+     * 红包兑换
+     * @param code
+     */
     private void exchange(final String code) {
         if (StringUtil.isEmpty(code)) {
             showToastMsg("兑换码不能为空！");

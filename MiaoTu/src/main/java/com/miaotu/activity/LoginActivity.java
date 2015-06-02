@@ -94,6 +94,9 @@ private void init(){
                     writePreference("qqid", result.getLogin().getQqopenid());
                     writePreference("sinaid", result.getLogin().getSinauid());
                     writePreference("luckmoney", result.getLogin().getLuckymoney());
+                    writePreference("status", result.getLogin().getStatus());   //1身份证验证 0未验证
+                    writePreference("email", result.getLogin().getEmail());
+                    writePreference("phone", result.getLogin().getPhone());
                     writePreference("login_state","in");
 
                     EMChatManager.getInstance().login(MD5.md5(readPreference("uid")), readPreference("token"),

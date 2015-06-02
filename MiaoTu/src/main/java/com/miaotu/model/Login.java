@@ -34,6 +34,12 @@ public class Login {
     private String sinauid;
     @JsonProperty("LuckyMoney")
     private String luckymoney;
+    @JsonProperty("Status")
+    private String status;
+    @JsonProperty("Phone")
+    private String phone;
+    @JsonProperty("Email")
+    private String email;
 
     public String getUid() {
         return uid;
@@ -145,5 +151,29 @@ public class Login {
 
     public void setLuckymoney(String luckymoney) {
         this.luckymoney = luckymoney;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

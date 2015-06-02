@@ -113,7 +113,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/iv_go_qq"
-                android:text="359233064"
+                android:text="未绑定"
                 android:textColor="#b4b4b4"
                 android:textSize="12sp"/>
         </RelativeLayout>
@@ -164,7 +164,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/iv_go_phone"
-                android:text="已绑定"
+                android:text="18612345678"
                 android:textColor="#b4b4b4"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -215,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/iv_go_email"
-                android:text="已绑定"
+                android:text="未绑定"
                 android:textColor="#b4b4b4"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -266,7 +266,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/iv_go_weixin"
-                android:text="已绑定"
+                android:text="未绑定"
                 android:textColor="#b4b4b4"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -317,7 +317,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/iv_go_weibo"
-                android:text="已绑定"
+                android:text="未绑定"
                 android:textColor="#b4b4b4"
                 android:textSize="12sp" />
         </RelativeLayout>
@@ -377,7 +377,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/iv_go_identity"
-                android:text="370181199005146542"
+                android:text="未认证"
                 android:textColor="#b4b4b4"
                 android:textSize="12sp" />
         </RelativeLayout>

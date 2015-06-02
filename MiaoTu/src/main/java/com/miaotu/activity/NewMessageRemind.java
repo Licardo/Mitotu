@@ -45,6 +45,9 @@ public class NewMessageRemind extends BaseActivity implements View.OnClickListen
                 }
                 isSelected = !isSelected;
                 break;
+            case R.id.tv_left:
+                finish();
+                break;
             default:
                 break;
         }

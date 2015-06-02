@@ -25,6 +25,15 @@
             android:textColor="#646464"
             android:textSize="14sp" />
 
+        <ImageView
+            android:id="@+id/iv_receptmsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:scaleType="fitCenter"
+            android:background="@drawable/icon_close"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,6 +42,7 @@
             android:layout_marginRight="10dp"
             android:text="已开启"
             android:textColor="#b5b5b5"
+            android:visibility="gone"
             android:textSize="14sp" />
     </RelativeLayout>
 
@@ -50,6 +60,7 @@
         android:lineSpacingExtra="5dp"
         android:text="如果你要关闭或开启妙途的新消息通知，请在iPhone的“设置”-“通知”功能中，找到应用程序“妙途”更改。"
         android:textColor="#b5b5b5"
+        android:visibility="gone"
         android:textSize="12sp" />
 
     <View
