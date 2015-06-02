@@ -26,7 +26,7 @@ public class DateTourActivity extends BaseFragmentActivity implements View.OnCli
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_date_tour);
+        setContentView(R.layout.fragment_date_tours);
 
         findView();
         bindView();
