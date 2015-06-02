@@ -88,7 +88,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_left:
+            case R.id.tv_left:
                 SettingActivity.this.finish();
                 break;
             case R.id.layout_feedback:        //帮助与反馈

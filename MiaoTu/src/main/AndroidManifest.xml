@@ -331,6 +331,9 @@
             android:name=".activity.FunctionIntroduceActivity"
             android:label="@string/title_activity_function_introduce" >
         </activity>
+        <activity
+            android:name=".activity.AppRecommendActivity" >
+        </activity>
     </application>
 
 </manifest>

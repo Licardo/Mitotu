@@ -377,13 +377,13 @@
                 android:background="@drawable/bg_line" />
 
             <RelativeLayout
-                android:id="@+id/rl_tuijian"
+                android:id="@+id/rl_recommend"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@android:color/white">
 
                 <ImageView
-                    android:id="@+id/iv_tuijian"
+                    android:id="@+id/iv_recommend"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_centerVertical="true"
@@ -396,7 +396,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/iv_tuijian"
+                    android:layout_toRightOf="@id/iv_recommend"
                     android:text="应用推荐"
                     android:textColor="#646464"
                     android:textSize="14sp" />
