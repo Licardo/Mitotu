@@ -36,7 +36,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     private RelativeLayout rl_gender,rl_age,rl_address,rl_emotion,rl_job,rl_wantgo;
     private CircleImageView ci_userhead;
     private TextView tv_start,tv_sign,tv_like,tv_trends,tv_tip_trends;
-    private RelativeLayout rl_follow,rl_chating,rl_bottom,rl_join,rl_like,rl_start;
+    private RelativeLayout rl_follow,rl_chating,rl_bottom,rl_join,rl_like,rl_start,rl_state;
     private TextView tv_follow;
     private ImageView iv_follow;
     private PersonInfoResult result;
@@ -73,6 +73,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         rl_join = (RelativeLayout) this.findViewById(R.id.rl_join);
         rl_like = (RelativeLayout) this.findViewById(R.id.rl_like);
         rl_start = (RelativeLayout) this.findViewById(R.id.rl_start);
+        rl_state = (RelativeLayout) this.findViewById(R.id.rl_state);
         view7 = this.findViewById(R.id.view7);
         view_bottom = this.findViewById(R.id.view_bottom);
         tv_title = (TextView) this.findViewById(R.id.tv_title);
@@ -100,6 +101,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         rl_like.setOnClickListener(this);
         rl_join.setOnClickListener(this);
         rl_start.setOnClickListener(this);
+        rl_state.setOnClickListener(this);
     }
 
     /**
@@ -258,6 +260,15 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                     startIntent.putExtra("title","TA发起的约游");
                 }
                 startActivity(startIntent);
+                break;
+            case R.id.rl_state:
+                Intent stateIntent = new Intent(PersonCenterActivity.this, PublishStateActivity.class);
+                stateIntent.putExtra("uid", uid);
+                stateIntent.putExtra("title","发布的动态");
+                if (!isMine){
+                    stateIntent.putExtra("title","TA的动态");
+                }
+                startActivity(stateIntent);
                 break;
             default:
                 break;

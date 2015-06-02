@@ -198,11 +198,15 @@ public class TopiclistAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, CustomTourDetailActivity.class);
-                intent.putExtra("id",mList.get(position).getAid());
+                intent.putExtra("id", mList.get(position).getAid());
                 mContext.startActivity(intent);
             }
         });
-        holder.tvDistance.setText(mList.get(position).getDistance() + "km");
+        if (!StringUtil.isBlank(mList.get(position).getDistance())){
+            holder.tvDistance.setText(mList.get(position).getDistance() + "km");
+        }else {
+            holder.tvDistance.setVisibility(View.GONE);
+        }
 //        holder.tvDate.setText(mList.get(position).getCreated());
         return convertView;
     }

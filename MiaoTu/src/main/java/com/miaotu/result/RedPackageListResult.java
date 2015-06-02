@@ -12,10 +12,8 @@ import com.miaotu.model.RedPackage;
  *
  */
 public class RedPackageListResult extends BaseResult{
-	@JsonProperty("items")
+	@JsonProperty("Items")
 	private List<RedPackage> redPackageList;
-	@JsonProperty("lucky_money")
-    private String luckMoney;
 
 	public List<RedPackage> getRedPackageList() {
 		return redPackageList;
@@ -25,11 +23,4 @@ public class RedPackageListResult extends BaseResult{
 		this.redPackageList = redPackageList;
 	}
 
-    public String getLuckMoney() {
-        return luckMoney;
-    }
-
-    public void setLuckMoney(String luckMoney) {
-        this.luckMoney = luckMoney;
-    }
 }

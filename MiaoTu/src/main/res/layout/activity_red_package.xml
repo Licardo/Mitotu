@@ -84,7 +84,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="红包总额（元）"
+                    android:text="红包总额"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
             </LinearLayout>

@@ -141,4 +141,5 @@
     <string name="title_activity_feed_back">FeedBackActivity</string>
     <string name="title_activity_black_list">BlackListActivity</string>
     <string name="title_activity_my_custom_tour">MyCustomTourActivity</string>
+    <string name="title_activity_publish_state">PublishStateActivity</string>
 </resources>

@@ -513,6 +513,22 @@ public class HttpRequestUtil {
     }
 
     /**
+     * 获取发布的动态
+     *
+     * @return
+     */
+    public TopicListResult getPublishStates(String token, String uid, String num) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token", token));
+        params.add(new BasicNameValuePair("uid", uid));
+        params.add(new BasicNameValuePair("page", "1"));
+        params.add(new BasicNameValuePair("num", num));
+        return HttpDecoder.getForObject(
+                getUrl("user/state/list"), TopicListResult.class,
+                params);
+    }
+
+    /**
      * 获取话题评论列表
      *
      * @param sid
@@ -601,13 +617,13 @@ public class HttpRequestUtil {
      * @param count
      * @return
      */
-    public TopicMessageListResult getTopicMessage(String token, String count) {
+    public TopicMessageListResult getTopicMessage(String token, String count, String type) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
         params.add(new BasicNameValuePair("num", count));
         params.add(new BasicNameValuePair("page", "1"));
         return HttpDecoder.getForObject(
-                getUrl("user/state/msg"), TopicMessageListResult.class,
+                getUrl("user/msg/"+type), TopicMessageListResult.class,
                 params);
 
     }
@@ -622,9 +638,9 @@ public class HttpRequestUtil {
     public MessageResult readTopicMessage(String token, String smid) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
-        params.add(new BasicNameValuePair("smid", smid));
+        params.add(new BasicNameValuePair("id", smid));
         return HttpDecoder.postForObject(
-                getUrl("user/state/msg"), MessageResult.class,
+                getUrl("user/msg"), MessageResult.class,
                 params);
     }
 
@@ -638,9 +654,9 @@ public class HttpRequestUtil {
     public MessageResult deleteTopicMessage(String token, String smid) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
-        params.add(new BasicNameValuePair("smid", smid));
+        params.add(new BasicNameValuePair("id", smid));
         return HttpDecoder.postForObject(
-                getUrl("user/state/msg/delete"), MessageResult.class,
+                getUrl("user/msg/delete"), MessageResult.class,
                 params);
     }
 
@@ -650,11 +666,11 @@ public class HttpRequestUtil {
      * @param token
      * @return
      */
-    public BaseResult emptyTopicMessage(String token) {
+    public BaseResult emptyTopicMessage(String token, String type) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
         return HttpDecoder.postForObject(
-                getUrl("user/state/msg/delete/all"), BaseResult.class,
+                getUrl("user/msg/delete/"+type), BaseResult.class,
                 params);
     }
 
@@ -729,21 +745,20 @@ public class HttpRequestUtil {
     }
 
     /**
-     * 获取卦象
+     * 每日一卦
      *
      * @return
      */
     public SymbolResult getSymbol (String token){
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token",token));
-//		params.add(new BasicNameValuePair("origin","5"));
-        return HttpDecoder.getForObject(
-                getUrl("user/check_sign"), SymbolResult.class,
+        return HttpDecoder.postForObject(
+                getUrl("user/day"), SymbolResult.class,
                 params);
     }
 
     /**
-     * 获取红包金额
+     * 获取红包金额(没用)
      *
      * @return
      */
@@ -755,17 +770,18 @@ public class HttpRequestUtil {
                 params);
     }
 
+
     /**
      * 优惠码兑换红包
      * @param token
      * @param code
      * @return
      */
-    public LuckyResult exchangeCouponCode (String token,String code){
+    public LuckyResult exchangeCouponCode(String token, String code){
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token",token));
         params.add(new BasicNameValuePair("code",code));
-        return HttpDecoder.getForObject(
+        return HttpDecoder.postForObject(
                 getUrl("user/lucky"), LuckyResult.class,
                 params);
     }

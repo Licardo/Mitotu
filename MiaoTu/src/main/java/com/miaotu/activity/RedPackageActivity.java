@@ -154,9 +154,13 @@ public class RedPackageActivity extends BaseActivity implements OnClickListener 
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     mList.clear();
+                    if (result.getRedPackageList() == null){
+                        adapter.notifyDataSetChanged();
+                        return;
+                    }
                     mList.addAll(result.getRedPackageList());
                     adapter.notifyDataSetChanged();
-                    tvMoney.setText(result.getLuckMoney());
+//                    tvMoney.setText(result.getLuckMoney());
                 } else {
                     if (StringUtil.isEmpty(result.getMsg())) {
                         showToastMsg("获取红包记录失败！");
@@ -293,8 +297,8 @@ public class RedPackageActivity extends BaseActivity implements OnClickListener 
                     rp.setMoney(result.getSymbol().getMoney());
                     rp.setMark(result.getSymbol().getType() + " " + result.getSymbol().getTitle());
                     rp.setType("1");
-                    rp.setUserId(readPreference("id"));
-                    rp.setTime(Util.getWholeTime());
+                    rp.setId(readPreference("id"));
+                    rp.setCreated(Util.getWholeTime());
                     mList.add(0, rp);
                     adapter.notifyDataSetChanged();
                     Double newMoney = Double.parseDouble(tvMoney.getText().toString()) + Double.parseDouble(result.getSymbol().getMoney());

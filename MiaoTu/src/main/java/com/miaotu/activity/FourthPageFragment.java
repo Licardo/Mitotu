@@ -28,7 +28,7 @@ private View root;
     private CircleImageView iv_userhead;
     private TextView tv_username,tv_userage,tv_iden,tv_userfans;
     private RelativeLayout rl_userinfo,rl_homepage,rl_setting,rl_hongbao,
-            rl_miaolvtuan,rl_yibaomingde,rl_like;
+            rl_miaolvtuan,rl_yibaomingde,rl_like,rl_together;
     private TextView tv_left, tv_title, tv_right;
 
     @Override
@@ -61,6 +61,7 @@ private View root;
         rl_miaolvtuan = (RelativeLayout) root.findViewById(R.id.rl_miaolvtuan);
         rl_yibaomingde = (RelativeLayout) root.findViewById(R.id.rl_yibaomingde);
         rl_like = (RelativeLayout) root.findViewById(R.id.rl_like);
+        rl_together = (RelativeLayout) root.findViewById(R.id.rl_together);
         tv_iden = (TextView) root.findViewById(R.id.tv_iden);
         tv_userage = (TextView) root.findViewById(R.id.tv_userage);
         tv_username = (TextView) root.findViewById(R.id.tv_username);
@@ -71,6 +72,7 @@ private View root;
         rl_hongbao.setOnClickListener(this);
         rl_miaolvtuan.setOnClickListener(this);
         rl_yibaomingde.setOnClickListener(this);
+        rl_together.setOnClickListener(this);
         rl_like.setOnClickListener(this);
         tv_right.setVisibility(View.GONE);
         tv_left.setVisibility(View.GONE);
@@ -131,12 +133,17 @@ private View root;
             case R.id.rl_yibaomingde:
                 intent.setClass(FourthPageFragment.this.getActivity(), DateTourActivity.class);
                 intent.putExtra("type", "join");
-                intent.putExtra("title","已报名的约游");
+                intent.putExtra("title", "已报名的约游");
                 break;
             case R.id.rl_like:
                 intent.setClass(FourthPageFragment.this.getActivity(), DateTourActivity.class);
                 intent.putExtra("type", "like");
                 intent.putExtra("title","喜欢的约游");
+                break;
+            case R.id.rl_together:
+                intent.setClass(FourthPageFragment.this.getActivity(), DateTourActivity.class);
+                intent.putExtra("type", "owner");
+                intent.putExtra("title","发起的约游");
                 break;
             default:
                 break;

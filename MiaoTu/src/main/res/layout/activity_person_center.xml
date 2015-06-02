@@ -250,14 +250,14 @@
                 android:background="@drawable/bg_line" />
 
             <RelativeLayout
-                android:id="@+id/rl_dongtai"
+                android:id="@+id/rl_state"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:background="@android:color/white"
                 android:visibility="visible">
 
                 <ImageView
-                    android:id="@+id/iv_dongtai"
+                    android:id="@+id/iv_state"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_centerVertical="true"
@@ -271,7 +271,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@id/iv_dongtai"
+                    android:layout_toRightOf="@id/iv_state"
                     android:text="TA的动态"
                     android:textColor="#646464"
                     android:textSize="14sp" />

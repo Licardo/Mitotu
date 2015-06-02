@@ -66,6 +66,8 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
     private int curPageCount = 0;
     private boolean isLoadMore = false;
     private View layoutMore;
+    private String type = "state";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,14 +140,14 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
         };
         lvTopicMessage.setMenuCreator(creator);
 
-        getMessages(false);
+        getMessages(type, false);
     }
 
     /**
      * 获取消息接口
      * @param isShow
      */
-    private void getMessages(boolean isShow) {
+    private void getMessages(final String type, boolean isShow) {
         new BaseHttpAsyncTask<Void, Void, TopicMessageListResult>(BBSMessageActivity.this, isShow) {
             @Override
             protected void onCompleteTask(TopicMessageListResult result) {
@@ -178,7 +180,7 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
             @Override
             protected TopicMessageListResult run(Void... params) {
                 curPageCount=PAGECOUNT;
-				return HttpRequestUtil.getInstance().getTopicMessage(readPreference("token"), curPageCount + "");
+				return HttpRequestUtil.getInstance().getTopicMessage(readPreference("token"), curPageCount + "",type);
             }
 
             @Override
@@ -220,7 +222,7 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
             protected TopicMessageListResult run(Void... params) {
                 isLoadMore = true;
                 curPageCount+=PAGECOUNT;
-                return HttpRequestUtil.getInstance().getTopicMessage(readPreference("token"), curPageCount + "");
+                return HttpRequestUtil.getInstance().getTopicMessage(readPreference("token"), curPageCount + "", type);
             }
 
             @Override
@@ -316,7 +318,7 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
 
             @Override
             protected BaseResult run(Void... params) {
-                return HttpRequestUtil.getInstance().emptyTopicMessage(token);
+                return HttpRequestUtil.getInstance().emptyTopicMessage(token, type);
             }
         }.execute();
     }
