@@ -218,7 +218,8 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                 });
                 if (j == 3) {
                     layoutTemp = new LinearLayout(this);
-                    LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                            ViewGroup.LayoutParams.WRAP_CONTENT);
                     params1.topMargin = Util.dip2px(this, 10);
                     layoutTemp.setLayoutParams(params1);
                     layoutTemp.setOrientation(LinearLayout.HORIZONTAL);
@@ -235,10 +236,12 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                 view.findViewById(R.id.tv_movement_name).setVisibility(View.GONE);
             }
             ((TextView) view
-                    .findViewById(R.id.tv_movement_name)).setText("@"+topic.getTitle());
+                    .findViewById(R.id.tv_movement_name)).setText("@" + topic.getTitle());
             view.findViewById(R.id.tv_movement_name).setOnClickListener(this);
-            ((TextView) view
-                    .findViewById(R.id.tv_comment_count)).setText(topic.getDistance()+"km");
+            if (!StringUtil.isBlank(topic.getDistance())){
+                ((TextView) view
+                        .findViewById(R.id.tv_comment_count)).setText(topic.getDistance()+"km");
+            }
             ((TextView) view
                     .findViewById(R.id.tv_top_date)).setText(topic.getCreated());
             final ImageView ivLike = (ImageView) view.findViewById(R.id.iv_like);

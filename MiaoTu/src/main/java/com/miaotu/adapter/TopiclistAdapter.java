@@ -51,12 +51,14 @@ public class TopiclistAdapter extends BaseAdapter {
     private List<Topic> mList = null;
     private Context mContext;
     private String token;
+    private boolean flag;
 
-    public TopiclistAdapter(Context context, List<Topic> list, String token) {
+    public TopiclistAdapter(Context context, List<Topic> list, String token, boolean flag) {
         mList = list;
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
         this.token = token;
+        this.flag = flag;
     }
 
     @Override
@@ -83,8 +85,6 @@ public class TopiclistAdapter extends BaseAdapter {
                     R.layout.item_topic, null);
             holder.tvNickname = (TextView) convertView.findViewById(R.id.tv_nickname);
             holder.ivHeadPhoto = (CircleImageView) convertView.findViewById(R.id.iv_head_photo);
-//			holder.tvTitle = (TextView) convertView
-//					.findViewById(R.id.tv_title);
             holder.tvContent = (TextView) convertView
                     .findViewById(R.id.tv_content);
             holder.layoutPhotos = (LinearLayout) convertView.findViewById(R.id.layout_photos);
@@ -92,14 +92,18 @@ public class TopiclistAdapter extends BaseAdapter {
                     .findViewById(R.id.tv_movement_name);
             holder.tvDistance = (TextView) convertView
                     .findViewById(R.id.tv_distance);
-//            holder.tvDate = (TextView) convertView
-//                    .findViewById(R.id.tv_date);
+			holder.tvLike = (TextView) convertView
+					.findViewById(R.id.tv_like);
+            holder.tvComment = (TextView) convertView
+                    .findViewById(R.id.tv_comment);
             holder.tvTopDate = (TextView) convertView
                     .findViewById(R.id.tv_top_date);
             holder.ivLike = (ImageView) convertView
                     .findViewById(R.id.iv_like);
             holder.llComment = (LinearLayout) convertView
                     .findViewById(R.id.ll_comment);
+            holder.llCount = (LinearLayout) convertView
+                    .findViewById(R.id.ll_count);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -207,6 +211,15 @@ public class TopiclistAdapter extends BaseAdapter {
         }else {
             holder.tvDistance.setVisibility(View.GONE);
         }
+        holder.tvLike.setText("喜欢 "+ mList.get(position).getStatelikecount() +"人");
+        holder.tvComment.setText("评论 "+ mList.get(position).getStatereplycount());
+        //true 显示我的/ta的动态, false 显示妙友
+        if (flag){
+            holder.tvDistance.setVisibility(View.GONE);
+            holder.ivLike.setVisibility(View.GONE);
+            holder.llComment.setVisibility(View.GONE);
+            holder.llCount.setVisibility(View.VISIBLE);
+        }
 //        holder.tvDate.setText(mList.get(position).getCreated());
         return convertView;
     }
@@ -215,14 +228,15 @@ public class TopiclistAdapter extends BaseAdapter {
     public final class ViewHolder {
         private TextView tvNickname = null;
         private CircleImageView ivHeadPhoto = null;
-        //        private TextView tvTitle = null;
         private TextView tvContent = null;
         private LinearLayout layoutPhotos = null;
         private TextView tvMovementName = null;
         private TextView tvDistance = null;
-        //        private TextView tvDate = null;
+        private TextView tvLike = null;
+        private TextView tvComment = null;
         private TextView tvTopDate;
         private LinearLayout llComment;
+        private LinearLayout llCount;
         private ImageView ivLike;
     }
 

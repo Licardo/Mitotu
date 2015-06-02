@@ -56,8 +56,8 @@
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="20dp"
-                android:scaleType="fitCenter"
-                android:background="@drawable/icon_friend_dislike" />
+                android:background="@drawable/icon_friend_dislike"
+                android:scaleType="fitCenter" />
         </RelativeLayout>
 
         <TextView
@@ -127,7 +127,7 @@
                     android:layout_height="15dp"
                     android:layout_gravity="center"
                     android:background="@drawable/icon_comment_count"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/tv_distance"
@@ -141,28 +141,65 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_comment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="right"
+                android:orientation="horizontal"
                 android:paddingRight="10dp">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:scaleType="fitCenter"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/icon_friend_comment"
-                    />
 
-                <TextView
-                    android:id="@+id/tv_date"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/ll_comment"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:text="评论"
-                    android:textColor="#ff8000"
-                    android:textSize="12sp" />
+                    android:gravity="right"
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/icon_friend_comment" />
+
+                    <TextView
+                        android:id="@+id/tv_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:text="评论"
+                        android:textColor="#ff8000"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_count"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:visibility="gone"
+                    android:layout_marginRight="5dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_like"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="喜欢 7人"
+                        android:textColor="#b4b4b4"
+                        android:textSize="10sp" />
+                    <TextView
+                        android:id="@+id/tv_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="评论 6"
+                        android:textColor="#b4b4b4"
+                        android:textSize="10sp" />
+
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

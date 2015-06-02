@@ -140,7 +140,7 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
         btnLeft.setVisibility(View.VISIBLE);
         topicList=new ArrayList<>();
         String token = readPreference("token");
-        adapter = new TopiclistAdapter(getActivity(),topicList, token);
+        adapter = new TopiclistAdapter(getActivity(),topicList, token, false);
         lvTopics.setAdapter(adapter);
 
         View emptyview = LayoutInflater.from(BBSTopicListFragment.this.getActivity()).

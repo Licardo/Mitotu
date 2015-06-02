@@ -318,6 +318,10 @@
             android:name=".activity.PublishStateActivity"
             android:label="@string/title_activity_publish_state" >
         </activity>
+        <activity
+            android:name=".activity.TogetherActivity"
+            android:label="@string/title_activity_together" >
+        </activity>
     </application>
 
 </manifest>

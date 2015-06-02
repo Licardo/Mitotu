@@ -115,7 +115,7 @@ public class PublishStateActivity extends BaseActivity implements View.OnClickLi
         uid = getIntent().getStringExtra("uid");
         title = getIntent().getStringExtra("title");
         tvTitle.setText(title);
-        adapter = new TopiclistAdapter(this,topicList, token);
+        adapter = new TopiclistAdapter(this,topicList, token, true);
         lvTopics.setAdapter(adapter);
         getTopics(token, uid, true);
     }

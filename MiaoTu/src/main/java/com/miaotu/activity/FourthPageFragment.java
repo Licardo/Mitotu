@@ -141,9 +141,7 @@ private View root;
                 intent.putExtra("title","喜欢的约游");
                 break;
             case R.id.rl_together:
-                intent.setClass(FourthPageFragment.this.getActivity(), DateTourActivity.class);
-                intent.putExtra("type", "owner");
-                intent.putExtra("title","发起的约游");
+                intent.setClass(FourthPageFragment.this.getActivity(), TogetherActivity.class);
                 break;
             default:
                 break;

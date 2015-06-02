@@ -20,6 +20,7 @@ import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.model.CustomTour;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.MovementListResult;
+import com.miaotu.result.MyCustomTourResult;
 import com.miaotu.result.PhotoUploadResult;
 import com.miaotu.util.LogUtil;
 import com.miaotu.util.StringUtil;
@@ -219,19 +220,22 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
 //        }
     }
 
+    /**
+     * 获取我参加的秒旅团
+     */
     private void getJoined() {
-        new BaseHttpAsyncTask<Void, Void, MovementListResult>(this, true) {
+        new BaseHttpAsyncTask<Void, Void, MyCustomTourResult>(this, true) {
             @Override
-            protected void onCompleteTask(MovementListResult result) {
+            protected void onCompleteTask(MyCustomTourResult result) {
                 if (movementList == null) {
                     return;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
-                    if (result.getResults().size() == 0) {
+                    if (result.getCustomTourInfolist().size() == 0) {
                         layoutMovement.setVisibility(View.GONE);
                     } else {
                         layoutMovement.setVisibility(View.VISIBLE);
-                        movementList.addAll(result.getResults());
+                        movementList.addAll(result.getCustomTourInfolist());
                         CustomTour frakeMovement = new CustomTour();
                         frakeMovement.setNickname("不选择");
                         movementList.add(frakeMovement);
@@ -246,8 +250,9 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
             }
 
             @Override
-            protected MovementListResult run(Void... params) {
-                return HttpRequestUtil.getInstance().getUserJoin(readPreference("id"), "");
+            protected MyCustomTourResult run(Void... params) {
+                return HttpRequestUtil.getInstance().getOwnerCustomerTour(readPreference("token"),
+                        readPreference("uid"), "join", "100");
             }
 //        @Override
 //        protected void onError() {
@@ -338,6 +343,9 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
 
     }
 
+    /**
+     * 上传图片得到相应的图片url
+     */
     private void getPhotoUrl() {
         if (!readPreference("login_state").equals("in")) {
             Intent intent = new Intent(BBSPublishTopicActivity.this, LoginActivity.class);

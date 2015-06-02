@@ -594,24 +594,6 @@ public class HttpRequestUtil {
     }
 
     /**
-     * 获取用户参加的活动
-     *
-     * @param uid
-     * @param count
-     * @return
-     */
-    public MovementListResult getUserJoin(String uid, String count) {
-        List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("uid", uid));
-        params.add(new BasicNameValuePair("count", count));
-        params.add(new BasicNameValuePair("page", "1"));
-        return HttpDecoder.getForObject(
-                getUrl("member/join_activity_list"), MovementListResult.class,
-                params);
-
-    }
-
-    /**
      * 获取话题消息列表
      *
      * @param count
