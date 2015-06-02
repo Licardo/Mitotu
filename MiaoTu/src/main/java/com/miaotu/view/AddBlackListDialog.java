@@ -68,31 +68,31 @@ public class AddBlackListDialog extends Dialog {
 		// TODO Auto-generated constructor stub
 	}
     private void collect(final String uid) {
-//        new BaseHttpAsyncTask<Void, Void, BaseResult>((BaseActivity)context, true) {
-//            @Override
-//            protected void onCompleteTask(BaseResult result) {
-//                if (result.getCode() == BaseResult.SUCCESS) {
-//                    ((BaseActivity)context).showToastMsg("拉黑成功！");
-//                    ((BaseActivity)context).finish();
-//                } else {
-//                    if(StringUtil.isEmpty(result.getMsg())){
-//                        ((BaseActivity)context).showToastMsg("拉黑失败！");
-//                    }else{
-//                        ((BaseActivity)context).showToastMsg(result.getMsg());
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            protected BaseResult run(Void... params) {
-//                return HttpRequestUtil.getInstance().addBlackList(
-//                        ((BaseActivity) context).readPreference("token"),uid);
-//            }
-//
-//
-//            protected void finallyRun() {
-//            };
-//        }.execute();
+        new BaseHttpAsyncTask<Void, Void, BaseResult>((BaseActivity)context, true) {
+            @Override
+            protected void onCompleteTask(BaseResult result) {
+                if (result.getCode() == BaseResult.SUCCESS) {
+                    ((BaseActivity)context).showToastMsg("拉黑成功！");
+                    ((BaseActivity)context).finish();
+                } else {
+                    if(StringUtil.isEmpty(result.getMsg())){
+                        ((BaseActivity)context).showToastMsg("拉黑失败！");
+                    }else{
+                        ((BaseActivity)context).showToastMsg(result.getMsg());
+                    }
+                }
+            }
+
+            @Override
+            protected BaseResult run(Void... params) {
+                return HttpRequestUtil.getInstance().setBlackList(
+                        ((BaseActivity) context).readPreference("token"),uid);
+            }
+
+
+            protected void finallyRun() {
+            };
+        }.execute();
     }
 
 }

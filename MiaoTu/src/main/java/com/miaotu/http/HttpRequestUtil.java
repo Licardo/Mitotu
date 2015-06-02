@@ -798,6 +798,25 @@ public class HttpRequestUtil {
     }
 
     /**
+     * 举报并拉黑
+     * @param token
+     * @param uid
+     * @param content
+     * @param type
+     * @return
+     */
+    public BaseResult addBlackListAndReport(String token, String uid, String content, String type){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("value",uid));
+        params.add(new BasicNameValuePair("content",content));
+        params.add(new BasicNameValuePair("remark",""));
+        params.add(new BasicNameValuePair("type",type));
+        return HttpDecoder.postForObject(getUrl("user/inform/"+type),
+                BaseResult.class, params);
+    }
+
+    /**
      * 获取我的秒旅团
      * @param token
      * @param uid

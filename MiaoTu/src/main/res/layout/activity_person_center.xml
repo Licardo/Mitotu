@@ -1,6 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:f="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f1f3f6"
@@ -10,13 +9,94 @@
         android:id="@+id/title"
         layout="@layout/top_bar" />
 
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white">
+
+        <View
+            android:id="@+id/view8"
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="#dcdcdc" />
+
+        <RelativeLayout
+            android:id="@+id/rl_follow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@id/view8">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_follow"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/mine_guanzhu" />
+
+                <TextView
+                    android:id="@+id/tv_follow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="center_vertical"
+                    android:text="关注"
+                    android:textColor="#ff8000"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_chating"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/view8">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/mine_chat" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:text="聊天"
+                    android:textColor="#646464"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
     <ScrollView
         android:id="@+id/sv_conent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/title"
-        android:scrollbars="none"
-        android:layout_marginBottom="49dp">
+        android:layout_above="@id/rl_bottom"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -474,11 +554,6 @@
                     android:background="@drawable/bg_line" />
             </RelativeLayout>
 
-            <!--<View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/bg_line" />-->
-
             <RelativeLayout
                 android:id="@+id/rl_job"
                 android:layout_width="match_parent"
@@ -522,11 +597,6 @@
                     android:background="@drawable/bg_line" />
             </RelativeLayout>
 
-            <!--<View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/bg_line" />-->
-
             <RelativeLayout
                 android:id="@+id/rl_wantgo"
                 android:layout_width="match_parent"
@@ -568,11 +638,6 @@
                     android:layout_alignParentBottom="true"
                     android:background="@drawable/bg_line" />
             </RelativeLayout>
-
-            <!--<View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/bg_line" />-->
 
             <LinearLayout
                 android:id="@+id/ll_tag"
@@ -625,85 +690,4 @@
 
         </LinearLayout>
     </ScrollView>
-
-    <RelativeLayout
-        android:id="@+id/rl_bottom"
-        android:layout_width="match_parent"
-        android:layout_height="49dp"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/white">
-
-        <View
-            android:id="@+id/view8"
-            android:layout_width="1dp"
-            android:layout_height="40dp"
-            android:layout_centerInParent="true"
-            android:background="#dcdcdc" />
-
-        <RelativeLayout
-            android:id="@+id/rl_follow"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_toLeftOf="@id/view8">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/iv_follow"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:scaleType="fitCenter"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/mine_guanzhu" />
-
-                <TextView
-                    android:id="@+id/tv_follow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center_vertical"
-                    android:layout_gravity="center_vertical"
-                    android:text="关注"
-                    android:textColor="#ff8000"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/rl_chating"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@id/view8">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_gravity="center_vertical"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/mine_chat" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="center_vertical"
-                    android:text="聊天"
-                    android:textColor="#646464"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-        </RelativeLayout>
-    </RelativeLayout>
 </RelativeLayout>

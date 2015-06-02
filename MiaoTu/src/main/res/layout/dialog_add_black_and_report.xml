@@ -1,118 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:gravity="center"
-    android:textColor="#b4b4b4"
-    android:text="选择举报类型，即可拉黑并举报该用户"
-    android:textSize="12sp"
-   />
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="选择举报类型，即可拉黑并举报该用户"
+        android:textColor="#b4b4b4"
+        android:textSize="12sp" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#b4b4b4"
-        >
-    </View>
-<TextView
-    android:id="@+id/reason1"
-    android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:layout_gravity="center"
-    android:gravity="center"
-    android:textColor="#000000"
-    android:text="骚扰信息"
-    android:textSize="14sp"
-    />
+        android:background="#b4b4b4"></View>
+
+    <TextView
+        android:id="@+id/reason1"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="骚扰信息"
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#b4b4b4">
-        </View>
+        android:background="#b4b4b4"></View>
+
     <TextView
         android:id="@+id/reason2"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="#000000"
-        android:textSize="14sp"
         android:text="色情相关"
-        />
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#b4b4b4">
-    </View>
+        android:background="#b4b4b4"></View>
+
     <TextView
         android:id="@+id/reason3"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textSize="14sp"
-        android:textColor="#000000"
         android:text="资料不当"
-        />
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#b4b4b4">
-    </View>
+        android:background="#b4b4b4"></View>
+
     <TextView
         android:id="@+id/reason4"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textSize="14sp"
-        android:textColor="#000000"
         android:text="盗用他人资料"
-        />
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#b4b4b4">
-    </View>
+        android:background="#b4b4b4"></View>
+
     <TextView
         android:id="@+id/reason5"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textSize="14sp"
-        android:textColor="#000000"
         android:text="垃圾广告"
-        />
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#b4b4b4">
-    </View>
+        android:background="#b4b4b4"></View>
+
     <TextView
         android:id="@+id/reason6"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textSize="14sp"
-        android:textColor="#000000"
         android:text="其他"
-        />
+        android:textColor="#000000"
+        android:textSize="14sp" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#b4b4b4">
-    </View>
-        <TextView
-            android:id="@+id/tv_cancel"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="取消"
-            android:gravity="center"
-            android:textColor="#b4b4b4"
-            android:textSize="12sp"
-            />
+        android:background="#b4b4b4"></View>
+
+    <TextView
+        android:id="@+id/tv_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="#b4b4b4"
+        android:textSize="12sp" />
 </LinearLayout>

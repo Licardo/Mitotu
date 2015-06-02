@@ -94,30 +94,35 @@ public class AddBlackAndReportDialog extends Dialog {
 
         setFeatureDrawableAlpha(Window.FEATURE_OPTIONS_PANEL, 0);
 		this.context = context;
-		// TODO Auto-generated constructor stub
 	}
-    private void collect(final String uid,final String reason) {
-//        new BaseHttpAsyncTask<Void, Void, BaseResult>((BaseActivity)context, true) {
-//            @Override
-//            protected void onCompleteTask(BaseResult result) {
-//                if (result.getCode() == BaseResult.SUCCESS) {
-//                    ((BaseActivity)context).showToastMsg("举报成功！");
-//                    ((BaseActivity)context).finish();
-//                } else {
-//                    ((BaseActivity)context).showToastMsg("举报失败！");
-//                }
-//            }
-//
-//            @Override
-//            protected BaseResult run(Void... params) {
-//                return HttpRequestUtil.getInstance().addBlackListAndReport(
-//                        ((BaseActivity) context).readPreference("token"),uid,reason);
-//            }
-//
-//
-//            protected void finallyRun() {
-//            };
-//        }.execute();
+
+    /**
+     * 拉黑并举报
+     * @param uid
+     * @param content
+     */
+    private void collect(final String uid,final String content) {
+        new BaseHttpAsyncTask<Void, Void, BaseResult>((BaseActivity)context, true) {
+            @Override
+            protected void onCompleteTask(BaseResult result) {
+                if (result.getCode() == BaseResult.SUCCESS) {
+                    ((BaseActivity)context).showToastMsg("举报成功！");
+                    ((BaseActivity)context).finish();
+                } else {
+                    ((BaseActivity)context).showToastMsg("举报失败！");
+                }
+            }
+
+            @Override
+            protected BaseResult run(Void... params) {
+                return HttpRequestUtil.getInstance().addBlackListAndReport(
+                        ((BaseActivity) context).readPreference("token"),uid,content,"user");
+            }
+
+
+            protected void finallyRun() {
+            };
+        }.execute();
     }
 
 }
