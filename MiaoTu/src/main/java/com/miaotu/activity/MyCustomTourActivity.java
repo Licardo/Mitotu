@@ -89,7 +89,7 @@ public class MyCustomTourActivity extends BaseActivity implements View.OnClickLi
      */
     private void getOwnerCustomerTour(final String token, final String uid,
                                       final String type){
-        new BaseHttpAsyncTask<Void, Void, MyCustomTourResult>(this, true){
+        new BaseHttpAsyncTask<Void, Void, MyCustomTourResult>(this, false){
 
             @Override
             protected void onCompleteTask(MyCustomTourResult myCustomTourResult) {
