@@ -1,6 +1,7 @@
 package com.miaotu.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,11 +28,9 @@ import com.umeng.update.UpdateStatus;
 public class SettingActivity extends BaseActivity implements OnClickListener {
     private Button btnExit;
     private TextView tvLeft, tvTitle;
-    /*private LinearLayout layout_account_safe, layoutMessageRemind,
-            layoutBlackList, layoutUseHelp, layoutFeedback, layoutAboutMiao,
-            layoutCheckUpdate; // 检查更新*/
     private LinearLayout layout_account_safe, layout_use_msg,
-            layout_call, layout_introduce, layout_feedback,layout_blacklist;
+            layout_call, layout_introduce, layout_feedback,
+            layout_blacklist,ll_comment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +58,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
         layout_introduce = (LinearLayout) findViewById(R.id.layout_introduce);
         layout_feedback = (LinearLayout) findViewById(R.id.layout_feedback);
         layout_blacklist = (LinearLayout) findViewById(R.id.layout_blacklist);
+        ll_comment = (LinearLayout) findViewById(R.id.ll_comment);
 //		layoutCheckUpdate = (LinearLayout) findViewById(R.id.layout_check_update);
         btnExit = (Button) findViewById(R.id.btn_exit);
     }
@@ -73,7 +73,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
         layout_introduce.setOnClickListener(this);
         layout_feedback.setOnClickListener(this);
         layout_blacklist.setOnClickListener(this);
-//		layoutCheckUpdate.setOnClickListener(this);
+		ll_comment.setOnClickListener(this);
         btnExit.setOnClickListener(this);
     }
 
@@ -88,38 +88,9 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_left:
+            case R.id.tv_left:
                 SettingActivity.this.finish();
                 break;
-        /*case R.id.layout_check_update:
-			// 版本更新
-			UmengUpdateAgent.setUpdateOnlyWifi(false);
-			UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
-				@Override
-				public void onUpdateReturned(int updateStatus,
-						UpdateResponse updateInfo) {
-					switch (updateStatus) {
-					case UpdateStatus.Yes: // has update
-						UmengUpdateAgent.showUpdateDialog(SettingActivity.this,
-								updateInfo);
-						break;
-					case UpdateStatus.No: // has no update
-						Toast.makeText(SettingActivity.this, "没有更新",
-								Toast.LENGTH_SHORT).show();
-						break;
-					case UpdateStatus.NoneWifi: // none wifi
-						// Toast.makeText(SettingActivity.this,
-						// "没有wifi连接， 只在wifi下更新", Toast.LENGTH_SHORT).show();
-						break;
-					case UpdateStatus.Timeout: // time out
-						Toast.makeText(SettingActivity.this, "超时",
-								Toast.LENGTH_SHORT).show();
-						break;
-					}
-				}
-			});
-			UmengUpdateAgent.forceUpdate(SettingActivity.this);
-			break;*/
             case R.id.layout_feedback:        //帮助与反馈
                 Intent feedIntent = new Intent(this, FeedBackActivity.class);
                 this.startActivity(feedIntent);
@@ -136,7 +107,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
                 Intent aboutIntent = new Intent(this, IntroduceActivity.class);
                 this.startActivity(aboutIntent);
                 break;
-            case R.id.layout_account_safe:
+            case R.id.layout_account_safe:      //账号与安全
                 if (!readPreference("login_state").equals("in")) {
                     Intent loginIntent = new Intent(this, LoginActivity.class);
                     this.startActivity(loginIntent);
@@ -169,6 +140,12 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
                 SettingActivity.this.finish();
                 Intent loginIntent = new Intent(SettingActivity.this,ChooseLoginActivity.class);
                 startActivity(loginIntent);
+                break;
+            case R.id.ll_comment:
+                Uri uri = Uri.parse("market://details?id="+getPackageName());
+                Intent intent = new Intent(Intent.ACTION_VIEW,uri);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 break;
         }
 

@@ -18,17 +18,17 @@ import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 
 public class FourthPageFragment extends BaseFragment implements View.OnClickListener {
-private View root;
+    private View root;
     private FragmentManager fragmentManager;
-    private FirstPageTab1Fragment mTab01 ;
-    private FirstPageTab1Fragment mTab02 ;
+    private FirstPageTab1Fragment mTab01;
+    private FirstPageTab1Fragment mTab02;
     private int curPage;
 
     private ImageView iv_usergender;
     private CircleImageView iv_userhead;
-    private TextView tv_username,tv_userage,tv_iden,tv_userfans;
-    private RelativeLayout rl_userinfo,rl_homepage,rl_setting,rl_hongbao,
-            rl_miaolvtuan,rl_yibaomingde,rl_like,rl_together;
+    private TextView tv_username, tv_userage, tv_iden, tv_userfans;
+    private RelativeLayout rl_userinfo, rl_homepage, rl_setting, rl_hongbao,
+            rl_miaolvtuan, rl_yibaomingde, rl_like, rl_together, rl_recommend;
     private TextView tv_left, tv_title, tv_right;
 
     @Override
@@ -47,7 +47,20 @@ private View root;
     }
 
     private void bindView() {
-            }
+        rl_userinfo.setOnClickListener(this);
+        rl_homepage.setOnClickListener(this);
+        rl_setting.setOnClickListener(this);
+        rl_hongbao.setOnClickListener(this);
+        rl_miaolvtuan.setOnClickListener(this);
+        rl_yibaomingde.setOnClickListener(this);
+        rl_together.setOnClickListener(this);
+        rl_like.setOnClickListener(this);
+        rl_recommend.setOnClickListener(this);
+        tv_right.setVisibility(View.GONE);
+        tv_left.setVisibility(View.GONE);
+        tv_title.setText("我的");
+    }
+
     private void findView() {
         tv_userfans = (TextView) root.findViewById(R.id.tv_userfans);
         iv_userhead = (CircleImageView) root.findViewById(R.id.iv_userhead);
@@ -62,27 +75,17 @@ private View root;
         rl_yibaomingde = (RelativeLayout) root.findViewById(R.id.rl_yibaomingde);
         rl_like = (RelativeLayout) root.findViewById(R.id.rl_like);
         rl_together = (RelativeLayout) root.findViewById(R.id.rl_together);
+        rl_recommend = (RelativeLayout) root.findViewById(R.id.rl_recommend);
         tv_iden = (TextView) root.findViewById(R.id.tv_iden);
         tv_userage = (TextView) root.findViewById(R.id.tv_userage);
         tv_username = (TextView) root.findViewById(R.id.tv_username);
         iv_usergender = (ImageView) root.findViewById(R.id.iv_usergender);
-        rl_userinfo.setOnClickListener(this);
-        rl_homepage.setOnClickListener(this);
-        rl_setting.setOnClickListener(this);
-        rl_hongbao.setOnClickListener(this);
-        rl_miaolvtuan.setOnClickListener(this);
-        rl_yibaomingde.setOnClickListener(this);
-        rl_together.setOnClickListener(this);
-        rl_like.setOnClickListener(this);
-        tv_right.setVisibility(View.GONE);
-        tv_left.setVisibility(View.GONE);
-        tv_title.setText("我的");
     }
 
     /**
      * 初始化用户信息
      */
-    private void initUserInfo(){
+    private void initUserInfo() {
         String headimg = readPreference("headphoto");
         String identity = readPreference("job");
         String age = readPreference("age");
@@ -91,13 +94,13 @@ private View root;
         String followcount = readPreference("followcount");
         String fanscount = readPreference("fanscount");
         UrlImageViewHelper.setUrlDrawable(iv_userhead, headimg, R.drawable.icon_default_head_photo);
-        if("男".equals(gender)){
+        if ("男".equals(gender)) {
             iv_usergender.setBackgroundResource(R.drawable.mine_boy);
         }
         tv_iden.setText(identity);
         tv_userage.setText(age);
         tv_username.setText(name);
-        tv_userfans.setText(followcount+"个关注|"+fanscount+"个粉丝");
+        tv_userfans.setText(followcount + "个关注|" + fanscount + "个粉丝");
     }
 
     private void init() {
@@ -107,47 +110,60 @@ private View root;
 
     @Override
     public void onClick(View view) {
-        if(!Util.isNetworkConnected(getActivity())) {
+        if (!Util.isNetworkConnected(getActivity())) {
             showToastMsg("当前未联网，请检查网络设置");
             return;
         }
         Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.rl_userinfo:
-                intent.setClass(FourthPageFragment.this.getActivity(), EditUserInfoActivity.class);
+                intent.setClass(FourthPageFragment.this.getActivity(),
+                        EditUserInfoActivity.class);
                 break;
             case R.id.rl_homepage:
                 String uid = readPreference("uid");
                 intent.putExtra("uid", uid);
-                intent.setClass(FourthPageFragment.this.getActivity(), PersonCenterActivity.class);
+                intent.setClass(FourthPageFragment.this.getActivity(),
+                        PersonCenterActivity.class);
                 break;
             case R.id.rl_setting:
-                intent.setClass(FourthPageFragment.this.getActivity(), SettingActivity.class);
+                intent.setClass(FourthPageFragment.this.getActivity(),
+                        SettingActivity.class);
                 break;
             case R.id.rl_hongbao:
-                intent.setClass(FourthPageFragment.this.getActivity(), RedPackageActivity.class);
+                intent.setClass(FourthPageFragment.this.getActivity(),
+                        RedPackageActivity.class);
                 break;
             case R.id.rl_miaolvtuan:
-                intent.setClass(FourthPageFragment.this.getActivity(), MyCustomTourActivity.class);
+                intent.setClass(FourthPageFragment.this.getActivity(),
+                        MyCustomTourActivity.class);
                 break;
             case R.id.rl_yibaomingde:
-                intent.setClass(FourthPageFragment.this.getActivity(), DateTourActivity.class);
+                intent.setClass(FourthPageFragment.this.getActivity(),
+                        DateTourActivity.class);
                 intent.putExtra("type", "join");
                 intent.putExtra("title", "已报名的约游");
                 break;
             case R.id.rl_like:
-                intent.setClass(FourthPageFragment.this.getActivity(), DateTourActivity.class);
+                intent.setClass(FourthPageFragment.this.getActivity(),
+                        DateTourActivity.class);
                 intent.putExtra("type", "like");
-                intent.putExtra("title","喜欢的约游");
+                intent.putExtra("title", "喜欢的约游");
                 break;
             case R.id.rl_together:
-                intent.setClass(FourthPageFragment.this.getActivity(), TogetherActivity.class);
+                intent.setClass(FourthPageFragment.this.getActivity(),
+                        TogetherActivity.class);
+                break;
+            case R.id.rl_recommend:
+                intent.setClass(FourthPageFragment.this.getActivity(),
+                        AppRecommendActivity.class);
                 break;
             default:
                 break;
         }
         startActivity(intent);
     }
+
     /**
      * 根据传入的index参数来设置选中的tab页。
      */
@@ -184,6 +200,7 @@ private View root;
 //        transaction.commit();
         transaction.commitAllowingStateLoss(); //为了解决换量页面返回时报的错误，详情见http://blog.csdn.net/ranxiedao/article/details/8214936
     }
+
     /**
      * 将所有的Fragment都置为隐藏状态。
      *
@@ -198,6 +215,7 @@ private View root;
             transaction.hide(mTab02);
         }
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

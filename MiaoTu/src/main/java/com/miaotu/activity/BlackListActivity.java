@@ -76,7 +76,7 @@ public class BlackListActivity extends BaseActivity implements View.OnClickListe
                 switch (index) {
                     case 0:
                         //解除黑名单
-                        setBlackList(readPreference("token"), blackInfoList.get(position).getUid(), position);
+                        setBlackList(position);
                         break;
                     default:
                         break;
@@ -86,22 +86,25 @@ public class BlackListActivity extends BaseActivity implements View.OnClickListe
             }
         });
 
-        String token = readPreference("token");
         String uid = readPreference("uid");
-        getBlackList(token, uid);
+        getBlackList(uid);
     }
 
     /**
      * 获取黑名单
-     * @param token
      * @param uid
      */
-    private void getBlackList(final String token, final String uid){
+    private void getBlackList(final String uid){
         new BaseHttpAsyncTask<Void, Void, BlackResult>(this, false){
 
             @Override
             protected void onCompleteTask(BlackResult blackResult) {
                 if(blackResult.getCode() == BaseResult.SUCCESS){
+                    blackInfoList.clear();
+                    if(blackResult.getBlackInfos() == null){
+                        adapter.notifyDataSetChanged();
+                        return;
+                    }
                     blackInfoList.addAll(blackResult.getBlackInfos());
                     adapter.notifyDataSetChanged();
                 }else {
@@ -115,7 +118,7 @@ public class BlackListActivity extends BaseActivity implements View.OnClickListe
 
             @Override
             protected BlackResult run(Void... params) {
-                return HttpRequestUtil.getInstance().getBlackList(token, uid);
+                return HttpRequestUtil.getInstance().getBlackList(readPreference("token"), uid);
             }
         }.execute();
     }
@@ -133,10 +136,8 @@ public class BlackListActivity extends BaseActivity implements View.OnClickListe
 
     /**
      * 加入/解除黑名单
-     * @param token
-     * @param to_uid
      */
-    private void setBlackList(final String token, final String to_uid, final int position){
+    private void setBlackList(final int position){
         new BaseHttpAsyncTask<Void, Void, BaseResult>(this, false){
 
             @Override
@@ -156,7 +157,8 @@ public class BlackListActivity extends BaseActivity implements View.OnClickListe
 
             @Override
             protected BaseResult run(Void... params) {
-                return HttpRequestUtil.getInstance().setBlackList(token, to_uid);
+                return HttpRequestUtil.getInstance().setBlackList(readPreference("token"),
+                        blackInfoList.get(position).getUid());
             }
         }.execute();
     }

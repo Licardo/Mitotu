@@ -102,13 +102,14 @@ public class RedPackageActivity extends BaseActivity implements OnClickListener 
     }
 
     private void init() {
-        if (!StringUtil.isBlank(readPreference("lucky_money"))) {
-            Double luckyMoney = Double.parseDouble(readPreference("lucky_money"));
+        if (!StringUtil.isBlank(readPreference("luckmoney"))) {
+            Double luckyMoney = Double.parseDouble(readPreference("luckmoney"));
             DecimalFormat df = new DecimalFormat("0.00");
-            writePreference("lucky_money", df.format(luckyMoney));
+            writePreference("luckmoney", df.format(luckyMoney));
         } else {
-            writePreference("lucky_money", "0.00");
+            writePreference("luckmoney", "0.00");
         }
+        tvMoney.setText(readPreference("luckmoney"));
 
         tvLeft.setBackgroundResource(R.drawable.arrow_left_grey);
         tvTitle.setText("我的红包");
@@ -304,7 +305,7 @@ public class RedPackageActivity extends BaseActivity implements OnClickListener 
                     Double newMoney = Double.parseDouble(tvMoney.getText().toString()) + Double.parseDouble(result.getSymbol().getMoney());
                     DecimalFormat df = new DecimalFormat("0.00"); //保留两位小数
                     tvMoney.setText(df.format(newMoney) + "");
-                    writePreference("lucky_money", newMoney + "");
+                    writePreference("luckmoney", newMoney + "");
                 } else {
                     if (StringUtil.isEmpty(result.getMsg())) {
                         showToastMsg("获取红包金额失败！");
@@ -441,6 +442,10 @@ public class RedPackageActivity extends BaseActivity implements OnClickListener 
         dialog.show();
     }
 
+    /**
+     * 红包兑换
+     * @param code
+     */
     private void exchange(final String code) {
         if (StringUtil.isEmpty(code)) {
             showToastMsg("兑换码不能为空！");

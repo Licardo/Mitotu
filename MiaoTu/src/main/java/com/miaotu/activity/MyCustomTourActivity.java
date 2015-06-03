@@ -24,7 +24,7 @@ import com.miaotu.util.StringUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyCustomTourActivity extends BaseActivity {
+public class MyCustomTourActivity extends BaseActivity implements View.OnClickListener{
 
     private TextView tvTitle, tvLeft;
     private PullToRefreshListView lvCustomTour;
@@ -66,6 +66,8 @@ public class MyCustomTourActivity extends BaseActivity {
                 loadMore();
             }
         });
+        tvLeft.setOnClickListener(this);
+        tvTitle.setText("妙旅团");
     }
 
     private void initData(){
@@ -95,28 +97,28 @@ public class MyCustomTourActivity extends BaseActivity {
                     if(customTourInfoList == null){
                         return;
                     }
-                    if (myCustomTourResult.getCustomTourInfolist() == null){
-                        return;
-                    }
-
                     //测试
-                    CustomTour info = new CustomTour();
-                    info.setEndDate("5月30号");
-                    info.setStartDate("4月30号");
-                    info.setNickname("四小美");
-                    info.setMtPrice("199元");
-                    info.setTitle("中华人民共和国");
-                    myCustomTourResult.getCustomTourInfolist().add(info);
-                    CustomTour info1 = new CustomTour();
-                    info1.setEndDate("5月30号");
-                    info1.setStartDate("4月30号");
-                    info1.setNickname("四小美");
-                    info1.setMtPrice("199元");
-                    info1.setTags("贝克汉姆,卡卡,罗纳尔迪尼奥");
-                    info1.setTitle("中华人民共和国");
-                    myCustomTourResult.getCustomTourInfolist().add(info1);
+//                    CustomTour info = new CustomTour();
+//                    info.setEndDate("5月30号");
+//                    info.setStartDate("4月30号");
+//                    info.setNickname("四小美");
+//                    info.setMtPrice("199元");
+//                    info.setTitle("中华人民共和国");
+//                    myCustomTourResult.getCustomTourInfolist().add(info);
+//                    CustomTour info1 = new CustomTour();
+//                    info1.setEndDate("5月30号");
+//                    info1.setStartDate("4月30号");
+//                    info1.setNickname("四小美");
+//                    info1.setMtPrice("199元");
+//                    info1.setTags("贝克汉姆,卡卡,罗纳尔迪尼奥");
+//                    info1.setTitle("中华人民共和国");
+//                    myCustomTourResult.getCustomTourInfolist().add(info1);
 
                     customTourInfoList.clear();
+                    if (myCustomTourResult.getCustomTourInfolist() == null){
+                        adapter.notifyDataSetChanged();
+                        return;
+                    }
                     customTourInfoList.addAll(myCustomTourResult.getCustomTourInfolist());
                     adapter.notifyDataSetChanged();
 
@@ -195,5 +197,16 @@ public class MyCustomTourActivity extends BaseActivity {
                 isLoadMore = false;
             }
         }.execute();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.tv_left:
+                finish();
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -327,6 +327,17 @@
             android:name=".activity.RemindLikeActivity"
             android:label="@string/title_activity_remind_like" >
         </activity>
+        <activity
+            android:name=".activity.GiftMoneyIntroduceActivity"
+            android:label="@string/title_activity_gift_money_introduce" >
+        </activity>
+        <activity
+            android:name=".activity.FunctionIntroduceActivity"
+            android:label="@string/title_activity_function_introduce" >
+        </activity>
+        <activity
+            android:name=".activity.AppRecommendActivity" >
+        </activity>
     </application>
 
 </manifest>
