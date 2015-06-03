@@ -66,7 +66,7 @@ public class JoinedListAdapter extends BaseAdapter{
         JoinedListInfo info = joinedListInfoList.get(i);
         holder.tvName.setText(info.getUsername());
         holder.tvNickName.setText(info.getNickname());
-//        holder.tvDate.setText(info.get);
+        holder.tvDate.setText(info.getCreated());
         holder.tvPhone.setText(info.getUserphone());
         holder.tvIdentity.setText(info.getUsercard());
         UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto, info.getHeadurl(), R.drawable.icon_default_head);

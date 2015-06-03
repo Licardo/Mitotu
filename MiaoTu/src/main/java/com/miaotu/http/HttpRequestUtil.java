@@ -12,6 +12,7 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.util.Log;
 
+import com.miaotu.activity.BaseActivity;
 import com.miaotu.annotation.FormProperty;
 import com.miaotu.annotation.Ignore;
 import com.miaotu.form.MFriendsInfo;
@@ -889,6 +890,20 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("num", num));
         return HttpDecoder.getForObject(getUrl("activity/join"),
                 JoinedListResult.class, params);
+    }
+
+    /**
+     * 意见反馈
+     * @param email
+     * @param content
+     * @return
+     */
+    public BaseResult feedBack(String email, String content){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("email", email));
+        params.add(new BasicNameValuePair("content", content));
+        return HttpDecoder.postForObject(getUrl("base/feedback"),
+                BaseResult.class, params);
     }
 
 }

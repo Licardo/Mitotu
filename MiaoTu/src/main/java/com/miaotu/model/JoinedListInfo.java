@@ -20,6 +20,8 @@ public class JoinedListInfo {
     private String usermark;
     @JsonProperty("UserCard")
     private String usercard;
+    @JsonProperty("Created")
+    private String created;
 
     public String getUid() {
         return uid;
@@ -75,5 +77,13 @@ public class JoinedListInfo {
 
     public void setUsercard(String usercard) {
         this.usercard = usercard;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
     }
 }
