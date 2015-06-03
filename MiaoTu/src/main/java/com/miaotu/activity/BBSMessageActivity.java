@@ -93,7 +93,7 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch (index){
                     case 0:
-                        deleteMessage(readPreference("token"), mList.get(position).getSmid(), position);
+                        deleteMessage(position);
                         break;
                     default:
                         break;
@@ -106,10 +106,10 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(BBSMessageActivity.this, BBSTopicDetailActivity.class);
-                intent.putExtra("sid", mList.get(i).getSid());
+                intent.putExtra("sid", mList.get(i).getContent().getSid());
                 startActivity(intent);
                 //设置已读状态
-                read(false, mList.get(i).getSmid(), i);
+                read(false, mList.get(i).getId(), i);
             }
         });
         tvLeft.setOnClickListener(this);
@@ -157,17 +157,7 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                 if (result.getCode() == BaseResult.SUCCESS) {
                     mList.clear();
                     mList.addAll(result.getMessages());
-//                    TopicMessage mes = new TopicMessage();
-//                    mes.setContent("你好啊");
-//                    mes.setCreated(new Date().toString());
-//                    mes.setNickname("四小美");
-//                    mes.setRemark("hi");
-//                    mes.setStatus("0");
-//                    mes.setSid("1");
-//                    mes.setSmid("1");
-//                    mList.add(mes);
                     adapter.notifyDataSetChanged();
-//                    showToastMsg("lastvisibale:"+lvTopicMessage.getRefreshableView().getLastVisiblePosition()+"  count: "+lvTopicMessage.getRefreshableView().getCount()+" first:"+lvTopicMessage.getRefreshableView().getFirstVisiblePosition());
                 } else {
                     if (StringUtil.isEmpty(result.getMsg())) {
                         showToastMsg("获取话题失败！");
@@ -180,7 +170,8 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
             @Override
             protected TopicMessageListResult run(Void... params) {
                 curPageCount=PAGECOUNT;
-				return HttpRequestUtil.getInstance().getTopicMessage(readPreference("token"), curPageCount + "",type);
+				return HttpRequestUtil.getInstance().getTopicMessage(
+                        readPreference("token"), curPageCount + "",type);
             }
 
             @Override
@@ -325,17 +316,15 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
 
     /**
      * 删除消息
-     * @param token
-     * @param smid
      */
-    private void deleteMessage(final String token, final String smid, final int postion){
-        new BaseHttpAsyncTask<Void, Void, MessageResult>(BBSMessageActivity.this, false){
+    private void deleteMessage(final int position){
+        new BaseHttpAsyncTask<Void, Void, TopicMessageListResult>(BBSMessageActivity.this, false){
 
             @Override
-            protected void onCompleteTask(MessageResult baseResult) {
-                if(baseResult.getCode() == 100){
-                    if("-1".equals(baseResult.getMessage().getStatus())){
-                        mList.remove(postion);
+            protected void onCompleteTask(TopicMessageListResult baseResult) {
+                if(baseResult.getCode() == BaseResult.SUCCESS){
+                    if("-1".equals(baseResult.getMessages().get(position).getStatus())){
+                        mList.remove(position);
                         adapter.notifyDataSetChanged();
                     }
                     showToastMsg("操作成功");
@@ -349,8 +338,8 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
             }
 
             @Override
-            protected MessageResult run(Void... params) {
-                return HttpRequestUtil.getInstance().deleteTopicMessage(token, smid);
+            protected TopicMessageListResult run(Void... params) {
+                return HttpRequestUtil.getInstance().deleteTopicMessage(readPreference("token"), mList.get(position).getId());
             }
         }.execute();
     }

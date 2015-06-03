@@ -2,10 +2,12 @@ package com.miaotu.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 /**
  * Created by hao on 2015/5/26.
  */
-public class LikeInfo {
+public class LikeInfo implements Serializable{
     @JsonProperty("Uid")
     private String uid;
     @JsonProperty("Nickname ")

@@ -75,10 +75,14 @@ public class TopicMessageAdapter extends BaseAdapter {
             //已读
 //            holder.ivDot.setVisibility(View.GONE);
         }
-        UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto, mList.get(position).getHeadurl(), R.drawable.icon_default_head);
-        UrlImageViewHelper.setUrlDrawable(holder.ivPhoto, mList.get(position).getPicurl(), R.drawable.icon_default_head);
-        holder.tvName.setText(mList.get(position).getNickname());
-        holder.tvStatus.setText(mList.get(position).getRemark());
+        UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto,
+                mList.get(position).getContent().getHeadurl(),
+                R.drawable.icon_default_head);
+        UrlImageViewHelper.setUrlDrawable(holder.ivPhoto,
+                mList.get(position).getContent().getPicurl(),
+                R.drawable.icon_default_head);
+        holder.tvName.setText(mList.get(position).getContent().getNickname());
+        holder.tvStatus.setText(mList.get(position).getTitle());
         holder.tvTime.setText(mList.get(position).getCreated());
         return convertView;
     }

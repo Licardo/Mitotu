@@ -636,12 +636,12 @@ public class HttpRequestUtil {
      * @param smid
      * @return
      */
-    public MessageResult deleteTopicMessage(String token, String smid) {
+    public TopicMessageListResult deleteTopicMessage(String token, String smid) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
         params.add(new BasicNameValuePair("id", smid));
         return HttpDecoder.postForObject(
-                getUrl("user/msg/delete"), MessageResult.class,
+                getUrl("user/msg/delete"), TopicMessageListResult.class,
                 params);
     }
 
