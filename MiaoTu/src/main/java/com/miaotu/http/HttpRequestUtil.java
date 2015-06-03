@@ -32,6 +32,7 @@ import com.miaotu.result.BaseResult;
 import com.miaotu.result.LoginResult;
 import com.miaotu.result.PhotoUploadResult;
 import com.miaotu.result.RedPackageListResult;
+import com.miaotu.result.RemindLikeResult;
 import com.miaotu.result.SearchTourResult;
 import com.miaotu.result.SearchUserResult;
 import com.miaotu.result.SymbolResult;
@@ -605,7 +606,7 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("num", count));
         params.add(new BasicNameValuePair("page", "1"));
         return HttpDecoder.getForObject(
-                getUrl("user/msg/"+type), TopicMessageListResult.class,
+                getUrl("user/msg/" + type), TopicMessageListResult.class,
                 params);
 
     }
@@ -783,6 +784,20 @@ public class HttpRequestUtil {
         return HttpDecoder.getForObject(getUrl("user/blocks"),
                 BlackResult.class, params);
     }
+
+    /**
+     * 获取提醒列表
+     * @param token
+     * @return
+     */
+    public RemindLikeResult getRemindLikeList(String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("page","1"));
+        params.add(new BasicNameValuePair("num","1000"));
+        return HttpDecoder.getForObject(getUrl("user/msg/like"),
+                RemindLikeResult.class, params);
+    }
 /**
      * 加入/解除黑名单
      * @param token
@@ -794,6 +809,31 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("token",token));
         params.add(new BasicNameValuePair("uid",to_uid));
         return HttpDecoder.postForObject(getUrl("user/Blocks"),
+                BaseResult.class, params);
+    }
+
+    /**
+     * 删除关注提醒
+     * @param token
+     * @param id
+     * @return
+     */
+    public BaseResult delLikeRemind(String token, String id){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("id",id));
+        return HttpDecoder.postForObject(getUrl("user/msg/delete"),
+                BaseResult.class, params);
+    }
+    /**
+     * 清空关注提醒
+     * @param token
+     * @return
+     */
+    public BaseResult delAllLikeRemind(String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        return HttpDecoder.postForObject(getUrl("user/msg/delete/like"),
                 BaseResult.class, params);
     }
 

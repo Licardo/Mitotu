@@ -16,6 +16,8 @@ import com.easemob.chat.EMMessage;
 import com.miaotu.R;
 import com.miaotu.imutil.CommonUtils;
 import com.miaotu.imutil.Conversation;
+import com.miaotu.jpush.MessageDatabaseHelper;
+import com.miaotu.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -67,12 +69,10 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
     }
     private void bindView(){
         layoutChat.setOnClickListener(this);
+        layoutLike.setOnClickListener(this);
     }
     private void init(){
-        if( EMChatManager.getInstance().getUnreadMsgsCount()!=0){
-            ivChatCount.setText(EMChatManager.getInstance().getUnreadMsgsCount()+"");
-            ivChatCount.setVisibility(View.VISIBLE);
-        }
+        refresh();
     }
     public static MessageFragment getInstance(){
         return messageFragment;
@@ -84,7 +84,20 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
         }else{
             ivChatCount.setVisibility(View.GONE);
         }
-
+        if(getLikeMessageNum()!=0){
+            ivLikeCount.setText(getLikeMessageNum()+"");
+            ivLikeCount.setVisibility(View.VISIBLE);
+            tvLikeContent.setText("又有新伙伴关注你啦！快去看看吧");
+        }else{
+            tvLikeContent.setText("");
+            ivLikeCount.setVisibility(View.GONE);
+        }
+    }
+    private int getLikeMessageNum() {
+        MessageDatabaseHelper helper = new MessageDatabaseHelper(getActivity());
+        int num = helper.getAllLikeMessage().size();
+        LogUtil.d("喜欢提醒个数"+num);
+        return num;
     }
     @Override
     public void onClick(View view) {
@@ -92,6 +105,10 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
             case R.id.layout_chat:
                 Intent intent = new Intent(getActivity(),MessageActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.layout_like:
+                Intent intent1 = new Intent(getActivity(),RemindLikeActivity.class);
+                startActivity(intent1);
                 break;
         }
     }

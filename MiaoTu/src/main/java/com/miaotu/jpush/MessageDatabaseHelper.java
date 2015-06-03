@@ -25,6 +25,7 @@ public class MessageDatabaseHelper {
 
 	public static final String TABLE_INVITE_MESSAGE = "invite_message";
 	public static final String TABLE_SYS_MESSAGE = "sys_message";
+	public static final String TABLE_LIKE_MESSAGE = "like_message";
 	public static final String TABLE_CHAT_MSG_COUNT = "msg_count";
 
 	public MessageDatabaseHelper(Context context) {
@@ -158,28 +159,23 @@ public class MessageDatabaseHelper {
 		return i ;
 	}
 	/**
-	 * 保存系统消息
+	 * 保存喜欢消息
 	 * 
-	 * @param chatInfo
+	 * @param likeMessage
 	 * @return
 	 */
-	public long saveSysMessage(SystemMessage systemMessage) {
+	public long saveSysMessage(LikeMessage likeMessage) {
 		long l = -1;
 		try {
 			SQLiteDatabase db = messageDbHelper.getWritableDatabase();
 			ContentValues cv = new ContentValues();
 			
-			cv.put("message_status", systemMessage.getMessageStatus());
-			cv.put("message_type", systemMessage.getMessageType());
-			cv.put("user_interest_count", systemMessage.getUserInterestCount());
-			cv.put("user_gender", systemMessage.getUserGender());
-			cv.put("user_age", systemMessage.getUserAge());
-			cv.put("user_id", systemMessage.getUserId());
-			cv.put("user_name", systemMessage.getUserName());
-			cv.put("message_content", systemMessage.getMessageContent());
-			cv.put("message_date", systemMessage.getMessageDate());
+			cv.put("uid", likeMessage.getUid());
+			cv.put("age", likeMessage.getAge());
+			cv.put("gender", likeMessage.getGender());
+			cv.put("headurl", likeMessage.getHeadUrl());
 			// 插入ContentValues中的数据
-			l = db.insert(TABLE_SYS_MESSAGE, null, cv);
+			l = db.insert(TABLE_LIKE_MESSAGE, null, cv);
 			db.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -210,34 +206,24 @@ public class MessageDatabaseHelper {
 	 * 获取所有邀请消息
 	 * @return
 	 */
-	public List<SystemMessage> getAllSysMessage(){
-		List<SystemMessage>list = new ArrayList<SystemMessage>();
+	public List<LikeMessage> getAllLikeMessage(){
+		List<LikeMessage>list = new ArrayList<LikeMessage>();
 		SQLiteDatabase db = messageDbHelper.getWritableDatabase();
-		String sql = "select * from "+TABLE_SYS_MESSAGE+" order by message_date desc";
+		String sql = "select * from "+TABLE_LIKE_MESSAGE+" order by message_id desc";
 		Cursor cursor = db.rawQuery(sql, null);
 		while (cursor.moveToNext()) {
-			SystemMessage systemMessage = new SystemMessage();
-			systemMessage.setMessageContent(cursor.getString(cursor
-					.getColumnIndex("message_content")));
-			systemMessage.setMessageDate(cursor.getString(cursor
-					.getColumnIndex("message_date")));
-			systemMessage.setMessageId(cursor.getInt(cursor
-					.getColumnIndex("sys_message_id")));
-			systemMessage.setMessageStatus(cursor.getString(cursor
-					.getColumnIndex("message_status")));
-			systemMessage.setMessageType(cursor.getString(cursor
-					.getColumnIndex("message_type")));
-			systemMessage.setUserAge(cursor.getString(cursor
-					.getColumnIndex("user_age")));
-			systemMessage.setUserGender(cursor.getString(cursor
-					.getColumnIndex("user_gender")));
-			systemMessage.setUserId(cursor.getString(cursor
-					.getColumnIndex("user_id")));
-			systemMessage.setUserInterestCount(cursor.getString(cursor
-					.getColumnIndex("user_interest_count")));
-			systemMessage.setUserName(cursor.getString(cursor
-					.getColumnIndex("user_name")));
-			list.add(systemMessage);
+			LikeMessage likeMessage = new LikeMessage();
+			likeMessage.setAge(cursor.getString(cursor
+					.getColumnIndex("age")));
+			likeMessage.setGender(cursor.getString(cursor
+					.getColumnIndex("gender")));
+			likeMessage.setMessageId(cursor.getInt(cursor
+					.getColumnIndex("message_id")));
+			likeMessage.setHeadUrl(cursor.getString(cursor
+					.getColumnIndex("headurl")));
+			likeMessage.setUid(cursor.getString(cursor
+					.getColumnIndex("uid")));
+			list.add(likeMessage);
 		}
 		if (!(cursor == null||cursor.isClosed())) {
 			cursor.close();
@@ -246,16 +232,13 @@ public class MessageDatabaseHelper {
 		return list;
 	}
 	/**
-	 * 重置邀请新消息数量
+	 * 删除所有喜欢提醒信息
 	 * @return
 	 */
-	public int resetSysMessageNo(){
+	public void resetAllLikeMessage(){
 		int i = 0;
 		SQLiteDatabase db = messageDbHelper.getWritableDatabase();
-		ContentValues cv = new ContentValues();
-		cv.put("message_status", "1");
-		i  = db.update(TABLE_SYS_MESSAGE, cv, "message_status = ?", new String[]{"0"});
-		return i ;
+		db.execSQL("DELETE FROM "+TABLE_LIKE_MESSAGE);
 	}
 	/**
 	 * 删除推送消息

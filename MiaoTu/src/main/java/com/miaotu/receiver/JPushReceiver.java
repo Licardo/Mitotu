@@ -13,14 +13,13 @@ import android.util.Log;
 import cn.jpush.android.api.JPushInterface;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.miaotu.jpush.InviteMessage;
 import com.miaotu.jpush.MessageCountDatabaseHelper;
 import com.miaotu.jpush.MessageDatabaseHelper;
-import com.miaotu.jpush.SystemMessage;
+import com.miaotu.jpush.LikeMessage;
 import com.miaotu.util.LogUtil;
 
 /**
@@ -108,7 +107,7 @@ public class JPushReceiver extends BroadcastReceiver {
 			//pushMessage = mapper.readValue(message,PushMessage.class);
 			InviteMessage inviteMessage = new InviteMessage();
 			JSONObject rootJson = new JSONObject(message);
-			if(rootJson.get("type").equals("invite")){
+			if(rootJson.get("Type").equals("invite")){
 				//邀请消息
 				inviteMessage = mapper.readValue(rootJson.getJSONObject("item").toString(), InviteMessage.class);
 				inviteMessage.setMessageStatus("0");
@@ -118,31 +117,27 @@ public class JPushReceiver extends BroadcastReceiver {
 				Intent msgIntent = new Intent(ACTION_JPUSH_INVITE_MESSAGE_RECIEVE);
 				msgIntent.putExtras(new Bundle());
 				context.sendOrderedBroadcast(msgIntent,null);
-			}else if(rootJson.get("type").equals("like")){
+			}else if(rootJson.get("Type").equals("like")){
 				//系统消息-喜欢
-				SystemMessage systemMessage = new SystemMessage();
-				systemMessage = mapper.readValue(rootJson.getJSONObject("item").toString(), SystemMessage.class);
-				systemMessage.setMessageStatus("0");
-				systemMessage.setMessageType("喜欢提醒");
+				LikeMessage likeMessage = new LikeMessage();
+				likeMessage = mapper.readValue(rootJson.getJSONObject("Content").toString(), LikeMessage.class);
 				MessageDatabaseHelper helper = new MessageDatabaseHelper(context);
-				long l = helper.saveSysMessage(systemMessage);
-				LogUtil.d("插入收到的系统消息：喜欢"+l);
+				long l = helper.saveSysMessage(likeMessage);
+				LogUtil.d("插入收到的喜欢人消息：喜欢"+l);
 				Intent msgIntent = new Intent(ACTION_JPUSH_SYS_MESSAGE_RECIEVE);
 				msgIntent.putExtras(new Bundle());
 				context.sendOrderedBroadcast(msgIntent,null);
-			}else if(rootJson.get("type").equals("order")){
+			}else if(rootJson.get("Type").equals("order")){
                 //系统消息-订单
-                SystemMessage systemMessage = new SystemMessage();
-                systemMessage = mapper.readValue(rootJson.getJSONObject("item").toString(), SystemMessage.class);
-                systemMessage.setMessageStatus("0");
-                systemMessage.setMessageType("订单通知");
+                LikeMessage systemMessage = new LikeMessage();
+                systemMessage = mapper.readValue(rootJson.getJSONObject("item").toString(), LikeMessage.class);
                 MessageDatabaseHelper helper = new MessageDatabaseHelper(context);
                 long l = helper.saveSysMessage(systemMessage);
                 LogUtil.d("插入收到的系统消息：订单"+l);
                 Intent msgIntent = new Intent(ACTION_JPUSH_SYS_MESSAGE_RECIEVE);
                 msgIntent.putExtras(new Bundle());
                 context.sendOrderedBroadcast(msgIntent,null);
-            }else if(rootJson.get("type").equals("topic")){
+            }else if(rootJson.get("Type").equals("topic")){
                 //系统消息-社区回复
                 MessageCountDatabaseHelper helper = new MessageCountDatabaseHelper(context);
                 long l = helper.saveMessage("topic");
