@@ -143,6 +143,7 @@
     <string name="title_activity_my_custom_tour">MyCustomTourActivity</string>
     <string name="title_activity_publish_state">PublishStateActivity</string>
     <string name="title_activity_together">TogetherActivity</string>
+    <string name="title_activity_remind_like">RemindLikeActivity</string>
     <string name="title_activity_gift_money_introduce">GiftMoneyIntroduceActivity</string>
     <string name="title_activity_function_introduce">FunctionIntroduceActivity</string>
     <string name="title_activity_joined_list">JoinedListActivity</string>

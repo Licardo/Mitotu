@@ -324,6 +324,10 @@
             android:label="@string/title_activity_together" >
         </activity>
         <activity
+            android:name=".activity.RemindLikeActivity"
+            android:label="@string/title_activity_remind_like" >
+        </activity>
+        <activity
             android:name=".activity.GiftMoneyIntroduceActivity"
             android:label="@string/title_activity_gift_money_introduce" >
         </activity>

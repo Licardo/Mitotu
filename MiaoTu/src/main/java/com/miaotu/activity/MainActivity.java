@@ -32,6 +32,7 @@ import com.easemob.chat.EMMessage.ChatType;
 import com.easemob.chat.OnMessageNotifyListener;
 import com.easemob.chat.OnNotificationClickListener;
 import com.easemob.exceptions.EaseMobException;
+import com.easemob.util.DateUtils;
 import com.miaotu.R;
 import com.miaotu.imutil.CommonUtils;
 import com.miaotu.imutil.ContactInfo;
@@ -50,6 +51,7 @@ import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -128,7 +130,7 @@ public class MainActivity extends BaseFragmentActivity implements
 
         if (readPreference("login_state").equals("in")) {
             JPushInterface.setDebugMode(true);
-            JPushInterface.setAliasAndTags(this, MD5.md5(readPreference("id")), null);
+            JPushInterface.setAliasAndTags(this, MD5.md5(readPreference("uid")), null);
             JPushInterface.init(getApplicationContext());
             JPushInterface.resumePush(getApplicationContext());
 
@@ -295,9 +297,9 @@ public class MainActivity extends BaseFragmentActivity implements
                     mTab03 = new MessageFragment();
                     transaction.add(R.id.id_content, mTab03);
                 } else {
-//                    mTab03.registerReceiver();
                     // 如果NewsFragment不为空，则直接将它显示出来
                     transaction.show(mTab03);
+                    mTab03.refresh();
                 }
                 break;
             case 3:
@@ -579,6 +581,12 @@ public class MainActivity extends BaseFragmentActivity implements
                 e.printStackTrace();
                 return;
             }
+            String ticker = CommonUtils.getMessageDigest(message, MainActivity.this);
+            if(message.getType() == EMMessage.Type.TXT)
+                ticker = ticker.replaceAll("\\[.{2,3}\\]", "[表情]");
+            writePreference("im_content", ticker);
+
+            writePreference("im_date",DateUtils.getTimestampString(new Date(message.getMsgTime())));
             remindUser("imMsg");
 
             return;
@@ -643,9 +651,9 @@ public class MainActivity extends BaseFragmentActivity implements
         }
     };
 
-    private int getSysMessageNum() {
+    private int getLikeMessageNum() {
         MessageDatabaseHelper helper = new MessageDatabaseHelper(this);
-        int num = helper.getSysMessageNum();
+        int num = helper.getAllLikeMessage().size();
         return num;
     }
 
@@ -687,7 +695,7 @@ public class MainActivity extends BaseFragmentActivity implements
         } else {
             int count = 0;
             count += getInviteMessageNum();
-            count += getSysMessageNum();
+            count += getLikeMessageNum();
             count += EMChatManager.getInstance().getUnreadMsgsCount();
             if (count > 99) {
                 ivMsgFlg.setText("99+");
