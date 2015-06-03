@@ -21,6 +21,7 @@ public class DateTourActivity extends BaseFragmentActivity implements View.OnCli
     private RadioGroup radioGroup;
     private String type = "owner";
     private String uid,title;
+    private boolean isOwner;    //是否我发起的
     private TextView tvLfet,tvTitle;
 
     @Override
@@ -65,6 +66,7 @@ public class DateTourActivity extends BaseFragmentActivity implements View.OnCli
         title = getIntent().getStringExtra("title");
         type = getIntent().getStringExtra("type");
         uid = getIntent().getStringExtra("uid");
+        isOwner = getIntent().getBooleanExtra("isOwner", false);
         if(StringUtil.isBlank(uid)){
             uid = readPreference("uid");
         }
@@ -101,8 +103,9 @@ public class DateTourActivity extends BaseFragmentActivity implements View.OnCli
         Bundle bundle = new Bundle();
         bundle.putString("type",type);
         bundle.putString("uid",uid);
+        bundle.putBoolean("isOwner", isOwner);
         switch (index) {
-            case 0:
+            case 0: //一起走
                 curPage = 0;
                 if (mTab01 == null) {
                     // 如果MessageFragment为空，则创建一个并添加到界面上
@@ -114,7 +117,7 @@ public class DateTourActivity extends BaseFragmentActivity implements View.OnCli
                     transaction.show(mTab01);
                 }
                 break;
-            case 1:
+            case 1: //妙旅团
                 curPage = 1;
                 if (mTab02 == null) {
                     // 如果MessageFragment为空，则创建一个并添加到界面上

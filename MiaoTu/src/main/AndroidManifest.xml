@@ -331,8 +331,11 @@
             android:name=".activity.FunctionIntroduceActivity"
             android:label="@string/title_activity_function_introduce" >
         </activity>
+        <activity android:name=".activity.AppRecommendActivity" >
+        </activity>
         <activity
-            android:name=".activity.AppRecommendActivity" >
+            android:name=".activity.JoinedListActivity"
+            android:label="@string/title_activity_joined_list" >
         </activity>
     </application>
 

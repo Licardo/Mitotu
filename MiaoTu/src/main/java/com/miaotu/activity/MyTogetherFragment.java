@@ -40,6 +40,7 @@ public class MyTogetherFragment extends BaseFragment implements View.OnClickList
     private boolean isLoadMore = false;
     private View layoutMore;
     private String type,uid;
+    private boolean isOwner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -114,9 +115,10 @@ public class MyTogetherFragment extends BaseFragment implements View.OnClickList
         if(getArguments() !=null){
             type = getArguments().getString("type");
             uid = getArguments().getString("uid");
+            isOwner = getArguments().getBoolean("isOwner");
         }
         mList = new ArrayList<>();
-        adapter = new TogetherlistAdapter(getActivity(), mList, false);
+        adapter = new TogetherlistAdapter(getActivity(), mList, true, isOwner);
         lvPull.setAdapter(adapter);
         WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
         Point size = new Point();

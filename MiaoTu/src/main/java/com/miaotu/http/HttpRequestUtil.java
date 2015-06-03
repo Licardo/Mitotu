@@ -18,6 +18,7 @@ import com.miaotu.form.MFriendsInfo;
 import com.miaotu.model.ModifyPersonInfo;
 import com.miaotu.result.BlackResult;
 import com.miaotu.result.CustomTourResult;
+import com.miaotu.result.JoinedListResult;
 import com.miaotu.result.MyTogetherResult;
 import com.miaotu.result.LikeResult;
 import com.miaotu.result.LuckyResult;
@@ -605,7 +606,7 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("num", count));
         params.add(new BasicNameValuePair("page", "1"));
         return HttpDecoder.getForObject(
-                getUrl("user/msg/"+type), TopicMessageListResult.class,
+                getUrl("user/msg/" + type), TopicMessageListResult.class,
                 params);
 
     }
@@ -854,6 +855,40 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("num", num));
         return HttpDecoder.getForObject(getUrl("user/yueyou/"+type),
                 MyTogetherResult.class, params);
+    }
+
+    /**
+     * 获取一起走报名列表
+     * @param token
+     * @param yid
+     * @param num
+     * @return
+     */
+    public JoinedListResult getTogetherJoinedList(String token, String yid, String num){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token", token));
+        params.add(new BasicNameValuePair("yid", yid));
+        params.add(new BasicNameValuePair("page", "1"));
+        params.add(new BasicNameValuePair("num", num));
+        return HttpDecoder.getForObject(getUrl("yueyou/join"),
+                JoinedListResult.class, params);
+    }
+
+    /**
+     * 获取妙旅团报名列表
+     * @param token
+     * @param aid
+     * @param num
+     * @return
+     */
+    public JoinedListResult getCustomTourJoinedList(String token, String aid, String num){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token", token));
+        params.add(new BasicNameValuePair("aid", aid));
+        params.add(new BasicNameValuePair("page", "1"));
+        params.add(new BasicNameValuePair("num", num));
+        return HttpDecoder.getForObject(getUrl("activity/join"),
+                JoinedListResult.class, params);
     }
 
 }

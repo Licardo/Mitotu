@@ -1,6 +1,7 @@
 package com.miaotu.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
+import com.miaotu.activity.JoinedListActivity;
 import com.miaotu.model.CustomTour;
 import com.miaotu.model.CustomTourInfo;
 import com.miaotu.util.Util;
@@ -81,10 +83,16 @@ public class MyCustomTourAdapter extends BaseAdapter{
         holder.tvEndDate.setText(info.getEndDate()+"截止报名");
         UrlImageViewHelper.setUrlDrawable(holder.ivBackground, info.getPicUrl(), R.drawable.bg_choose_login);
         UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto, info.getHeadUrl(), R.drawable.icon_default_head);
+        holder.tvJoin.setTag(i);
         holder.tvJoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //查看报名列表
+                int pos = (int) view.getTag();
+                Intent intent = new Intent(mContext, JoinedListActivity.class);
+                intent.putExtra("flag", "2");
+                intent.putExtra("aid", customTourInfoList.get(pos).getId());
+                mContext.startActivity(intent);
             }
         });
         String[] tags = null;

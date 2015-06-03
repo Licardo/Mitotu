@@ -259,6 +259,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                 if (!isMine){
                     startIntent.putExtra("title","TA发起的约游");
                 }
+                startIntent.putExtra("isOwner", true);
                 startActivity(startIntent);
                 break;
             case R.id.rl_state:

@@ -2,6 +2,7 @@ package com.miaotu.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
+import com.miaotu.activity.JoinedListActivity;
+import com.miaotu.activity.PersonCenterActivity;
 import com.miaotu.model.PhotoInfo;
 import com.miaotu.model.Together;
 import com.miaotu.util.LogUtil;
@@ -41,13 +44,15 @@ public class TogetherlistAdapter extends BaseAdapter {
 	private LayoutInflater mLayoutInflater = null;
 	private List<Together> mList = null;
 	private Context mContext;
-    private boolean isMine;
+    private boolean isMine;         //是否是我的
+    private boolean isOwner;       //是否是我发起的
 
-	public TogetherlistAdapter(Context context, List<Together> list,boolean isMine) {
+	public TogetherlistAdapter(Context context, List<Together> list,boolean isMine, boolean isOwner) {
 		mList = list;
 		mContext = context;
 		mLayoutInflater = LayoutInflater.from(context);
         this.isMine = isMine;
+        this.isOwner = isOwner;
 	}
 
 	@Override
@@ -102,29 +107,48 @@ public class TogetherlistAdapter extends BaseAdapter {
                     .findViewById(R.id.layout_img);
             holder.ivLike = (ImageView) convertView
                     .findViewById(R.id.iv_like);
-            if(isMine){
-                holder.tvDistance.setVisibility(View.GONE);
-                holder.ivLike.setVisibility(View.GONE);
-            }else{
-                holder.tvDistance.setVisibility(View.VISIBLE);
-                holder.ivLike.setVisibility(View.VISIBLE);
-            }
-
+            holder.tvJoinList = (TextView) convertView
+                    .findViewById(R.id.tv_join_list);
 			convertView.setTag(holder);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
+        if(isMine){ //我的
+            holder.tvDistance.setVisibility(View.GONE);
+            holder.ivLike.setVisibility(View.GONE);
+        }else{
+            holder.tvDistance.setVisibility(View.VISIBLE);
+            holder.ivLike.setVisibility(View.VISIBLE);
+        }
+        if(isOwner){        //我发起的
+            holder.tvJoinList.setVisibility(View.VISIBLE);
+            holder.tvJoinCount.setVisibility(View.GONE);
+            holder.tvCommentCount.setVisibility(View.GONE);
+        }
+        holder.tvJoinList.setTag(position);
+        holder.tvJoinList.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int pos = (int) view.getTag();
+                Intent intent = new Intent(mContext, JoinedListActivity.class);
+                intent.putExtra("flag", "1");
+                intent.putExtra("yid",mList.get(pos).getId());
+            }
+        });
+
 		// 对ListView的Item中的控件的操作
 		UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto,
-                mList.get(position).getHeadPhoto() + "&size=100x100",
+                mList.get(position).getHeadPhoto() + "100x100",
                 R.drawable.icon_default_head_photo);
+        holder.ivHeadPhoto.setTag(position);
         holder.ivHeadPhoto.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(mContext, UserHomeActivity.class);
-//                intent.putExtra("userId",mList.get(position).getUid());
-//                mContext.startActivity(intent);
+                int pos = (int) view.getTag();
+                Intent intent = new Intent(mContext, PersonCenterActivity.class);
+                intent.putExtra("uid",mList.get(pos).getUid());
+                mContext.startActivity(intent);
             }
         });
         holder.tvNickname.setText(mList.get(position).getNickname());
@@ -201,10 +225,7 @@ public class TogetherlistAdapter extends BaseAdapter {
                         R.drawable.default_avatar);
             }
         }
-        holder.tvDistance.setText(mList.get(position).getDistance()+"km");
-
-        holder.ivLike.setVisibility(View.GONE);
-        holder.tvDistance.setVisibility(View.GONE);
+        holder.tvDistance.setText(mList.get(position).getDistance() + "km");
 		return convertView;
 	}
 
@@ -226,5 +247,6 @@ public class TogetherlistAdapter extends BaseAdapter {
         private TextView tvCommentCount= null;
         private ImageView ivLike= null;
         private LinearLayout layoutImg= null;
+        private  TextView tvJoinList = null;
 	}
 }
