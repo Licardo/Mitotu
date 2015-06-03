@@ -256,10 +256,11 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                 startIntent.putExtra("type","owner");
                 startIntent.putExtra("uid",uid);
                 startIntent.putExtra("title","发起的约游");
+                startIntent.putExtra("isOwner", true);
                 if (!isMine){
                     startIntent.putExtra("title","TA发起的约游");
+                    startIntent.putExtra("isOwner", false);
                 }
-                startIntent.putExtra("isOwner", true);
                 startActivity(startIntent);
                 break;
             case R.id.rl_state:

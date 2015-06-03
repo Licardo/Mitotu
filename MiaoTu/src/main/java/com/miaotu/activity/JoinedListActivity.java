@@ -42,7 +42,8 @@ public class JoinedListActivity extends BaseActivity implements View.OnClickList
         lvContent = (ListView) findViewById(R.id.lv_content);
     }
     private void init(){
-        tvTitle.setText("");
+        String title = getIntent().getStringExtra("title");
+        tvTitle.setText(title);
         tvLeft.setOnClickListener(this);
         joinedListInfoList = new ArrayList<>();
         adapter = new JoinedListAdapter(this, joinedListInfoList);

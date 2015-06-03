@@ -41,6 +41,7 @@ public class MyCustomTourFragment extends BaseFragment implements View.OnClickLi
     private boolean isLoadMore = false;
     private View layoutMore;
     private String type,uid;
+    private boolean isOwner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -114,9 +115,10 @@ public class MyCustomTourFragment extends BaseFragment implements View.OnClickLi
         if(getArguments() !=null){
             type = getArguments().getString("type");
             uid = getArguments().getString("uid");
+            isOwner = getArguments().getBoolean("isOwner");
         }
         mList = new ArrayList<>();
-        adapter = new CustomTourlistAdapter(getActivity(), mList, false);
+        adapter = new CustomTourlistAdapter(getActivity(), mList, isOwner);
         lvPull.setAdapter(adapter);
         WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
         Point size = new Point();

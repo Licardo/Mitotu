@@ -92,6 +92,7 @@ public class MyCustomTourAdapter extends BaseAdapter{
                 Intent intent = new Intent(mContext, JoinedListActivity.class);
                 intent.putExtra("flag", "2");
                 intent.putExtra("aid", customTourInfoList.get(pos).getId());
+                intent.putExtra("title", customTourInfoList.get(pos).getTitle());
                 mContext.startActivity(intent);
             }
         });

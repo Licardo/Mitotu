@@ -134,6 +134,9 @@ public class TogetherlistAdapter extends BaseAdapter {
                 Intent intent = new Intent(mContext, JoinedListActivity.class);
                 intent.putExtra("flag", "1");
                 intent.putExtra("yid",mList.get(pos).getId());
+                intent.putExtra("title",mList.get(pos).getStartDate()+
+                        "一起去"+mList.get(pos).getDesCity());
+                mContext.startActivity(intent);
             }
         });
 
