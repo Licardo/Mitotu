@@ -65,4 +65,5 @@ public class LikeMessage implements Serializable{
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+
 }

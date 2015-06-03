@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import cn.jpush.android.api.JPushInterface;
@@ -30,6 +31,7 @@ import com.miaotu.util.LogUtil;
  * 2) 接收不到自定义消息
  */
 public class JPushReceiver extends BroadcastReceiver {
+	private Context mContext;
 	private static final String TAG = "JPush";
 	public static final String ACTION_JPUSH_INVITE_MESSAGE_RECIEVE = "action_jpush_invite_message_recieve";
 	public static final String ACTION_JPUSH_SYS_MESSAGE_RECIEVE = "action_jpush_sys_message_recieve";
@@ -42,6 +44,7 @@ public class JPushReceiver extends BroadcastReceiver {
 //	public static final String ACTION_TEST = "action_test";
 	@Override
 	public void onReceive(Context context, Intent intent) {
+		this.mContext = context;
         Bundle bundle = intent.getExtras();
 		Log.d(TAG, "[MyReceiver] onReceive - " + intent.getAction() + ", extras: " + printBundle(bundle));
 		
@@ -121,6 +124,11 @@ public class JPushReceiver extends BroadcastReceiver {
 				//系统消息-喜欢
 				LikeMessage likeMessage = new LikeMessage();
 				likeMessage = mapper.readValue(rootJson.getJSONObject("Content").toString(), LikeMessage.class);
+				SharedPreferences sharedPreferences = mContext.getSharedPreferences("COMMON",
+						mContext.MODE_PRIVATE);
+				SharedPreferences.Editor editor = sharedPreferences.edit();
+				editor.putString("like_date", "" + rootJson.get("Time"));
+				editor.commit();
 				MessageDatabaseHelper helper = new MessageDatabaseHelper(context);
 				long l = helper.saveSysMessage(likeMessage);
 				LogUtil.d("插入收到的喜欢人消息：喜欢"+l);

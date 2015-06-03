@@ -85,13 +85,16 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
             ivChatCount.setVisibility(View.GONE);
         }
         if(getLikeMessageNum()!=0){
-            ivLikeCount.setText(getLikeMessageNum()+"");
+            ivLikeCount.setText(getLikeMessageNum() + "");
             ivLikeCount.setVisibility(View.VISIBLE);
             tvLikeContent.setText("又有新伙伴关注你啦！快去看看吧");
         }else{
             tvLikeContent.setText("");
             ivLikeCount.setVisibility(View.GONE);
         }
+        tvLikeDate.setText(readPreference("like_date"));
+        tvChatContent.setText(readPreference("im_content"));
+        tvChatDate.setText(readPreference("im_date"));
     }
     private int getLikeMessageNum() {
         MessageDatabaseHelper helper = new MessageDatabaseHelper(getActivity());

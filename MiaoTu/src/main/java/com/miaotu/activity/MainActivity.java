@@ -32,6 +32,7 @@ import com.easemob.chat.EMMessage.ChatType;
 import com.easemob.chat.OnMessageNotifyListener;
 import com.easemob.chat.OnNotificationClickListener;
 import com.easemob.exceptions.EaseMobException;
+import com.easemob.util.DateUtils;
 import com.miaotu.R;
 import com.miaotu.imutil.CommonUtils;
 import com.miaotu.imutil.ContactInfo;
@@ -50,6 +51,7 @@ import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -579,6 +581,12 @@ public class MainActivity extends BaseFragmentActivity implements
                 e.printStackTrace();
                 return;
             }
+            String ticker = CommonUtils.getMessageDigest(message, MainActivity.this);
+            if(message.getType() == EMMessage.Type.TXT)
+                ticker = ticker.replaceAll("\\[.{2,3}\\]", "[表情]");
+            writePreference("im_content", ticker);
+
+            writePreference("im_date",DateUtils.getTimestampString(new Date(message.getMsgTime())));
             remindUser("imMsg");
 
             return;
