@@ -44,6 +44,8 @@ public class FeedBackActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initView(){
+        tvLeft = (TextView) this.findViewById(R.id.tv_left);
+        tvTitle = (TextView) this.findViewById(R.id.tv_title);
         etContent = (EditText) this.findViewById(R.id.et_content);
         etEmail = (EditText) this.findViewById(R.id.et_email);
         btnSubmit = (Button) this.findViewById(R.id.btn_submit);
