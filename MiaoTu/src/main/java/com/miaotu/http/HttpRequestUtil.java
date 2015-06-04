@@ -19,6 +19,7 @@ import com.miaotu.form.MFriendsInfo;
 import com.miaotu.model.ModifyPersonInfo;
 import com.miaotu.result.BlackResult;
 import com.miaotu.result.CustomTourResult;
+import com.miaotu.result.DeleteTopicMessageResult;
 import com.miaotu.result.JoinedListResult;
 import com.miaotu.result.MyTogetherResult;
 import com.miaotu.result.LikeResult;
@@ -620,12 +621,12 @@ public class HttpRequestUtil {
      * @param smid
      * @return
      */
-    public TopicMessageListResult readTopicMessage(String token, String smid) {
+    public DeleteTopicMessageResult readTopicMessage(String token, String smid) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
         params.add(new BasicNameValuePair("id", smid));
         return HttpDecoder.postForObject(
-                getUrl("user/msg"), TopicMessageListResult.class,
+                getUrl("user/msg"), DeleteTopicMessageResult.class,
                 params);
     }
 
@@ -636,12 +637,12 @@ public class HttpRequestUtil {
      * @param smid
      * @return
      */
-    public TopicMessageListResult deleteTopicMessage(String token, String smid) {
+    public DeleteTopicMessageResult deleteTopicMessage(String token, String smid) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
         params.add(new BasicNameValuePair("id", smid));
         return HttpDecoder.postForObject(
-                getUrl("user/msg/delete"), TopicMessageListResult.class,
+                getUrl("user/msg/delete"), DeleteTopicMessageResult.class,
                 params);
     }
 
