@@ -8,17 +8,12 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import cn.jpush.android.api.JPushInterface;
 
 import com.easemob.chat.EMChatManager;
 import com.miaotu.R;
 import com.miaotu.receiver.JPushReceiver;
-import com.umeng.update.UmengUpdateAgent;
-import com.umeng.update.UmengUpdateListener;
-import com.umeng.update.UpdateResponse;
-import com.umeng.update.UpdateStatus;
 
 /**
  * @author zhanglei
@@ -96,7 +91,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
                 this.startActivity(feedIntent);
                 break;
             case R.id.layout_use_msg:        //新消息通知提醒
-                Intent msgIntent = new Intent(this, NewMessageRemind.class);
+                Intent msgIntent = new Intent(this, BBSTopicRemind.class);
                 this.startActivity(msgIntent);
                 break;
             case R.id.layout_call:        //联系我们
