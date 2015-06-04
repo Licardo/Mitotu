@@ -620,12 +620,12 @@ public class HttpRequestUtil {
      * @param smid
      * @return
      */
-    public MessageResult readTopicMessage(String token, String smid) {
+    public TopicMessageListResult readTopicMessage(String token, String smid) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
         params.add(new BasicNameValuePair("id", smid));
         return HttpDecoder.postForObject(
-                getUrl("user/msg"), MessageResult.class,
+                getUrl("user/msg"), TopicMessageListResult.class,
                 params);
     }
 

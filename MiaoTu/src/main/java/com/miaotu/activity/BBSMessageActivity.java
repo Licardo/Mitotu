@@ -109,7 +109,7 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                 intent.putExtra("sid", mList.get(i).getContent().getSid());
                 startActivity(intent);
                 //设置已读状态
-                read(false, mList.get(i).getId(), i);
+                read(false, i);
             }
         });
         tvLeft.setOnClickListener(this);
@@ -226,19 +226,18 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
         }.execute();
     }
     //标记消息为已读
-    private void read(boolean isShow,final String meesageId,final int position) {
-        new BaseHttpAsyncTask<Void, Void, MessageResult>(BBSMessageActivity.this, isShow) {
+    private void read(boolean isShow, final int position) {
+        new BaseHttpAsyncTask<Void, Void, TopicMessageListResult>(BBSMessageActivity.this, isShow) {
             @Override
-            protected void onCompleteTask(MessageResult result) {
+            protected void onCompleteTask(TopicMessageListResult result) {
                     if(mList==null){
                         return;
                     }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     //标记成功
-                    if("1".equals(result.getMessage().getStatus())){
+                    if("1".equals(result.getMessages().get(position).getStatus())){
                         adapter.notifyDataSetChanged();
                     }
-//                    mList.get(position).setStatus("1");
                 } else {
                     if (StringUtil.isEmpty(result.getMsg())) {
                         showToastMsg("读取失败");
@@ -249,9 +248,10 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
             }
 
             @Override
-            protected MessageResult run(Void... params) {
+            protected TopicMessageListResult run(Void... params) {
                 curPageCount=PAGECOUNT;
-                return HttpRequestUtil.getInstance().readTopicMessage(readPreference("token"), meesageId);
+                return HttpRequestUtil.getInstance().readTopicMessage(
+                        readPreference("token"), mList.get(position).getId());
             }
         }.execute();
     }

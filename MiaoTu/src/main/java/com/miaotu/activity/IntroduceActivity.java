@@ -1,10 +1,7 @@
 package com.miaotu.activity;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -46,7 +43,7 @@ public class IntroduceActivity extends BaseActivity implements View.OnClickListe
                 startActivity(funIntent);
                 break;
             case R.id.ll_red:
-                Intent redIntent = new Intent(IntroduceActivity.this, GiftMoneyIntroduceActivity.class);
+                Intent redIntent = new Intent(IntroduceActivity.this, RedPackageIntroduceActivity.class);
                 startActivity(redIntent);
                 break;
             default:

@@ -13,7 +13,6 @@ import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
-import com.miaotu.result.LikeResult;
 import com.miaotu.result.PersonInfoResult;
 import com.miaotu.result.BaseResult;
 import com.miaotu.util.MD5;
@@ -21,8 +20,6 @@ import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 import com.miaotu.view.FlowLayout;
-
-import java.util.Date;
 
 public class PersonCenterActivity extends BaseActivity implements View.OnClickListener {
 
@@ -232,7 +229,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                 like(token, result.getPersonInfo().getUid());
                 break;
             case R.id.rl_like:
-                Intent likeIntent = new Intent(PersonCenterActivity.this, DateTourActivity.class);
+                Intent likeIntent = new Intent(PersonCenterActivity.this, TogetherAndCustomTourActivity.class);
                 likeIntent.putExtra("type","like");
                 likeIntent.putExtra("uid",uid);
                 likeIntent.putExtra("title","喜欢的约游");
@@ -242,7 +239,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                 startActivity(likeIntent);
                 break;
             case R.id.rl_join:
-                Intent joinIntent = new Intent(PersonCenterActivity.this, DateTourActivity.class);
+                Intent joinIntent = new Intent(PersonCenterActivity.this, TogetherAndCustomTourActivity.class);
                 joinIntent.putExtra("type","join");
                 joinIntent.putExtra("uid",uid);
                 joinIntent.putExtra("title","已报名的约游");
@@ -252,7 +249,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                 startActivity(joinIntent);
                 break;
             case R.id.rl_start:
-                Intent startIntent = new Intent(PersonCenterActivity.this, DateTourActivity.class);
+                Intent startIntent = new Intent(PersonCenterActivity.this, TogetherAndCustomTourActivity.class);
                 startIntent.putExtra("type","owner");
                 startIntent.putExtra("uid",uid);
                 startIntent.putExtra("title","发起的约游");

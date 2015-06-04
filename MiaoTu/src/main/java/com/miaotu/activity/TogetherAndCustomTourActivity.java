@@ -13,7 +13,7 @@ import com.miaotu.R;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 
-public class DateTourActivity extends BaseFragmentActivity implements View.OnClickListener {
+public class TogetherAndCustomTourActivity extends BaseFragmentActivity implements View.OnClickListener {
     private FragmentManager fragmentManager;
     private MyTogetherFragment mTab01;
     private MyCustomTourFragment mTab02;
@@ -78,7 +78,7 @@ public class DateTourActivity extends BaseFragmentActivity implements View.OnCli
 
     @Override
     public void onClick(View view) {
-        if (!Util.isNetworkConnected(DateTourActivity.this)) {
+        if (!Util.isNetworkConnected(TogetherAndCustomTourActivity.this)) {
             showToastMsg("当前未联网，请检查网络设置");
             return;
         }
@@ -153,7 +153,7 @@ public class DateTourActivity extends BaseFragmentActivity implements View.OnCli
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 3 && resultCode == 1) {
-            (DateTourActivity.this).writePreference("movement_city", data.getStringExtra("city"));
+            (TogetherAndCustomTourActivity.this).writePreference("movement_city", data.getStringExtra("city"));
         }
     }
 }

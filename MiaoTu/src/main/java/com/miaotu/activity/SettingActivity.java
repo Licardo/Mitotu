@@ -91,7 +91,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
                 this.startActivity(feedIntent);
                 break;
             case R.id.layout_use_msg:        //新消息通知提醒
-                Intent msgIntent = new Intent(this, BBSTopicRemind.class);
+                Intent msgIntent = new Intent(this, BBSTopicRemindActivity.class);
                 this.startActivity(msgIntent);
                 break;
             case R.id.layout_call:        //联系我们

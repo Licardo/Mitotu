@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.miaotu.R;
 
-public class BBSTopicRemind extends BaseActivity implements View.OnClickListener{
+public class BBSTopicRemindActivity extends BaseActivity implements View.OnClickListener{
 
     private ImageView iv_msgremind, iv_receptmsg;
     private boolean isSelected1,isSelected2;
