@@ -79,8 +79,7 @@ public class TopicMessageAdapter extends BaseAdapter {
                 mList.get(position).getContent().getHeadurl(),
                 R.drawable.icon_default_head);
         UrlImageViewHelper.setUrlDrawable(holder.ivPhoto,
-                mList.get(position).getContent().getPicurl(),
-                R.drawable.icon_default_head);
+                mList.get(position).getContent().getPicurl());
         holder.tvName.setText(mList.get(position).getContent().getNickname());
         holder.tvStatus.setText(mList.get(position).getTitle());
         holder.tvTime.setText(mList.get(position).getCreated());

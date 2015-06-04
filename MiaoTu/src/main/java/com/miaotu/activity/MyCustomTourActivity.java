@@ -97,23 +97,6 @@ public class MyCustomTourActivity extends BaseActivity implements View.OnClickLi
                     if(customTourInfoList == null){
                         return;
                     }
-                    //测试
-                    CustomTour info = new CustomTour();
-                    info.setEndDate("5月30号");
-                    info.setStartDate("4月30号");
-                    info.setNickname("四小美");
-                    info.setMtPrice("199元");
-                    info.setTitle("中华人民共和国");
-                    myCustomTourResult.getCustomTourInfolist().add(info);
-                    CustomTour info1 = new CustomTour();
-                    info1.setEndDate("5月30号");
-                    info1.setStartDate("4月30号");
-                    info1.setNickname("四小美");
-                    info1.setMtPrice("199元");
-                    info1.setTags("贝克汉姆,卡卡,罗纳尔迪尼奥");
-                    info1.setTitle("中华人民共和国");
-                    myCustomTourResult.getCustomTourInfolist().add(info1);
-
                     customTourInfoList.clear();
                     if (myCustomTourResult.getCustomTourInfolist() == null){
                         adapter.notifyDataSetChanged();

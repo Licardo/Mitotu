@@ -46,12 +46,14 @@ public class JoinedListActivity extends BaseActivity implements View.OnClickList
         tvTitle.setText(title);
         tvLeft.setOnClickListener(this);
         joinedListInfoList = new ArrayList<>();
-        adapter = new JoinedListAdapter(this, joinedListInfoList);
-        lvContent.setAdapter(adapter);
         String flag = getIntent().getStringExtra("flag");       //1：一起走的报名列表，2：妙旅团的报名列表
         if("1".equals(flag)){
+            adapter = new JoinedListAdapter(this, joinedListInfoList, true);
+            lvContent.setAdapter(adapter);
             getTogetherList(getIntent().getStringExtra("yid"));
         }else {
+            adapter = new JoinedListAdapter(this, joinedListInfoList, false);
+            lvContent.setAdapter(adapter);
             getCustomTourList(getIntent().getStringExtra("aid"));
         }
     }
