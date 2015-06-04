@@ -273,7 +273,7 @@
             android:name=".activity.TogetherDetailActivity"
             android:label="@string/title_activity_together_detail" />
         <activity
-            android:name=".activity.NewMessageRemind"
+            android:name=".activity.BBSTopicRemindActivity"
             android:label="@string/title_activity_new_message_remind" />
         <activity
             android:name=".activity.SettingActivity"
@@ -322,7 +322,7 @@
             android:name=".activity.MyCustomTourActivity"
             android:label="@string/title_activity_my_custom_tour" >
         </activity>
-        <activity android:name=".activity.DateTourActivity" >
+        <activity android:name=".activity.TogetherAndCustomTourActivity" >
         </activity>
         <activity
             android:name=".activity.PublishStateActivity"
@@ -337,15 +337,18 @@
             android:label="@string/title_activity_remind_like" >
         </activity>
         <activity
-            android:name=".activity.GiftMoneyIntroduceActivity"
+            android:name=".activity.RedPackageIntroduceActivity"
             android:label="@string/title_activity_gift_money_introduce" >
         </activity>
         <activity
             android:name=".activity.FunctionIntroduceActivity"
             android:label="@string/title_activity_function_introduce" >
         </activity>
+        <activity android:name=".activity.AppRecommendActivity" >
+        </activity>
         <activity
-            android:name=".activity.AppRecommendActivity" >
+            android:name=".activity.JoinedListActivity"
+            android:label="@string/title_activity_joined_list" >
         </activity>
     </application>
 

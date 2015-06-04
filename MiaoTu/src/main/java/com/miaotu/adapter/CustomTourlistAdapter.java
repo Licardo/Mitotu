@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
+import com.miaotu.activity.JoinedListActivity;
 import com.miaotu.activity.PersonCenterActivity;
 import com.miaotu.model.CustomTour;
 import com.miaotu.model.PhotoInfo;
@@ -101,7 +102,7 @@ public class CustomTourlistAdapter extends BaseAdapter {
 
 		// 对ListView的Item中的控件的操作
 		UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto,
-                mList.get(position).getHeadUrl() + "&size=100x100",
+                mList.get(position).getHeadUrl() + "100x100",
                 R.drawable.icon_default_head_photo);
         holder.ivHeadPhoto.setOnClickListener(new OnClickListener() {
             @Override
@@ -121,6 +122,19 @@ public class CustomTourlistAdapter extends BaseAdapter {
             holder.tvJoinList.setVisibility(View.GONE);
             holder.tvCount.setText("已报名"+mList.get(position).getJoinCount()+"人"+" 评论"+mList.get(position).getLikeCount()+"人");
         }
+        holder.tvJoinList.setTag(position);
+        holder.tvJoinList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //查看报名列表
+                int pos = (int) view.getTag();
+                Intent intent = new Intent(mContext, JoinedListActivity.class);
+                intent.putExtra("flag", "2");
+                intent.putExtra("aid", mList.get(pos).getId());
+                intent.putExtra("title", mList.get(pos).getTitle());
+                mContext.startActivity(intent);
+            }
+        });
         if(mList.get(position).isLike()){
             holder.ivLike.setBackgroundResource(R.drawable.icon_bglike);
         }else{

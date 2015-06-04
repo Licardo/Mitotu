@@ -10,55 +10,55 @@ import java.util.List;
  * Created by hao on 2015/3/6.
  */
 public class TopicMessage implements Serializable {
-    @JsonProperty("Smid")
-    private String smid;
-    @JsonProperty("Sid")
-    private String sid;
-    @JsonProperty("Nickname")
-    private String nickname;
-    @JsonProperty("HeadUrl")
-    private String headurl;
+    @JsonProperty("Id")
+    private String id;
+    @JsonProperty("Uid")
+    private String uid;
+    @JsonProperty("Type")
+    private String type;
+    @JsonProperty("Title")
+    private String title;
     @JsonProperty("Created")
     private String created;
-    @JsonProperty("Remark")
-    private String remark;
+    @JsonProperty("Updated")
+    private String updated;
     @JsonProperty("Content")
-    private String content;
-    @JsonProperty("PicUrl")
-    private String picurl;
+    private TopicContentInfo content;
+    @JsonProperty("Deleted")
+    private String deleted;
     @JsonProperty("Status")
     private String status;
 
-    public String getSmid() {
-        return smid;
+    public String getId() {
+        return id;
     }
 
-    public void setSmid(String smid) {
-        this.smid = smid;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getSid() {
-        return sid;
+    public String getUid() {
+        return uid;
     }
 
-    public void setSid(String sid) {
-        this.sid = sid;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getType() {
+        return type;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public String getHeadurl() {
-        return headurl;
+    public String getTitle() {
+        return title;
     }
 
-    public void setHeadurl(String headurl) {
-        this.headurl = headurl;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getCreated() {
@@ -69,28 +69,28 @@ public class TopicMessage implements Serializable {
         this.created = created;
     }
 
-    public String getRemark() {
-        return remark;
+    public String getUpdated() {
+        return updated;
     }
 
-    public void setRemark(String remark) {
-        this.remark = remark;
+    public void setUpdated(String updated) {
+        this.updated = updated;
     }
 
-    public String getContent() {
+    public TopicContentInfo getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(TopicContentInfo content) {
         this.content = content;
     }
 
-    public String getPicurl() {
-        return picurl;
+    public String getDeleted() {
+        return deleted;
     }
 
-    public void setPicurl(String picurl) {
-        this.picurl = picurl;
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
     }
 
     public String getStatus() {

@@ -36,6 +36,7 @@ import com.miaotu.model.Topic;
 import com.miaotu.model.TopicComment;
 import com.miaotu.model.TopicMessage;
 import com.miaotu.result.BaseResult;
+import com.miaotu.result.DeleteTopicMessageResult;
 import com.miaotu.result.MessageResult;
 import com.miaotu.result.TopicCommentsListResult;
 import com.miaotu.result.TopicMessageListResult;
@@ -91,9 +92,9 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
         lvTopicMessage.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                switch (index){
+                switch (index) {
                     case 0:
-                        deleteMessage(readPreference("token"), mList.get(position).getSmid(), position);
+                        deleteMessage(position);
                         break;
                     default:
                         break;
@@ -106,10 +107,10 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(BBSMessageActivity.this, BBSTopicDetailActivity.class);
-                intent.putExtra("sid", mList.get(i).getSid());
+                intent.putExtra("sid", mList.get(i).getContent().getSid());
                 startActivity(intent);
                 //设置已读状态
-                read(false, mList.get(i).getSmid(), i);
+                read(false, i);
             }
         });
         tvLeft.setOnClickListener(this);
@@ -157,17 +158,7 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                 if (result.getCode() == BaseResult.SUCCESS) {
                     mList.clear();
                     mList.addAll(result.getMessages());
-//                    TopicMessage mes = new TopicMessage();
-//                    mes.setContent("你好啊");
-//                    mes.setCreated(new Date().toString());
-//                    mes.setNickname("四小美");
-//                    mes.setRemark("hi");
-//                    mes.setStatus("0");
-//                    mes.setSid("1");
-//                    mes.setSmid("1");
-//                    mList.add(mes);
                     adapter.notifyDataSetChanged();
-//                    showToastMsg("lastvisibale:"+lvTopicMessage.getRefreshableView().getLastVisiblePosition()+"  count: "+lvTopicMessage.getRefreshableView().getCount()+" first:"+lvTopicMessage.getRefreshableView().getFirstVisiblePosition());
                 } else {
                     if (StringUtil.isEmpty(result.getMsg())) {
                         showToastMsg("获取话题失败！");
@@ -180,7 +171,8 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
             @Override
             protected TopicMessageListResult run(Void... params) {
                 curPageCount=PAGECOUNT;
-				return HttpRequestUtil.getInstance().getTopicMessage(readPreference("token"), curPageCount + "",type);
+				return HttpRequestUtil.getInstance().getTopicMessage(
+                        readPreference("token"), curPageCount + "",type);
             }
 
             @Override
@@ -193,61 +185,19 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
         }.execute();
     }
 
-    /**
-     * 加载更多消息
-     */
-    private void loadMoreComments() {
-        new BaseHttpAsyncTask<Void, Void, TopicMessageListResult>(BBSMessageActivity.this, false) {
-            @Override
-            protected void onCompleteTask(TopicMessageListResult result) {
-                    if(mList==null){
-                        return;
-                    }
-                if (result.getCode() == BaseResult.SUCCESS) {
-                    mList.clear();
-                    mList.addAll(result.getMessages());
-                    adapter.notifyDataSetChanged();
-                    if(mList.size()!=curPageCount){
-                    }
-                } else {
-                    if (StringUtil.isEmpty(result.getMsg())) {
-                        showToastMsg("获取话题失败！");
-                    } else {
-                        showToastMsg(result.getMsg());
-                    }
-                }
-            }
-
-            @Override
-            protected TopicMessageListResult run(Void... params) {
-                isLoadMore = true;
-                curPageCount+=PAGECOUNT;
-                return HttpRequestUtil.getInstance().getTopicMessage(readPreference("token"), curPageCount + "", type);
-            }
-
-            @Override
-            protected void finallyRun() {
-                if(mList==null){
-                    return;
-                }
-                isLoadMore = false;
-            }
-        }.execute();
-    }
     //标记消息为已读
-    private void read(boolean isShow,final String meesageId,final int position) {
-        new BaseHttpAsyncTask<Void, Void, MessageResult>(BBSMessageActivity.this, isShow) {
+    private void read(boolean isShow, final int position) {
+        new BaseHttpAsyncTask<Void, Void, DeleteTopicMessageResult>(BBSMessageActivity.this, isShow) {
             @Override
-            protected void onCompleteTask(MessageResult result) {
+            protected void onCompleteTask(DeleteTopicMessageResult result) {
                     if(mList==null){
                         return;
                     }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     //标记成功
-                    if("1".equals(result.getMessage().getStatus())){
+                    if("1".equals(result.getTopicMessage().getStatus())){
                         adapter.notifyDataSetChanged();
                     }
-//                    mList.get(position).setStatus("1");
                 } else {
                     if (StringUtil.isEmpty(result.getMsg())) {
                         showToastMsg("读取失败");
@@ -258,9 +208,10 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
             }
 
             @Override
-            protected MessageResult run(Void... params) {
+            protected DeleteTopicMessageResult run(Void... params) {
                 curPageCount=PAGECOUNT;
-                return HttpRequestUtil.getInstance().readTopicMessage(readPreference("token"), meesageId);
+                return HttpRequestUtil.getInstance().readTopicMessage(
+                        readPreference("token"), mList.get(position).getId());
             }
         }.execute();
     }
@@ -325,17 +276,15 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
 
     /**
      * 删除消息
-     * @param token
-     * @param smid
      */
-    private void deleteMessage(final String token, final String smid, final int postion){
-        new BaseHttpAsyncTask<Void, Void, MessageResult>(BBSMessageActivity.this, false){
+    private void deleteMessage(final int position){
+        new BaseHttpAsyncTask<Void, Void, DeleteTopicMessageResult>(BBSMessageActivity.this, false){
 
             @Override
-            protected void onCompleteTask(MessageResult baseResult) {
-                if(baseResult.getCode() == 100){
-                    if("-1".equals(baseResult.getMessage().getStatus())){
-                        mList.remove(postion);
+            protected void onCompleteTask(DeleteTopicMessageResult baseResult) {
+                if(baseResult.getCode() == BaseResult.SUCCESS){
+                    if("-1".equals(baseResult.getTopicMessage().getStatus())){
+                        mList.remove(position);
                         adapter.notifyDataSetChanged();
                     }
                     showToastMsg("操作成功");
@@ -349,8 +298,9 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
             }
 
             @Override
-            protected MessageResult run(Void... params) {
-                return HttpRequestUtil.getInstance().deleteTopicMessage(token, smid);
+            protected DeleteTopicMessageResult run(Void... params) {
+                return HttpRequestUtil.getInstance().deleteTopicMessage(
+                        readPreference("token"), mList.get(position).getId());
             }
         }.execute();
     }

@@ -9,9 +9,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
         android:layout_marginBottom="10dp"
-        >
+        android:background="@android:color/white">
 
         <com.miaotu.view.CircleImageView
             android:id="@+id/iv_head_photo"
@@ -19,8 +18,8 @@
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            app:border_width="0dp"
-            android:src="@drawable/location_msg" />
+            android:src="@drawable/location_msg"
+            app:border_width="0dp" />
 
         <ImageView
             android:id="@+id/iv_gender"
@@ -30,8 +29,8 @@
             android:layout_marginBottom="2dp"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/iv_head_photo"
-            android:scaleType="fitCenter"
-            android:background="@drawable/mine_girl" />
+            android:background="@drawable/mine_girl"
+            android:scaleType="fitCenter" />
 
         <TextView
             android:id="@+id/tv_age"
@@ -65,16 +64,17 @@
             android:text="刚刚"
             android:textColor="#b4b4b4"
             android:textSize="10sp" />
+
         <ImageView
             android:id="@+id/iv_like"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:background="@drawable/icon_like"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            />
+            android:layout_marginTop="10dp"
+            android:background="@drawable/icon_like" />
+
         <TextView
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
@@ -94,13 +94,12 @@
             android:layout_below="@id/iv_head_photo"
             android:layout_marginTop="6dp"
             android:background="@drawable/bg_tag_date"
+            android:gravity="center"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
             android:text="5月20日"
             android:textColor="@android:color/white"
-            android:textSize="10sp"
-            android:gravity="center"
-            />
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/tv_tag_des"
@@ -110,11 +109,11 @@
             android:layout_marginLeft="6dp"
             android:layout_toRightOf="@id/tv_tag_date"
             android:background="@drawable/bg_tag_des"
+            android:gravity="center"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
             android:text="白云湖"
             android:textColor="@android:color/white"
-            android:gravity="center"
             android:textSize="10sp" />
 
         <TextView
@@ -125,11 +124,11 @@
             android:layout_marginLeft="6dp"
             android:layout_toRightOf="@id/tv_tag_des"
             android:background="@drawable/bg_tag_require"
+            android:gravity="center"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
             android:text="需要10人"
             android:textColor="@android:color/white"
-            android:gravity="center"
             android:textSize="10sp" />
 
         <TextView
@@ -140,11 +139,11 @@
             android:layout_marginLeft="6dp"
             android:layout_toRightOf="@id/tv_tag_require"
             android:background="@drawable/bg_tag_price"
+            android:gravity="center"
             android:paddingLeft="3dp"
             android:paddingRight="3dp"
             android:text="20000元"
             android:textColor="@android:color/white"
-            android:gravity="center"
             android:textSize="10sp" />
 
         <TextView
@@ -167,9 +166,8 @@
             android:layout_alignLeft="@id/tv_introduce"
             android:layout_below="@id/tv_introduce"
             android:layout_marginTop="10dp"
-            android:scaleType="fitXY"
             android:orientation="horizontal"
-            />
+            android:scaleType="fitXY" />
 
         <TextView
             android:id="@+id/tv_comment_count"
@@ -177,9 +175,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_below="@id/layout_img"
+            android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="10dp"
             android:text="评论2人"
             android:textColor="#b4b4b4"
             android:textSize="10sp" />
@@ -194,16 +192,30 @@
             android:text="已报名2人"
             android:textColor="#b4b4b4"
             android:textSize="10sp" />
+
         <TextView
             android:id="@+id/tv_distance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_join_count"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="50dp"
             android:text="0.05km"
             android:textColor="#b4b4b4"
-            android:textSize="10dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignBottom="@+id/tv_join_count"
-            android:layout_marginLeft="50dp"
-            />
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/tv_join_list"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/layout_img"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/joinlist"
+            android:textColor="#4d99cb"
+            android:textSize="12sp"
+            android:visibility="gone" />
     </RelativeLayout>
 </LinearLayout>

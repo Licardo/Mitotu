@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.miaotu.R;
 
-public class GiftMoneyIntroduceActivity extends BaseActivity implements View.OnClickListener{
+public class RedPackageIntroduceActivity extends BaseActivity implements View.OnClickListener{
 
     private TextView tvLeft,tvTitle;
 

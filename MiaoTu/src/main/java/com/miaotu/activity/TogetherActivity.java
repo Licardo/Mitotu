@@ -118,7 +118,7 @@ public class TogetherActivity extends BaseActivity implements View.OnClickListen
     private void init() {
         tvTitle.setText("一起去");
         mList = new ArrayList<>();
-        adapter = new TogetherlistAdapter(TogetherActivity.this, mList, false);
+        adapter = new TogetherlistAdapter(TogetherActivity.this, mList, true, true);
         lvPull.setAdapter(adapter);
         WindowManager wm = (WindowManager) TogetherActivity.this.getSystemService(Context.WINDOW_SERVICE);
         Point size = new Point();

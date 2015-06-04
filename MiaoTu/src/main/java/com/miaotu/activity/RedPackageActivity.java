@@ -46,8 +46,7 @@ import cn.sharesdk.framework.ShareSDK;
 
 /**
  * @author zhanglei
- *         <p/>
- *         红包界面
+ * 红包界面
  */
 public class RedPackageActivity extends BaseActivity implements OnClickListener {
     private TextView tvTitle, tvLeft;

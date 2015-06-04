@@ -68,7 +68,6 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/location_msg"
             android:scaleType="fitCenter" />
     </LinearLayout>
 

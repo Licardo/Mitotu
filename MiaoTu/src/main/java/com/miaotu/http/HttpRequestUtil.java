@@ -12,12 +12,15 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.util.Log;
 
+import com.miaotu.activity.BaseActivity;
 import com.miaotu.annotation.FormProperty;
 import com.miaotu.annotation.Ignore;
 import com.miaotu.form.MFriendsInfo;
 import com.miaotu.model.ModifyPersonInfo;
 import com.miaotu.result.BlackResult;
 import com.miaotu.result.CustomTourResult;
+import com.miaotu.result.DeleteTopicMessageResult;
+import com.miaotu.result.JoinedListResult;
 import com.miaotu.result.MyTogetherResult;
 import com.miaotu.result.LikeResult;
 import com.miaotu.result.LuckyResult;
@@ -620,12 +623,12 @@ public class HttpRequestUtil {
      * @param smid
      * @return
      */
-    public MessageResult readTopicMessage(String token, String smid) {
+    public DeleteTopicMessageResult readTopicMessage(String token, String smid) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
         params.add(new BasicNameValuePair("id", smid));
         return HttpDecoder.postForObject(
-                getUrl("user/msg"), MessageResult.class,
+                getUrl("user/msg"), DeleteTopicMessageResult.class,
                 params);
     }
 
@@ -636,12 +639,12 @@ public class HttpRequestUtil {
      * @param smid
      * @return
      */
-    public MessageResult deleteTopicMessage(String token, String smid) {
+    public DeleteTopicMessageResult deleteTopicMessage(String token, String smid) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
         params.add(new BasicNameValuePair("id", smid));
         return HttpDecoder.postForObject(
-                getUrl("user/msg/delete"), MessageResult.class,
+                getUrl("user/msg/delete"), DeleteTopicMessageResult.class,
                 params);
     }
 
@@ -946,6 +949,54 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("num", num));
         return HttpDecoder.getForObject(getUrl("user/yueyou/"+type),
                 MyTogetherResult.class, params);
+    }
+
+    /**
+     * 获取一起走报名列表
+     * @param token
+     * @param yid
+     * @param num
+     * @return
+     */
+    public JoinedListResult getTogetherJoinedList(String token, String yid, String num){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token", token));
+        params.add(new BasicNameValuePair("yid", yid));
+        params.add(new BasicNameValuePair("page", "1"));
+        params.add(new BasicNameValuePair("num", num));
+        return HttpDecoder.getForObject(getUrl("yueyou/join"),
+                JoinedListResult.class, params);
+    }
+
+    /**
+     * 获取妙旅团报名列表
+     * @param token
+     * @param aid
+     * @param num
+     * @return
+     */
+    public JoinedListResult getCustomTourJoinedList(String token, String aid, String num){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token", token));
+        params.add(new BasicNameValuePair("aid", aid));
+        params.add(new BasicNameValuePair("page", "1"));
+        params.add(new BasicNameValuePair("num", num));
+        return HttpDecoder.getForObject(getUrl("activity/join"),
+                JoinedListResult.class, params);
+    }
+
+    /**
+     * 意见反馈
+     * @param email
+     * @param content
+     * @return
+     */
+    public BaseResult feedBack(String email, String content){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("email", email));
+        params.add(new BasicNameValuePair("content", content));
+        return HttpDecoder.postForObject(getUrl("base/feedback"),
+                BaseResult.class, params);
     }
 
 }

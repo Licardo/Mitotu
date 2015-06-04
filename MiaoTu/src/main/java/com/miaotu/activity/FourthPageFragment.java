@@ -140,13 +140,13 @@ public class FourthPageFragment extends BaseFragment implements View.OnClickList
                 break;
             case R.id.rl_yibaomingde:
                 intent.setClass(FourthPageFragment.this.getActivity(),
-                        DateTourActivity.class);
+                        TogetherAndCustomTourActivity.class);
                 intent.putExtra("type", "join");
                 intent.putExtra("title", "已报名的约游");
                 break;
             case R.id.rl_like:
                 intent.setClass(FourthPageFragment.this.getActivity(),
-                        DateTourActivity.class);
+                        TogetherAndCustomTourActivity.class);
                 intent.putExtra("type", "like");
                 intent.putExtra("title", "喜欢的约游");
                 break;
