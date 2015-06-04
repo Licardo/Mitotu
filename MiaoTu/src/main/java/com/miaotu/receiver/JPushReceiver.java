@@ -121,7 +121,7 @@ public class JPushReceiver extends BroadcastReceiver {
 				msgIntent.putExtras(new Bundle());
 				context.sendOrderedBroadcast(msgIntent,null);
 			}else if(rootJson.get("Type").equals("like")){
-				//系统消息-喜欢
+				//消息-喜欢
 				LikeMessage likeMessage = new LikeMessage();
 				likeMessage = mapper.readValue(rootJson.getJSONObject("Content").toString(), LikeMessage.class);
 				SharedPreferences sharedPreferences = mContext.getSharedPreferences("COMMON",
@@ -135,13 +135,18 @@ public class JPushReceiver extends BroadcastReceiver {
 				Intent msgIntent = new Intent(ACTION_JPUSH_SYS_MESSAGE_RECIEVE);
 				msgIntent.putExtras(new Bundle());
 				context.sendOrderedBroadcast(msgIntent,null);
-			}else if(rootJson.get("Type").equals("order")){
-                //系统消息-订单
-                LikeMessage systemMessage = new LikeMessage();
-                systemMessage = mapper.readValue(rootJson.getJSONObject("item").toString(), LikeMessage.class);
-                MessageDatabaseHelper helper = new MessageDatabaseHelper(context);
-                long l = helper.saveSysMessage(systemMessage);
-                LogUtil.d("插入收到的系统消息：订单"+l);
+			}else if(rootJson.get("Type").equals("yueyou_like")||rootJson.get("Type").equals("activity_like")){
+                //消息-喜欢约游
+				LikeMessage likeMessage = new LikeMessage();
+				likeMessage = mapper.readValue(rootJson.getJSONObject("Content").toString(), LikeMessage.class);
+				SharedPreferences sharedPreferences = mContext.getSharedPreferences("COMMON",
+						mContext.MODE_PRIVATE);
+				SharedPreferences.Editor editor = sharedPreferences.edit();
+				editor.putString("tour_like_date", "" + rootJson.get("Time"));
+				editor.putString("tour_like_name", "" + likeMessage.getNickname());
+				editor.putString("tour_like_count", "" + (1+Integer.parseInt(sharedPreferences.getString("tour_like_count", "0"))));
+				editor.commit();
+                LogUtil.d("插入收到的系统消息：喜欢约游");
                 Intent msgIntent = new Intent(ACTION_JPUSH_SYS_MESSAGE_RECIEVE);
                 msgIntent.putExtras(new Bundle());
                 context.sendOrderedBroadcast(msgIntent,null);

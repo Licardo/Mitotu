@@ -21,6 +21,8 @@ public class LikeMessage implements Serializable{
 	private String age;
 	@JsonProperty("Gender")
 	private String gender;
+	@JsonProperty("Nickname")
+	private String nickname;
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
@@ -66,4 +68,11 @@ public class LikeMessage implements Serializable{
 		this.gender = gender;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 }

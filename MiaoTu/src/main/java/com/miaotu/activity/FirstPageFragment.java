@@ -77,10 +77,13 @@ private View root;
         switch (view.getId()) {
             case R.id.iv_publish:
                 //发布新的旅行
-                Intent publishTogetherIntent = new Intent(getActivity(),PublishTogetherStep1Activity.class);
-                startActivity(publishTogetherIntent);
-//                Intent publishTogetherIntent = new Intent(getActivity(),CustomTourDetailActivity.class);
-//                startActivity(publishTogetherIntent);
+                if(radioGroup.getCheckedRadioButtonId()==R.id.tab1){
+                    Intent publishTogetherIntent = new Intent(getActivity(),PublishTogetherStep1Activity.class);
+                    startActivity(publishTogetherIntent);
+                }else if(radioGroup.getCheckedRadioButtonId()==R.id.tab2){
+                    Intent publishCustomIntent = new Intent(getActivity(),PublishCustomTourActivity.class);
+                    startActivity(publishCustomIntent);
+                }
                 break;
             case R.id.layout_search:
                 Intent intent = new Intent(getActivity(),SearchActivity.class);
