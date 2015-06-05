@@ -481,12 +481,25 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                         view.findViewById(R.id.tv_movement_name).setVisibility(View.GONE);
                     }
                     ((TextView) view
-                            .findViewById(R.id.tv_movement_name)).setText("@"+topic.getTitle());
+                            .findViewById(R.id.tv_movement_name)).setText("@" + topic.getTitle());
                     view.findViewById(R.id.tv_movement_name).setOnClickListener(BBSTopicDetailActivity.this);
                     ((TextView) view
                             .findViewById(R.id.tv_comment_count)).setText(topic.getStatereplycount());
                     ((TextView) view
                             .findViewById(R.id.tv_date)).setText(topic.getCreated());
+                    final ImageView ivLike = (ImageView) view.findViewById(R.id.iv_like);
+                    ivLike.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if ("false".equals(topic.getIslike())) {
+                                like(token, topic.getUid(), false, ivLike);   //添加喜欢
+                                topic.setIslike("true");
+                            } else {
+                                like(token, topic.getUid(), true, ivLike);    //取消喜欢
+                                topic.setIslike("false");
+                            }
+                        }
+                    });
 
                     lvTopics.getRefreshableView().addHeaderView(view);
                     getComments(false);
