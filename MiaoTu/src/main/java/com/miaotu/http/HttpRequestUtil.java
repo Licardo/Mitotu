@@ -559,7 +559,7 @@ public class HttpRequestUtil {
      */
     public TopicResult getTopicDetail(String sid, String token) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("id", sid));
+        params.add(new BasicNameValuePair("sid", sid));
         params.add(new BasicNameValuePair("token", token));
         return HttpDecoder.getForObject(
                 getUrl("user/state"), TopicResult.class,

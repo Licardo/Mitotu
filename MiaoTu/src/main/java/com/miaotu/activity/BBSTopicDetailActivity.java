@@ -85,7 +85,6 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
         etComment = (EditText) findViewById(R.id.et_comment);
         tvPublishComment = (TextView) findViewById(R.id.tv_publish_comment);
         layoutMore = getLayoutInflater().inflate(R.layout.pull_to_refresh_more, null);
-
     }
 
     private void bindView() {
@@ -399,6 +398,11 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
         }.execute();
     }
 
+    /**
+     * 获取妙友动态详情
+     * @param isShow
+     * @param sid
+     */
     private void getDetail(boolean isShow, final String sid) {
         new BaseHttpAsyncTask<Void, Void, TopicResult>(BBSTopicDetailActivity.this, isShow) {
             @Override
@@ -418,9 +422,9 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                     view.findViewById(R.id.iv_head_photo).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-//                            Intent intent = new Intent(BBSTopicDetailActivity.this, UserHomeActivity.class);
-//                            intent.putExtra("userId",topic.getUid());
-//                            startActivity(intent);
+                            Intent intent = new Intent(BBSTopicDetailActivity.this, PersonCenterActivity.class);
+                            intent.putExtra("uid",topic.getUid());
+                            startActivity(intent);
                         }
                     });
                     /*((TextView) view

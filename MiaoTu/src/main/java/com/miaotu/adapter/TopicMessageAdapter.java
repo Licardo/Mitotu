@@ -21,31 +21,30 @@ import java.util.List;
 
 /**
  * @author Jayden
- *
  */
 public class TopicMessageAdapter extends BaseAdapter {
-	private LayoutInflater mLayoutInflater = null;
-	private List<TopicMessage> mList = null;
+    private LayoutInflater mLayoutInflater = null;
+    private List<TopicMessage> mList = null;
 
-	public TopicMessageAdapter(Context context, List<TopicMessage> list) {
-		mList = list;
-		mLayoutInflater = LayoutInflater.from(context);
-	}
+    public TopicMessageAdapter(Context context, List<TopicMessage> list) {
+        mList = list;
+        mLayoutInflater = LayoutInflater.from(context);
+    }
 
-	@Override
-	public int getCount() {
-		return this.mList != null ? this.mList.size() : 0;
-	}
+    @Override
+    public int getCount() {
+        return this.mList != null ? this.mList.size() : 0;
+    }
 
-	@Override
-	public Object getItem(int position) {
-		    return this.mList.get(position);
-	}
+    @Override
+    public Object getItem(int position) {
+        return this.mList.get(position);
+    }
 
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {

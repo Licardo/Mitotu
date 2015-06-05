@@ -53,6 +53,7 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
     private MFriendsInfo info;
     private RadioGroup rgTitle;
     private RadioButton tab1,tab2;
+    private boolean isClick;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.activity_bbs_topic_list,
@@ -308,11 +309,20 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
                 startActivity(intent1);
                 break;
             case R.id.tab1:
-                showPopWindow(this.getActivity(), tab1);
+                if (isClick){
+                    tab1.setChecked(true);
+                    tab1.setText("身旁");
+                    info.setType("nearby");
+                    getTopics(true, info);
+                }else {
+                    showPopWindow(this.getActivity(), tab1);
+                }
+                isClick = false;
                 break;
             case R.id.tab2:
                 info.setType("like");
                 getTopics(true, info);
+                isClick =  true;
                 break;
             default:
                 break;
