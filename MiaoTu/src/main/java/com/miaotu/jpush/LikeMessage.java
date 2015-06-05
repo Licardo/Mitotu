@@ -23,6 +23,8 @@ public class LikeMessage implements Serializable{
 	private String gender;
 	@JsonProperty("Nickname")
 	private String nickname;
+	@JsonProperty("Content")
+	private String content;
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
@@ -74,5 +76,13 @@ public class LikeMessage implements Serializable{
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 }

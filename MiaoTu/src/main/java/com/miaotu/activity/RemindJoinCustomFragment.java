@@ -11,6 +11,7 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.miaotu.R;
+import com.miaotu.adapter.RemindJoinCustomListAdapter;
 import com.miaotu.adapter.RemindLikeCustomListAdapter;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
@@ -27,7 +28,7 @@ import java.util.List;
 public class RemindJoinCustomFragment extends BaseFragment implements View.OnClickListener{
     private SwipeMenuListView lv;
     private List<RemindLikeCustom> remindLikes;
-    private RemindLikeCustomListAdapter adapter;
+    private RemindJoinCustomListAdapter adapter;
     private View root;
 
     @Override
@@ -45,11 +46,8 @@ public class RemindJoinCustomFragment extends BaseFragment implements View.OnCli
     private void bindView(){
     }
     private void init(){
-        MessageDatabaseHelper helper = new MessageDatabaseHelper(getActivity());
-        helper.resetAllLikeMessage();
-        MessageFragment.getInstance().refresh();
         remindLikes = new ArrayList<RemindLikeCustom>();
-        adapter = new RemindLikeCustomListAdapter(getActivity(), remindLikes);
+        adapter = new RemindJoinCustomListAdapter(getActivity(), remindLikes);
         lv.setAdapter(adapter);
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
@@ -108,7 +106,7 @@ public class RemindJoinCustomFragment extends BaseFragment implements View.OnCli
 
             @Override
             protected RemindLikeCustomResult run(Void... params) {
-                return HttpRequestUtil.getInstance().getRemindLikeCustomList(readPreference("token"));
+                return HttpRequestUtil.getInstance().getRemindJoinCustomList(readPreference("token"));
             }
         }.execute();
     }

@@ -18,6 +18,8 @@ public class RemindLikeCustomInfo implements Serializable{
     private String aid;
     @JsonProperty("PicUrl")
     private String picUrl;
+    @JsonProperty("Content")
+    private String content;
 
     public String getUid() {
         return uid;
@@ -57,5 +59,13 @@ public class RemindLikeCustomInfo implements Serializable{
 
     public void setPicUrl(String picUrl) {
         this.picUrl = picUrl;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

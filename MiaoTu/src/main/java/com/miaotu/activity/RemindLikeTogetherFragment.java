@@ -49,9 +49,6 @@ public class RemindLikeTogetherFragment extends BaseFragment implements View.OnC
     private void bindView(){
     }
     private void init(){
-        MessageDatabaseHelper helper = new MessageDatabaseHelper(getActivity());
-        helper.resetAllLikeMessage();
-        MessageFragment.getInstance().refresh();
         remindLikes = new ArrayList<RemindLikeTogether>();
         adapter = new RemindLikeTogetherListAdapter(getActivity(), remindLikes);
         lv.setAdapter(adapter);

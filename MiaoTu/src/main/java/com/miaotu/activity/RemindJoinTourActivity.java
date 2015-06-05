@@ -17,8 +17,8 @@ import com.miaotu.util.StringUtil;
 public class RemindJoinTourActivity extends BaseFragmentActivity implements View.OnClickListener{
     private TextView tvTitle,tvLeft,tvRight;
     private FragmentManager fragmentManager;
-    private RemindLikeTogetherFragment mTab01;
-    private RemindLikeCustomFragment mTab02;
+    private RemindJoinTogetherFragment mTab01;
+    private RemindJoinCustomFragment mTab02;
     private RadioGroup radioGroup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +52,9 @@ public class RemindJoinTourActivity extends BaseFragmentActivity implements View
         });
     }
     private void init(){
-        writePreference("tour_like_count","0");
+        writePreference("tour_join_count","0");
         MessageFragment.getInstance().refresh();
-        tvTitle.setText("喜欢提醒");
+        tvTitle.setText("报名提醒");
         tvRight.setText("清空");
         fragmentManager = getSupportFragmentManager();
         setTabSelection(0);
@@ -72,7 +72,7 @@ public class RemindJoinTourActivity extends BaseFragmentActivity implements View
             case 0:
                 if (mTab01 == null) {
                     // 如果MessageFragment为空，则创建一个并添加到界面上
-                    mTab01 = new RemindLikeTogetherFragment();
+                    mTab01 = new RemindJoinTogetherFragment();
                     transaction.add(R.id.id_content, mTab01);
                 } else {
                     // 如果MessageFragment不为空，则直接将它显示出来
@@ -82,7 +82,7 @@ public class RemindJoinTourActivity extends BaseFragmentActivity implements View
             case 1:
                 if (mTab02 == null) {
                     // 如果MessageFragment为空，则创建一个并添加到界面上
-                    mTab02 = new RemindLikeCustomFragment();
+                    mTab02 = new RemindJoinCustomFragment();
                     transaction.add(R.id.id_content, mTab02);
                 } else {
                     // 如果MessageFragment不为空，则直接将它显示出来
@@ -129,7 +129,7 @@ public class RemindJoinTourActivity extends BaseFragmentActivity implements View
 
             @Override
             protected BaseResult run(Void... params) {
-                return HttpRequestUtil.getInstance().delAllLikeTogetherRemind(readPreference("token"));
+                return HttpRequestUtil.getInstance().delAllJoinTogetherRemind(readPreference("token"));
             }
         }.execute();
     }
@@ -155,7 +155,7 @@ public class RemindJoinTourActivity extends BaseFragmentActivity implements View
 
             @Override
             protected BaseResult run(Void... params) {
-                return HttpRequestUtil.getInstance().delAllLikeCustomRemind(readPreference("token"));
+                return HttpRequestUtil.getInstance().delAllJoinCustomRemind(readPreference("token"));
             }
         }.execute();
     }

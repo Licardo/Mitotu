@@ -830,6 +830,32 @@ public class HttpRequestUtil {
         return HttpDecoder.getForObject(getUrl("user/msg/activity_like"),
                 RemindLikeCustomResult.class, params);
     }
+    /**
+     * 获取参加一起去提醒
+     * @param token
+     * @return
+     */
+    public RemindLikeTogetherResult getRemindJoinTogetherList(String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("page","1"));
+        params.add(new BasicNameValuePair("num","1000"));
+        return HttpDecoder.getForObject(getUrl("user/msg/yueyou_join"),
+                RemindLikeTogetherResult.class, params);
+    }
+    /**
+     * 获取参加定制游提醒
+     * @param token
+     * @return
+     */
+    public RemindLikeCustomResult getRemindJoinCustomList(String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("page","1"));
+        params.add(new BasicNameValuePair("num","1000"));
+        return HttpDecoder.getForObject(getUrl("user/msg/activity_join"),
+                RemindLikeCustomResult.class, params);
+    }
 /**
      * 加入/解除黑名单
      * @param token
@@ -859,12 +885,12 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("content",content));
         params.add(new BasicNameValuePair("remark",""));
         params.add(new BasicNameValuePair("type",type));
-        return HttpDecoder.postForObject(getUrl("user/inform/"+type),
+        return HttpDecoder.postForObject(getUrl("user/inform/" + type),
                 BaseResult.class, params);
     }
 
     /**
-     * 删除关注提醒
+     * 删除提醒
      * @param token
      * @param id
      * @return
@@ -910,7 +936,28 @@ public class HttpRequestUtil {
         return HttpDecoder.postForObject(getUrl("user/msg/delete/activity_like"),
                 BaseResult.class, params);
     }
-
+    /**
+     * 清空参加一起去提醒
+     * @param token
+     * @return
+     */
+    public BaseResult delAllJoinTogetherRemind(String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        return HttpDecoder.postForObject(getUrl("user/msg/delete/yueyou_join"),
+                BaseResult.class, params);
+    }
+    /**
+     * 清空参加定制游提醒
+     * @param token
+     * @return
+     */
+    public BaseResult delAllJoinCustomRemind(String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        return HttpDecoder.postForObject(getUrl("user/msg/delete/activity_join"),
+                BaseResult.class, params);
+    }
     /**
      * 获取我的秒旅团
      * @param token

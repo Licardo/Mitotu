@@ -48,9 +48,6 @@ public class RemindLikeCustomFragment extends BaseFragment implements View.OnCli
     private void bindView(){
     }
     private void init(){
-        MessageDatabaseHelper helper = new MessageDatabaseHelper(getActivity());
-        helper.resetAllLikeMessage();
-        MessageFragment.getInstance().refresh();
         remindLikes = new ArrayList<RemindLikeCustom>();
         adapter = new RemindLikeCustomListAdapter(getActivity(), remindLikes);
         lv.setAdapter(adapter);

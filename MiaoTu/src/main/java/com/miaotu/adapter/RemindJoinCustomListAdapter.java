@@ -49,20 +49,27 @@ public class RemindJoinCustomListAdapter extends BaseAdapter{
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder holder = null;
         if(view == null){
-            view = mLayoutInflater.inflate(R.layout.item_remind_like_tour, null);
+            view = mLayoutInflater.inflate(R.layout.item_remind_join_tour, null);
             holder = new ViewHolder();
             holder.ivPhoto = (CircleImageView) view.findViewById(R.id.iv_head_photo);
             holder.tvDate = (TextView) view.findViewById(R.id.tv_time);
             holder.tvName = (TextView) view.findViewById(R.id.tv_name);
             holder.ivPic = (ImageView) view.findViewById(R.id.iv_right);
+            holder.tvContent = (TextView) view.findViewById(R.id.tv_status);
             view.setTag(holder);
         }else {
             holder = (ViewHolder) view.getTag();
         }
         UrlImageViewHelper.setUrlDrawable(holder.ivPhoto, remindLikes.get(i).getRemindLikeCustomInfo().getHeadUrl(), R.drawable.icon_default_head_photo);
-        UrlImageViewHelper.setUrlDrawable(holder.ivPic, remindLikes.get(i).getRemindLikeCustomInfo().getPicUrl(), R.drawable.icon_default_head_photo);
+        holder.ivPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         holder.tvDate.setText(remindLikes.get(i).getCreated());
         holder.tvName.setText(remindLikes.get(i).getRemindLikeCustomInfo().getNickname());
+        holder.tvContent.setText(remindLikes.get(i).getRemindLikeCustomInfo().getContent());
         return view;
     }
 
@@ -70,6 +77,7 @@ public class RemindJoinCustomListAdapter extends BaseAdapter{
         CircleImageView ivPhoto;
         ImageView ivPic;
         TextView tvName;
+        TextView tvContent;
         TextView tvDate;
     }
 }

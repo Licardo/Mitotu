@@ -150,14 +150,21 @@ public class JPushReceiver extends BroadcastReceiver {
                 Intent msgIntent = new Intent(ACTION_JPUSH_SYS_MESSAGE_RECIEVE);
                 msgIntent.putExtras(new Bundle());
                 context.sendOrderedBroadcast(msgIntent,null);
-            }else if(rootJson.get("Type").equals("topic")){
-                //系统消息-社区回复
-                MessageCountDatabaseHelper helper = new MessageCountDatabaseHelper(context);
-                long l = helper.saveMessage("topic");
-                LogUtil.d("插入收到的社区回复消息："+l);
-                Intent msgIntent = new Intent(ACTION_JPUSH_TOPIC_MESSAGE_RECIEVE);
-                msgIntent.putExtras(new Bundle());
-                context.sendOrderedBroadcast(msgIntent,null);
+            }else if(rootJson.get("Type").equals("yueyou_join")||rootJson.get("Type").equals("activity_join")){
+				//消息-参加约游
+				LikeMessage likeMessage = new LikeMessage();
+				likeMessage = mapper.readValue(rootJson.getJSONObject("Content").toString(), LikeMessage.class);
+				SharedPreferences sharedPreferences = mContext.getSharedPreferences("COMMON",
+						mContext.MODE_PRIVATE);
+				SharedPreferences.Editor editor = sharedPreferences.edit();
+				editor.putString("tour_join_date", "" + rootJson.get("Time"));
+				editor.putString("tour_join_name", "" + likeMessage.getContent());
+				editor.putString("tour_join_count", "" + (1+Integer.parseInt(sharedPreferences.getString("tour_join_count", "0"))));
+				editor.commit();
+				LogUtil.d("插入收到的系统消息：参加约游");
+				Intent msgIntent = new Intent(ACTION_JPUSH_SYS_MESSAGE_RECIEVE);
+				msgIntent.putExtras(new Bundle());
+				context.sendOrderedBroadcast(msgIntent,null);
             }
 		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block

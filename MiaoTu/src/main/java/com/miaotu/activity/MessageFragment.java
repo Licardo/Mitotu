@@ -72,6 +72,7 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
         layoutChat.setOnClickListener(this);
         layoutLike.setOnClickListener(this);
         layoutLikeTour.setOnClickListener(this);
+        layoutJoin.setOnClickListener(this);
     }
     private void init(){
         refresh();
@@ -101,15 +102,26 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
         }else{
             ivLikeTourCount.setVisibility(View.GONE);
         }
+        //是否有参加线路消息
+        if(!StringUtil.isEmpty(readPreference("tour_join_count"))&&Integer.parseInt(readPreference("tour_join_count"))>0){
+            ivJoinCount.setText(readPreference("tour_join_count"));
+            ivJoinCount.setVisibility(View.VISIBLE);
+        }else{
+            ivJoinCount.setVisibility(View.GONE);
+        }
 
         if(!StringUtil.isEmpty(readPreference("tour_like_name"))){
             tvLikeTourContent.setText("@"+readPreference("tour_like_name")+"喜欢您发布的线路了~");
+        }
+        if(!StringUtil.isEmpty(readPreference("tour_join_name"))){
+            tvJoinContent.setText("有人报名了您发布的“"+readPreference("tour_join_name")+"”活动");
         }
         if(!StringUtil.isEmpty(readPreference("like_date"))){
             tvLikeContent.setText("又有新伙伴关注你啦！快去看看吧");
         }
         tvLikeTourDate.setText(readPreference("tour_like_date"));
         tvLikeDate.setText(readPreference("like_date"));
+        tvJoinDate.setText(readPreference("tour_join_date"));
         tvChatContent.setText(readPreference("im_content"));
         tvChatDate.setText(readPreference("im_date"));
     }
@@ -133,6 +145,10 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
             case R.id.layout_like_tour:
                 Intent intent2 = new Intent(getActivity(),RemindLikeTourActivity.class);
                 startActivity(intent2);
+                break;
+            case R.id.layout_join:
+                Intent intent3 = new Intent(getActivity(),RemindJoinTourActivity.class);
+                startActivity(intent3);
                 break;
         }
     }
