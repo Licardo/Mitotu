@@ -35,7 +35,9 @@ import com.miaotu.result.BaseResult;
 import com.miaotu.result.LoginResult;
 import com.miaotu.result.PhotoUploadResult;
 import com.miaotu.result.RedPackageListResult;
+import com.miaotu.result.RemindLikeCustomResult;
 import com.miaotu.result.RemindLikeResult;
+import com.miaotu.result.RemindLikeTogetherResult;
 import com.miaotu.result.SearchTourResult;
 import com.miaotu.result.SearchUserResult;
 import com.miaotu.result.SymbolResult;
@@ -801,6 +803,33 @@ public class HttpRequestUtil {
         return HttpDecoder.getForObject(getUrl("user/msg/like"),
                 RemindLikeResult.class, params);
     }
+
+    /**
+     * 获取喜欢一起去提醒
+     * @param token
+     * @return
+     */
+    public RemindLikeTogetherResult getRemindLikeTogetherList(String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("page","1"));
+        params.add(new BasicNameValuePair("num","1000"));
+        return HttpDecoder.getForObject(getUrl("user/msg/yueyou_like"),
+                RemindLikeTogetherResult.class, params);
+    }
+    /**
+     * 获取喜欢定制游提醒
+     * @param token
+     * @return
+     */
+    public RemindLikeCustomResult getRemindLikeCustomList(String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("page","1"));
+        params.add(new BasicNameValuePair("num","1000"));
+        return HttpDecoder.getForObject(getUrl("user/msg/activity_like"),
+                RemindLikeCustomResult.class, params);
+    }
 /**
      * 加入/解除黑名单
      * @param token
@@ -856,6 +885,29 @@ public class HttpRequestUtil {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token",token));
         return HttpDecoder.postForObject(getUrl("user/msg/delete/like"),
+                BaseResult.class, params);
+    }
+
+    /**
+     * 清空喜欢一起去提醒
+     * @param token
+     * @return
+     */
+    public BaseResult delAllLikeTogetherRemind(String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        return HttpDecoder.postForObject(getUrl("user/msg/delete/yueyou_like"),
+                BaseResult.class, params);
+    }
+    /**
+     * 清空喜欢定制游提醒
+     * @param token
+     * @return
+     */
+    public BaseResult delAllLikeCustomRemind(String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        return HttpDecoder.postForObject(getUrl("user/msg/delete/activity_like"),
                 BaseResult.class, params);
     }
 
