@@ -68,6 +68,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
     private EditText etComment;
     private TextView tvPublishComment;
     private String token;
+    private TextView tvTipComment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,6 +169,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             LayoutInflater inflater = LayoutInflater.from(this);
             View view = inflater.inflate(R.layout.item_topic_detail, null);
 //            tvTitle.setText(topic.getTitle());
+            tvTipComment = (TextView) view.findViewById(R.id.tv_tip_comment);
             ((TextView) view.findViewById(R.id.tv_nickname)).setText(topic.getNickname());
             UrlImageViewHelper.setUrlDrawable((CircleImageView) view.findViewById(R.id.iv_head_photo),
                     topic.getHead_url() + "100x100",
@@ -316,6 +318,11 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                     }
                     commentList.addAll(result.getComment());
                     adapter.notifyDataSetChanged();
+                    if (commentList.size() < 1){
+                        if (tvTipComment != null){
+                            tvTipComment.setVisibility(View.GONE);
+                        }
+                    }
 
                     if (lvTopics.getRefreshableView().getFooterViewsCount() == 1 && commentList.size() == PAGECOUNT) {
                         lvTopics.getRefreshableView().addFooterView(layoutMore);
@@ -415,6 +422,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                     /*tvTitle.setText(topic.getTitle());*/
                     LayoutInflater inflater = LayoutInflater.from(BBSTopicDetailActivity.this);
                     View view = inflater.inflate(R.layout.item_topic_detail, null);
+                    tvTipComment = (TextView) view.findViewById(R.id.tv_tip_comment);
                     ((TextView) view.findViewById(R.id.tv_nickname)).setText(topic.getNickname());
                     UrlImageViewHelper.setUrlDrawable((CircleImageView) view.findViewById(R.id.iv_head_photo),
                             topic.getHead_url() + "100x100",
@@ -444,7 +452,9 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                         photoModel.setOriginalPath(photoInfo.getUrl());
                         photoList.add(photoModel);
                         ImageView imageView = new ImageView(BBSTopicDetailActivity.this);
-                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Util.dip2px(BBSTopicDetailActivity.this, 70), Util.dip2px(BBSTopicDetailActivity.this, 70));
+                        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                Util.dip2px(BBSTopicDetailActivity.this, 70),
+                                Util.dip2px(BBSTopicDetailActivity.this, 70));
                         params.leftMargin = Util.dip2px(BBSTopicDetailActivity.this, 10);
                         imageView.setLayoutParams(params);
                         UrlImageViewHelper.setUrlDrawable(imageView,
@@ -481,12 +491,58 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                         view.findViewById(R.id.tv_movement_name).setVisibility(View.GONE);
                     }
                     ((TextView) view
-                            .findViewById(R.id.tv_movement_name)).setText("@"+topic.getTitle());
+                            .findViewById(R.id.tv_movement_name)).setText("@" + topic.getTitle());
                     view.findViewById(R.id.tv_movement_name).setOnClickListener(BBSTopicDetailActivity.this);
+                    if (StringUtil.isBlank(topic.getDistance())){
+                        ((TextView) view
+                                .findViewById(R.id.tv_comment_count)).setVisibility(View.GONE);
+                    }
                     ((TextView) view
-                            .findViewById(R.id.tv_comment_count)).setText(topic.getStatereplycount());
+                            .findViewById(R.id.tv_comment_count)).setText(topic.getDistance()+"km");
                     ((TextView) view
                             .findViewById(R.id.tv_date)).setText(topic.getCreated());
+                    final ImageView ivLike = (ImageView) view.findViewById(R.id.iv_like);
+                    ivLike.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            if ("false".equals(topic.getIslike())) {
+                                like(token, topic.getUid(), false, ivLike);   //添加喜欢
+                                topic.setIslike("true");
+                            } else {
+                                like(token, topic.getUid(), true, ivLike);    //取消喜欢
+                                topic.setIslike("false");
+                            }
+                        }
+                    });
+
+                    if(topic.getLikelist().size() > 0){
+                        for(int i=0;i<topic.getLikelist().size();i++){
+                            LinearLayout llLikePhoto = (LinearLayout) view.findViewById(R.id.ll_likephoto);
+                            CircleImageView imageView = new CircleImageView(BBSTopicDetailActivity.this);
+                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                                    Util.dip2px(BBSTopicDetailActivity.this, 30),
+                                    Util.dip2px(BBSTopicDetailActivity.this, 30));
+                            params.rightMargin = Util.dip2px(BBSTopicDetailActivity.this, 10);
+                            imageView.setLayoutParams(params);
+                            UrlImageViewHelper.setUrlDrawable(imageView,
+                                    topic.getLikelist().get(i).getHeadurl() + "100×100",
+                                    R.drawable.icon_default_bbs_photo);
+                            imageView.setTag(i);
+                            imageView.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    int pos = (int) view.getTag();
+                                    Intent intent = new Intent();
+                                    intent.setClass(BBSTopicDetailActivity.this, PersonCenterActivity.class);
+                                    intent.putExtra("uid", topic.getLikelist().get(pos).getUid());
+                                    startActivity(intent);
+                                }
+                            });
+                            llLikePhoto.addView(imageView);
+                        }
+                    }else{
+                        view.findViewById(R.id.ll_likeuser).setVisibility(View.GONE);
+                    }
 
                     lvTopics.getRefreshableView().addHeaderView(view);
                     getComments(false);
