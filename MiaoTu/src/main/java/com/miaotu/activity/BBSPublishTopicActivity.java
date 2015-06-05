@@ -207,8 +207,10 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
                 for (String img:imgs){
                     images += img+",";
                 }
-                return HttpRequestUtil.getInstance().publishTopic((String) layoutMovement.getTag(), readPreference("token"),
-                        etContent.getText().toString(), images.substring(0, images.length() - 1));
+                return HttpRequestUtil.getInstance().publishTopic(
+                        (String) layoutMovement.getTag(), readPreference("token"),
+                        etContent.getText().toString(),
+                        images.substring(0, images.length() - 1));
             }
 
 //                @Override
@@ -232,13 +234,17 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     if (result.getCustomTourInfolist().size() == 0) {
-                        layoutMovement.setVisibility(View.GONE);
+//                        layoutMovement.setVisibility(View.GONE);
+                        CustomTour frakeMovement = new CustomTour();
+                        frakeMovement.setNickname("您还没有参加任何活动");
+                        movementList.add(frakeMovement);
+
                     } else {
                         layoutMovement.setVisibility(View.VISIBLE);
                         movementList.addAll(result.getCustomTourInfolist());
-                        CustomTour frakeMovement = new CustomTour();
-                        frakeMovement.setNickname("不选择");
-                        movementList.add(frakeMovement);
+//                        CustomTour frakeMovement = new CustomTour();
+//                        frakeMovement.setNickname("不选择");
+//                        movementList.add(frakeMovement);
                     }
                 } else {
                     if (StringUtil.isEmpty(result.getMsg())) {
