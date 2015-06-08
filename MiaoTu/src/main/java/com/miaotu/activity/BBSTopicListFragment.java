@@ -323,6 +323,9 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
                 info.setType("like");
                 getTopics(true, info);
                 isClick =  true;
+                if (lvTopics.getRefreshableView().getFooterViewsCount()>1){
+                    lvTopics.getRefreshableView().removeFooterView(layoutMore);
+                }
                 break;
             default:
                 break;
@@ -368,6 +371,9 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
             public void onClick(View v) {
                 tab1.setText("最热");
                 info.setType("hot");
+                if (lvTopics.getRefreshableView().getFooterViewsCount()>1){
+                    lvTopics.getRefreshableView().removeFooterView(layoutMore);
+                }
                 getTopics(true, info);
                 popWindow.dismiss();
             }

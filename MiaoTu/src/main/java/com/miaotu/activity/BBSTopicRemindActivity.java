@@ -31,6 +31,7 @@ public class BBSTopicRemindActivity extends BaseActivity implements View.OnClick
         tvLeft = (TextView) this.findViewById(R.id.tv_left);
         tvTitle = (TextView) this.findViewById(R.id.tv_title);
         iv_msgremind.setOnClickListener(this);
+        iv_receptmsg.setOnClickListener(this);
         tvLeft.setOnClickListener(this);
         tvTitle.setText("新消息通知提醒");
     }
