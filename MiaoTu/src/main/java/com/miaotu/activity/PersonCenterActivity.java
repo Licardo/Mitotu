@@ -7,8 +7,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -104,7 +106,13 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         iv_gender = (ImageView) this.findViewById(R.id.iv_gender);
         fl_tag = (FlowLayout) this.findViewById(R.id.fl_tag);
         ll_tag = (LinearLayout) this.findViewById(R.id.ll_tag);
+        DisplayMetrics metric = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metric);
+        int width = metric.widthPixels;
+        int height = (metric.widthPixels / 1080) * 669;
         iv_background = (ImageView) this.findViewById(R.id.iv_background);
+        iv_background.setLayoutParams(new RelativeLayout.LayoutParams(
+                width, height));
         File myDir = new File(Environment
                 .getExternalStorageDirectory().getAbsolutePath() + "/miaotu");
         myDir.mkdirs();

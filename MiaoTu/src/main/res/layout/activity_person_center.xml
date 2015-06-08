@@ -111,7 +111,7 @@
                 <ImageView
                     android:id="@+id/iv_background"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="100dp"
                     android:scaleType="fitXY"
                     android:background="@drawable/bg_choose_login"
                     android:visibility="visible" />
