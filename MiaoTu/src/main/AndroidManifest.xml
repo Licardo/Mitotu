@@ -48,7 +48,7 @@
             android:value="${UMENG_CHANNEL_VALUE}" />
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="7435c47cc25c1897d779d4dc74e69b22" />
+            android:value="5e18698dfa4136f9b53213243ef65404" />
 
         <service
             android:name="com.umeng.update.net.DownloadingService"

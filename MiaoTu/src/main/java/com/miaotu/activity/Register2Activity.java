@@ -72,6 +72,10 @@ private boolean validate(){
         showToastMsg("请输入密码！");
         return false;
     }
+    if(etPassword.getText().toString().length()<6){
+        showToastMsg("请输入6-8位密码！");
+        return false;
+    }
     if(StringUtil.isEmpty(etPasswordRe.getText().toString())){
         showToastMsg("请重复输入密码！");
         return false;

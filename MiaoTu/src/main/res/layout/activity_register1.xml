@@ -56,6 +56,7 @@
                 android:background="#f1f1f1"
                 android:hint="请输入您的妙途用户名"
                 android:textSize="12sp"
+                android:maxLength="8"
                 android:textColorHint="#b4b4b4"
                 android:digits="1234567890abcdefghijklmnopqrstuvwxyz"
                 />

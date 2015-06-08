@@ -79,7 +79,7 @@ private void init(){
                     return;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
-                    showToastMsg("登陆成功！");
+                    showToastMsg("登录成功！");
                     writePreference("uid", result.getLogin().getUid());
                     writePreference("id", result.getLogin().getId());
                     writePreference("token",result.getLogin().getToken());
@@ -128,7 +128,7 @@ private void init(){
                 } else {
                     if(isTel){
                         if(StringUtil.isEmpty(result.getMsg())){
-                            showToastMsg("登陆失败！");
+                            showToastMsg("登录失败！");
                         }else{
                             showToastMsg(result.getMsg());
                         }
