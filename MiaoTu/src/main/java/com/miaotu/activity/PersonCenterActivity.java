@@ -163,6 +163,11 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         if("男".equals(personInfoResult.getPersonInfo().getGender())){
             iv_gender.setBackgroundResource(R.drawable.mine_boy);
         }
+        if (!StringUtil.isBlank(personInfoResult.getPersonInfo().getPicurl())){
+            UrlImageViewHelper.setUrlDrawable(iv_background,
+                    personInfoResult.getPersonInfo().getPicurl(),
+                    R.drawable.icon_default_bbs_photo);
+        }
 
 //        personInfoResult.getPersonInfo().setTags("胭脂膏,爱搞笑,硬币,硬笔, 硬逼, 影壁, yingbi, 逮屁, 特使");    //测试数据
         if(!StringUtil.isBlank(personInfoResult.getPersonInfo().getTags())){
@@ -192,10 +197,6 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void initData(){
-        String imgBg = readPreference("background");
-        if (!StringUtil.isBlank(imgBg)){
-            UrlImageViewHelper.setUrlDrawable(iv_background, imgBg, R.drawable.icon_default_bbs_photo);
-        }
         token = readPreference("token");
         String id = readPreference("uid");
         uid = getIntent().getStringExtra("uid");
@@ -296,7 +297,9 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                 startActivity(stateIntent);
                 break;
             case R.id.iv_background:
-                chosePhoto(2);
+                if (isMine){
+                    chosePhoto(2);
+                }
                 break;
             default:
                 break;
@@ -464,7 +467,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
             @Override
             protected void onCompleteTask(BaseResult baseResult) {
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
-                    writePreference("background", info.getPic_url());
+                    showToastMsg("修改成功");
                 } else {
                     if (StringUtil.isBlank(baseResult.getMsg())) {
                         showToastMsg("修改信息失败");

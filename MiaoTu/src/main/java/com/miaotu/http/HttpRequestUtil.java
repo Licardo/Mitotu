@@ -492,6 +492,7 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("film", info.getFilm()));
         params.add(new BasicNameValuePair("book", info.getBook()));
         params.add(new BasicNameValuePair("food", info.getFood()));
+        params.add(new BasicNameValuePair("pic_url", info.getPic_url()));
 
         return HttpDecoder.postForObject(getUrl("user"), BaseResult.class, params);
     }
