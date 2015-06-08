@@ -80,6 +80,10 @@ private WebView webView;
         public String getToken() {
             return readPreference("token");
         }
+        @android.webkit.JavascriptInterface
+        public String getLuckyMoney() {
+            return readPreference("luckmoney");
+        }
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK) &&   webView .canGoBack()) {

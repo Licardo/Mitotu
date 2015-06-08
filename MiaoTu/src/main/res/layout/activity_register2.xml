@@ -140,7 +140,7 @@
                 android:inputType="textPassword"
                 android:textColorHint="#b4b4b4"
                 android:digits="1234567890abcdefghijklmnopqrstuvwxyz"
-                android:maxLength="10"
+                android:maxLength="8"
                 />
         </LinearLayout>
     </LinearLayout>

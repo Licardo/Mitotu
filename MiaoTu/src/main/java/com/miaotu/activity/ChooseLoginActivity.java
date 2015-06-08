@@ -252,7 +252,7 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
                     return;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
-                    showToastMsg("登陆成功！");
+                    showToastMsg("登录成功！");
                     writePreference("uid", result.getLogin().getUid());
                     writePreference("id", result.getLogin().getId());
                     writePreference("token",result.getLogin().getToken());
