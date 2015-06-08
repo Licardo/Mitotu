@@ -49,9 +49,9 @@ public class BBSTopicRemindActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.iv_receptmsg:
                 if(!isSelected2){
-                    iv_msgremind.setBackgroundResource(R.drawable.icon_open);
+                    iv_receptmsg.setBackgroundResource(R.drawable.icon_open);
                 }else {
-                    iv_msgremind.setBackgroundResource(R.drawable.icon_close);
+                    iv_receptmsg.setBackgroundResource(R.drawable.icon_close);
                 }
                 isSelected2 = !isSelected2;
                 break;

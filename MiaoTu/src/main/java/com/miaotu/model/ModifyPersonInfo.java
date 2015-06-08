@@ -29,6 +29,7 @@ public class ModifyPersonInfo {
     private String film;
     private String book;
     private String food;
+    private String pic_url;
 
     public String getToken() {
         return token;
@@ -228,5 +229,13 @@ public class ModifyPersonInfo {
 
     public void setHear_url(String hear_url) {
         this.hear_url = hear_url;
+    }
+
+    public String getPic_url() {
+        return pic_url;
+    }
+
+    public void setPic_url(String pic_url) {
+        this.pic_url = pic_url;
     }
 }
