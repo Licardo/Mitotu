@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/top_bar"
+        layout="@layout/top_bar"/>
+
+    <LinearLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_below="@id/top_bar"
+        android:background="@android:color/white">
+
+        <RadioGroup
+            android:id="@+id/rg_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/tab1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_date_tour"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:text="关注"
+                android:textColor="@color/selector_firstpage_tab_color"
+                android:textSize="17sp" />
+
+            <RadioButton
+                android:id="@+id/tab2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/selector_date_tour"
+                android:button="@null"
+                android:checked="false"
+                android:gravity="center"
+                android:text="粉丝"
+                android:textColor="@color/selector_firstpage_tab_color"
+                android:textSize="17sp" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/id_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relativeLayout"
+        android:orientation="vertical" />
+
+</RelativeLayout>

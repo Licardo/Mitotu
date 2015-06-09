@@ -730,6 +730,23 @@ public class HttpRequestUtil {
     }
 
     /**
+     * 喜欢/取消喜欢妙友状态
+     *
+     * @param token
+     * @param sid
+     * @return
+     */
+    public BaseResult likeState(String token, String sid) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token", token));
+        params.add(new BasicNameValuePair("sid", sid));
+        return HttpDecoder.postForObject(
+                getUrl("user/state/like"), BaseResult.class,
+                params);
+
+    }
+
+    /**
      * 移除照片
      *
      * @param token

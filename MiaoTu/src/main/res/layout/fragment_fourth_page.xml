@@ -50,7 +50,7 @@
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
+                    android:layout_marginTop="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_toRightOf="@id/iv_userhead"
                     android:orientation="horizontal">
@@ -104,7 +104,7 @@
                         android:layout_marginTop="6dp"
                         android:text="10个关注|39个粉丝"
                         android:textColor="#ff8000"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
                 </RelativeLayout>
 
                 <ImageView
