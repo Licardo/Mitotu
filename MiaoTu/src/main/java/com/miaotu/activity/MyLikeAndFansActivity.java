@@ -15,13 +15,10 @@ import com.miaotu.util.Util;
 
 public class MyLikeAndFansActivity extends BaseFragmentActivity implements View.OnClickListener {
     private FragmentManager fragmentManager;
-    private MyTogetherFragment mTab01;
-    private MyCustomTourFragment mTab02;
+    private MyLikeFragment mTab01;
+    private MyFansFragment mTab02;
     private int curPage;
     private RadioGroup radioGroup;
-    private String type = "owner";
-    private String uid,title;
-    private boolean isOwner;    //是否我发起的
     private TextView tvLfet,tvTitle;
 
     @Override
@@ -63,14 +60,7 @@ public class MyLikeAndFansActivity extends BaseFragmentActivity implements View.
     }
 
     private void init() {
-        title = getIntent().getStringExtra("title");
-        type = getIntent().getStringExtra("type");
-        uid = getIntent().getStringExtra("uid");
-        isOwner = getIntent().getBooleanExtra("isOwner", false);
-        if(StringUtil.isBlank(uid)){
-            uid = readPreference("uid");
-        }
-        tvTitle.setText(title);
+        tvTitle.setText("关注与粉丝");
         fragmentManager = getSupportFragmentManager();
         setTabSelection(0);
     }
@@ -100,33 +90,29 @@ public class MyLikeAndFansActivity extends BaseFragmentActivity implements View.
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         // 先隐藏掉所有的Fragment，以防止有多个Fragment显示在界面上的情况
         hideFragments(transaction);
-        Bundle bundle = new Bundle();
-        bundle.putString("type",type);
-        bundle.putString("uid",uid);
-        bundle.putBoolean("isOwner", isOwner);
         switch (index) {
             case 0: //关注
                 curPage = 0;
                 if (mTab01 == null) {
                     // 如果MessageFragment为空，则创建一个并添加到界面上
-                    mTab01 = new MyTogetherFragment();
-                    mTab01.setArguments(bundle);
+                    mTab01 = new MyLikeFragment();
                     transaction.add(R.id.id_content, mTab01);
                 } else {
                     // 如果MessageFragment不为空，则直接将它显示出来
                     transaction.show(mTab01);
+                    mTab01.getLikeList();
                 }
                 break;
             case 1: //粉丝
                 curPage = 1;
                 if (mTab02 == null) {
                     // 如果MessageFragment为空，则创建一个并添加到界面上
-                    mTab02 = new MyCustomTourFragment();
-                    mTab02.setArguments(bundle);
+                    mTab02 = new MyFansFragment();
                     transaction.add(R.id.id_content, mTab02);
                 } else {
                     // 如果MessageFragment不为空，则直接将它显示出来
                     transaction.show(mTab02);
+                    mTab02.getFansList();
                 }
                 break;
         }

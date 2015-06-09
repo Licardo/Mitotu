@@ -367,7 +367,10 @@
         <activity
             android:name=".activity.ProtocolActivity"
             android:label="@string/title_activity_protocol" >
+            android:label="@string/title_activity_every_day_pic"
+            >
         </activity>
+        <activity android:name=".activity.MyLikeAndFansActivity"></activity>
     </application>
 
 </manifest>

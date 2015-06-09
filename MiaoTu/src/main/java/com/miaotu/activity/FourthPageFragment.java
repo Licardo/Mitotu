@@ -160,7 +160,7 @@ public class FourthPageFragment extends BaseFragment implements View.OnClickList
                 break;
             case R.id.tv_userfans:
                 intent.setClass(FourthPageFragment.this.getActivity(),
-                        AppRecommendActivity.class);
+                        MyLikeAndFansActivity.class);
                 break;
             default:
                 break;
