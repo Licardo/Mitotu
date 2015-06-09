@@ -1,9 +1,16 @@
 package com.miaotu.activity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -13,13 +20,19 @@ import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
+import com.miaotu.model.ModifyPersonInfo;
 import com.miaotu.result.PersonInfoResult;
 import com.miaotu.result.BaseResult;
+import com.miaotu.result.PhotoUploadResult;
 import com.miaotu.util.MD5;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 import com.miaotu.view.FlowLayout;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PersonCenterActivity extends BaseActivity implements View.OnClickListener {
 
@@ -35,10 +48,13 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     private TextView tv_start,tv_sign,tv_like,tv_trends,tv_tip_trends;
     private RelativeLayout rl_follow,rl_chating,rl_bottom,rl_join,rl_like,rl_start,rl_state;
     private TextView tv_follow;
-    private ImageView iv_follow;
+    private ImageView iv_follow,iv_background;
     private PersonInfoResult result;
     private String token,uid;
     private boolean isMine;
+    private static final String IMAGE_FILE_LOCATION = Environment
+            .getExternalStorageDirectory().getAbsolutePath() + "/miaotu/bg.jpg";
+    Uri imageUri = Uri.parse(IMAGE_FILE_LOCATION);//
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +62,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         setContentView(R.layout.activity_person_center);
 
         initView();
+        bindView();
         initData();
     }
 
@@ -89,7 +106,19 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         iv_gender = (ImageView) this.findViewById(R.id.iv_gender);
         fl_tag = (FlowLayout) this.findViewById(R.id.fl_tag);
         ll_tag = (LinearLayout) this.findViewById(R.id.ll_tag);
+        DisplayMetrics metric = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metric);
+        int width = metric.widthPixels;
+        int height = (metric.widthPixels / 1080) * 669;
+        iv_background = (ImageView) this.findViewById(R.id.iv_background);
+        iv_background.setLayoutParams(new RelativeLayout.LayoutParams(
+                width, height));
+        File myDir = new File(Environment
+                .getExternalStorageDirectory().getAbsolutePath() + "/miaotu");
+        myDir.mkdirs();
+    }
 
+    private void bindView(){
         tv_right.setVisibility(View.GONE);
         tv_title.setText("个人主页");
         tv_left.setOnClickListener(this);
@@ -99,6 +128,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         rl_join.setOnClickListener(this);
         rl_start.setOnClickListener(this);
         rl_state.setOnClickListener(this);
+        iv_background.setOnClickListener(this);
     }
 
     /**
@@ -140,6 +170,11 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         tv_username.setText(personInfoResult.getPersonInfo().getNickname());
         if("男".equals(personInfoResult.getPersonInfo().getGender())){
             iv_gender.setBackgroundResource(R.drawable.mine_boy);
+        }
+        if (!StringUtil.isBlank(personInfoResult.getPersonInfo().getPicurl())){
+            UrlImageViewHelper.setUrlDrawable(iv_background,
+                    personInfoResult.getPersonInfo().getPicurl(),
+                    R.drawable.icon_default_bbs_photo);
         }
 
 //        personInfoResult.getPersonInfo().setTags("胭脂膏,爱搞笑,硬币,硬笔, 硬逼, 影壁, yingbi, 逮屁, 特使");    //测试数据
@@ -269,6 +304,11 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                 }
                 startActivity(stateIntent);
                 break;
+            case R.id.iv_background:
+                if (isMine){
+                    chosePhoto(2);
+                }
+                break;
             default:
                 break;
         }
@@ -337,6 +377,117 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
             @Override
             protected BaseResult run(Void... params) {
                 return HttpRequestUtil.getInstance().like(token, touser);
+            }
+        }.execute();
+    }
+
+    /**
+     * 相册选择照片
+     * @param index
+     */
+    public void chosePhoto(int index) {
+        File fos = null;
+        try {
+            fos = new File(IMAGE_FILE_LOCATION);
+            fos.createNewFile();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        imageUri = Uri.fromFile(fos);
+        Intent intent = new Intent(Intent.ACTION_PICK, null);
+        intent.setType("image/*");
+        intent.putExtra("crop", "true");
+//        intent.putExtra("aspectX", 1);
+//        intent.putExtra("aspectY", 1);
+//        intent.putExtra("outputX", 300);
+//        intent.putExtra("outputY", 300);
+        intent.putExtra("scale", true);
+        intent.putExtra("return-data", true);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        intent.putExtra("noFaceDetection", true); // no face detection
+        if (index == 1) {
+            startActivityForResult(intent, 3); // 如果requestCode=3，是修改头像
+        } else if (index == 2) {
+            startActivityForResult(intent, 22); // requestCode=22,是相册添加照片
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case 22:
+                    if (imageUri != null) {
+                        File file = new File(imageUri.getPath());
+                        List<File> imgs = new ArrayList<File>();
+                        imgs.add(file);
+                        addPhoto(imgs);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    /**
+     * 向服务器添加照片
+     *
+     * @param imgs
+     */
+    private void addPhoto(final List<File> imgs) {
+        new BaseHttpAsyncTask<Void, Void, PhotoUploadResult>(this) {
+
+            @Override
+            protected void onCompleteTask(final PhotoUploadResult result) {
+                if (result.getCode() == BaseResult.SUCCESS) {
+                    String photourl = result.getPhotoList().get(0);
+                    ModifyPersonInfo info = new ModifyPersonInfo();
+                    info.setToken(readPreference("token"));
+                    info.setPic_url(photourl);
+                    UrlImageViewHelper.setUrlDrawable(iv_background, photourl, R.drawable.icon_default_bbs_photo);
+                    modifyUserInfo(info);
+                } else {
+                    if (StringUtil.isBlank(result.getMsg())) {
+                        showToastMsg("操作失败");
+                    } else {
+                        showToastMsg(result.getMsg());
+                    }
+                }
+            }
+
+            @Override
+            protected PhotoUploadResult run(Void... params) {
+                return HttpRequestUtil.getInstance().uploadPhoto(imgs);
+            }
+
+        }.execute();
+    }
+
+    /**
+     * 修改用户信息
+     */
+    private void modifyUserInfo(final ModifyPersonInfo info) {
+        new BaseHttpAsyncTask<Void, Void, BaseResult>(this, true) {
+
+            @Override
+            protected void onCompleteTask(BaseResult baseResult) {
+                if (baseResult.getCode() == BaseResult.SUCCESS) {
+                    showToastMsg("修改成功");
+                } else {
+                    if (StringUtil.isBlank(baseResult.getMsg())) {
+                        showToastMsg("修改信息失败");
+                    } else {
+                        showToastMsg(baseResult.getMsg());
+                    }
+                }
+            }
+
+            @Override
+            protected BaseResult run(Void... params) {
+                return HttpRequestUtil.getInstance().modifyPersonInfo(info);
             }
         }.execute();
     }

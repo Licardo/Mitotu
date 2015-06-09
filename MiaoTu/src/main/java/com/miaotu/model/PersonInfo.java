@@ -219,11 +219,12 @@ public class PersonInfo implements Serializable {
     private String wxunionid;
     @JsonProperty("QqOpenid")
     private String qqopenid;
-
     @JsonProperty("SinaUid")
     private String sinauid;
     @JsonProperty("HeadUrl")
     private String headurl;
+    @JsonProperty("PicUrl")
+    private String picurl;
     @JsonProperty("AboutMe")
     private String aboutme;
     @JsonProperty("High")
@@ -439,5 +440,13 @@ public class PersonInfo implements Serializable {
 
     public void setPhotocount(String photocount) {
         this.photocount = photocount;
+    }
+
+    public String getPicurl() {
+        return picurl;
+    }
+
+    public void setPicurl(String picurl) {
+        this.picurl = picurl;
     }
 }

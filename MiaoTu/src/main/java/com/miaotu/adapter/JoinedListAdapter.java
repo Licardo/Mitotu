@@ -69,7 +69,7 @@ public class JoinedListAdapter extends BaseAdapter{
         }
         JoinedListInfo info = joinedListInfoList.get(i);
         holder.tvName.setText(info.getUsername());
-        holder.tvNickName.setText(info.getNickname());
+        holder.tvNickName.setText("(昵称："+info.getNickname()+")");
         holder.tvDate.setText(info.getCreated());
         holder.tvPhone.setText(info.getUserphone());
         holder.tvIdentity.setText(info.getUsercard());
