@@ -29,7 +29,7 @@ public class Register1Activity extends BaseActivity implements View.OnClickListe
 private TextView tvLeft,tvTitle;
     private Button btnNext;
     private EditText etName;
-    private TextView tvCity,tvAge;
+    private TextView tvCity,tvAge,tvProtocol;
     private RadioGroup rgGender;
     private RadioButton rbMan,rbWoman;
     private RegisterInfo registerInfo;
@@ -45,6 +45,7 @@ private TextView tvLeft,tvTitle;
     private void findView(){
         tvLeft = (TextView) findViewById(R.id.tv_left);
         tvTitle = (TextView) findViewById(R.id.tv_title);
+        tvProtocol = (TextView) findViewById(R.id.tv_protocol);
         btnNext = (Button) findViewById(R.id.btn_next);
         etName = (EditText) findViewById(R.id.et_name);
         tvCity = (TextView) findViewById(R.id.tv_city);
@@ -58,6 +59,7 @@ private TextView tvLeft,tvTitle;
         btnNext.setOnClickListener(this);
         tvCity.setOnClickListener(this);
         tvAge.setOnClickListener(this);
+        tvProtocol.setOnClickListener(this);
     }
     private void init(){
         tvTitle.setText("创建个人资料（1/3）");
@@ -162,6 +164,9 @@ private TextView tvLeft,tvTitle;
                 break;
             case R.id.tv_age:
                 getMaritalStatusDialog(tvAge);
+                break;
+            case R.id.tv_protocol:
+                //跳转到注册协议页面
                 break;
         }
     }

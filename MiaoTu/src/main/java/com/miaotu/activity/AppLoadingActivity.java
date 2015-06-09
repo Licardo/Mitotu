@@ -21,6 +21,9 @@ import com.miaotu.util.LogUtil;
 import com.miaotu.util.MD5;
 import com.miaotu.util.Util;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 /**
  * @author ZhangLei
  *
@@ -152,9 +155,17 @@ public class AppLoadingActivity extends BaseActivity {
 
                      });
 
-    		Intent it = new Intent(AppLoadingActivity.this, MainActivity.class);
-            startActivity(it);
-            finish();
+             Calendar calendar = Calendar.getInstance();
+             SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+             String sysDatetime = fmt.format(calendar.getTime());
+             if(readPreference("everyday").equals(sysDatetime)){
+                 Intent intent = new Intent(AppLoadingActivity.this,MainActivity.class);
+                 startActivity(intent);
+             }else{
+                 Intent intent = new Intent(AppLoadingActivity.this,EveryDayPicActivity.class);
+                 startActivity(intent);
+             }
+             finish();
     	}else{
              Intent it = new Intent(AppLoadingActivity.this, ChooseLoginActivity.class);
              startActivity(it);

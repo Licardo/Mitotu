@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">妙途</string>
+    <string name="register_protocol">《<u>妙途用户注册协议</u>》</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -147,4 +148,5 @@
     <string name="title_activity_gift_money_introduce">GiftMoneyIntroduceActivity</string>
     <string name="title_activity_function_introduce">FunctionIntroduceActivity</string>
     <string name="title_activity_joined_list">JoinedListActivity</string>
+    <string name="title_activity_every_day_pic">EveryDayPicActivity</string>
 </resources>

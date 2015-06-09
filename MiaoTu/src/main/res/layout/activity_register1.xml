@@ -58,7 +58,6 @@
                 android:textSize="12sp"
                 android:maxLength="8"
                 android:textColorHint="#b4b4b4"
-                android:digits="1234567890abcdefghijklmnopqrstuvwxyz"
                 />
         </LinearLayout>
         <RadioGroup
@@ -190,4 +189,28 @@
         android:textSize="14sp"
         android:background="@drawable/bg_input_login_btn"
         />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点击下一步表示同意"
+            android:textColor="#b5b5b5"
+            android:textSize="14sp"
+            />
+        <TextView
+            android:id="@+id/tv_protocol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register_protocol"
+            android:textSize="14sp"
+            android:textColor="#4d99cd"
+            />
+    </LinearLayout>
 </RelativeLayout>

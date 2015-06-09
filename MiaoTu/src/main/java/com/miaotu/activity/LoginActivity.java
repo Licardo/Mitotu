@@ -26,6 +26,8 @@ import com.miaotu.util.LogUtil;
 import com.miaotu.util.MD5;
 import com.miaotu.util.StringUtil;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import cn.sharesdk.framework.Platform;
@@ -122,9 +124,18 @@ private void init(){
                                 }
 
                             });
-
-                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                    startActivity(intent);
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+                    String sysDatetime = fmt.format(calendar.getTime());
+//                    if(readPreference("everyday").equals(sysDatetime)){
+//                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+//                        startActivity(intent);
+//                    }else{
+                        Intent intent = new Intent(LoginActivity.this,EveryDayPicActivity.class);
+                        startActivity(intent);
+//                    }
+                    setResult(1);
+                    finish();
                 } else {
                     if(isTel){
                         if(StringUtil.isEmpty(result.getMsg())){

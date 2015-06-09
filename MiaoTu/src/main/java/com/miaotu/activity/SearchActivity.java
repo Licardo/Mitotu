@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.miaotu.R;
 import com.miaotu.util.StringUtil;
@@ -25,6 +26,7 @@ private LinearLayout layoutSearch,layoutClear,layoutResult;
     private SearchResultTab1Fragment mTab01 ;
     private SearchResultTab2Fragment mTab02 ;
     private String key;
+    private TextView tvCancel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,11 +42,13 @@ private LinearLayout layoutSearch,layoutClear,layoutResult;
         etKey = (EditText) findViewById(R.id.et_key);
         ivInit = (ImageView) findViewById(R.id.iv_init);
         rgTab = (RadioGroup) findViewById(R.id.rg_search);
+        tvCancel = (TextView) findViewById(R.id.tv_cancel);
 
     }
     private void bindView(){
         layoutClear.setOnClickListener(this);
         layoutSearch.setOnClickListener(this);
+        tvCancel.setOnClickListener(this);
         rgTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -139,6 +143,9 @@ private LinearLayout layoutSearch,layoutClear,layoutResult;
             case R.id.layout_clear:
                 //点击清除
                 etKey.setText("");
+                break;
+            case R.id.tv_cancel:
+                finish();
                 break;
         }
     }

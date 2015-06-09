@@ -356,6 +356,12 @@
             android:name=".activity.JoinedListActivity"
             android:label="@string/title_activity_joined_list" >
         </activity>
+        <activity
+            android:name=".activity.EveryDayPicActivity"
+            android:label="@string/title_activity_every_day_pic"
+
+            >
+        </activity>
     </application>
 
 </manifest>

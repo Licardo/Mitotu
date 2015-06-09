@@ -31,6 +31,8 @@ import com.miaotu.util.MD5;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import cn.sharesdk.framework.Platform;
@@ -140,7 +142,7 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
                 break;
             case R.id.btn_login:
                 Intent loginIntent = new Intent(ChooseLoginActivity.this,LoginActivity.class);
-                startActivity(loginIntent);
+                startActivityForResult(loginIntent, 1);
                 break;
         }
     }
@@ -285,8 +287,17 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
                                 }
 
                             });
-                    Intent intent = new Intent(ChooseLoginActivity.this,MainActivity.class);
-                    startActivity(intent);
+                    Calendar calendar = Calendar.getInstance();
+                    SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+                    String sysDatetime = fmt.format(calendar.getTime());
+                    if(readPreference("everyday").equals(sysDatetime)){
+                        Intent intent = new Intent(ChooseLoginActivity.this,MainActivity.class);
+                        startActivity(intent);
+                    }else{
+                        Intent intent = new Intent(ChooseLoginActivity.this,EveryDayPicActivity.class);
+                        startActivity(intent);
+                    }
+                    finish();
                 } else {
                     //注册流程
                     register(registerInfo);
@@ -354,5 +365,13 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
             }
 
         }.execute();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1&&resultCode==1){
+            finish();
+        }
     }
 }

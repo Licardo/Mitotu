@@ -196,7 +196,7 @@ public class TogetherlistAdapter extends BaseAdapter {
         holder.layoutImg.removeAllViews();
         for(int i=0;i<limit;i++) {
             PhotoInfo photoInfo = mList.get(position).getPicList().get(i);
-            if(i==2){
+            if(i==2&&mList.get(position).getPicList().size()>3){
                 //添加图片个数textview
                 ImageView imageView = new ImageView(mContext);
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(Util.dip2px(mContext, 80), Util.dip2px(mContext, 80));

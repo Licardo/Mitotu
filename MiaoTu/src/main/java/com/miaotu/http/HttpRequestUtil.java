@@ -20,6 +20,7 @@ import com.miaotu.model.ModifyPersonInfo;
 import com.miaotu.result.BlackResult;
 import com.miaotu.result.CustomTourResult;
 import com.miaotu.result.DeleteTopicMessageResult;
+import com.miaotu.result.EveryDayResult;
 import com.miaotu.result.JoinedListResult;
 import com.miaotu.result.MyTogetherResult;
 import com.miaotu.result.LikeResult;
@@ -181,6 +182,18 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("phone", tel));
         return HttpDecoder.getForObject(
                 getUrl("sms/register"), BaseResult.class,
+                params);
+
+    }
+    /**
+     * 获取每日一图
+     *
+     * @return
+     */
+    public EveryDayResult getEveryDay() {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        return HttpDecoder.getForObject(
+                getUrl("base/day"), EveryDayResult.class,
                 params);
 
     }

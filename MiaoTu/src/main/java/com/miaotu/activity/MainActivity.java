@@ -694,7 +694,7 @@ public class MainActivity extends BaseFragmentActivity implements
             }
         } else {
             int count = 0;
-            count += getInviteMessageNum();
+//            count += getInviteMessageNum();
             count += getLikeMessageNum();
             count += EMChatManager.getInstance().getUnreadMsgsCount();
             count +=Integer.parseInt(readPreference("tour_like_count"));
