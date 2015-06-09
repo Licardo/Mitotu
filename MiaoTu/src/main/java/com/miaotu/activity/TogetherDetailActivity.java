@@ -62,6 +62,7 @@ private Together together;
     private boolean islike;
     private EditText etComment;
     private TextView tvPublishComment;
+    private TogetherDetailResult togetherDetailResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,6 +120,7 @@ private Together together;
         layoutJoin.setOnClickListener(this);
         tvPublishComment.setOnClickListener(this);
         tvLeft.setOnClickListener(this);
+        ivHeadPhoto.setOnClickListener(this);
     }
     private void init(){
         id=getIntent().getStringExtra("id");
@@ -135,6 +137,7 @@ private Together together;
                     return;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
+                    togetherDetailResult = result;
                     writeDetail(result);
                 } else {
                    if(StringUtil.isEmpty(result.getMsg())){
@@ -348,8 +351,29 @@ private Together together;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
                         showToastMsg("评论发表成功！");
+                    etComment.setText("");
                     layoutMenu.setVisibility(View.VISIBLE);
                     layoutPublishComment.setVisibility(View.GONE);
+                    TogetherReply reply1 = new TogetherReply();
+                    reply1.setNickname(readPreference("name"));
+                    reply1.setContent(StringUtil.trimAll(etComment.getText().toString()));
+                    togetherDetailResult.getTogether().getReplyList().add(0,reply1);
+                    layoutCommentList.removeAllViews();
+                    if(togetherDetailResult.getTogether().getReplyList()!=null){
+                        for(TogetherReply reply:togetherDetailResult.getTogether().getReplyList()){
+                            TextView textView = new TextView(TogetherDetailActivity.this);
+                            SpannableStringBuilder style=new SpannableStringBuilder(reply.getNickname()+" "+reply.getContent());
+                            style.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.b4b4b4)), 0, reply.getNickname().length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+                            style.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.grey64)), reply.getNickname().length(), reply.getNickname().length() + reply.getContent().length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+                            textView.setText(style);
+                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            params.bottomMargin = Util.dip2px(TogetherDetailActivity.this,5);
+                            textView.setLayoutParams(params);
+                            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP,14);
+                            textView.setLineSpacing(0f,1.4f);
+                            layoutCommentList.addView(textView);
+                        }
+                    }
                 } else {
                     if(StringUtil.isEmpty(result.getMsg())){
                         showToastMsg("评论发表失败！");
@@ -397,6 +421,12 @@ private Together together;
             case R.id.layout_like:
                 // 感兴趣
                 like();
+                break;
+            case R.id.iv_head_photo:
+                // 个人中心
+                Intent userIntent = new Intent(TogetherDetailActivity.this,PersonCenterActivity.class);
+                userIntent.putExtra("uid",togetherDetailResult.getTogether().getUid());
+                startActivity(userIntent);
                 break;
             case R.id.layout_join:
                 // 参加

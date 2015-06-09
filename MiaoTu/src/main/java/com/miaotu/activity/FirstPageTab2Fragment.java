@@ -39,6 +39,8 @@ import com.miaotu.view.GuideGallery;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class FirstPageTab2Fragment extends BaseFragment implements View.OnClickListener {
 private View root;
@@ -55,6 +57,8 @@ private View root;
     private LinearLayout layoutContainer;
     protected Handler imageChangeHandler = new MyHandler();
     private static final int CHANGE_IMG = 1;
+    private Timer timer;
+    Handler handler ;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -138,7 +142,18 @@ private View root;
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 width, width * 202 / 339);
         gallery.setLayoutParams(params);
+
         getTogether(true);
+        handler = new Handler( ) {
+            public void handleMessage(Message msg) {
+                switch (msg.what) {
+                    case 1:
+                        head.findViewById(R.id.tv_tip).setVisibility(View.GONE);
+                        break;
+                }
+                super.handleMessage(msg);
+            }
+        };
     }
 //获取一起去
     private void getTogether(final boolean isShow) {
@@ -152,6 +167,15 @@ private View root;
                     mList.clear();
                     mList.addAll(result.getCustomTourList());
                     adapter.notifyDataSetChanged();
+                    timer = new Timer();
+                    timer.schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            Message message = new Message();
+                            message.what = 1;
+                            handler.sendMessage(message);
+                        }
+                    }, 5000);
                     if(lvPull.getRefreshableView().getFooterViewsCount()==1&&mList.size()==PAGECOUNT*page){
                         lvPull.getRefreshableView().addFooterView(layoutMore);
                     }

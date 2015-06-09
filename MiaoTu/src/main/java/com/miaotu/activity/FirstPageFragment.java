@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.miaotu.R;
 import com.miaotu.util.Util;
@@ -24,6 +25,7 @@ private View root;
     private ImageView ivPublish;
     private RadioGroup radioGroup;
     private LinearLayout layoutSearch;
+    private TextView tvRight;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,6 +44,7 @@ private View root;
     private void bindView() {
         ivPublish.setOnClickListener(this);
         layoutSearch.setOnClickListener(this);
+        tvRight.setOnClickListener(this);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -60,10 +63,12 @@ private View root;
         ivPublish = (ImageView) root.findViewById(R.id.iv_publish);
         radioGroup = (RadioGroup) root.findViewById(R.id.rg_title);
         layoutSearch = (LinearLayout) root.findViewById(R.id.layout_search);
+        tvRight = (TextView) root.findViewById(R.id.tv_right);
     }
 
     private void init() {
         fragmentManager = getChildFragmentManager();
+        tvRight.setText(readPreference("located_city"));
         setTabSelection(0);
     }
 
@@ -88,6 +93,10 @@ private View root;
             case R.id.layout_search:
                 Intent intent = new Intent(getActivity(),SearchActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.tv_right:
+                Intent intent1 = new Intent(getActivity(),CityListActivity.class);
+                startActivityForResult(intent1,1);
                 break;
         }
     }
@@ -144,8 +153,9 @@ private View root;
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 3 && resultCode == 1) {
-            ((MainActivity) getActivity()).writePreference("movement_city", data.getStringExtra("city"));
+        if (requestCode == 1 && resultCode == 1) {
+            ((MainActivity) getActivity()).writePreference("located_city", data.getStringExtra("city"));
+            tvRight.setText(readPreference("located_city"));
         }
     }
 }

@@ -26,6 +26,7 @@
             ></LinearLayout>
     </RelativeLayout>
     <TextView
+        android:id="@+id/tv_tip"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:background="#f1f3f6"

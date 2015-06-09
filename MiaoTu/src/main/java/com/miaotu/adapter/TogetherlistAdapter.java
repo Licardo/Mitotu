@@ -18,10 +18,14 @@ import android.widget.TextView;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
+import com.miaotu.activity.BaseFragmentActivity;
 import com.miaotu.activity.JoinedListActivity;
 import com.miaotu.activity.PersonCenterActivity;
+import com.miaotu.async.BaseHttpAsyncTask;
+import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.model.PhotoInfo;
 import com.miaotu.model.Together;
+import com.miaotu.result.BaseResult;
 import com.miaotu.util.LogUtil;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
@@ -133,9 +137,9 @@ public class TogetherlistAdapter extends BaseAdapter {
                 int pos = (int) view.getTag();
                 Intent intent = new Intent(mContext, JoinedListActivity.class);
                 intent.putExtra("flag", "1");
-                intent.putExtra("yid",mList.get(pos).getId());
-                intent.putExtra("title",mList.get(pos).getStartDate()+
-                        "一起去"+mList.get(pos).getDesCity());
+                intent.putExtra("yid", mList.get(pos).getId());
+                intent.putExtra("title", mList.get(pos).getStartDate() +
+                        "一起去" + mList.get(pos).getDesCity());
                 mContext.startActivity(intent);
             }
         });
@@ -150,7 +154,7 @@ public class TogetherlistAdapter extends BaseAdapter {
             public void onClick(View view) {
                 int pos = (int) view.getTag();
                 Intent intent = new Intent(mContext, PersonCenterActivity.class);
-                intent.putExtra("uid",mList.get(pos).getUid());
+                intent.putExtra("uid", mList.get(pos).getUid());
                 mContext.startActivity(intent);
             }
         });
@@ -167,6 +171,12 @@ public class TogetherlistAdapter extends BaseAdapter {
         }else{
             holder.ivLike.setBackgroundResource(R.drawable.icon_unlike);
         }
+        holder.ivLike.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                like(position);
+            }
+        });
         holder.tvAge.setText(mList.get(position).getAge()+"岁");
         holder.tvJob.setText(mList.get(position).getJob());
         if(mList.get(position).getGender().equals("男")){
@@ -231,7 +241,35 @@ public class TogetherlistAdapter extends BaseAdapter {
         holder.tvDistance.setText(mList.get(position).getDistance() + "km");
 		return convertView;
 	}
+    private void like(final int position) {
+        new BaseHttpAsyncTask<Void, Void, BaseResult>((BaseFragmentActivity)mContext, true) {
+            @Override
+            protected void onCompleteTask(BaseResult result) {
+                if (result.getCode() == BaseResult.SUCCESS) {
+                    if(mList.get(position).isLike()){
+                        ((BaseFragmentActivity)mContext).showToastMsg("取消喜欢成功！");
+                        mList.get(position).setIsLike(false);
+                    }else{
+                        ((BaseFragmentActivity)mContext).showToastMsg("喜欢成功！");
+                        mList.get(position).setIsLike(true);
+                    }
+                    notifyDataSetChanged();
+                } else {
+                    if(StringUtil.isEmpty(result.getMsg())){
+                        ((BaseFragmentActivity)mContext).showToastMsg("失败！");
+                    }else{
+                        ((BaseFragmentActivity)mContext).showToastMsg(result.getMsg());
+                    }
+                }
+            }
 
+            @Override
+            protected BaseResult run(Void... params) {
+                return HttpRequestUtil.getInstance().likeTogether(((BaseFragmentActivity)mContext).readPreference("token"),mList.get(position).getId());
+            }
+
+        }.execute();
+    }
 
 	public final class ViewHolder {
         private TextView tvNickname = null;

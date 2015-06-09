@@ -252,6 +252,22 @@ public class HttpRequestUtil {
     }
 
     /**
+     * 喜欢定制游
+     * @param token
+     * @param yid
+     * @return
+     */
+    public BaseResult likeCustomTour(String token, String yid) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token", token));
+        params.add(new BasicNameValuePair("aid", yid));
+        return HttpDecoder.postForObject(
+                getUrl("activity/like"), BaseResult.class,
+                params);
+
+    }
+
+    /**
      * 对约游进行评论
      *
      * @param token

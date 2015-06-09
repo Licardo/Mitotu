@@ -20,11 +20,16 @@ import android.widget.TextView;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
+import com.miaotu.activity.BaseFragmentActivity;
 import com.miaotu.activity.JoinedListActivity;
 import com.miaotu.activity.PersonCenterActivity;
+import com.miaotu.async.BaseHttpAsyncTask;
+import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.model.CustomTour;
 import com.miaotu.model.PhotoInfo;
 import com.miaotu.model.Together;
+import com.miaotu.result.BaseResult;
+import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 import com.miaotu.view.FlowLayout;
@@ -140,6 +145,12 @@ public class CustomTourlistAdapter extends BaseAdapter {
         }else{
             holder.ivLike.setBackgroundResource(R.drawable.icon_bgfdislike);
         }
+        holder.ivLike.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                like(position);
+            }
+        });
         if(mList.get(position).getTags()!=null&&mList.get(position).getTags().length()!=0){
             String[]tags=mList.get(position).getTags().split(",");
             for(String tag:tags){
@@ -168,7 +179,35 @@ public class CustomTourlistAdapter extends BaseAdapter {
 		return convertView;
 	}
 
+    private void like(final int position) {
+        new BaseHttpAsyncTask<Void, Void, BaseResult>((BaseFragmentActivity)mContext, true) {
+            @Override
+            protected void onCompleteTask(BaseResult result) {
+                if (result.getCode() == BaseResult.SUCCESS) {
+                    if(mList.get(position).isLike()){
+                        ((BaseFragmentActivity)mContext).showToastMsg("取消喜欢成功！");
+                        mList.get(position).setIsLike(false);
+                    }else{
+                        ((BaseFragmentActivity)mContext).showToastMsg("喜欢成功！");
+                        mList.get(position).setIsLike(true);
+                    }
+                    notifyDataSetChanged();
+                } else {
+                    if(StringUtil.isEmpty(result.getMsg())){
+                        ((BaseFragmentActivity)mContext).showToastMsg("失败！");
+                    }else{
+                        ((BaseFragmentActivity)mContext).showToastMsg(result.getMsg());
+                    }
+                }
+            }
 
+            @Override
+            protected BaseResult run(Void... params) {
+                return HttpRequestUtil.getInstance().likeCustomTour(((BaseFragmentActivity) mContext).readPreference("token"), mList.get(position).getId());
+            }
+
+        }.execute();
+    }
 	public final class ViewHolder {
         private TextView tvNickname = null;
         private TextView tvEndTime = null;
