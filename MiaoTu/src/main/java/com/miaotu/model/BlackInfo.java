@@ -18,6 +18,8 @@ public class BlackInfo {
     private String gender;
     @JsonProperty("IsLiked")
     private String isliked;
+    @JsonProperty("IsLike")
+    private String islike;
     @JsonProperty("State")
     private String state;
 
@@ -75,5 +77,13 @@ public class BlackInfo {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getIslike() {
+        return islike;
+    }
+
+    public void setIslike(String islike) {
+        this.islike = islike;
     }
 }

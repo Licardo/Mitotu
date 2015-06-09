@@ -56,8 +56,8 @@ public class MyFansFragment extends BaseFragment implements View.OnClickListener
     /**
      * 获取关注列表
      */
-    private void getFansList(){
-        new BaseHttpAsyncTask<Void, Void, BlackResult>(this.getActivity(), false){
+    public void getFansList(){
+        new BaseHttpAsyncTask<Void, Void, BlackResult>(this.getActivity(), true){
 
             @Override
             protected void onCompleteTask(BlackResult blackResult) {

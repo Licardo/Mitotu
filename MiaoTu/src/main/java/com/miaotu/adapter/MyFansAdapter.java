@@ -30,7 +30,6 @@ public class MyFansAdapter extends BaseAdapter{
     private List<BlackInfo> blackInfos;
     private LayoutInflater mLayoutInflater = null;
     private String token;
-    private boolean isLike;
 
     public MyFansAdapter(Context context, List<BlackInfo> blackInfos, String token){
         this.context = context;
@@ -71,9 +70,8 @@ public class MyFansAdapter extends BaseAdapter{
         UrlImageViewHelper.setUrlDrawable(holder.ivPhoto, blackInfos.get(i).getHeadurl(), R.drawable.icon_default_head_photo);
         holder.tvContent.setText(blackInfos.get(i).getState());
         holder.tvName.setText(blackInfos.get(i).getNickname());
-        if ("true".equals(blackInfos.get(i).getIsliked())){
+        if ("true".equals(blackInfos.get(i).getIslike())){
             holder.ivFollow.setBackgroundResource(R.drawable.icon_guanzhu);
-            isLike = true;
         }
         holder.ivFollow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,12 +99,13 @@ public class MyFansAdapter extends BaseAdapter{
             @Override
             protected void onCompleteTask(BaseResult baseResult) {
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
-                    if (isLike){    //取消关注
+                    if ("true".equals(blackInfos.get(position).getIslike())){    //取消关注
                         view.setBackgroundResource(R.drawable.mine_guanzhu);
+                        blackInfos.get(position).setIslike("false");
                     }else {     //关注
                         view.setBackgroundResource(R.drawable.icon_guanzhu);
+                        blackInfos.get(position).setIslike("true");
                     }
-                    isLike = !isLike;
                 } else {
                     if (StringUtil.isBlank(baseResult.getMsg())) {
                         Toast.makeText(context, "操作失败", Toast.LENGTH_SHORT).show();

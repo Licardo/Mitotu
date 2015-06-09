@@ -88,8 +88,8 @@ public class MyLikeFragment extends BaseFragment implements View.OnClickListener
     /**
      * 获取关注列表
      */
-    private void getLikeList(){
-        new BaseHttpAsyncTask<Void, Void, BlackResult>(this.getActivity(), false){
+    public void getLikeList(){
+        new BaseHttpAsyncTask<Void, Void, BlackResult>(this.getActivity(), true){
 
             @Override
             protected void onCompleteTask(BlackResult blackResult) {

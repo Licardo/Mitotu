@@ -100,6 +100,7 @@ public class MyLikeAndFansActivity extends BaseFragmentActivity implements View.
                 } else {
                     // 如果MessageFragment不为空，则直接将它显示出来
                     transaction.show(mTab01);
+                    mTab01.getLikeList();
                 }
                 break;
             case 1: //粉丝
@@ -111,6 +112,7 @@ public class MyLikeAndFansActivity extends BaseFragmentActivity implements View.
                 } else {
                     // 如果MessageFragment不为空，则直接将它显示出来
                     transaction.show(mTab02);
+                    mTab02.getFansList();
                 }
                 break;
         }
