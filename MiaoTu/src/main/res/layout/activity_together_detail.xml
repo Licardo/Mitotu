@@ -50,7 +50,7 @@
             android:id="@+id/iv_gender"
             android:layout_width="10dp"
             android:layout_height="10dp"
-            android:src="@drawable/icon_man"
+            android:background="@drawable/icon_man"
             android:layout_gravity="center_vertical"
             />
         <TextView

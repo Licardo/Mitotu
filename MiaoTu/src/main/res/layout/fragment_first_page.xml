@@ -75,7 +75,7 @@
             android:textSize="14sp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="杭州"
+            android:text=""
             android:gravity="center"
             android:drawableRight="@drawable/arrow_down"
             />
