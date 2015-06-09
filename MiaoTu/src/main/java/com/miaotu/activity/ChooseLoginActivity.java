@@ -350,6 +350,7 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     showToastMsg("注册成功！");
+                    login(registerInfo);
                 } else {
                     if(StringUtil.isEmpty(result.getMsg())){
                         showToastMsg("注册失败！");

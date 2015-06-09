@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -16,7 +17,7 @@ import com.miaotu.R;
 
 public class CustomTourDetailActivity extends BaseActivity {
 private WebView webView;
-    private TextView tvTitle;
+    private TextView tvLeft,tvTitle;
     Handler mHandler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,13 @@ private WebView webView;
         webView = (WebView) findViewById(R.id.webview);
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvTitle.setText("线路详情");
+        tvLeft = (TextView) findViewById(R.id.tv_left);
+        tvLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         WebSettings wSet = webView.getSettings();
         wSet.setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new JSInterface(), "native");

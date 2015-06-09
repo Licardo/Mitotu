@@ -167,6 +167,8 @@ private TextView tvLeft,tvTitle;
                 break;
             case R.id.tv_protocol:
                 //跳转到注册协议页面
+                Intent intent3 = new Intent(Register1Activity.this,ProtocolActivity.class);
+                startActivity(intent3);
                 break;
         }
     }

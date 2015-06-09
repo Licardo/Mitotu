@@ -28,47 +28,36 @@ import com.miaotu.util.StringUtil;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class Register3Activity extends BaseActivity implements View.OnClickListener {
-    private TextView tvLeft,tvTitle,tvResend;
+public class FindPasswordActivity extends BaseActivity implements View.OnClickListener{
+private TextView tvLeft,tvTitle,tvSendValidate;
+    private EditText etTel,etPassword,etValidate;
     private Button btnNext;
-    private RegisterInfo registerInfo;
-    private EditText etSMS;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register3);
+        setContentView(R.layout.activity_find_password);
         findView();
         bindView();
         init();
     }
-    private void findView(){
-        tvLeft = (TextView) findViewById(R.id.tv_left);
-        tvTitle = (TextView) findViewById(R.id.tv_title);
-        tvResend = (TextView) findViewById(R.id.tv_resend);
-        btnNext = (Button) findViewById(R.id.btn_next);
-        etSMS = (EditText) findViewById(R.id.et_sms);
-    }
-    private void bindView(){
-        tvLeft.setOnClickListener(this);
-        btnNext.setOnClickListener(this);
-        tvResend.setOnClickListener(this);
-    }
-    private void init(){
-        tvTitle.setText("验证手机号（3/3）");
-        registerInfo = (RegisterInfo) getIntent().getSerializableExtra("registerInfo");
-    }
-private boolean validate(){
-    if(StringUtil.isEmpty(etSMS.getText().toString())){
-        showToastMsg("请输入验证码！");
-        return false;
-    }
-    return true;
+private void findView (){
+    tvLeft = (TextView) findViewById(R.id.tv_left);
+    tvTitle = (TextView) findViewById(R.id.tv_title);
+    tvSendValidate = (TextView) findViewById(R.id.tv_send_validate);
+    etTel = (EditText) findViewById(R.id.et_tel);
+    etPassword = (EditText) findViewById(R.id.et_password);
+    etValidate = (EditText) findViewById(R.id.et_validate);
+    btnNext = (Button) findViewById(R.id.btn_login);
 }
-    /**
-     * 注册
-     * @param registerInfo
-     */
-    private void register(final RegisterInfo registerInfo) {
+private void bindView (){
+    tvSendValidate.setOnClickListener(this);
+    tvLeft.setOnClickListener(this);
+    btnNext.setOnClickListener(this);
+}
+private void init (){
+    tvTitle.setText("忘记密码");
+}
+    private void getSms(final String tel) {
         new BaseHttpAsyncTask<Void, Void, BaseResult>(this, true) {
             @Override
             protected void onCompleteTask(BaseResult result) {
@@ -76,13 +65,10 @@ private boolean validate(){
                     return;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
-                    showToastMsg("注册成功！");
-
-                    login(registerInfo);
-
+                    showToastMsg("验证码已经发送");
                 } else {
                     if(StringUtil.isEmpty(result.getMsg())){
-                        showToastMsg("注册失败！");
+                        showToastMsg("获取验证码失败！");
                     }else{
                         showToastMsg(result.getMsg());
                     }
@@ -91,12 +77,37 @@ private boolean validate(){
 
             @Override
             protected BaseResult run(Void... params) {
-                return HttpRequestUtil.getInstance().register(registerInfo);
+                return HttpRequestUtil.getInstance().getFindSms(etTel.getText().toString());
             }
 
         }.execute();
     }
+    //找回密码
+    private void findPassword(final RegisterInfo registerInfo) {
+        new BaseHttpAsyncTask<Void, Void, BaseResult>(this, true) {
+            @Override
+            protected void onCompleteTask(BaseResult result) {
+                if(tvLeft==null){
+                    return;
+                }
+                if (result.getCode() == BaseResult.SUCCESS) {
+                    login(registerInfo);
+                } else {
+                    if(StringUtil.isEmpty(result.getMsg())){
+                        showToastMsg("密码找回失败！");
+                    }else{
+                        showToastMsg(result.getMsg());
+                    }
+                }
+            }
 
+            @Override
+            protected BaseResult run(Void... params) {
+                return HttpRequestUtil.getInstance().findPassword(registerInfo);
+            }
+
+        }.execute();
+    }
     //登陆
     private void login(final RegisterInfo registerInfo) {
         new BaseHttpAsyncTask<Void, Void, LoginResult>(this, true) {
@@ -106,7 +117,7 @@ private boolean validate(){
                     return;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
-                    showToastMsg("登录成功！");
+                    showToastMsg("密码重置成功！");
                     writePreference("uid", result.getLogin().getUid());
                     writePreference("id", result.getLogin().getId());
                     writePreference("token",result.getLogin().getToken());
@@ -156,17 +167,17 @@ private boolean validate(){
 //                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
 //                        startActivity(intent);
 //                    }else{
-                    Intent intent = new Intent(Register3Activity.this,EveryDayPicActivity.class);
+                    Intent intent = new Intent(FindPasswordActivity.this,EveryDayPicActivity.class);
                     startActivity(intent);
 //                    }
                     setResult(1);
                     finish();
                 } else {
-                        if(StringUtil.isEmpty(result.getMsg())){
-                            showToastMsg("登录失败！");
-                        }else{
-                            showToastMsg(result.getMsg());
-                        }
+                    if(StringUtil.isEmpty(result.getMsg())){
+                        showToastMsg("登录失败！");
+                    }else{
+                        showToastMsg(result.getMsg());
+                    }
                 }
             }
 
@@ -202,50 +213,60 @@ private boolean validate(){
 //            }
         }
     }
-    private void getSms() {
-        new BaseHttpAsyncTask<Void, Void, BaseResult>(this, true) {
-            @Override
-            protected void onCompleteTask(BaseResult result) {
-                if(tvLeft==null){
-                    return;
-                }
-                if (result.getCode() == BaseResult.SUCCESS) {
-                    showToastMsg("发送成功！");
-                } else {
-                    if(StringUtil.isEmpty(result.getMsg())){
-                        showToastMsg("获取验证码失败！");
-                    }else{
-                        showToastMsg(result.getMsg());
-                    }
-                }
-            }
-
-            @Override
-            protected BaseResult run(Void... params) {
-                return HttpRequestUtil.getInstance().getSms(registerInfo.getPhone());
-            }
-
-        }.execute();
-    }
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_left:
                 finish();
                 break;
-            case R.id.tv_resend:
-                //重发验证码
-                getSms();
-                break;
-            case R.id.btn_next:
-//                Intent nextIntent = new Intent(Register3Activity.this,Register3Activity.class);
-//                startActivity(nextIntent);
-                if(validate()){
-                    //执行注册
-                    registerInfo.setCode(etSMS.getText().toString());
-                    register(registerInfo);
+            case R.id.tv_send_validate:
+                if(StringUtil.isEmpty(etTel.getText().toString())){
+                    showToastMsg("请输入手机号！");
+                    break;
                 }
+                if(!StringUtil.isPhoneNumber(etTel.getText().toString())){
+                    showToastMsg("请输入合法的手机号！");
+                    break;
+                }
+                if(StringUtil.isEmpty(etPassword.getText().toString())){
+                    showToastMsg("请输入新密码");
+                    break;
+                }
+                if(etPassword.getText().toString().length()<6){
+                    showToastMsg("请输入至少6位密码");
+                    break;
+                }
+                getSms(etTel.getText().toString());
+                break;
+            case R.id.btn_login:
+                if(StringUtil.isEmpty(etTel.getText().toString())){
+                    showToastMsg("请输入手机号！");
+                    break;
+                }
+                if(!StringUtil.isPhoneNumber(etTel.getText().toString())){
+                    showToastMsg("请输入合法的手机号！");
+                    break;
+                }
+                if(StringUtil.isEmpty(etPassword.getText().toString())){
+                    showToastMsg("请输入新密码");
+                    break;
+                }
+                if(etPassword.getText().toString().length()<6){
+                    showToastMsg("请输入至少6位密码");
+                    break;
+                }
+                if(StringUtil.isEmpty(etValidate.getText().toString())){
+                    showToastMsg("请输入验证码");
+                    break;
+                }
+                RegisterInfo registerInfo = new RegisterInfo();
+                registerInfo.setPhone(etTel.getText().toString());
+                registerInfo.setPassword(etPassword.getText().toString());
+                registerInfo.setCode(etValidate.getText().toString());
+                findPassword(registerInfo);
                 break;
         }
+
     }
+
 }
