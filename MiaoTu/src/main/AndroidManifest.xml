@@ -358,9 +358,15 @@
         </activity>
         <activity
             android:name=".activity.EveryDayPicActivity"
-            android:label="@string/title_activity_every_day_pic"
-
-            >
+            android:label="@string/title_activity_every_day_pic" >
+        </activity>
+        <activity
+            android:name=".activity.FindPasswordActivity"
+            android:label="@string/title_activity_find_password" >
+        </activity>
+        <activity
+            android:name=".activity.ProtocolActivity"
+            android:label="@string/title_activity_protocol" >
         </activity>
     </application>
 

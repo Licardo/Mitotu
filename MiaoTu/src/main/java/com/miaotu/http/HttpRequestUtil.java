@@ -119,6 +119,28 @@ public class HttpRequestUtil {
     }
 
     /**
+     *找回密码
+     * @param registerInfo
+     * @return
+     */
+    public BaseResult findPassword(RegisterInfo registerInfo) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        if (!StringUtil.isEmpty(registerInfo.getPhone())) {
+            params.add(new BasicNameValuePair("phone", registerInfo.getPhone()));
+        }
+        if (!StringUtil.isEmpty(registerInfo.getPassword())) {
+            params.add(new BasicNameValuePair("password", registerInfo.getPassword()));
+        }
+        if (!StringUtil.isEmpty(registerInfo.getCode())) {
+            params.add(new BasicNameValuePair("code", registerInfo.getCode()));
+        }
+        return HttpDecoder.postForObject(
+                getUrl("base/user/password"), BaseResult.class,
+                params);
+
+    }
+
+    /**
      * 注册
      *
      * @param registerInfo
@@ -182,6 +204,20 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("phone", tel));
         return HttpDecoder.getForObject(
                 getUrl("sms/register"), BaseResult.class,
+                params);
+
+    }
+
+    /**
+     * 获取重置密码验证码
+     * @param tel
+     * @return
+     */
+    public BaseResult getFindSms(String tel) {
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("phone", tel));
+        return HttpDecoder.getForObject(
+                getUrl("sms/password/reset"), BaseResult.class,
                 params);
 
     }

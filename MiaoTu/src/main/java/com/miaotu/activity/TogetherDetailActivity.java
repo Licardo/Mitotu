@@ -48,7 +48,7 @@ import com.umeng.analytics.MobclickAgent;
 public class TogetherDetailActivity extends BaseActivity implements View.OnClickListener{
 private String id;
 private Together together;
-    private TextView tvTitle,tvName,tvAge,tvJob,tvComment;
+    private TextView tvLeft,tvTitle,tvName,tvAge,tvJob,tvComment;
     private CircleImageView ivHeadPhoto;
     private ImageView ivGender,ivLike;
     private FlowLayout personalTag,togetherTag;
@@ -74,6 +74,7 @@ private Together together;
     }
     private void findView(){
         tvTitle = (TextView) findViewById(R.id.tv_title);
+        tvLeft = (TextView) findViewById(R.id.tv_left);
         ivHeadPhoto = (CircleImageView) findViewById(R.id.iv_head_photo);
         tvName = (TextView) findViewById(R.id.tv_name);
         ivGender = (ImageView) findViewById(R.id.iv_gender);
@@ -117,6 +118,7 @@ private Together together;
         layoutComment.setOnClickListener(this);
         layoutJoin.setOnClickListener(this);
         tvPublishComment.setOnClickListener(this);
+        tvLeft.setOnClickListener(this);
     }
     private void init(){
         id=getIntent().getStringExtra("id");

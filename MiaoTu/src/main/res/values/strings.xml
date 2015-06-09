@@ -149,4 +149,6 @@
     <string name="title_activity_function_introduce">FunctionIntroduceActivity</string>
     <string name="title_activity_joined_list">JoinedListActivity</string>
     <string name="title_activity_every_day_pic">EveryDayPicActivity</string>
+    <string name="title_activity_find_password">FindPasswordActivity</string>
+    <string name="title_activity_protocol">ProtocolActivity</string>
 </resources>

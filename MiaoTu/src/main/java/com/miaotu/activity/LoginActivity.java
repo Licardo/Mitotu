@@ -39,7 +39,7 @@ import cn.sharesdk.tencent.qzone.QZone;
 import cn.sharesdk.wechat.friends.Wechat;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener,PlatformActionListener {
-private TextView tvLeft,tvTitle;
+private TextView tvLeft,tvTitle,tvFindPassword;
     private Button btnLogin;
     private EditText etTel,etPassword;
     private ImageView ivWeibo,ivQQ,ivWechat;
@@ -54,6 +54,7 @@ private TextView tvLeft,tvTitle;
 private void findView(){
     tvLeft = (TextView) findViewById(R.id.tv_left);
     tvTitle = (TextView) findViewById(R.id.tv_title);
+    tvFindPassword = (TextView) findViewById(R.id.tv_find_password);
     btnLogin = (Button) findViewById(R.id.btn_login);
     etTel = (EditText) findViewById(R.id.et_tel);
     etPassword = (EditText) findViewById(R.id.et_password);
@@ -63,6 +64,7 @@ private void findView(){
 }
 private void bindView(){
     tvLeft.setOnClickListener(this);
+    tvFindPassword.setOnClickListener(this);
     btnLogin.setOnClickListener(this);
     ivWeibo.setOnClickListener(this);
     ivQQ.setOnClickListener(this);
@@ -194,6 +196,7 @@ private void init(){
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     showToastMsg("注册成功！");
+                    login(registerInfo,false);
                 } else {
                     if(StringUtil.isEmpty(result.getMsg())){
                         showToastMsg("注册失败！");
@@ -236,11 +239,26 @@ private void init(){
         plat.SSOSetting(false);
         plat.showUser(null);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==1&&resultCode==1){
+            finish();
+            //告诉上一个页面结束
+            setResult(1);
+        }
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_left:
                 finish();
+                break;
+            case R.id.tv_find_password:
+                Intent intent = new Intent(LoginActivity.this,FindPasswordActivity.class);
+                startActivityForResult(intent, 1);
                 break;
             case R.id.btn_login:
                 if(validate()){

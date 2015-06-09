@@ -10,6 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.sina.weibo.SinaWeibo;
+import cn.sharesdk.tencent.qzone.QZone;
+import cn.sharesdk.wechat.friends.Wechat;
 
 import com.easemob.chat.EMChatManager;
 import com.miaotu.R;
@@ -130,6 +135,20 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
                 exitIntent.putExtra("exit_action", "Done");
                 exitIntent.putExtras(new Bundle());
                 SettingActivity.this.sendOrderedBroadcast(exitIntent, null);
+
+                ShareSDK.initSDK(getApplicationContext());
+                Platform qzone = ShareSDK.getPlatform(this, QZone.NAME);
+                if(qzone.isValid()) {
+                        qzone.removeAccount();
+                    }
+                Platform wechat = ShareSDK.getPlatform(this, Wechat.NAME);
+                if(wechat.isValid()) {
+                    wechat.removeAccount();
+                    }
+                Platform weibo = ShareSDK.getPlatform(this, SinaWeibo.NAME);
+                if(weibo.isValid()) {
+                    weibo.removeAccount();
+                    }
                 EMChatManager.getInstance().logout();// 此方法为同步方法
                 MainActivity.getInstance().finish();
                 SettingActivity.this.finish();
