@@ -816,8 +816,40 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("token",token));
         params.add(new BasicNameValuePair("uid",uid));
         params.add(new BasicNameValuePair("page","1"));
-        params.add(new BasicNameValuePair("num","10"));
+        params.add(new BasicNameValuePair("num","100"));
         return HttpDecoder.getForObject(getUrl("user/blocks"),
+                BlackResult.class, params);
+    }
+
+    /**
+     * 获取关注列表
+     * @param token
+     * @param uid
+     * @return
+     */
+    public BlackResult getLikeList(String token, String uid){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("uid",uid));
+        params.add(new BasicNameValuePair("page","1"));
+        params.add(new BasicNameValuePair("num","100"));
+        return HttpDecoder.getForObject(getUrl("user/like"),
+                BlackResult.class, params);
+    }
+
+    /**
+     * 获取粉丝列表
+     * @param token
+     * @param uid
+     * @return
+     */
+    public BlackResult getFansList(String token, String uid){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("uid",uid));
+        params.add(new BasicNameValuePair("page","1"));
+        params.add(new BasicNameValuePair("num","100"));
+        return HttpDecoder.getForObject(getUrl("user/liked"),
                 BlackResult.class, params);
     }
 

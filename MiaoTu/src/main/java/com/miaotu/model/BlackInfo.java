@@ -14,6 +14,12 @@ public class BlackInfo {
     private String headurl;
     @JsonProperty("Created")
     private String created;
+    @JsonProperty("Gender")
+    private String gender;
+    @JsonProperty("IsLiked")
+    private String isliked;
+    @JsonProperty("State")
+    private String state;
 
     public String getUid() {
         return uid;
@@ -45,5 +51,29 @@ public class BlackInfo {
 
     public void setCreated(String created) {
         this.created = created;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getIsliked() {
+        return isliked;
+    }
+
+    public void setIsliked(String isliked) {
+        this.isliked = isliked;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }
