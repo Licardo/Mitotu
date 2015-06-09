@@ -59,6 +59,7 @@ public class FourthPageFragment extends BaseFragment implements View.OnClickList
         tv_right.setVisibility(View.GONE);
         tv_left.setVisibility(View.GONE);
         tv_title.setText("我的");
+        tv_userfans.setOnClickListener(this);
     }
 
     private void findView() {
@@ -107,7 +108,6 @@ public class FourthPageFragment extends BaseFragment implements View.OnClickList
         fragmentManager = getChildFragmentManager();
     }
 
-
     @Override
     public void onClick(View view) {
         if (!Util.isNetworkConnected(getActivity())) {
@@ -155,6 +155,10 @@ public class FourthPageFragment extends BaseFragment implements View.OnClickList
                         TogetherActivity.class);
                 break;
             case R.id.rl_recommend:
+                intent.setClass(FourthPageFragment.this.getActivity(),
+                        AppRecommendActivity.class);
+                break;
+            case R.id.tv_userfans:
                 intent.setClass(FourthPageFragment.this.getActivity(),
                         AppRecommendActivity.class);
                 break;

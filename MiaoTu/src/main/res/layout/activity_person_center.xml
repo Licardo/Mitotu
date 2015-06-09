@@ -113,7 +113,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:scaleType="fitXY"
-                    android:background="@drawable/bg_choose_login"
+                    android:background="@drawable/icon_default_background"
                     android:visibility="visible" />
 
                 <com.miaotu.view.CircleImageView

@@ -1,6 +1,8 @@
 package com.miaotu.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -92,6 +94,26 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
         et_tag.setText("");
     }
 
+    /**
+     * 判断edittext是否全为空
+     * @return
+     */
+    private boolean isEmpty(){
+        boolean empty = false;
+        if (StringUtil.isBlank(et_wantgo.getText().toString()) &&
+                StringUtil.isBlank(et_job.getText().toString()) &&
+                StringUtil.isBlank(et_address.getText().toString()) &&
+                StringUtil.isBlank(et_emotion.getText().toString()) &&
+                StringUtil.isBlank(et_age.getText().toString()) &&
+                StringUtil.isBlank(et_gender.getText().toString()) &&
+                StringUtil.isBlank(et_nickname.getText().toString()) &&
+                StringUtil.isBlank(et_tag.getText().toString()) &&
+                fl_tags.getChildCount() < 1){
+            empty = true;
+        }
+        return empty;
+    }
+
     private void initData() {
         File myDir = new File(Environment
                 .getExternalStorageDirectory().getAbsolutePath() + "/miaotu");
@@ -109,7 +131,34 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
 
         switch (view.getId()) {
             case R.id.tv_left:
-                finish();
+                if (isEmpty()){
+                    finish();
+                }else {
+                    final Dialog dialog = new AlertDialog.Builder(EditUserInfoActivity.this).create();
+                    dialog.setCancelable(true);
+                    dialog.show();
+                    dialog.setContentView(R.layout.dialog_message_empty);
+                    Button btnCancle = (Button) dialog.findViewById(R.id.btn_cancel);
+                    Button btnConfirm = (Button) dialog.findViewById(R.id.btn_confirm);
+                    TextView tvContent = (TextView) dialog.findViewById(R.id.tv_content);
+                    btnCancle.setText("否");
+                    btnConfirm.setText("是");
+                    tvContent.setText("是否保存已填信息？");
+                    btnConfirm.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            EditUserInfoActivity.this.onClick(tv_right);
+                            dialog.dismiss();
+                        }
+                    });
+                    btnCancle.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            finish();
+                            dialog.dismiss();
+                        }
+                    });
+                }
                 break;
             case R.id.btn_add:
                 String content = et_tag.getText().toString().trim();
@@ -187,13 +236,13 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                     if (!StringUtil.isBlank(info.getWork())) {
                         writePreference("job", info.getWork());
                     }
-                    if (!StringUtil.isBlank(info.getWork())) {
+                    if (!StringUtil.isBlank(info.getAge())) {
                         writePreference("age", info.getAge());
                     }
-                    if (!StringUtil.isBlank(info.getWork())) {
+                    if (!StringUtil.isBlank(info.getNickname())) {
                         writePreference("name", info.getNickname());
                     }
-                    if (!StringUtil.isBlank(info.getWork())) {
+                    if (!StringUtil.isBlank(info.getGender())) {
                         writePreference("gender", info.getGender());
                     }
 //                    UrlImageViewHelper.setUrlDrawable(iv_head_photo, info.getHear_url(),
