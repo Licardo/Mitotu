@@ -69,6 +69,8 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
     private TextView tvPublishComment;
     private String token;
     private TextView tvTipComment;
+    private ImageView ivLike;
+    private int isLike; //1001喜欢,1002取消喜欢
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,8 +180,9 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(BBSTopicDetailActivity.this, PersonCenterActivity.class);
-                    intent.putExtra("uid",topic.getUid());
-                    startActivity(intent);
+                    intent.putExtra("uid", topic.getUid());
+//                    startActivity(intent);
+                    startActivityForResult(intent, 1001);
                 }
             });
             ((TextView) view
@@ -245,7 +248,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             }
             ((TextView) view
                     .findViewById(R.id.tv_top_date)).setText(topic.getCreated());
-            final ImageView ivLike = (ImageView) view.findViewById(R.id.iv_like);
+            ivLike = (ImageView) view.findViewById(R.id.iv_like);
 
             if ("false".equals(topic.getIslike())) {
                 ivLike.setBackgroundResource(R.drawable.icon_friend_dislike);
@@ -256,10 +259,10 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                 @Override
                 public void onClick(View view) {
                     if ("false".equals(topic.getIslike())) {
-                        like(token, topic.getUid(), false, ivLike);   //添加喜欢
+                        likeState(token, topic.getSid(), false, ivLike);   //添加喜欢
                         topic.setIslike("true");
                     } else {
-                        like(token, topic.getUid(), true, ivLike);    //取消喜欢
+                        likeState(token, topic.getSid(), true, ivLike);    //取消喜欢
                         topic.setIslike("false");
                     }
                 }
@@ -432,7 +435,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                         public void onClick(View view) {
                             Intent intent = new Intent(BBSTopicDetailActivity.this, PersonCenterActivity.class);
                             intent.putExtra("uid",topic.getUid());
-                            startActivity(intent);
+                            startActivityForResult(intent, 1001);
                         }
                     });
                     /*((TextView) view
@@ -501,15 +504,15 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                             .findViewById(R.id.tv_comment_count)).setText(topic.getDistance()+"km");
                     ((TextView) view
                             .findViewById(R.id.tv_date)).setText(topic.getCreated());
-                    final ImageView ivLike = (ImageView) view.findViewById(R.id.iv_like);
+                    ivLike = (ImageView) view.findViewById(R.id.iv_like);
                     ivLike.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             if ("false".equals(topic.getIslike())) {
-                                like(token, topic.getUid(), false, ivLike);   //添加喜欢
+                                likeState(token, topic.getSid(), false, ivLike);   //添加喜欢
                                 topic.setIslike("true");
                             } else {
-                                like(token, topic.getUid(), true, ivLike);    //取消喜欢
+                                likeState(token, topic.getSid(), true, ivLike);    //取消喜欢
                                 topic.setIslike("false");
                             }
                         }
@@ -585,6 +588,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                 startActivity(intent);
                 break;
             case R.id.tv_left:
+                setResult(isLike);
                 this.finish();
                 break;
         }
@@ -631,13 +635,13 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
     }
 
     /**
-     * 添加/取消喜欢接口
+     * 添加/取消喜欢妙友状态的接口
      * @param token
-     * @param touser
+     * @param sid
      * @param islike
      * @param iv
      */
-    private void like(final String token, final String touser, final boolean islike, final ImageView iv) {
+    private void likeState(final String token, final String sid, final boolean islike, final ImageView iv) {
 
         new BaseHttpAsyncTask<Void, Void, BaseResult>(this, false) {
 
@@ -646,8 +650,10 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
                     if(!islike){
                         iv.setBackgroundResource(R.drawable.icon_friend_like);
+                        isLike = 1001;
                     }else {
                         iv.setBackgroundResource(R.drawable.icon_friend_dislike);
+                        isLike = 1002;
                     }
                 } else {
                     if (StringUtil.isBlank(baseResult.getMsg())) {
@@ -660,7 +666,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
 
             @Override
             protected BaseResult run(Void... params) {
-                return HttpRequestUtil.getInstance().like(token, touser);
+                return HttpRequestUtil.getInstance().likeState(token, sid);
             }
         }.execute();
     }

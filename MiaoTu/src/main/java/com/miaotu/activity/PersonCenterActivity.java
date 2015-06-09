@@ -360,11 +360,12 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                     if("true".equals(result.getPersonInfo().getIslike())){
                         changeBtnFollow(false);
                         result.getPersonInfo().setIslike("false");
+                        showToastMsg("已取消关注");
                     }else{
                         changeBtnFollow(true);
                         result.getPersonInfo().setIslike("true");
+                        showToastMsg("已关注");
                     }
-                    showToastMsg("操作成功");
                 } else {
                     if (StringUtil.isBlank(baseResult.getMsg())) {
                         showToastMsg("操作失败");

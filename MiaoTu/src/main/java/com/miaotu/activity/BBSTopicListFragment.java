@@ -120,7 +120,8 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
                 if (i > 0) {
                     Intent intent = new Intent(getActivity(), BBSTopicDetailActivity.class);
                     intent.putExtra("topic", topicList.get(i - 1));
-                    startActivity(intent);
+//                    startActivity(intent);
+                    startActivityForResult(intent, i-1);
                 }
             }
         });
@@ -337,6 +338,13 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
         if(requestCode==1&&resultCode==1){
             //发表帖子成功
             refresh();
+        }
+        if (resultCode == 1001){        //喜欢
+            topicList.get(requestCode).setIslike("true");
+            adapter.notifyDataSetChanged();
+        }else if (resultCode == 1002){   //取消喜欢
+            topicList.get(requestCode).setIslike("false");
+            adapter.notifyDataSetChanged();
         }
     }
 

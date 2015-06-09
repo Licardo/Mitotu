@@ -139,10 +139,10 @@ public class TopiclistAdapter extends BaseAdapter {
             public void onClick(View view) {
                 int pos = (int) view.getTag();
                 if ("false".equals(mList.get(pos).getIslike())) {
-                    like(token, mList.get(pos).getUid(), false, (ImageView) view);   //添加喜欢
+                    likeState(token, mList.get(pos).getSid(), false, (ImageView) view);   //添加喜欢
                     mList.get(pos).setIslike("true");
                 } else {
-                    like(token, mList.get(pos).getUid(), true, (ImageView) view);    //取消喜欢
+                    likeState(token, mList.get(pos).getSid(), true, (ImageView) view);    //取消喜欢
                     mList.get(pos).setIslike("false");
                 }
             }
@@ -241,7 +241,7 @@ public class TopiclistAdapter extends BaseAdapter {
     }
 
 
-    private void like(final String token, final String touser, final boolean islike, final ImageView iv) {
+    private void likeState(final String token, final String sid, final boolean islike, final ImageView iv) {
 
         new BaseHttpAsyncTask<Void, Void, BaseResult>((Activity) mContext, false) {
 
@@ -265,7 +265,7 @@ public class TopiclistAdapter extends BaseAdapter {
 
             @Override
             protected BaseResult run(Void... params) {
-                return HttpRequestUtil.getInstance().like(token, touser);
+                return HttpRequestUtil.getInstance().likeState(token, sid);
             }
         }.execute();
     }
