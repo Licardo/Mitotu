@@ -118,7 +118,7 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
 
     private void init() {
         tvTitle.setVisibility(View.VISIBLE);
-        tvTitle.setText("话题回复");
+        tvTitle.setText("消息");
         tvRight.setText("清空");
         tvLeft.setVisibility(View.VISIBLE);
         tvLeft.setBackgroundResource(R.drawable.icon_back);
