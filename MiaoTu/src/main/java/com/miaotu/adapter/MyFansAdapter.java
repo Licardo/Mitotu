@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
+import com.miaotu.activity.BaseFragment;
+import com.miaotu.activity.BaseFragmentActivity;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.model.BlackInfo;
@@ -102,9 +104,15 @@ public class MyFansAdapter extends BaseAdapter{
                     if ("true".equals(blackInfos.get(position).getIslike())){    //取消关注
                         view.setBackgroundResource(R.drawable.mine_guanzhu);
                         blackInfos.get(position).setIslike("false");
+                        ((BaseFragmentActivity)context).writePreference("followcount",
+                                (Integer.parseInt(((BaseFragmentActivity)context).
+                                        readPreference("followcount")) - 1) + "");
                     }else {     //关注
                         view.setBackgroundResource(R.drawable.icon_guanzhu);
                         blackInfos.get(position).setIslike("true");
+                        ((BaseFragmentActivity)context).writePreference("followcount",
+                                (Integer.parseInt(((BaseFragmentActivity)context).
+                                        readPreference("followcount")) + 1) + "");
                     }
                 } else {
                     if (StringUtil.isBlank(baseResult.getMsg())) {

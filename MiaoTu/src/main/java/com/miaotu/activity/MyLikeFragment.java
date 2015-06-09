@@ -138,6 +138,8 @@ public class MyLikeFragment extends BaseFragment implements View.OnClickListener
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
                     blackInfoList.remove(position);
                     adapter.notifyDataSetChanged();
+                    writePreference("followcount",
+                            (Integer.parseInt(readPreference("followcount"))-1)+"");
                 } else {
                     if (StringUtil.isBlank(baseResult.getMsg())) {
                         showToastMsg("操作失败");
