@@ -54,6 +54,7 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
     private RadioGroup rgTitle;
     private RadioButton tab1,tab2;
     private boolean isClick;
+    private String tempTitle = "nearby";//区分最热和身旁
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.activity_bbs_topic_list,
@@ -312,8 +313,7 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
             case R.id.tab1:
                 if (isClick){
                     tab1.setChecked(true);
-                    tab1.setText("身旁");
-                    info.setType("nearby");
+                    info.setType(tempTitle);
                     getTopics(true, info);
                 }else {
                     showPopWindow(this.getActivity(), tab1);
@@ -366,8 +366,9 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
 
             @Override
             public void onClick(View v) {
+                tempTitle = "nearby";
                 tab1.setText("身旁");
-                info.setType("nearby");
+                info.setType(tempTitle);
                 getTopics(true, info);
                 popWindow.dismiss();
             }
@@ -377,8 +378,9 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
 
             @Override
             public void onClick(View v) {
+                tempTitle = "hot";
                 tab1.setText("最热");
-                info.setType("hot");
+                info.setType(tempTitle);
                 if (lvTopics.getRefreshableView().getFooterViewsCount()>1){
                     lvTopics.getRefreshableView().removeFooterView(layoutMore);
                 }
