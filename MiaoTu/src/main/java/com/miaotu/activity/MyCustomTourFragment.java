@@ -43,7 +43,8 @@ public class MyCustomTourFragment extends BaseFragment implements View.OnClickLi
     private boolean isLoadMore = false;
     private View layoutMore;
     private String type,uid;
-    private boolean isOwner;
+    private boolean isOwner;    //我的动态orTA的动态
+    private boolean isMineCustomTour;   //是否是我发布的妙旅团
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -119,8 +120,11 @@ public class MyCustomTourFragment extends BaseFragment implements View.OnClickLi
             uid = getArguments().getString("uid");
             isOwner = getArguments().getBoolean("isOwner");
         }
+        if (isOwner && "owner".equals(type)){
+            isMineCustomTour = true;
+        }
         mList = new ArrayList<>();
-        adapter = new CustomTourlistAdapter(getActivity(), mList, isOwner);
+        adapter = new CustomTourlistAdapter(getActivity(), mList, isMineCustomTour);
         lvPull.setAdapter(adapter);
         WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
         Point size = new Point();

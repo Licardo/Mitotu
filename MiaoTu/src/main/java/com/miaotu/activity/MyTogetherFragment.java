@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -41,7 +42,8 @@ public class MyTogetherFragment extends BaseFragment implements View.OnClickList
     private boolean isLoadMore = false;
     private View layoutMore;
     private String type,uid;
-    private boolean isOwner;
+    private boolean isOwner;    //我的动态orTA的动态
+    private boolean isMineCustomTour;   //是否是我发布的一起去
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -118,8 +120,11 @@ public class MyTogetherFragment extends BaseFragment implements View.OnClickList
             uid = getArguments().getString("uid");
             isOwner = getArguments().getBoolean("isOwner");
         }
+        if (isOwner && "owner".equals(type)){
+            isMineCustomTour = true;
+        }
         mList = new ArrayList<>();
-        adapter = new TogetherlistAdapter(getActivity(), mList, true, isOwner);
+        adapter = new TogetherlistAdapter(getActivity(), mList, true, isMineCustomTour);
         lvPull.setAdapter(adapter);
         WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
         Point size = new Point();
@@ -132,6 +137,8 @@ public class MyTogetherFragment extends BaseFragment implements View.OnClickList
         TextView tvContent2 = (TextView) emptyview.findViewById(R.id.tv_content2);
         TextView tvTip1 = (TextView) emptyview.findViewById(R.id.tv_tip1);
         TextView tvTip2 = (TextView) emptyview.findViewById(R.id.tv_tip2);
+        Button btnSearch = (Button) emptyview.findViewById(R.id.btn_search);
+        btnSearch.setVisibility(View.GONE);
         if (isOwner) {  //我的动态
             if ("join".equals(type)) {
                 tvContent1.setVisibility(View.GONE);

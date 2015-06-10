@@ -270,8 +270,10 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                 likeIntent.putExtra("type","like");
                 likeIntent.putExtra("uid",uid);
                 likeIntent.putExtra("title","喜欢的约游");
+                likeIntent.putExtra("isOwner", true);
                 if (!isMine){
                     likeIntent.putExtra("title","TA喜欢的约游");
+                    likeIntent.putExtra("isOwner", false);
                 }
                 startActivity(likeIntent);
                 break;
@@ -280,12 +282,14 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                 joinIntent.putExtra("type","join");
                 joinIntent.putExtra("uid",uid);
                 joinIntent.putExtra("title","已报名的约游");
+                joinIntent.putExtra("isOwner", true);
                 if (!isMine){
                     joinIntent.putExtra("title","TA报名的约游");
+                    joinIntent.putExtra("isOwner", false);
                 }
                 startActivity(joinIntent);
                 break;
-            case R.id.rl_start:
+            case R.id.rl_start: //发起的
                 Intent startIntent = new Intent(PersonCenterActivity.this, TogetherAndCustomTourActivity.class);
                 startIntent.putExtra("type","owner");
                 startIntent.putExtra("uid",uid);
