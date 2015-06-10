@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -31,19 +32,31 @@ import com.miaotu.adapter.ImageItemAdapter;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.model.PersonInfo;
+import com.miaotu.model.PhotoInfo;
 import com.miaotu.model.RegisterInfo;
 import com.miaotu.model.Together;
 import com.miaotu.model.TogetherReply;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.LoginResult;
 import com.miaotu.result.TogetherDetailResult;
+import com.miaotu.util.LogUtil;
+import com.miaotu.util.MD5;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 import com.miaotu.view.FlowLayout;
 import com.miaotu.view.GuideGallery;
 import com.miaotu.view.MyGridView;
+import com.photoselector.model.PhotoModel;
+import com.photoselector.ui.PhotoPreviewActivity;
+import com.photoselector.util.CommonUtils;
 import com.umeng.analytics.MobclickAgent;
+
+import java.util.ArrayList;
+
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.onekeyshare.OnekeyShareTheme;
 
 public class TogetherDetailActivity extends BaseActivity implements View.OnClickListener{
 private String id;
@@ -57,12 +70,13 @@ private Together together;
     private TextView tvJoined,tvLiked,tvStartDate,tvEndDate,tvDesCity,tvOrginCity,tvFee,tvRequirement;
     private RelativeLayout layoutJoined,layoutLiked,layoutPublishComment;
     private LinearLayout layoutJoinedPhotos,layoutInterestPhotos,layoutInterestPart,layoutJoinedPart;
-    private ImageView ivJoinedTriangle,ivInterestTriangle;
+    private ImageView ivJoinedTriangle,ivInterestTriangle,ivChat,ivGroupChat,ivShare;
     private LinearLayout layoutLike,layoutComment,layoutJoin,layoutMenu,layoutCommentList;
     private boolean islike;
     private EditText etComment;
     private TextView tvPublishComment;
     private TogetherDetailResult togetherDetailResult;
+    final ArrayList<PhotoModel> photoList = new ArrayList<PhotoModel>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +125,9 @@ private Together together;
         tvPublishComment = (TextView) findViewById(R.id.tv_publish_comment);
         layoutCommentList = (LinearLayout) findViewById(R.id.layout_comment_list);
 
+        ivChat = (ImageView) findViewById(R.id.iv_chat);
+        ivGroupChat = (ImageView) findViewById(R.id.iv_group_chat);
+        ivShare = (ImageView) findViewById(R.id.iv_share);
     }
     private void bindView(){
         layoutLiked.setOnClickListener(this);
@@ -121,6 +138,20 @@ private Together together;
         tvPublishComment.setOnClickListener(this);
         tvLeft.setOnClickListener(this);
         ivHeadPhoto.setOnClickListener(this);
+        ivChat.setOnClickListener(this);
+        ivGroupChat.setOnClickListener(this);
+        ivShare.setOnClickListener(this);
+        gvPhotos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //点击照片
+                /** 预览照片 */
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("photos", photoList);
+                bundle.putSerializable("position", i);
+                CommonUtils.launchActivity(TogetherDetailActivity.this, PhotoPreviewActivity.class, bundle);
+            }
+        });
     }
     private void init(){
         id=getIntent().getStringExtra("id");
@@ -181,6 +212,13 @@ private Together together;
             textView.setPadding(Util.dip2px(this, 10), Util.dip2px(this, 4), Util.dip2px(this, 10), Util.dip2px(this, 4));
             personalTag.addView(textView);
         }
+        photoList.clear();
+        for (int i = 0; i < result.getTogether().getPicList().size(); i++) {
+            PhotoInfo photoInfo = result.getTogether().getPicList().get(i);
+            PhotoModel photoModel = new PhotoModel();
+            photoModel.setOriginalPath(photoInfo.getUrl());
+            photoList.add(photoModel);
+        }
         adapter= new ImageItemAdapter(this,result.getTogether().getPicList());
         gvPhotos.setAdapter(adapter);
         adapter.notifyDataSetChanged();
@@ -215,41 +253,40 @@ private Together together;
         }else{
             ivLike.setBackgroundResource(R.drawable.icon_unlike);
         }
-        if(result.getTogether().getLikeList()!=null) {
-//            for (int i = 0; i < detail.getJoinUsers().size(); i++) {
-//                Member m = detail.getJoinUsers().get(i);
-//                CircleImageView imageView = new CircleImageView(
-//                        MovementDetailActivity.this);
-//                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-//                        Util.dip2px(this, 24),
-//                        Util.dip2px(this, 24));
-//                if (i == 0) {
-//                    params.leftMargin = Util.dip2px(
-//                            MovementDetailActivity.this, 10);
-//                }
-//                params.rightMargin = Util.dip2px(
-//                        MovementDetailActivity.this, 10);
-//                imageView.setLayoutParams(params);
-//                imageView.setTag(m.getUserId());
-//                imageView.setOnClickListener(new OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(View v) {
-//                        // TODO Auto-generated method stub
-//                        MobclickAgent.onEvent(MovementDetailActivity.this, "线路详情页-参加的人");
-//                        Intent intent = new Intent(
-//                                MovementDetailActivity.this,
-//                                UserHomeActivity.class);
-//                        intent.putExtra("userId", (String) v.getTag());
-//                        startActivity(intent);
-//                    }
-//                });
-//                layoutJoinedPhotos.addView(imageView);
-//                UrlImageViewHelper.setUrlDrawable(
-//                        imageView,
-//
-//                        m.getPhoto().getUrl() + "&size=100x100", R.drawable.icon_default_head_photo);
-//            }
+        if(result.getTogether().getJoinList()!=null) {
+            for (int i = 0; i < result.getTogether().getJoinList().size(); i++) {
+                PersonInfo m = result.getTogether().getJoinList().get(i);
+                CircleImageView imageView = new CircleImageView(
+                        this);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        Util.dip2px(this, 24),
+                        Util.dip2px(this, 24));
+                if (i == 0) {
+                    params.leftMargin = Util.dip2px(
+                            this, 10);
+                }
+                params.rightMargin = Util.dip2px(
+                        this, 10);
+                imageView.setLayoutParams(params);
+                imageView.setTag(m.getUid());
+                imageView.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        MobclickAgent.onEvent(TogetherDetailActivity.this, "线路详情页-感兴趣的人");
+                        Intent intent = new Intent(
+                                TogetherDetailActivity.this,
+                                PersonCenterActivity.class);
+                        intent.putExtra("uid", (String) v.getTag());
+                        startActivity(intent);
+                    }
+                });
+                layoutJoinedPhotos.addView(imageView);
+                UrlImageViewHelper.setUrlDrawable(
+                        imageView,
+                        m.getHeadurl() + "100x100", R.drawable.icon_default_head_photo);
+            }
         }
         if(result.getTogether().getLikeList()!=null){
             for (int i = 0; i < result.getTogether().getLikeList().size(); i++) {
@@ -357,7 +394,7 @@ private Together together;
                     TogetherReply reply1 = new TogetherReply();
                     reply1.setNickname(readPreference("name"));
                     reply1.setContent(StringUtil.trimAll(etComment.getText().toString()));
-                    togetherDetailResult.getTogether().getReplyList().add(0,reply1);
+                    togetherDetailResult.getTogether().getReplyList().add(0, reply1);
                     layoutCommentList.removeAllViews();
                     if(togetherDetailResult.getTogether().getReplyList()!=null){
                         for(TogetherReply reply:togetherDetailResult.getTogether().getReplyList()){
@@ -389,6 +426,38 @@ private Together together;
             }
 
         }.execute();
+    } /**
+     * 分享到sns社区平台
+     */
+    private void showShare() {
+        ShareSDK.initSDK(this);
+        OnekeyShare oks = new OnekeyShare();
+        oks.setTheme(OnekeyShareTheme.CLASSIC);
+        // 关闭sso授权
+        oks.disableSSOWhenAuthorize();
+        // 分享时Notification的图标和文字
+//        oks.setNotification(R.drawable.ic_launcher,
+//                getString(R.string.app_name));
+        // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+        oks.setTitle(togetherDetailResult.getTogether().getComment() + "\n http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
+        // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+        oks.setTitleUrl("http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
+        // text是分享文本，所有平台都需要这个字段
+        oks.setText(togetherDetailResult.getTogether().getComment() + "\n http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
+        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+        oks.setImageUrl(togetherDetailResult.getTogether().getPicList().get(0).getUrl()
+                + "&size=200x200");
+        // url仅在微信（包括好友和朋友圈）中使用
+        oks.setUrl("http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
+        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
+        oks.setComment(togetherDetailResult.getTogether().getComment() + "\n http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
+        // site是分享此内容的网站名称，仅在QQ空间使用
+        oks.setSite(getString(R.string.app_name));
+        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+        oks.setSiteUrl("http://m.miaotu.com/journey/detail.php?id=" +togetherDetailResult.getTogether().getId());
+
+        // 启动分享GUI
+        oks.show(this);
     }
     @Override
     public void onClick(View view) {
@@ -425,8 +494,38 @@ private Together together;
             case R.id.iv_head_photo:
                 // 个人中心
                 Intent userIntent = new Intent(TogetherDetailActivity.this,PersonCenterActivity.class);
-                userIntent.putExtra("uid",togetherDetailResult.getTogether().getUid());
+                userIntent.putExtra("uid", togetherDetailResult.getTogether().getUid());
                 startActivity(userIntent);
+                break;
+            case R.id.iv_chat:
+                //私聊
+                if(togetherDetailResult.getTogether().getUid().equals(readPreference("uid"))){
+                    showToastMsg("不能和自己聊天！");
+                    break;
+                }
+                Intent chatIntent = new Intent(TogetherDetailActivity.this, ChatsActivity.class);
+                chatIntent.putExtra("chatType", ChatsActivity.CHATTYPE_SINGLE);
+                chatIntent.putExtra("id", MD5.md5(togetherDetailResult.getTogether().getUid()));
+                chatIntent.putExtra("uid", togetherDetailResult.getTogether().getUid());
+                chatIntent.putExtra("name", togetherDetailResult.getTogether().getNickname());
+                chatIntent.putExtra("headphoto", togetherDetailResult.getTogether().getHeadPhoto());
+                startActivity(chatIntent);
+                break;
+            case R.id.iv_group_chat:
+                //群聊
+                if(togetherDetailResult.getTogether().isAddGroup()){
+                    Intent groupChatIntent = new Intent(TogetherDetailActivity.this, ChatsActivity.class);
+                    groupChatIntent.putExtra("groupImId", togetherDetailResult.getTogether().getGroupId());
+                    groupChatIntent.putExtra("groupName", togetherDetailResult.getTogether().getComment());
+                    groupChatIntent.putExtra("chatType", 2);
+                    startActivity(groupChatIntent);
+                }else{
+                    showToastMsg("您还未报名此次活动，不能参与团聊！");
+                }
+                break;
+            case R.id.iv_share:
+                //分享
+                showShare();
                 break;
             case R.id.layout_join:
                 // 参加
