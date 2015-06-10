@@ -418,10 +418,10 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         Intent intent = new Intent(Intent.ACTION_PICK, null);
         intent.setType("image/*");
         intent.putExtra("crop", "true");
-//        intent.putExtra("aspectX", 1);
-//        intent.putExtra("aspectY", 1);
-//        intent.putExtra("outputX", 300);
-//        intent.putExtra("outputY", 300);
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        intent.putExtra("outputX", 300);
+        intent.putExtra("outputY", 300);
         intent.putExtra("scale", true);
         intent.putExtra("return-data", true);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
@@ -430,7 +430,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         if (index == 1) {
             startActivityForResult(intent, 3); // 如果requestCode=3，是修改头像
         } else if (index == 2) {
-            startActivityForResult(intent, 22); // requestCode=22,是相册添加照片
+            startActivityForResult(intent, 2); // requestCode=22,是相册添加照片
         }
     }
 
@@ -439,7 +439,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
-                case 22:
+                case 2:
                     if (imageUri != null) {
                         File file = new File(imageUri.getPath());
                         List<File> imgs = new ArrayList<File>();

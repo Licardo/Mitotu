@@ -114,9 +114,10 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
 
     /**
      * 判断edittext是否全为空
+     *
      * @return
      */
-    private boolean isEmpty(){
+    private boolean isEmpty() {
         boolean empty = false;
         if (StringUtil.isBlank(et_wantgo.getText().toString()) &&
                 StringUtil.isBlank(et_job.getText().toString()) &&
@@ -126,7 +127,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                 StringUtil.isBlank(tv_gender.getText().toString()) &&
                 StringUtil.isBlank(et_nickname.getText().toString()) &&
                 StringUtil.isBlank(et_tag.getText().toString()) &&
-                fl_tags.getChildCount() < 1){
+                fl_tags.getChildCount() < 1) {
             empty = true;
         }
         return empty;
@@ -149,9 +150,9 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
 
         switch (view.getId()) {
             case R.id.tv_left:
-                if (isEmpty()){
+                if (isEmpty()) {
                     finish();
-                }else {
+                } else {
                     final Dialog dialog = new AlertDialog.Builder(EditUserInfoActivity.this).create();
                     dialog.setCancelable(true);
                     dialog.show();
@@ -216,7 +217,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                 userinfo.setNickname(et_nickname.getText().toString().trim());
                 userinfo.setGender(tv_gender.getText().toString().trim());
                 userinfo.setAge(tv_age.getText().toString().trim().substring(0,
-                        tv_age.getText().toString().length()-1));
+                        tv_age.getText().toString().length() - 1));
                 userinfo.setAddress(tv_address.getText().toString().trim());
                 userinfo.setMarital_status(et_emotion.getText().toString().trim());
                 userinfo.setWork(et_job.getText().toString().trim());
@@ -526,7 +527,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
         View v = lay.inflate(R.layout.dialog_birthday_layout, null);
         final WheelView wvDay = (WheelView) v.findViewById(R.id.wv_day);
 
-        final String months[] = new String[]{"男","女"};
+        final String months[] = new String[]{"男", "女"};
         wvDay.setViewAdapter(new DateArrayAdapter(this, months, 0));
         // 创建dialog
         dialog = new WheelTwoColumnDialog(this, R.style.Dialog_Fullscreen, v);
@@ -556,8 +557,8 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
         final WheelView wvDay = (WheelView) v.findViewById(R.id.wv_day);
 
         final String months[] = new String[100];
-        for (int i=1;i<=100;i++){
-            months[i-1] = i+"";
+        for (int i = 1; i <= 100; i++) {
+            months[i - 1] = i + "";
         }
         wvDay.setViewAdapter(new DateArrayAdapter(this, months, 17));
         // 创建dialog
@@ -572,7 +573,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
 //                if (currentDay.length() == 1) {
 //                    currentDay = "0" + currentDay;
 //                }
-                tv_age.setText(currentDay+"岁");
+                tv_age.setText(currentDay + "岁");
 
                 dialog.dismiss();
             }
