@@ -145,9 +145,11 @@ public class MyTogetherFragment extends BaseFragment implements View.OnClickList
                 tvTip2.setVisibility(View.VISIBLE);
                 tvTip1.setText("你还没有报名“一起去”哦");
                 tvTip2.setText("再去首页逛逛吧！");
-                lvPull.setEmptyView(emptyview);
             } else if ("like".equals(type)) {
-
+                tvContent1.setVisibility(View.GONE);
+                tvTip2.setVisibility(View.VISIBLE);
+                tvTip1.setText("你还没有喜欢的“一起去”哦");
+                tvTip2.setText("再去首页逛逛吧！");
             }else {
                 tvContent2.setVisibility(View.VISIBLE);
                 tvTip2.setVisibility(View.VISIBLE);
@@ -157,14 +159,19 @@ public class MyTogetherFragment extends BaseFragment implements View.OnClickList
                 tvTip2.setText("去首页“一起去”板块发起旅行吧");
             }
         }else { //TA的动态
+                tvTip2.setVisibility(View.VISIBLE);
             if ("join".equals(type)){ //ta报名的
                 tvContent1.setVisibility(View.GONE);
-                tvTip1.setText("TA还没有报名“一起去”哦");
+                tvTip1.setText("TA还没有报名的“一起去”");
+                tvTip2.setText("你可以去首页再逛逛哦！");
             }else if ("like".equals(type)){ //ta喜欢的
-
+                tvContent1.setVisibility(View.GONE);
+                tvTip1.setText("TA还没有喜欢的“一起去”");
+                tvTip2.setText("你可以去首页再逛逛哦！！");
             }else { //ta发起的
                 tvContent1.setVisibility(View.GONE);
-                tvTip1.setText("TA还没有发起“一起去”哦");
+                tvTip1.setText("TA还没有发起的“一起去”");
+                tvTip2.setText("你可以去首页再逛逛哦！！");
             }
         }
         lvPull.setEmptyView(emptyview);

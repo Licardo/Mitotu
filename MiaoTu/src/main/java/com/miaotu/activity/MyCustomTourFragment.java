@@ -143,11 +143,15 @@ public class MyCustomTourFragment extends BaseFragment implements View.OnClickLi
             if ("join".equals(type)) {
                 tvContent1.setVisibility(View.GONE);
                 tvTip2.setVisibility(View.VISIBLE);
-                tvTip1.setText("你还没有报名“妙旅团”哦");
+                tvTip1.setText("你还没有报名的“妙旅团”哦");
                 tvTip2.setText("有好多好玩线路等着你！");
                 lvPull.setEmptyView(emptyview);
             } else if ("like".equals(type)) {
-
+                tvContent1.setVisibility(View.GONE);
+                tvTip2.setVisibility(View.VISIBLE);
+                tvTip1.setText("你还没有喜欢的“妙旅团”哦");
+                tvTip2.setText("有好多好玩线路等着你！");
+                lvPull.setEmptyView(emptyview);
             }else {
                 tvContent2.setVisibility(View.VISIBLE);
                 tvTip2.setVisibility(View.VISIBLE);
@@ -157,14 +161,19 @@ public class MyCustomTourFragment extends BaseFragment implements View.OnClickLi
                 tvTip2.setText("快去“妙旅团”发起旅行吧");
             }
         }else { //TA的动态
+            tvTip2.setVisibility(View.VISIBLE);
             if ("join".equals(type)){ //ta报名的
                 tvContent1.setVisibility(View.GONE);
-                tvTip1.setText("TA还没有报名“妙旅团”哦");
+                tvTip1.setText("TA还没有报名的“妙旅团”哦");
+                tvTip2.setText("你可以去“妙旅团”板块再逛逛哦！");
             }else if ("like".equals(type)){ //ta喜欢的
-
+                tvContent1.setVisibility(View.GONE);
+                tvTip1.setText("TA还没有喜欢的“妙旅团”哦");
+                tvTip2.setText("你可以去“妙旅团”板块再逛逛哦！");
             }else { //ta发起的
                 tvContent1.setVisibility(View.GONE);
-                tvTip1.setText("TA还没有发起“妙旅团”哦");
+                tvTip1.setText("TA还没有发起的“妙旅团”哦");
+                tvTip2.setText("你可以去“妙旅团”板块再逛逛哦！");
             }
         }
         lvPull.setEmptyView(emptyview);
