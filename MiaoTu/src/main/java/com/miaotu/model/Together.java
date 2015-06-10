@@ -68,8 +68,14 @@ public class Together implements Serializable{
     private String distance;
     @JsonProperty("UserTags")
     private String userTag;
+    @JsonProperty("Gid")
+    private String groupId;
+    @JsonProperty("IsGroup")
+    private boolean isAddGroup;
     @JsonProperty("LikeList")
     private List<PersonInfo> likeList;
+    @JsonProperty("JoinList")
+    private List<PersonInfo> joinList;
     @JsonProperty("ReplyList")
     private List<TogetherReply> replyList;
 
@@ -319,5 +325,29 @@ public class Together implements Serializable{
 
     public void setReplyList(List<TogetherReply> replyList) {
         this.replyList = replyList;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public List<PersonInfo> getJoinList() {
+        return joinList;
+    }
+
+    public void setJoinList(List<PersonInfo> joinList) {
+        this.joinList = joinList;
+    }
+
+    public boolean isAddGroup() {
+        return isAddGroup;
+    }
+
+    public void setIsAddGroup(boolean isAddGroup) {
+        this.isAddGroup = isAddGroup;
     }
 }
