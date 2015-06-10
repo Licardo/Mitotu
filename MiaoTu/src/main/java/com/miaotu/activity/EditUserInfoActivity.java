@@ -92,6 +92,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
         et_gender.setText("");
         et_nickname.setText("");
         et_tag.setText("");
+        fl_tags.removeAllViews();
     }
 
     /**
