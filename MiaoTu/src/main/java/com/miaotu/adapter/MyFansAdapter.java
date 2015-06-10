@@ -76,6 +76,8 @@ public class MyFansAdapter extends BaseAdapter{
         holder.tvName.setText(blackInfos.get(i).getNickname());
         if ("true".equals(blackInfos.get(i).getIslike())){
             holder.ivFollow.setBackgroundResource(R.drawable.icon_guanzhu);
+        }else {
+            holder.ivFollow.setBackgroundResource(R.drawable.mine_guanzhu);
         }
         holder.ivFollow.setOnClickListener(new View.OnClickListener() {
             @Override

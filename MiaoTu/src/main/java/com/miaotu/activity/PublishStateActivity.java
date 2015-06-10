@@ -102,7 +102,7 @@ public class PublishStateActivity extends BaseActivity implements View.OnClickLi
                 if (i > 0) {
                     Intent intent = new Intent(PublishStateActivity.this, BBSTopicDetailActivity.class);
                     intent.putExtra("topic", topicList.get(i - 1));
-                    startActivity(intent);
+                    startActivityForResult(intent, i-1);
                 }
             }
         });
@@ -217,6 +217,19 @@ public class PublishStateActivity extends BaseActivity implements View.OnClickLi
                 finish();
                 break;
             default:
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode){
+            case 1001:
+                topicList.get(requestCode).setIslike("true");
+                break;
+            case 1002:
+                topicList.get(requestCode).setIslike("false");
                 break;
         }
     }

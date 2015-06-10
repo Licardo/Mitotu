@@ -67,9 +67,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
     private Topic topic;
     private EditText etComment;
     private TextView tvPublishComment;
-    private String token;
     private TextView tvTipComment;
-    private ImageView ivLike;
     private int isLike; //1001喜欢,1002取消喜欢
 
     @Override
@@ -158,7 +156,6 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
     }
 
     private void init() {
-        token = readPreference("token");
         topic = (Topic) getIntent().getSerializableExtra("topic");
 
         tvTitle.setVisibility(View.VISIBLE);
@@ -248,7 +245,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             }
             ((TextView) view
                     .findViewById(R.id.tv_top_date)).setText(topic.getCreated());
-            ivLike = (ImageView) view.findViewById(R.id.iv_like);
+            ImageView ivLike = (ImageView) view.findViewById(R.id.iv_like);
 
             if ("false".equals(topic.getIslike())) {
                 ivLike.setBackgroundResource(R.drawable.icon_friend_dislike);
@@ -259,10 +256,10 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                 @Override
                 public void onClick(View view) {
                     if ("false".equals(topic.getIslike())) {
-                        likeState(token, topic.getSid(), false, ivLike);   //添加喜欢
+                        likeState(topic.getSid(), false, (ImageView) view);   //添加喜欢
                         topic.setIslike("true");
                     } else {
-                        likeState(token, topic.getSid(), true, ivLike);    //取消喜欢
+                        likeState(topic.getSid(), true, (ImageView) view);    //取消喜欢
                         topic.setIslike("false");
                     }
                 }
@@ -342,7 +339,8 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             @Override
             protected TopicCommentsListResult run(Void... params) {
                 curPageCount = PAGECOUNT;
-                return HttpRequestUtil.getInstance().getTopicComments(topic.getSid(), token, curPageCount+"");
+                return HttpRequestUtil.getInstance().getTopicComments(topic.getSid(),
+                        readPreference("token"), curPageCount+"");
             }
 
 //            @Override
@@ -388,7 +386,8 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             protected TopicCommentsListResult run(Void... params) {
                 isLoadMore = true;
                 curPageCount += PAGECOUNT;
-                return HttpRequestUtil.getInstance().getTopicComments(topic.getSid(), token, curPageCount + "");
+                return HttpRequestUtil.getInstance().getTopicComments(topic.getSid(),
+                        readPreference("token"), curPageCount + "");
             }
 
 //            @Override
@@ -504,15 +503,20 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                             .findViewById(R.id.tv_comment_count)).setText(topic.getDistance()+"km");
                     ((TextView) view
                             .findViewById(R.id.tv_date)).setText(topic.getCreated());
-                    ivLike = (ImageView) view.findViewById(R.id.iv_like);
+                    ImageView ivLike = (ImageView) view.findViewById(R.id.iv_like);
+                    if ("false".equals(topic.getIslike())) {
+                        ivLike.setBackgroundResource(R.drawable.icon_friend_dislike);
+                    } else {
+                        ivLike.setBackgroundResource(R.drawable.icon_friend_like);
+                    }
                     ivLike.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             if ("false".equals(topic.getIslike())) {
-                                likeState(token, topic.getSid(), false, ivLike);   //添加喜欢
+                                likeState(topic.getSid(), false, (ImageView) view);   //添加喜欢
                                 topic.setIslike("true");
                             } else {
-                                likeState(token, topic.getSid(), true, ivLike);    //取消喜欢
+                                likeState(topic.getSid(), true, (ImageView) view);    //取消喜欢
                                 topic.setIslike("false");
                             }
                         }
@@ -561,7 +565,8 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
 
             @Override
             protected TopicResult run(Void... params) {
-                return HttpRequestUtil.getInstance().getTopicDetail(sid, token);
+                return HttpRequestUtil.getInstance().getTopicDetail(sid,
+                        readPreference("token"));
             }
 
             @Override
@@ -636,12 +641,11 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
 
     /**
      * 添加/取消喜欢妙友状态的接口
-     * @param token
      * @param sid
      * @param islike
      * @param iv
      */
-    private void likeState(final String token, final String sid, final boolean islike, final ImageView iv) {
+    private void likeState(final String sid, final boolean islike, final ImageView iv) {
 
         new BaseHttpAsyncTask<Void, Void, BaseResult>(this, false) {
 
@@ -666,8 +670,13 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
 
             @Override
             protected BaseResult run(Void... params) {
-                return HttpRequestUtil.getInstance().likeState(token, sid);
+                return HttpRequestUtil.getInstance().likeState(readPreference("token"), sid);
             }
         }.execute();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }
