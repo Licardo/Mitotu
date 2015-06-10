@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import cn.sharesdk.framework.FakeActivity;
+import com.mob.tools.FakeActivity;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.ShareSDK;
 
@@ -141,8 +141,11 @@ public class PlatformListFakeActivity extends FakeActivity {
 		Platform plat;
 		HashMap<String, Object> shareParam;
 		for(Object item : checkedPlatforms) {
-			if(item instanceof CustomerLogo)
+			if(item instanceof CustomerLogo){
+				CustomerLogo customerLogo = (CustomerLogo)item;
+				customerLogo.listener.onClick(v);
 				continue;
+			}
 
 			plat = (Platform)item;
 			String name = plat.getName();

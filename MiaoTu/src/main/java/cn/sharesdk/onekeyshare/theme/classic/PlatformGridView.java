@@ -8,7 +8,7 @@
 
 package cn.sharesdk.onekeyshare.theme.classic;
 
-import static cn.sharesdk.framework.utils.R.getBitmapRes;
+import static com.mob.tools.utils.R.getBitmapRes;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -16,11 +16,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import com.miaotu.R;
-import com.miaotu.util.Util;
-
-import m.framework.ui.widget.viewpager.ViewPagerAdapter;
-import m.framework.ui.widget.viewpager.ViewPagerClassic;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -39,7 +34,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.framework.utils.UIHandler;
+import com.mob.tools.gui.ViewPagerAdapter;
+import com.mob.tools.gui.ViewPagerClassic;
+import com.mob.tools.utils.UIHandler;
 import cn.sharesdk.onekeyshare.CustomerLogo;
 
 /** platform logo list gridview */
@@ -58,7 +55,7 @@ public class PlatformGridView extends LinearLayout implements
 	// indicators
 	private ImageView[] points;
 	private Bitmap grayPoint;
-	private Bitmap whitePoint;
+	private Bitmap bluePoint;
 	// Determine whether don't jump editpage and share directly
 	private boolean silent;
 	// platforms
@@ -84,11 +81,7 @@ public class PlatformGridView extends LinearLayout implements
 	private void init(final Context context) {
 		calPageSize();
 		setOrientation(VERTICAL);
-		
-		//大gridview背景
-		
-		setBackgroundColor(0xe5FFFfFf);
-		
+
 		pager = new ViewPagerClassic(context);
 		disableOverScrollMode(pager);
 		pager.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
@@ -97,20 +90,24 @@ public class PlatformGridView extends LinearLayout implements
 		// in order to have a better UI effect, opening a thread request the list of platforms
 		new Thread() {
 			public void run() {
-				platformList = ShareSDK.getPlatformList();
-				if (platformList == null) {
-					platformList = new Platform[0];
+				try {
+					platformList = ShareSDK.getPlatformList();
+					if (platformList == null) {
+						platformList = new Platform[0];
+					}
+					UIHandler.sendEmptyMessage(MSG_PLATFORM_LIST_GOT, PlatformGridView.this);
+				} catch (Throwable t) {
+					t.printStackTrace();
 				}
-				UIHandler.sendEmptyMessage(MSG_PLATFORM_LIST_GOT, PlatformGridView.this);
 			}
 		}.start();
 	}
 
 	private void calPageSize() {
-		float scrW = cn.sharesdk.framework.utils.R.getScreenWidth(getContext());
-		float scrH = cn.sharesdk.framework.utils.R.getScreenHeight(getContext());
+		float scrW = com.mob.tools.utils.R.getScreenWidth(getContext());
+		float scrH = com.mob.tools.utils.R.getScreenHeight(getContext());
 		float whR = scrW / scrH;
-		if (whR < 0.6) {
+		if (whR < 0.63) {
 			COLUMN_PER_LINE = 3;
 			LINE_PER_PAGE = 3;
 		} else if (whR < 0.75) {
@@ -172,14 +169,14 @@ public class PlatformGridView extends LinearLayout implements
 		llPoints.setLayoutParams(lpLl);
 		addView(llPoints);
 
-		int dp_5 = cn.sharesdk.framework.utils.R.dipToPx(context, 5);
-		int resId = getBitmapRes(getContext(), "gray_point");
+		int dp_5 = com.mob.tools.utils.R.dipToPx(context, 5);
+		int resId = getBitmapRes(getContext(), "light_blue_point");
 		if (resId > 0) {
 			grayPoint = BitmapFactory.decodeResource(getResources(), resId);
 		}
-		resId = getBitmapRes(getContext(), "white_point");
+		resId = getBitmapRes(getContext(), "blue_point");
 		if (resId > 0) {
-			whitePoint = BitmapFactory.decodeResource(getResources(), resId);
+			bluePoint = BitmapFactory.decodeResource(getResources(), resId);
 		}
 		for (int i = 0; i < pageCount; i++) {
 			points[i] = new ImageView(context);
@@ -191,7 +188,7 @@ public class PlatformGridView extends LinearLayout implements
 			llPoints.addView(points[i]);
 		}
 		int curPage = pager.getCurrentScreen();
-		points[curPage].setImageBitmap(whitePoint);
+		points[curPage].setImageBitmap(bluePoint);
 	}
 
 	/** after the screen rotates, this method will be called to refresh the list of gridviews */
@@ -236,9 +233,8 @@ public class PlatformGridView extends LinearLayout implements
 		}
 		lastClickTime = time;
 
-		Platform plat = (Platform) v.getTag();
 		ArrayList<Object> platforms = new ArrayList<Object>(1);
-		platforms.add(plat);
+		platforms.add(v.getTag());
 		parent.onPlatformIconClick(v, platforms);
 	}
 
@@ -344,7 +340,7 @@ public class PlatformGridView extends LinearLayout implements
 				points[i].setImageBitmap(platformGridView.grayPoint);
 			}
 
-			points[currentScreen].setImageBitmap(platformGridView.whitePoint);
+			points[currentScreen].setImageBitmap(platformGridView.bluePoint);
 		}
 
 	}
@@ -369,7 +365,7 @@ public class PlatformGridView extends LinearLayout implements
 		}
 
 		private void init() {
-			int dp_5 = cn.sharesdk.framework.utils.R.dipToPx(getContext(), 5);
+			int dp_5 = com.mob.tools.utils.R.dipToPx(getContext(), 5);
 			setPadding(0, dp_5, 0, dp_5);
 			setOrientation(VERTICAL);
 
@@ -418,20 +414,20 @@ public class PlatformGridView extends LinearLayout implements
 				label = getName((Platform) beans[position]);
 				listener = ocL;
 			} else {
-				logo = ((CustomerLogo) beans[position]).logo;
+				logo = ((CustomerLogo) beans[position]).enableLogo;
 				label = ((CustomerLogo) beans[position]).label;
-				listener = ((CustomerLogo) beans[position]).listener;
+				listener = ocL;
 			}
 
 			LinearLayout ll = new LinearLayout(context);
 			ll.setOrientation(LinearLayout.VERTICAL);
 
 			ImageView iv = new ImageView(context);
-			int dp_5 = cn.sharesdk.framework.utils.R.dipToPx(context, 5);
+			int dp_5 = com.mob.tools.utils.R.dipToPx(context, 5);
 			iv.setPadding(dp_5, dp_5, dp_5, dp_5);
 			iv.setScaleType(ScaleType.CENTER_INSIDE);
 			LayoutParams lpIv = new LayoutParams(
-                    Util.dip2px(context,62), Util.dip2px(context,62));
+					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			lpIv.setMargins(dp_5, dp_5, dp_5, dp_5);
 			lpIv.gravity = Gravity.CENTER_HORIZONTAL;
 			iv.setLayoutParams(lpIv);
@@ -439,15 +435,15 @@ public class PlatformGridView extends LinearLayout implements
 			ll.addView(iv);
 
 			TextView tv = new TextView(context);
-			tv.setTextColor(0xfa969696);
-			tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10);
+			tv.setTextColor(0xff000000);
+			tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
 			tv.setSingleLine();
 			tv.setIncludeFontPadding(false);
 			LayoutParams lpTv = new LayoutParams(
 					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			lpTv.gravity = Gravity.CENTER_HORIZONTAL;
 			lpTv.weight = 1;
-//			lpTv.setMargins(dp_5, 0, dp_5, dp_5);
+			lpTv.setMargins(dp_5, 0, dp_5, dp_5);
 			tv.setLayoutParams(lpTv);
 			tv.setText(label);
 			ll.addView(tv);
@@ -467,7 +463,7 @@ public class PlatformGridView extends LinearLayout implements
 			}
 
 			String resName = "logo_" + plat.getName();
-			int resId = getBitmapRes(getContext(), resName);
+			int resId = getBitmapRes(getContext(), resName.toLowerCase());
 			return BitmapFactory.decodeResource(getResources(), resId);
 		}
 
@@ -481,7 +477,7 @@ public class PlatformGridView extends LinearLayout implements
 				return "";
 			}
 
-			int resId = cn.sharesdk.framework.utils.R.getStringRes(getContext(), plat.getName());
+			int resId = com.mob.tools.utils.R.getStringRes(getContext(), plat.getName().toLowerCase());
 			if (resId > 0) {
 				return getContext().getString(resId);
 			}

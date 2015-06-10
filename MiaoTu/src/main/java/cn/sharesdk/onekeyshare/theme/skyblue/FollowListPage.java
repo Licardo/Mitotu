@@ -35,22 +35,23 @@ import java.util.HashMap;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.TitleLayout;
-import cn.sharesdk.framework.utils.UIHandler;
+import com.mob.tools.gui.AsyncImageView;
+import com.mob.tools.gui.BitmapProcessor;
+import com.mob.tools.gui.PullToRefreshListAdapter;
+import com.mob.tools.gui.PullToRefreshView;
+import com.mob.tools.utils.UIHandler;
 import cn.sharesdk.onekeyshare.FollowerListFakeActivity;
-import m.framework.ui.widget.asyncview.AsyncImageView;
-import m.framework.ui.widget.asyncview.BitmapProcessor;
-import m.framework.ui.widget.pulltorefresh.PullToRefreshListAdapter;
-import m.framework.ui.widget.pulltorefresh.PullToRefreshView;
 
-import static cn.sharesdk.framework.utils.R.dipToPx;
-import static cn.sharesdk.framework.utils.R.getBitmapRes;
-import static cn.sharesdk.framework.utils.R.getStringRes;
+import static com.mob.tools.utils.R.dipToPx;
+import static com.mob.tools.utils.R.getBitmapRes;
+import static com.mob.tools.utils.R.getStringRes;
 
 /** 获取好友或关注列表 */
 public class FollowListPage extends FollowerListFakeActivity implements OnClickListener, OnItemClickListener {
 	private TitleLayout llTitle;
 	private FollowAdapter adapter;
 	private int lastPosition = -1;
+
 
 	public void onCreate() {
 		LinearLayout llPage = new LinearLayout(getContext());
@@ -75,12 +76,12 @@ public class FollowListPage extends FollowerListFakeActivity implements OnClickL
 			llTitle.getBtnRight().setText(resId);
 		}
 		llTitle.getBtnRight().setOnClickListener(this);
-		llTitle.setLayoutParams(new LayoutParams(
+		llTitle.setLayoutParams(new LinearLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 		llPage.addView(llTitle);
 
 		FrameLayout flPage = new FrameLayout(getContext());
-		LayoutParams lpFl = new LayoutParams(
+		LinearLayout.LayoutParams lpFl = new LinearLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		lpFl.weight = 1;
 		flPage.setLayoutParams(lpFl);
@@ -191,13 +192,13 @@ public class FollowListPage extends FollowerListFakeActivity implements OnClickL
 				llItem.setTag(item);
 				convertView = llItem;
 
-				int dp_52 = cn.sharesdk.framework.utils.R.dipToPx(getContext(), 52);
-				int dp_10 = cn.sharesdk.framework.utils.R.dipToPx(parent.getContext(), 10);
-				int dp_5 = cn.sharesdk.framework.utils.R.dipToPx(parent.getContext(), 5);
+				int dp_52 = com.mob.tools.utils.R.dipToPx(getContext(), 52);
+				int dp_10 = com.mob.tools.utils.R.dipToPx(parent.getContext(), 10);
+				int dp_5 = com.mob.tools.utils.R.dipToPx(parent.getContext(), 5);
 
 				if(!simpleMode) {
 					item.aivIcon = new AsyncImageView(getContext());
-					LayoutParams lpIcon = new LayoutParams(dp_52, dp_52);
+					LinearLayout.LayoutParams lpIcon = new LinearLayout.LayoutParams(dp_52, dp_52);
 					lpIcon.gravity = Gravity.CENTER_VERTICAL;
 					lpIcon.setMargins(dp_10, dp_5, dp_10, dp_5);
 					item.aivIcon.setLayoutParams(lpIcon);
@@ -207,7 +208,7 @@ public class FollowListPage extends FollowerListFakeActivity implements OnClickL
 				LinearLayout llText = new LinearLayout(parent.getContext());
 				llText.setPadding(0, dp_10, dp_10, dp_10);
 				llText.setOrientation(LinearLayout.VERTICAL);
-				LayoutParams lpText = new LayoutParams(
+				LinearLayout.LayoutParams lpText = new LinearLayout.LayoutParams(
 						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 				lpText.gravity = Gravity.CENTER_VERTICAL;
 				lpText.weight = 1;
@@ -233,7 +234,7 @@ public class FollowListPage extends FollowerListFakeActivity implements OnClickL
 
 				item.ivCheck = new ImageView(parent.getContext());
 				item.ivCheck.setPadding(0, 0, dp_10, 0);
-				LayoutParams lpCheck = new LayoutParams(
+				LinearLayout.LayoutParams lpCheck = new LinearLayout.LayoutParams(
 						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 				lpCheck.gravity = Gravity.CENTER_VERTICAL;
 				item.ivCheck.setLayoutParams(lpCheck);
@@ -254,10 +255,10 @@ public class FollowListPage extends FollowerListFakeActivity implements OnClickL
 					if (bm != null && !bm.isRecycled()) {
 						item.aivIcon.setImageBitmap(bm);
 					} else {
-						item.aivIcon.execute(null, AsyncImageView.DEFAULT_TRANSPARENT);
+						item.aivIcon.execute(null, 0);
 					}
 				} else {
-					item.aivIcon.execute(following.icon);
+					item.aivIcon.execute(following.icon,0);
 				}
 			}
 
@@ -361,7 +362,7 @@ public class FollowListPage extends FollowerListFakeActivity implements OnClickL
 			setOrientation(VERTICAL);
 
 			LinearLayout llInner = new LinearLayout(context);
-			LayoutParams lpInner = new LayoutParams(
+			LinearLayout.LayoutParams lpInner = new LinearLayout.LayoutParams(
 					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			lpInner.gravity = Gravity.CENTER_HORIZONTAL;
 			addView(llInner, lpInner);
@@ -383,7 +384,7 @@ public class FollowListPage extends FollowerListFakeActivity implements OnClickL
 			tvHeader = new TextView(getContext());
 			tvHeader.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 18);
 			tvHeader.setGravity(Gravity.CENTER);
-			int dp_10 = cn.sharesdk.framework.utils.R.dipToPx(getContext(), 10);
+			int dp_10 = com.mob.tools.utils.R.dipToPx(getContext(), 10);
 			tvHeader.setPadding(dp_10, dp_10, dp_10, dp_10);
 			tvHeader.setTextColor(0xff000000);
 			LayoutParams lpTv = new LayoutParams(

@@ -436,8 +436,8 @@ private Together together;
         // 关闭sso授权
         oks.disableSSOWhenAuthorize();
         // 分享时Notification的图标和文字
-        oks.setNotification(R.drawable.ic_launcher,
-                getString(R.string.app_name));
+//        oks.setNotification(R.drawable.ic_launcher,
+//                getString(R.string.app_name));
         // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
         oks.setTitle(togetherDetailResult.getTogether().getComment() + "\n http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
         // titleUrl是标题的网络链接，仅在人人网和QQ空间使用

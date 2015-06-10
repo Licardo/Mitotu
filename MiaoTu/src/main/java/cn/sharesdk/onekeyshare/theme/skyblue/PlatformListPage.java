@@ -19,8 +19,8 @@ import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.PlatformListFakeActivity;
 
-import static cn.sharesdk.framework.utils.R.getLayoutRes;
-import static cn.sharesdk.framework.utils.R.getStringRes;
+import static com.mob.tools.utils.R.getLayoutRes;
+import static com.mob.tools.utils.R.getStringRes;
 
 public class PlatformListPage extends PlatformListFakeActivity implements View.OnClickListener {
 	private PlatformGridViewAdapter gridViewAdapter;
@@ -80,15 +80,14 @@ public class PlatformListPage extends PlatformListFakeActivity implements View.O
 	private void onShareButtonClick(View v) {
 		if(gridViewAdapter == null || "locked".equals(v.getTag()))
 			return;
-		v.setTag("locked");
 
 		List<Object> checkedPlatforms = gridViewAdapter.getCheckedItems();
-		if(checkedPlatforms.size() == 0)
-		{
+		if(checkedPlatforms.size() == 0){
 			Toast.makeText(activity, getStringRes(activity, "select_one_plat_at_least"), Toast.LENGTH_SHORT).show();
 			return;
 		}
 
+		v.setTag("locked");
 		onShareButtonClick(v, checkedPlatforms);
 	}
 
