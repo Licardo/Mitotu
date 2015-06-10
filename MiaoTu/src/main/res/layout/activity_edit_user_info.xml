@@ -115,7 +115,7 @@
                 android:background="@drawable/bg_edittext">
 
                 <TextView
-                    android:id="@+id/tv_gender"
+                    android:id="@+id/tv_title_gender"
                     android:layout_width="67dp"
                     android:layout_height="30dp"
                     android:gravity="center"
@@ -128,18 +128,18 @@
                     android:layout_width="1dp"
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/tv_gender"
+                    android:layout_toRightOf="@id/tv_title_gender"
                     android:background="#dcdcdc" />
 
-                <EditText
-                    android:id="@+id/et_gender"
+                <TextView
+                    android:id="@+id/tv_gender"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/view2"
                     android:background="#f1f1f1"
                     android:gravity="center_vertical"
-                    android:hint="请输入您的性别"
+                    android:hint="请选择您的性别"
                     android:textColorHint="#b4b4b4"
                     android:textColor="#646464"
                     android:textSize="14sp" />
@@ -154,7 +154,7 @@
                 android:background="@drawable/bg_edittext">
 
                 <TextView
-                    android:id="@+id/tv_age"
+                    android:id="@+id/tv_title_age"
                     android:layout_width="67dp"
                     android:layout_height="30dp"
                     android:gravity="center"
@@ -167,18 +167,18 @@
                     android:layout_width="1dp"
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/tv_age"
+                    android:layout_toRightOf="@id/tv_title_age"
                     android:background="#dcdcdc" />
 
-                <EditText
-                    android:id="@+id/et_age"
+                <TextView
+                    android:id="@+id/tv_age"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/view3"
                     android:background="#f1f1f1"
                     android:gravity="center_vertical"
-                    android:hint="请输入您的年龄"
+                    android:hint="请选择您的年龄"
                     android:textColorHint="#b4b4b4"
                     android:text=""
                     android:textColor="#646464"
@@ -194,7 +194,7 @@
                 android:background="@drawable/bg_edittext">
 
                 <TextView
-                    android:id="@+id/tv_address"
+                    android:id="@+id/tv_title_address"
                     android:layout_width="67dp"
                     android:layout_height="30dp"
                     android:gravity="center"
@@ -207,18 +207,18 @@
                     android:layout_width="1dp"
                     android:layout_height="20dp"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/tv_address"
+                    android:layout_toRightOf="@id/tv_title_address"
                     android:background="#dcdcdc" />
 
-                <EditText
-                    android:id="@+id/et_address"
+                <TextView
+                    android:id="@+id/tv_address"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/view4"
                     android:background="#f1f1f1"
                     android:gravity="center_vertical"
-                    android:hint="请输入您的所在地"
+                    android:hint="请选择您的所在地"
                     android:textColorHint="#b4b4b4"
                     android:textColor="#646464"
                     android:textSize="14sp" />
