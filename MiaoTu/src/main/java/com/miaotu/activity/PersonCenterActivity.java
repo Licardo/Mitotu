@@ -29,6 +29,9 @@ import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 import com.miaotu.view.FlowLayout;
+import com.photoselector.model.PhotoModel;
+import com.photoselector.ui.PhotoPreviewActivity;
+import com.photoselector.util.CommonUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -44,7 +47,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     private View view7,view_bottom;
     private LinearLayout ll_tag;
     private RelativeLayout rl_gender,rl_age,rl_address,rl_emotion,rl_job,rl_wantgo;
-    private CircleImageView ci_userhead;
+    private CircleImageView iv_head_photo;
     private TextView tv_start,tv_sign,tv_like,tv_trends,tv_tip_trends;
     private RelativeLayout rl_follow,rl_chating,rl_bottom,rl_join,rl_like,rl_start,rl_state;
     private TextView tv_follow;
@@ -55,6 +58,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
     private static final String IMAGE_FILE_LOCATION = Environment
             .getExternalStorageDirectory().getAbsolutePath() + "/miaotu/bg.jpg";
     Uri imageUri = Uri.parse(IMAGE_FILE_LOCATION);//
+    private ArrayList<PhotoModel> photoList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +81,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         rl_follow = (RelativeLayout) this.findViewById(R.id.rl_follow);
         rl_chating = (RelativeLayout) this.findViewById(R.id.rl_chating);
         rl_bottom = (RelativeLayout) this.findViewById(R.id.rl_bottom);
-        ci_userhead = (CircleImageView) this.findViewById(R.id.ci_userhead);
+        iv_head_photo = (CircleImageView) this.findViewById(R.id.iv_head_photo);
         rl_gender = (RelativeLayout) this.findViewById(R.id.rl_gender);
         rl_age = (RelativeLayout) this.findViewById(R.id.rl_age);
         rl_address = (RelativeLayout) this.findViewById(R.id.rl_address);
@@ -129,6 +133,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         rl_start.setOnClickListener(this);
         rl_state.setOnClickListener(this);
         iv_background.setOnClickListener(this);
+        iv_head_photo.setOnClickListener(this);
     }
 
     /**
@@ -139,9 +144,13 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         if("true".equals(personInfoResult.getPersonInfo().getIslike())){    //是否关注此人
             changeBtnFollow(true);
         }
-        UrlImageViewHelper.setUrlDrawable(ci_userhead,
+        UrlImageViewHelper.setUrlDrawable(iv_head_photo,
                 personInfoResult.getPersonInfo().getHeadurl(),
                 R.drawable.icon_default_head_photo);
+        photoList = new ArrayList<>();
+        PhotoModel photoModel = new PhotoModel();
+        photoModel.setOriginalPath(personInfoResult.getPersonInfo().getHeadurl());
+        photoList.add(photoModel);
         tv_top_emotion.setText(personInfoResult.getPersonInfo().getMaritalstatus());
         if(!StringUtil.isBlank(personInfoResult.getPersonInfo().getAddress())){
             rl_address.setVisibility(View.VISIBLE);
@@ -179,7 +188,6 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                     R.drawable.icon_default_background);
         }
 
-//        personInfoResult.getPersonInfo().setTags("胭脂膏,爱搞笑,硬币,硬笔, 硬逼, 影壁, yingbi, 逮屁, 特使");    //测试数据
         if(!StringUtil.isBlank(personInfoResult.getPersonInfo().getTags())){
             String[] tags = personInfoResult.getPersonInfo().getTags().split(",");
             int count = 0;
@@ -314,6 +322,12 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                 if (isMine){
                     chosePhoto(2);
                 }
+                break;
+            case R.id.iv_head_photo:
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("photos", photoList);
+                bundle.putSerializable("position", 0);
+                CommonUtils.launchActivity(PersonCenterActivity.this, PhotoPreviewActivity.class, bundle);
                 break;
             default:
                 break;

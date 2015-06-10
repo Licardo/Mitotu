@@ -2,6 +2,7 @@ package com.miaotu.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.activity.BaseFragment;
 import com.miaotu.activity.BaseFragmentActivity;
+import com.miaotu.activity.PersonCenterActivity;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.model.BlackInfo;
@@ -79,6 +81,16 @@ public class MyFansAdapter extends BaseAdapter{
             @Override
             public void onClick(View view) {
                 like(i, (ImageView) view);
+            }
+        });
+        holder.ivPhoto.setTag(i);
+        holder.ivPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int pos = (int) view.getTag();
+                Intent intent = new Intent(context, PersonCenterActivity.class);
+                intent.putExtra("uid", blackInfos.get(pos).getUid());
+                context.startActivity(intent);
             }
         });
         return view;
