@@ -360,6 +360,7 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/bg_edittext"
                     android:paddingLeft="10dp"
+                    android:maxLength="8"
                     android:hint="请添加您的标签"
                     android:textColor="#b4b4b4"
                     android:textSize="12sp" />

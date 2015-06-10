@@ -152,7 +152,7 @@ public class FourthPageFragment extends BaseFragment implements View.OnClickList
                 break;
             case R.id.rl_together:
                 intent.setClass(FourthPageFragment.this.getActivity(),
-                        TogetherActivity.class);
+                        MyTogetherActivity.class);
                 break;
             case R.id.rl_recommend:
                 intent.setClass(FourthPageFragment.this.getActivity(),

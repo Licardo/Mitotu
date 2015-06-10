@@ -2,20 +2,16 @@ package com.miaotu.activity;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -33,7 +29,7 @@ import com.miaotu.util.StringUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TogetherActivity extends BaseActivity implements View.OnClickListener{
+public class MyTogetherActivity extends BaseActivity implements View.OnClickListener{
 
     private PullToRefreshListView lvPull;
     private TogetherlistAdapter adapter;
@@ -72,7 +68,7 @@ public class TogetherActivity extends BaseActivity implements View.OnClickListen
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // TODO Auto-generated method stub
-                Intent intent = new Intent(TogetherActivity.this,
+                Intent intent = new Intent(MyTogetherActivity.this,
                         TogetherDetailActivity.class);
                 intent.putExtra("id", mList.get(position - 1).getId());
                 startActivityForResult(intent, 1);
@@ -84,7 +80,7 @@ public class TogetherActivity extends BaseActivity implements View.OnClickListen
             public void onPullDownToRefresh(
                     PullToRefreshBase<ListView> refreshView) {
                 String label = DateUtils.formatDateTime(
-                        TogetherActivity.this, System.currentTimeMillis(),
+                        MyTogetherActivity.this, System.currentTimeMillis(),
                         DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_SHOW_DATE
                                 | DateUtils.FORMAT_ABBREV_ALL);
 
@@ -118,18 +114,33 @@ public class TogetherActivity extends BaseActivity implements View.OnClickListen
     private void init() {
         tvTitle.setText("一起去");
         mList = new ArrayList<>();
-        adapter = new TogetherlistAdapter(TogetherActivity.this, mList, true, true);
+        adapter = new TogetherlistAdapter(MyTogetherActivity.this, mList, true, true);
         lvPull.setAdapter(adapter);
-        WindowManager wm = (WindowManager) TogetherActivity.this.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wm = (WindowManager) MyTogetherActivity.this.getSystemService(Context.WINDOW_SERVICE);
         Point size = new Point();
         wm.getDefaultDisplay().getSize(size);
         int width = size.x;
+        View emptyview = LayoutInflater.from(this).
+                inflate(R.layout.activity_empty, null);
+        TextView tvContent1 = (TextView) emptyview.findViewById(R.id.tv_content1);
+        TextView tvContent2 = (TextView) emptyview.findViewById(R.id.tv_content2);
+        TextView tvTip1 = (TextView) emptyview.findViewById(R.id.tv_tip1);
+        TextView tvTip2 = (TextView) emptyview.findViewById(R.id.tv_tip2);
+        Button btnSearch = (Button) emptyview.findViewById(R.id.btn_search);
+        btnSearch.setVisibility(View.GONE);
+        tvContent2.setVisibility(View.VISIBLE);
+        tvTip2.setVisibility(View.VISIBLE);
+        tvContent1.setText("不和别人玩");
+        tvContent2.setText("又丑又孤单");
+        tvTip1.setText("你还没有发起“一起去”");
+        tvTip2.setText("去首页“一起去”板块发起旅行吧");
+        lvPull.setEmptyView(emptyview);
         getTogether("owner", readPreference("uid"), true);
     }
 
     //获取一起去
     private void getTogether(final String type, final String uid, final boolean isShow) {
-        new BaseHttpAsyncTask<Void, Void, MyTogetherResult>(TogetherActivity.this, isShow) {
+        new BaseHttpAsyncTask<Void, Void, MyTogetherResult>(MyTogetherActivity.this, isShow) {
             @Override
             protected void onCompleteTask(MyTogetherResult result) {
                 if (result.getCode() == BaseResult.SUCCESS) {
@@ -169,7 +180,7 @@ public class TogetherActivity extends BaseActivity implements View.OnClickListen
 
     //获取一起去
     private void loadMore(final boolean isShow) {
-        new BaseHttpAsyncTask<Void, Void, MyTogetherResult>(TogetherActivity.this, isShow) {
+        new BaseHttpAsyncTask<Void, Void, MyTogetherResult>(MyTogetherActivity.this, isShow) {
             @Override
             protected void onCompleteTask(MyTogetherResult result) {
                 if (result.getCode() == BaseResult.SUCCESS) {

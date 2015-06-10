@@ -109,7 +109,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         DisplayMetrics metric = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metric);
         int width = metric.widthPixels;
-        int height = (metric.widthPixels / 1080) * 669;
+        int height = (metric.widthPixels *669) / 1080;
         iv_background = (ImageView) this.findViewById(R.id.iv_background);
         iv_background.setLayoutParams(new RelativeLayout.LayoutParams(
                 width, height));
@@ -139,7 +139,9 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         if("true".equals(personInfoResult.getPersonInfo().getIslike())){    //是否关注此人
             changeBtnFollow(true);
         }
-        UrlImageViewHelper.setUrlDrawable(ci_userhead, personInfoResult.getPersonInfo().getHeadurl(), R.drawable.icon_default_head_photo);
+        UrlImageViewHelper.setUrlDrawable(ci_userhead,
+                personInfoResult.getPersonInfo().getHeadurl(),
+                R.drawable.icon_default_head_photo);
         tv_top_emotion.setText(personInfoResult.getPersonInfo().getMaritalstatus());
         if(!StringUtil.isBlank(personInfoResult.getPersonInfo().getAddress())){
             rl_address.setVisibility(View.VISIBLE);
@@ -174,7 +176,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         if (!StringUtil.isBlank(personInfoResult.getPersonInfo().getPicurl())){
             UrlImageViewHelper.setUrlDrawable(iv_background,
                     personInfoResult.getPersonInfo().getPicurl(),
-                    R.drawable.icon_default_bbs_photo);
+                    R.drawable.icon_default_background);
         }
 
 //        personInfoResult.getPersonInfo().setTags("胭脂膏,爱搞笑,硬币,硬笔, 硬逼, 影壁, yingbi, 逮屁, 特使");    //测试数据

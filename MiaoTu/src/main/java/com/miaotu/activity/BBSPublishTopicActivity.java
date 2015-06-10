@@ -124,7 +124,7 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
 
     private void init() {
         tvTitle.setVisibility(View.VISIBLE);
-        tvTitle.setText("发表话题");
+        tvTitle.setText("发布动态");
 
         ImageView imageView = new ImageView(this);
         AbsListView.LayoutParams params = new AbsListView.LayoutParams(Util.dip2px(this, 70), Util.dip2px(this, 70));

@@ -401,7 +401,7 @@
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/bg_confirm"
+            android:background="@drawable/bg_btn_exit"
             android:text="退出登录"
             android:textColor="@color/white"
             android:visibility="visible" />

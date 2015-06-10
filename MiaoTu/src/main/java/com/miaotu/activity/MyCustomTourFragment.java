@@ -12,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
@@ -124,6 +126,45 @@ public class MyCustomTourFragment extends BaseFragment implements View.OnClickLi
         Point size = new Point();
         wm.getDefaultDisplay().getSize(size);
         int width = size.x;
+
+        View emptyview = LayoutInflater.from(this.getActivity()).
+                inflate(R.layout.activity_empty, null);
+        TextView tvContent1 = (TextView) emptyview.findViewById(R.id.tv_content1);
+        TextView tvContent2 = (TextView) emptyview.findViewById(R.id.tv_content2);
+        TextView tvTip1 = (TextView) emptyview.findViewById(R.id.tv_tip1);
+        TextView tvTip2 = (TextView) emptyview.findViewById(R.id.tv_tip2);
+        Button btnSearch = (Button) emptyview.findViewById(R.id.btn_search);
+        btnSearch.setVisibility(View.GONE);
+        if (isOwner) {  //我的动态
+            if ("join".equals(type)) {
+                tvContent1.setVisibility(View.GONE);
+                tvTip2.setVisibility(View.VISIBLE);
+                tvTip1.setText("你还没有报名“妙旅团”哦");
+                tvTip2.setText("有好多好玩线路等着你！");
+                lvPull.setEmptyView(emptyview);
+            } else if ("like".equals(type)) {
+
+            }else {
+                tvContent2.setVisibility(View.VISIBLE);
+                tvTip2.setVisibility(View.VISIBLE);
+                tvContent1.setText("一个人旅行是瞎逛");
+                tvContent2.setText("一群人旅行是狂欢");
+                tvTip1.setText("良辰美景你忍心独自欣赏？");
+                tvTip2.setText("快去“妙旅团”发起旅行吧");
+            }
+        }else { //TA的动态
+            if ("join".equals(type)){ //ta报名的
+                tvContent1.setVisibility(View.GONE);
+                tvTip1.setText("TA还没有报名“妙旅团”哦");
+            }else if ("like".equals(type)){ //ta喜欢的
+
+            }else { //ta发起的
+                tvContent1.setVisibility(View.GONE);
+                tvTip1.setText("TA还没有发起“妙旅团”哦");
+            }
+        }
+        lvPull.setEmptyView(emptyview);
+
         getCustomTour(type, uid, true);
     }
 
