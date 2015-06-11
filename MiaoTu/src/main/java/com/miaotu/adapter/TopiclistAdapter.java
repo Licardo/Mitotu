@@ -92,8 +92,8 @@ public class TopiclistAdapter extends BaseAdapter {
                     .findViewById(R.id.tv_movement_name);
             holder.tvDistance = (TextView) convertView
                     .findViewById(R.id.tv_distance);
-			holder.tvLike = (TextView) convertView
-					.findViewById(R.id.tv_like);
+            holder.tvLike = (TextView) convertView
+                    .findViewById(R.id.tv_like);
             holder.tvComment = (TextView) convertView
                     .findViewById(R.id.tv_comment);
             holder.tvTopDate = (TextView) convertView
@@ -120,7 +120,7 @@ public class TopiclistAdapter extends BaseAdapter {
             public void onClick(View view) {
                 int pos = (int) view.getTag();
                 Intent intent = new Intent(mContext, PersonCenterActivity.class);
-                intent.putExtra("uid",mList.get(pos).getUid());
+                intent.putExtra("uid", mList.get(pos).getUid());
                 mContext.startActivity(intent);
             }
         });
@@ -192,12 +192,12 @@ public class TopiclistAdapter extends BaseAdapter {
                 }
             });
         }
-        if(StringUtil.isBlank(mList.get(position).getTitle())){
+        if (StringUtil.isBlank(mList.get(position).getTitle())) {
             holder.tvMovementName.setVisibility(View.GONE);
-        }else {
+        } else {
             holder.tvMovementName.setVisibility(View.VISIBLE);
         }
-        holder.tvMovementName.setText("@"+mList.get(position).getTitle());
+        holder.tvMovementName.setText("@" + mList.get(position).getTitle());
         holder.tvMovementName.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -206,15 +206,15 @@ public class TopiclistAdapter extends BaseAdapter {
                 mContext.startActivity(intent);
             }
         });
-        if (!StringUtil.isBlank(mList.get(position).getDistance())){
+        if (!StringUtil.isBlank(mList.get(position).getDistance())) {
             holder.tvDistance.setText(mList.get(position).getDistance() + "km");
-        }else {
+        } else {
             holder.tvDistance.setVisibility(View.GONE);
         }
-        holder.tvLike.setText("喜欢 "+ mList.get(position).getStatelikecount() +"人");
-        holder.tvComment.setText("评论 "+ mList.get(position).getStatereplycount());
+        holder.tvLike.setText("喜欢 " + mList.get(position).getStatelikecount() + "人");
+        holder.tvComment.setText("评论 " + mList.get(position).getStatereplycount());
         //true 显示我的/ta的动态, false 显示妙友
-        if (flag){
+        if (flag) {
             holder.tvDistance.setVisibility(View.GONE);
             holder.ivLike.setVisibility(View.GONE);
             holder.llComment.setVisibility(View.GONE);
@@ -248,10 +248,11 @@ public class TopiclistAdapter extends BaseAdapter {
             @Override
             protected void onCompleteTask(BaseResult baseResult) {
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
-                    Toast.makeText(mContext, "操作成功", Toast.LENGTH_SHORT).show();
                     if (!islike) {
+                        Toast.makeText(mContext, "喜欢成功", Toast.LENGTH_SHORT).show();
                         iv.setBackgroundResource(R.drawable.icon_friend_like);
                     } else {
+                        Toast.makeText(mContext, "取消喜欢成功", Toast.LENGTH_SHORT).show();
                         iv.setBackgroundResource(R.drawable.icon_friend_dislike);
                     }
                 } else {

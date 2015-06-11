@@ -225,9 +225,12 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                 final Dialog dialog = new AlertDialog.Builder(BBSMessageActivity.this).create();
                 dialog.setCancelable(true);
                 dialog.show();
-                dialog.setContentView(R.layout.dialog_message_empty);
-                Button btnCancle = (Button) dialog.findViewById(R.id.btn_cancel);
-                Button btnConfirm = (Button) dialog.findViewById(R.id.btn_confirm);
+                View v = LayoutInflater.from(BBSMessageActivity.this).inflate(
+                        R.layout.dialog_message_empty, null);
+                v.setBackgroundResource(R.drawable.bg_dialog_choose_register);
+                dialog.setContentView(v);
+                Button btnCancle = (Button) v.findViewById(R.id.btn_cancel);
+                Button btnConfirm = (Button) v.findViewById(R.id.btn_confirm);
                 btnConfirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

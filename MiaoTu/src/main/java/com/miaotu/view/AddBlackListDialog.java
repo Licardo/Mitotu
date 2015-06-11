@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.miaotu.R;
@@ -26,15 +27,25 @@ import com.miaotu.util.Util;
  */
 public class AddBlackListDialog extends Dialog {
 	private Context context;
-	private TextView cancel,confirm;
+	private Button cancel,confirm;
+    private TextView tvContent,tvTip;
 
-	public AddBlackListDialog(Activity context, final String uid) {
+	public AddBlackListDialog(Activity context, final String uid, String name) {
 		super(context, R.style.dialog_add_black_list);
 		LayoutInflater lay = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View v = lay.inflate(R.layout.dialog_add_black_list, null);
-        cancel = (TextView) v.findViewById(R.id.tv_cancel);
-        confirm = (TextView) v.findViewById(R.id.tv_confirm);
+//		View v = lay.inflate(R.layout.dialog_add_black_list, null);
+//        cancel = (TextView) v.findViewById(R.id.tv_cancel);
+//        confirm = (TextView) v.findViewById(R.id.tv_confirm);
+ 		View v = lay.inflate(R.layout.dialog_message_empty, null);
+        cancel = (Button) v.findViewById(R.id.btn_cancel);
+        confirm = (Button) v.findViewById(R.id.btn_confirm);
+        tvContent = (TextView) v.findViewById(R.id.tv_content);
+        tvTip = (TextView) v.findViewById(R.id.tv_tip);
+        tvTip.setVisibility(View.VISIBLE);
+        cancel.setText("取消");
+        confirm.setText("确认");
+        tvContent.setText("确定拉黑"+name+"？");
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,13 +66,14 @@ public class AddBlackListDialog extends Dialog {
 		setCanceledOnTouchOutside(false);
         setCancelable(false);
 //        // 设置dialog的宽高
-        Window window = getWindow();
+        /*Window window = getWindow();
         WindowManager.LayoutParams wl = window.getAttributes();
 //        wl.x = Util.dip2px(context,3);
 //        wl.y = Util.dip2px(context,50);
         wl.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        wl.width = Util.dip2px(context,220);
-        window.setAttributes(wl);
+//        wl.height = Util.dip2px(context,149);
+        wl.width = Util.dip2px(context,240);
+        window.setAttributes(wl);*/
 
         setFeatureDrawableAlpha(Window.FEATURE_OPTIONS_PANEL, 0);
 		this.context = context;

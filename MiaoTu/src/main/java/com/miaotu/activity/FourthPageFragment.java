@@ -143,12 +143,14 @@ public class FourthPageFragment extends BaseFragment implements View.OnClickList
                         TogetherAndCustomTourActivity.class);
                 intent.putExtra("type", "join");
                 intent.putExtra("title", "已报名的约游");
+                intent.putExtra("isOwner", true);
                 break;
             case R.id.rl_like:
                 intent.setClass(FourthPageFragment.this.getActivity(),
                         TogetherAndCustomTourActivity.class);
                 intent.putExtra("type", "like");
                 intent.putExtra("title", "喜欢的约游");
+                intent.putExtra("isOwner", true);
                 break;
             case R.id.rl_together:
                 intent.setClass(FourthPageFragment.this.getActivity(),

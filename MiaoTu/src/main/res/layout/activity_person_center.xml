@@ -117,7 +117,7 @@
                     android:visibility="visible" />
 
                 <com.miaotu.view.CircleImageView
-                    android:id="@+id/ci_userhead"
+                    android:id="@+id/iv_head_photo"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_below="@id/iv_background"
@@ -134,7 +134,7 @@
                     android:layout_below="@id/iv_background"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:layout_toRightOf="@id/ci_userhead"
+                    android:layout_toRightOf="@id/iv_head_photo"
                     android:text="Great"
                     android:textColor="#646464"
                     android:textSize="14sp" />

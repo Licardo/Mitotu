@@ -43,6 +43,8 @@ import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 
 import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.onekeyshare.OnekeyShareTheme;
 
 /**
  * @author zhanglei
@@ -331,15 +333,15 @@ public class RedPackageActivity extends BaseActivity implements OnClickListener 
      * 分享到sns社区平台
      */
     private void showShare() {
-        /*String currentDate = (Util.getWholeTime()).substring(0,10); //获取当前日期，格式2015-01-11
+        String currentDate = (Util.getWholeTime()).substring(0,10); //获取当前日期，格式2015-01-11
         ShareSDK.initSDK(this);
         OnekeyShare oks = new OnekeyShare();
         oks.setTheme(OnekeyShareTheme.CLASSIC);
         // 关闭sso授权
         oks.disableSSOWhenAuthorize();
         // 分享时Notification的图标和文字
-        oks.setNotification(R.drawable.ic_launcher,
-                getString(R.string.app_name));
+//        oks.setNotification(R.drawable.ic_launcher,
+//                getString(R.string.app_name));
         // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
 //        oks.setTitle("快来围观我今天的运势！" + "\n http://m.miaotu.com/share/share_divine.php?user_id="+readPreference("id")+"&date="+currentDate);
         oks.setTitle("快来围观我今天的运势！");
@@ -358,7 +360,7 @@ public class RedPackageActivity extends BaseActivity implements OnClickListener 
         // siteUrl是分享此内容的网站地址，仅在QQ空间使用
         oks.setSiteUrl("http://m.miaotu.com/share/share_divine.php?user_id="+readPreference("id")+"&date="+currentDate);
         // 启动分享GUI
-        oks.show(this);*/
+        oks.show(this);
     }
 
     /**

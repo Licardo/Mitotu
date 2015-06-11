@@ -95,7 +95,7 @@ public class BlackListActivity extends BaseActivity implements View.OnClickListe
      * @param uid
      */
     private void getBlackList(final String uid){
-        new BaseHttpAsyncTask<Void, Void, BlackResult>(this, false){
+        new BaseHttpAsyncTask<Void, Void, BlackResult>(this, true){
 
             @Override
             protected void onCompleteTask(BlackResult blackResult) {

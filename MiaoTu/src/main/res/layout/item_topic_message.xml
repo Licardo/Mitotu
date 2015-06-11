@@ -71,7 +71,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginRight="10dp"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitXY" />
     </LinearLayout>
 
 </LinearLayout>
