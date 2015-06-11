@@ -67,6 +67,7 @@ import com.miaotu.R;
 import com.miaotu.activity.BaseActivity;
 import com.miaotu.activity.BaseFragmentActivity;
 import com.miaotu.activity.ChatsActivity;
+import com.miaotu.activity.PersonCenterActivity;
 import com.miaotu.activity.ShowVideoActivity;
 import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.util.LogUtil;
@@ -320,11 +321,11 @@ public class MessageAdapter extends BaseAdapter{
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
-//					Intent intent = new Intent(activity,UserHomeActivity.class);
-//					intent.putExtra("userId", uid);
-//                    if(!StringUtil.isEmpty(uid)){
-//					    activity.startActivity(intent);
-//                    }
+					Intent intent = new Intent(activity,PersonCenterActivity.class);
+					intent.putExtra("uid", uid);
+                    if(!StringUtil.isEmpty(uid)){
+					    activity.startActivity(intent);
+                    }
 				}
 			});
 		}else{
@@ -474,11 +475,11 @@ public class MessageAdapter extends BaseAdapter{
 
 				@Override
 				public boolean onLongClick(View v) {
-					Intent intent = new Intent(activity, AlertDialogActivity.class);
-					intent.putExtra("msg", "移入到黑名单？");
-					intent.putExtra("cancel", true);
-					intent.putExtra("position", position);
-					activity.startActivityForResult(intent, ChatsActivity.REQUEST_CODE_ADD_TO_BLACKLIST);
+//					Intent intent = new Intent(activity, AlertDialogActivity.class);
+//					intent.putExtra("msg", "移入到黑名单？");
+//					intent.putExtra("cancel", true);
+//					intent.putExtra("position", position);
+//					activity.startActivityForResult(intent, ChatsActivity.REQUEST_CODE_ADD_TO_BLACKLIST);
 					return true;
 				}
 			});
@@ -517,9 +518,9 @@ public class MessageAdapter extends BaseAdapter{
 		holder.tv.setOnLongClickListener(new OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
-				activity.startActivityForResult(
-						(new Intent(activity, ContextMenu.class)).putExtra("position", position).putExtra("type",
-								Type.TXT.ordinal()), ChatsActivity.REQUEST_CODE_CONTEXT_MENU);
+//				activity.startActivityForResult(
+//						(new Intent(activity, ContextMenu.class)).putExtra("position", position).putExtra("type",
+//								Type.TXT.ordinal()), ChatsActivity.REQUEST_CODE_CONTEXT_MENU);
 				return true;
 			}
 		});
@@ -568,12 +569,13 @@ public class MessageAdapter extends BaseAdapter{
 	 */
 	private void handleImageMessage(final EMMessage message, final ViewHolder holder, final int position, View convertView) {
 		holder.pb.setTag(position);
+		//图片长按
 		holder.iv.setOnLongClickListener(new OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
-				activity.startActivityForResult(
-						(new Intent(activity, ContextMenu.class)).putExtra("position", position).putExtra("type",
-								Type.IMAGE.ordinal()), ChatsActivity.REQUEST_CODE_CONTEXT_MENU);
+//				activity.startActivityForResult(
+//						(new Intent(activity, ContextMenu.class)).putExtra("position", position).putExtra("type",
+//								Type.IMAGE.ordinal()), ChatsActivity.REQUEST_CODE_CONTEXT_MENU);
 				return true;
 			}
 		});
@@ -686,14 +688,14 @@ public class MessageAdapter extends BaseAdapter{
 		// final File image=new File(PathUtil.getInstance().getVideoPath(),
 		// videoBody.getFileName());
 		String localThumb = videoBody.getLocalThumb();
-
+//视频长按
 		holder.iv.setOnLongClickListener(new OnLongClickListener() {
 
 			@Override
 			public boolean onLongClick(View v) {
-				activity.startActivityForResult(
-						new Intent(activity, ContextMenu.class).putExtra("position", position).putExtra("type",
-								Type.VIDEO.ordinal()), ChatsActivity.REQUEST_CODE_CONTEXT_MENU);
+//				activity.startActivityForResult(
+//						new Intent(activity, ContextMenu.class).putExtra("position", position).putExtra("type",
+//								Type.VIDEO.ordinal()), ChatsActivity.REQUEST_CODE_CONTEXT_MENU);
 				return true;
 			}
 		});
@@ -813,12 +815,13 @@ public class MessageAdapter extends BaseAdapter{
 		VoiceMessageBody voiceBody = (VoiceMessageBody) message.getBody();
 		holder.tv.setText(voiceBody.getLength() + "\"");
 		holder.iv.setOnClickListener(new VoicePlayClickListener(message, holder.iv, holder.iv_read_status, this, activity, username));
+		//音频长按
 		holder.iv.setOnLongClickListener(new OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
-				activity.startActivityForResult(
-						(new Intent(activity, ContextMenu.class)).putExtra("position", position).putExtra("type",
-								Type.VOICE.ordinal()), ChatsActivity.REQUEST_CODE_CONTEXT_MENU);
+//				activity.startActivityForResult(
+//						(new Intent(activity, ContextMenu.class)).putExtra("position", position).putExtra("type",
+//								Type.VOICE.ordinal()), ChatsActivity.REQUEST_CODE_CONTEXT_MENU);
 				return true;
 			}
 		});
@@ -1029,12 +1032,13 @@ public class MessageAdapter extends BaseAdapter{
 		locationView.setText(locBody.getAddress());
 		LatLng loc = new LatLng(locBody.getLatitude(), locBody.getLongitude());
 		locationView.setOnClickListener(new MapClickListener(loc, locBody.getAddress()));
+		//位置长按
 		locationView.setOnLongClickListener(new OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
-				activity.startActivityForResult(
-						(new Intent(activity, ContextMenu.class)).putExtra("position", position).putExtra("type",
-								Type.LOCATION.ordinal()), ChatsActivity.REQUEST_CODE_CONTEXT_MENU);
+//				activity.startActivityForResult(
+//						(new Intent(activity, ContextMenu.class)).putExtra("position", position).putExtra("type",
+//								Type.LOCATION.ordinal()), ChatsActivity.REQUEST_CODE_CONTEXT_MENU);
 				return false;
 			}
 		});

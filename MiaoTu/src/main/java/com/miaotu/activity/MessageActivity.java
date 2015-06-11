@@ -53,7 +53,7 @@ public class MessageActivity extends BaseActivity implements
     private TextView sysMessageNum, inviteNum, visitNum;
     private RelativeLayout layoutRecentInvite, layoutSystemMessage, layoutRecentVisit;
     private boolean hidden;
-    private TextView tvTitle;
+    private TextView tvTitle,tvLeft;
     private RelativeLayout layoutInviteNum, layoutSysMsgNum, layoutVisitNum;
 
     @Override
@@ -92,10 +92,17 @@ public class MessageActivity extends BaseActivity implements
     private void findView() {
         lvConversation = (SwipeMenuListView) findViewById(R.id.lv_conversation);
         tvTitle = (TextView) findViewById(R.id.tv_title);
+        tvLeft = (TextView) findViewById(R.id.tv_left);
     }
 
     private void bindView() {
         tvTitle.setVisibility(View.VISIBLE);
+        tvLeft.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         mList = new ArrayList<EMConversation>();
         contactList = new ArrayList<ContactInfo>();
         conversationList = new ArrayList<Conversation>();
@@ -145,7 +152,7 @@ public class MessageActivity extends BaseActivity implements
     }
 
     private void init() {
-        tvTitle.setText("消息中心");
+        tvTitle.setText("聊天中心");
         receiver = new MyReceiver();
         if (!bRegisterReceiver) {
             bRegisterReceiver = true;

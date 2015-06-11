@@ -1114,7 +1114,7 @@ private void sendPicture(final String filePath) {
 	public void onClick(View view) {
 
 		int id = view.getId();
-		if(id == R.id.btn_left){
+		if(id == R.id.tv_left){
 			ChatsActivity.this.finish();
 		}else
 		if (id == R.id.btn_send) {// 点击发送按钮(发文字和表情)

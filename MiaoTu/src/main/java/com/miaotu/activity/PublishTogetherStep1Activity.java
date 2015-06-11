@@ -67,6 +67,7 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
     private Button btnTagAdd;
     private WheelTwoColumnDialog dialog;
     PublishTogether publishTogether;
+    private TextView tvTitle,tvLeft;
     public static DisplayImageOptions imageOptions = new DisplayImageOptions.Builder()
             .showImageOnLoading(com.photoselector.R.drawable.ic_picture_loading)
             .showImageOnFail(com.photoselector.R.drawable.ic_picture_loadfailed)
@@ -96,9 +97,12 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
         layoutNext = (LinearLayout) findViewById(R.id.layout_next);
         btnTagAdd = (Button) findViewById(R.id.btn_tag_add);
         tvPhotoNum = (TextView) findViewById(R.id.tv_photo_num);
+        tvTitle = (TextView) findViewById(R.id.tv_title);
+        tvLeft = (TextView) findViewById(R.id.tv_left);
     }
     private void bindView(){
         tvDesCity.setOnClickListener(this);
+        tvLeft.setOnClickListener(this);
         tvOriginCity.setOnClickListener(this);
         tvStartDate.setOnClickListener(this);
         tvEndDate.setOnClickListener(this);
@@ -141,6 +145,7 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
         AbsListView.LayoutParams params = new AbsListView.LayoutParams(Util.dip2px(this, 70),Util.dip2px(this,70));
         imageView.setLayoutParams(params);
         imageView.setBackgroundResource(R.drawable.icon_pic_add);
+        tvTitle.setText("发起旅行");
 
         dgv.addView(imageView);
         photoList = new ArrayList<>();
@@ -393,6 +398,9 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            case R.id.tv_left:
+                finish();
+                break;
             case R.id.tv_des_city:
                 //目的城市
                 Intent cityIntent = new Intent(PublishTogetherStep1Activity.this,CityListActivity.class);
@@ -427,7 +435,7 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
                             layoutTags.removeView(viewTemp);
                         }
                     });
-                    tvTag.setText(etTag.getText().toString());
+                    tvTag.setText(StringUtil.trimAll(etTag.getText().toString()));
                     etTag.setText("");
                     FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT,FlowLayout.LayoutParams.WRAP_CONTENT);
                     params.rightMargin = Util.dip2px(PublishTogetherStep1Activity.this,10);

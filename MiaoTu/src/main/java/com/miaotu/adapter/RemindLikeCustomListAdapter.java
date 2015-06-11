@@ -1,6 +1,7 @@
 package com.miaotu.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
+import com.miaotu.activity.CustomTourDetailActivity;
 import com.miaotu.model.RemindLikeCustom;
 import com.miaotu.model.RemindLikeTogether;
 import com.miaotu.view.CircleImageView;
@@ -47,7 +49,7 @@ public class RemindLikeCustomListAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         ViewHolder holder = null;
         if(view == null){
             view = mLayoutInflater.inflate(R.layout.item_remind_like_tour, null);
@@ -62,6 +64,15 @@ public class RemindLikeCustomListAdapter extends BaseAdapter{
         }
         UrlImageViewHelper.setUrlDrawable(holder.ivPhoto, remindLikes.get(i).getRemindLikeCustomInfo().getHeadUrl(), R.drawable.icon_default_head_photo);
         UrlImageViewHelper.setUrlDrawable(holder.ivPic, remindLikes.get(i).getRemindLikeCustomInfo().getPicUrl(), R.drawable.icon_default_head_photo);
+        holder.ivPic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context,
+                        CustomTourDetailActivity.class);
+                intent.putExtra("id", remindLikes.get(i).getRemindLikeCustomInfo().getAid());
+                context.startActivity(intent);
+            }
+        });
         holder.tvDate.setText(remindLikes.get(i).getCreated());
         holder.tvName.setText(remindLikes.get(i).getRemindLikeCustomInfo().getNickname());
         return view;

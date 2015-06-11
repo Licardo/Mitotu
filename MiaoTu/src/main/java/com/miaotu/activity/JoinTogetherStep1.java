@@ -40,6 +40,14 @@ private TextView tvTitle,tvLable,tvLeft;
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==1&&resultCode==1){
+            setResult(1);
+            finish();
+        }
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_left:
@@ -48,7 +56,7 @@ private TextView tvTitle,tvLable,tvLeft;
             case R.id.btn_next:
                 Intent intent = new Intent(JoinTogetherStep1.this,JoinTogetherStep2.class);
                 intent.putExtra("together",together);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
                 break;
         }
     }

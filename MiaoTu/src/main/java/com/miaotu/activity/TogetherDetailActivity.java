@@ -72,6 +72,7 @@ private Together together;
     private LinearLayout layoutJoinedPhotos,layoutInterestPhotos,layoutInterestPart,layoutJoinedPart;
     private ImageView ivJoinedTriangle,ivInterestTriangle,ivChat,ivGroupChat,ivShare;
     private LinearLayout layoutLike,layoutComment,layoutJoin,layoutMenu,layoutCommentList;
+    private LinearLayout layoutJoinMore,layoutLikeMore;
     private boolean islike;
     private EditText etComment;
     private TextView tvPublishComment;
@@ -124,12 +125,16 @@ private Together together;
         etComment = (EditText) findViewById(R.id.et_comment);
         tvPublishComment = (TextView) findViewById(R.id.tv_publish_comment);
         layoutCommentList = (LinearLayout) findViewById(R.id.layout_comment_list);
+        layoutJoinMore = (LinearLayout) findViewById(R.id.layout_joined_more);
+        layoutLikeMore = (LinearLayout) findViewById(R.id.layout_interest_more);
 
         ivChat = (ImageView) findViewById(R.id.iv_chat);
         ivGroupChat = (ImageView) findViewById(R.id.iv_group_chat);
         ivShare = (ImageView) findViewById(R.id.iv_share);
     }
     private void bindView(){
+        layoutJoinMore.setOnClickListener(this);
+        layoutLikeMore.setOnClickListener(this);
         layoutLiked.setOnClickListener(this);
         layoutJoined.setOnClickListener(this);
         layoutLike.setOnClickListener(this);
@@ -198,19 +203,23 @@ private Together together;
         tvAge.setText(result.getTogether().getAge()+"岁");
         tvJob.setText(result.getTogether().getJob());
         tvComment.setText(result.getTogether().getComment());
-        String[] tags = result.getTogether().getTags().split(",");
-        for(String tag:tags){
-            TextView textView = new TextView(this);
-            textView.setTextColor(getResources().getColor(R.color.b4b4b4));
-            textView.setText(tag);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-            textView.setGravity(Gravity.CENTER);
-            textView.setBackgroundResource(R.drawable.bg_hottag);
-            FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.rightMargin = Util.dip2px(this,10);
-            textView.setLayoutParams(params);
-            textView.setPadding(Util.dip2px(this, 10), Util.dip2px(this, 4), Util.dip2px(this, 10), Util.dip2px(this, 4));
-            personalTag.addView(textView);
+        if(!StringUtil.isEmpty(result.getTogether().getUserTag())){
+            String[] tags = result.getTogether().getUserTag().split(",");
+            personalTag.removeAllViews();
+            for(String tag:tags){
+                TextView textView = new TextView(this);
+                textView.setTextColor(getResources().getColor(R.color.b4b4b4));
+                textView.setText(tag);
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                textView.setGravity(Gravity.CENTER);
+                textView.setBackgroundResource(R.drawable.bg_hottag);
+                FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.rightMargin = Util.dip2px(this,10);
+                params.bottomMargin = Util.dip2px(this,5);
+                textView.setLayoutParams(params);
+                textView.setPadding(Util.dip2px(this, 10), Util.dip2px(this, 4), Util.dip2px(this, 10), Util.dip2px(this, 4));
+                personalTag.addView(textView);
+            }
         }
         photoList.clear();
         for (int i = 0; i < result.getTogether().getPicList().size(); i++) {
@@ -232,20 +241,23 @@ private Together together;
         tvOrginCity.setText(result.getTogether().getOriginCity()+" "+result.getTogether().getOriginLocation());
         tvFee.setText(result.getTogether().getFee());
         tvRequirement.setText(result.getTogether().getRequirement());
-
-        String[] tags1 = result.getTogether().getUserTag().split(",");
-        for(String tag:tags1){
-            TextView textView = new TextView(this);
-            textView.setTextColor(getResources().getColor(R.color.b4b4b4));
-            textView.setText(tag);
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
-            textView.setGravity(Gravity.CENTER);
-            textView.setBackgroundResource(R.drawable.bg_hottag);
-            FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            params.rightMargin = Util.dip2px(this,10);
-            textView.setLayoutParams(params);
-            textView.setPadding(Util.dip2px(this, 10), Util.dip2px(this, 4), Util.dip2px(this, 10), Util.dip2px(this, 4));
-            togetherTag.addView(textView);
+        if(!StringUtil.isEmpty(result.getTogether().getTags())){
+            String[] tags1 = result.getTogether().getTags().split(",");
+            togetherTag.removeAllViews();
+            for(String tag:tags1){
+                TextView textView = new TextView(this);
+                textView.setTextColor(getResources().getColor(R.color.b4b4b4));
+                textView.setText(tag);
+                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
+                textView.setGravity(Gravity.CENTER);
+                textView.setBackgroundResource(R.drawable.bg_hottag);
+                FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.rightMargin = Util.dip2px(this,10);
+                params.bottomMargin = Util.dip2px(this,5);
+                textView.setLayoutParams(params);
+                textView.setPadding(Util.dip2px(this, 10), Util.dip2px(this, 4), Util.dip2px(this, 10), Util.dip2px(this, 4));
+                togetherTag.addView(textView);
+            }
         }
         islike=result.getTogether().isLike();
         if(islike){
@@ -253,6 +265,7 @@ private Together together;
         }else{
             ivLike.setBackgroundResource(R.drawable.icon_unlike);
         }
+        layoutJoinedPhotos.removeAllViews();
         if(result.getTogether().getJoinList()!=null) {
             for (int i = 0; i < result.getTogether().getJoinList().size(); i++) {
                 PersonInfo m = result.getTogether().getJoinList().get(i);
@@ -288,6 +301,7 @@ private Together together;
                         m.getHeadurl() + "100x100", R.drawable.icon_default_head_photo);
             }
         }
+        layoutInterestPhotos.removeAllViews();
         if(result.getTogether().getLikeList()!=null){
             for (int i = 0; i < result.getTogether().getLikeList().size(); i++) {
                 PersonInfo m = result.getTogether().getLikeList().get(i);
@@ -323,6 +337,7 @@ private Together together;
                         m.getHeadurl() + "100x100", R.drawable.icon_default_head_photo);
             }
         }
+        layoutCommentList.removeAllViews();
         if(result.getTogether().getReplyList()!=null){
             for(TogetherReply reply:result.getTogether().getReplyList()){
                 TextView textView = new TextView(this);
@@ -354,11 +369,26 @@ private Together together;
                         ivLike.setBackgroundResource(R.drawable.icon_unlike);
                         showToastMsg("取消喜欢成功！");
                         islike=false;
+                        for(PersonInfo p:togetherDetailResult.getTogether().getLikeList()){
+                            if(p.getUid().equals(readPreference("uid"))){
+                                togetherDetailResult.getTogether().getLikeList().remove(p);
+                            }
+                        }
+                        togetherDetailResult.getTogether().setIsLike(false);
                     }else{
                         showToastMsg("喜欢成功！");
                         ivLike.setBackgroundResource(R.drawable.icon_like);
                         islike=true;
+                        PersonInfo personInfo = new PersonInfo();
+                        personInfo.setUid(readPreference("uid"));
+                        personInfo.setHeadurl(readPreference("headphoto"));
+                        if(togetherDetailResult.getTogether().getLikeList()==null){
+                            togetherDetailResult.getTogether().setLikeList(new ArrayList<PersonInfo>());
+                        }
+                        togetherDetailResult.getTogether().getLikeList().add(0, personInfo);
+                        togetherDetailResult.getTogether().setIsLike(true);
                     }
+                    writeDetail(togetherDetailResult);
                 } else {
                     if(StringUtil.isEmpty(result.getMsg())){
                         showToastMsg("失败！");
@@ -388,12 +418,15 @@ private Together together;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
                         showToastMsg("评论发表成功！");
-                    etComment.setText("");
                     layoutMenu.setVisibility(View.VISIBLE);
                     layoutPublishComment.setVisibility(View.GONE);
                     TogetherReply reply1 = new TogetherReply();
                     reply1.setNickname(readPreference("name"));
                     reply1.setContent(StringUtil.trimAll(etComment.getText().toString()));
+                    etComment.setText("");
+                    if(togetherDetailResult.getTogether().getReplyList()==null){
+                        togetherDetailResult.getTogether().setReplyList(new ArrayList<TogetherReply>());
+                    }
                     togetherDetailResult.getTogether().getReplyList().add(0, reply1);
                     layoutCommentList.removeAllViews();
                     if(togetherDetailResult.getTogether().getReplyList()!=null){
@@ -401,7 +434,7 @@ private Together together;
                             TextView textView = new TextView(TogetherDetailActivity.this);
                             SpannableStringBuilder style=new SpannableStringBuilder(reply.getNickname()+" "+reply.getContent());
                             style.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.b4b4b4)), 0, reply.getNickname().length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-                            style.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.grey64)), reply.getNickname().length(), reply.getNickname().length() + reply.getContent().length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+                            style.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.grey64)), reply.getNickname().length(),(reply.getNickname()+" "+reply.getContent()).length()-1 , Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
                             textView.setText(style);
                             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                             params.bottomMargin = Util.dip2px(TogetherDetailActivity.this,5);
@@ -459,6 +492,22 @@ private Together together;
         // 启动分享GUI
         oks.show(this);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==1&&resultCode==1){
+            togetherDetailResult.getTogether().setIsAddGroup(true);
+            if(togetherDetailResult.getTogether().getJoinList()==null){
+                togetherDetailResult.getTogether().setJoinList(new ArrayList<PersonInfo>());
+            }
+            PersonInfo personInfo = new PersonInfo();
+            personInfo.setHeadurl(readPreference("headphoto"));
+            personInfo.setUid(readPreference("uid"));
+            togetherDetailResult.getTogether().getJoinList().add(0,personInfo);
+            writeDetail(togetherDetailResult);
+        }
+    }
+
     @Override
     public void onClick(View view) {
         switch(view.getId()){
@@ -491,6 +540,24 @@ private Together together;
                 // 感兴趣
                 like();
                 break;
+//            case R.id.layout_joined_more:
+//                // 参加列表
+//                Intent intent = new Intent(TogetherDetailActivity.this, JoinedListActivity.class);
+//                intent.putExtra("flag", "1");
+//                intent.putExtra("yid", togetherDetailResult.getTogether().getId());
+//                intent.putExtra("title", togetherDetailResult.getTogether().getStartDate() +
+//                        "一起去" + togetherDetailResult.getTogether().getDesCity());
+//                startActivity(intent);
+//                break;
+//            case R.id.layout_interest_more:
+//                // 感兴趣列表
+//                Intent intent1 = new Intent(TogetherDetailActivity.this, JoinedListActivity.class);
+//                intent1.putExtra("flag", "1");
+//                intent1.putExtra("yid", togetherDetailResult.getTogether().getId());
+//                intent1.putExtra("title", togetherDetailResult.getTogether().getStartDate() +
+//                        "一起去" + togetherDetailResult.getTogether().getDesCity());
+//                startActivity(intent1);
+//                break;
             case R.id.iv_head_photo:
                 // 个人中心
                 Intent userIntent = new Intent(TogetherDetailActivity.this,PersonCenterActivity.class);
@@ -520,7 +587,7 @@ private Together together;
                     groupChatIntent.putExtra("chatType", 2);
                     startActivity(groupChatIntent);
                 }else{
-                    showToastMsg("您还未报名此次活动，不能参与团聊！");
+                    showToastMsg("您还未报名此次活动，不能参与群聊！");
                 }
                 break;
             case R.id.iv_share:
@@ -531,7 +598,7 @@ private Together together;
                 // 参加
                 Intent joinIntent = new Intent(TogetherDetailActivity.this,JoinTogetherStep1.class);
                 joinIntent.putExtra("together",together);
-                startActivity(joinIntent);
+                startActivityForResult(joinIntent, 1);
                 break;
             case R.id.layout_comment:
                 // 评论

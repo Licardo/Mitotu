@@ -1,6 +1,7 @@
 package com.miaotu.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
+import com.miaotu.activity.JoinedListActivity;
 import com.miaotu.model.RemindLikeTogether;
 import com.miaotu.view.CircleImageView;
 
@@ -46,7 +48,7 @@ public class RemindJoinTogetherListAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         ViewHolder holder = null;
         if(view == null){
             view = mLayoutInflater.inflate(R.layout.item_remind_join_tour, null);
@@ -64,7 +66,11 @@ public class RemindJoinTogetherListAdapter extends BaseAdapter{
         holder.ivPic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(context, JoinedListActivity.class);
+                intent.putExtra("flag", "1");
+                intent.putExtra("yid", remindLikes.get(i).getRemindLikeTogetherInfo().getYid());
+                intent.putExtra("title", remindLikes.get(i).getRemindLikeTogetherInfo().getContent());
+                context.startActivity(intent);
             }
         });
         holder.tvDate.setText(remindLikes.get(i).getCreated());

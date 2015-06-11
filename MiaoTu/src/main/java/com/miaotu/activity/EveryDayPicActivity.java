@@ -32,6 +32,10 @@ import com.miaotu.util.StringUtil;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.onekeyshare.OnekeyShareTheme;
+
 public class EveryDayPicActivity extends BaseActivity implements View.OnClickListener{
 private ImageView ivPic,ivShare,ivDownload;
     private TextView tvDate1,tvDate2;
@@ -105,12 +109,45 @@ private ImageView ivPic,ivShare,ivDownload;
 
         }.execute();
     }
+    /**
+     * 分享到sns社区平台
+     */
+    private void showShare() {
+        ShareSDK.initSDK(this);
+        OnekeyShare oks = new OnekeyShare();
+        oks.setTheme(OnekeyShareTheme.CLASSIC);
+        // 关闭sso授权
+        oks.disableSSOWhenAuthorize();
+        // 分享时Notification的图标和文字
+        // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+
+//        oks.setTitle(togetherDetailResult.getTogether().getComment() + "\n http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
+//        // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+//        oks.setTitleUrl("http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
+//        // text是分享文本，所有平台都需要这个字段
+//        oks.setText(togetherDetailResult.getTogether().getComment() + "\n http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
+//        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+//        oks.setImageUrl(togetherDetailResult.getTogether().getPicList().get(0).getUrl()
+//                + "&size=200x200");
+//        // url仅在微信（包括好友和朋友圈）中使用
+//        oks.setUrl("http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
+//        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
+//        oks.setComment(togetherDetailResult.getTogether().getComment() + "\n http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
+//        // site是分享此内容的网站名称，仅在QQ空间使用
+//        oks.setSite(getString(R.string.app_name));
+//        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+//        oks.setSiteUrl("http://m.miaotu.com/journey/detail.php?id=" +togetherDetailResult.getTogether().getId());
+
+        // 启动分享GUI
+        oks.show(this);
+    }
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.iv_pic:
                 break;
             case R.id.iv_share:
+                showShare();
                 break;
             case R.id.iv_download:
                 UrlImageViewHelper.loadUrlDrawable(EveryDayPicActivity.this, url, new UrlImageViewCallback() {

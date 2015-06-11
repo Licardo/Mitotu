@@ -1,6 +1,7 @@
 package com.miaotu.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
+import com.miaotu.activity.BaseActivity;
+import com.miaotu.activity.PersonCenterActivity;
 import com.miaotu.model.BlackInfo;
 import com.miaotu.model.RemindLike;
 import com.miaotu.view.CircleImageView;
@@ -46,7 +49,7 @@ public class RemindLikeListAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         ViewHolder holder = null;
         if(view == null){
             view = mLayoutInflater.inflate(R.layout.item_remind_like, null);
@@ -59,6 +62,14 @@ public class RemindLikeListAdapter extends BaseAdapter{
             holder = (ViewHolder) view.getTag();
         }
         UrlImageViewHelper.setUrlDrawable(holder.ivPhoto, remindLikes.get(i).getPersonInfo().getHeadurl(), R.drawable.icon_default_head_photo);
+        holder.ivPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PersonCenterActivity.class);
+                intent.putExtra("uid",remindLikes.get(i).getPersonInfo().getUid());
+                context.startActivity(intent);
+            }
+        });
         holder.tvDate.setText(remindLikes.get(i).getCreated());
         holder.tvName.setText(remindLikes.get(i).getPersonInfo().getNickname());
         return view;

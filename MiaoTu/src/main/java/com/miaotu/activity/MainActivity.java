@@ -661,7 +661,7 @@ public class MainActivity extends BaseFragmentActivity implements
      * 用声音和振动提醒用户，设置消息页面下标
      */
     private void remindUser(String type){
-        if ("open".equals(readPreference("no_disturb")) && Util.isInLimitTime()) {
+        if ("off".equals(readPreference("msgnotification"))) {
             // 如果开启免打扰并且当前时间是23:00以后09:00之前，没有声音或震动提示
         } else {
             if(type.equals("imMsg")){

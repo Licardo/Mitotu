@@ -25,6 +25,7 @@ public class PublishTogetherStep2Activity extends BaseActivity implements OnClic
     PublishTogether publishTogether;
     private EditText etComment;
     private TextView tvPublish;
+    private TextView tvTitle,tvLeft;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,12 +37,16 @@ public class PublishTogetherStep2Activity extends BaseActivity implements OnClic
 private void findView(){
     etComment = (EditText) findViewById(R.id.et_comment);
     tvPublish = (TextView) findViewById(R.id.tv_publish);
+    tvLeft = (TextView) findViewById(R.id.tv_left);
+    tvTitle = (TextView) findViewById(R.id.tv_title);
 }
 private void bindView(){
     tvPublish.setOnClickListener(this);
+    tvLeft.setOnClickListener(this);
 }
 private void init(){
     publishTogether = (PublishTogether) getIntent().getSerializableExtra("publishTogether");
+    tvTitle.setText("发起旅行");
 }
 private void publish(){
         new BaseHttpAsyncTask<Void, Void, BaseResult>(PublishTogetherStep2Activity.this, true) {
@@ -78,9 +83,11 @@ private void publish(){
                     publishTogether.setToken(readPreference("token"));
                     publish();
                 }else{
-                    showToastMsg("请输入备注！");
+                    showToastMsg("请输入旅行推荐语！");
                 }
                 break;
+            case R.id.tv_left:
+                finish();
         }
     }
 }
