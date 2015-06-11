@@ -134,7 +134,7 @@ public class FourthPageFragment extends BaseFragment implements View.OnClickList
                 intent.setClass(FourthPageFragment.this.getActivity(),
                         RedPackageActivity.class);
                 break;
-            case R.id.rl_miaolvtuan:
+            case R.id.rl_miaolvtuan:    //妙旅团
                 intent.setClass(FourthPageFragment.this.getActivity(),
                         MyCustomTourActivity.class);
                 break;
@@ -152,15 +152,15 @@ public class FourthPageFragment extends BaseFragment implements View.OnClickList
                 intent.putExtra("title", "喜欢的约游");
                 intent.putExtra("isOwner", true);
                 break;
-            case R.id.rl_together:
+            case R.id.rl_together:  //一起走
                 intent.setClass(FourthPageFragment.this.getActivity(),
                         MyTogetherActivity.class);
                 break;
-            case R.id.rl_recommend:
+            case R.id.rl_recommend: //应用推荐
                 intent.setClass(FourthPageFragment.this.getActivity(),
                         AppRecommendActivity.class);
                 break;
-            case R.id.tv_userfans:
+            case R.id.tv_userfans:  //粉丝和关注
                 intent.setClass(FourthPageFragment.this.getActivity(),
                         MyLikeAndFansActivity.class);
                 break;
