@@ -53,15 +53,6 @@ public class BBSTopicRemindActivity extends BaseActivity implements View.OnClick
                 if(!isSelected1){
                     iv_msgremind.setBackgroundResource(R.drawable.icon_open);
                     writePreference("msgnotification","on");
-                }else {
-                    iv_msgremind.setBackgroundResource(R.drawable.icon_close);
-                    writePreference("msgnotification","off");
-                }
-                isSelected1 = !isSelected1;
-                break;
-            case R.id.iv_receptmsg:
-                if(!isSelected2){
-                    iv_receptmsg.setBackgroundResource(R.drawable.icon_open);
                     EMChatOptions chatOptions = EMChatManager.getInstance().getChatOptions();
                     chatOptions.setNotifyBySoundAndVibrate(false);
                     chatOptions.setNotificationEnable(false);
@@ -71,15 +62,15 @@ public class BBSTopicRemindActivity extends BaseActivity implements View.OnClick
                         public String onNewMessageNotify(EMMessage emMessage) {
                             String text = "";
                             try {
-                                text= emMessage
+                                text = emMessage
                                         .getStringAttribute("nick_name");
                             } catch (EaseMobException e) {
                                 e.printStackTrace();
                             }
                             String ticker = CommonUtils.getMessageDigest(emMessage, BBSTopicRemindActivity.this);
-                            if(emMessage.getType() == EMMessage.Type.TXT)
+                            if (emMessage.getType() == EMMessage.Type.TXT)
                                 ticker = ticker.replaceAll("\\[.{2,3}\\]", "[表情]");
-                            text +=":"+ticker;
+                            text += ":" + ticker;
                             return text;
                         }
 
@@ -106,9 +97,8 @@ public class BBSTopicRemindActivity extends BaseActivity implements View.OnClick
                             return intent;
                         }
                     });
-
                 }else {
-                    iv_receptmsg.setBackgroundResource(R.drawable.icon_close);
+                    iv_msgremind.setBackgroundResource(R.drawable.icon_close);
                     EMChatOptions chatOptions = EMChatManager.getInstance().getChatOptions();
                     chatOptions.setNotifyBySoundAndVibrate(false);
                     chatOptions.setNotificationEnable(false);
@@ -143,6 +133,16 @@ public class BBSTopicRemindActivity extends BaseActivity implements View.OnClick
                             return intent;
                         }
                     });
+                }
+                isSelected1 = !isSelected1;
+                break;
+            case R.id.iv_receptmsg:
+                if(!isSelected2){
+                    iv_receptmsg.setBackgroundResource(R.drawable.icon_open);
+                    writePreference("msgnotification", "on");
+                }else {
+                    iv_receptmsg.setBackgroundResource(R.drawable.icon_close);
+                    writePreference("msgnotification", "off");
                 }
                 isSelected2 = !isSelected2;
                 break;
