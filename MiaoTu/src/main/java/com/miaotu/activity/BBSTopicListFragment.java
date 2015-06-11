@@ -134,6 +134,13 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
     }
 
     private void init() {
+
+        if(readPreference("topic_comment").equals("1")){
+            ivDot.setVisibility(View.VISIBLE);
+        }else {
+            ivDot.setVisibility(View.GONE);
+        }
+
         btnLeft.setBackgroundResource(R.drawable.icon_topic_message);
         ViewGroup.LayoutParams params1 = btnLeft.getLayoutParams();
         params1.width =  Util.dip2px(getActivity(),24);
@@ -176,7 +183,7 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
     //刷新左上角提示
     public void refreshMessage(){
         try{
-
+            ivDot.setVisibility(View.VISIBLE);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -304,6 +311,8 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
                 break;
             case R.id.btn_left:
                 //社区提醒
+                ivDot.setVisibility(View.GONE);
+                writePreference("topic_comment","0");
                 MessageCountDatabaseHelper helper = new MessageCountDatabaseHelper(getActivity());
                 long l = helper.resetMessageNo("topic");
                 Intent intent1 = new Intent(getActivity(),BBSMessageActivity.class);
