@@ -60,8 +60,11 @@ public class RemindLikeTogetherListAdapter extends BaseAdapter{
         }else {
             holder = (ViewHolder) view.getTag();
         }
-        UrlImageViewHelper.setUrlDrawable(holder.ivPhoto, remindLikes.get(i).getRemindLikeTogetherInfo().getHeadUrl(), R.drawable.icon_default_head_photo);
-        UrlImageViewHelper.setUrlDrawable(holder.ivPic, remindLikes.get(i).getRemindLikeTogetherInfo().getPicUrl(), R.drawable.icon_default_head_photo);
+        UrlImageViewHelper.setUrlDrawable(holder.ivPhoto,
+                remindLikes.get(i).getRemindLikeTogetherInfo().getHeadUrl(),
+                R.drawable.icon_default_head_photo);
+        UrlImageViewHelper.setUrlDrawable(holder.ivPic,
+                remindLikes.get(i).getRemindLikeTogetherInfo().getPicUrl());
         holder.tvDate.setText(remindLikes.get(i).getCreated());
         holder.tvName.setText(remindLikes.get(i).getRemindLikeTogetherInfo().getNickname());
         return view;
