@@ -76,7 +76,7 @@ public class BlackListActivity extends BaseActivity implements View.OnClickListe
                 switch (index) {
                     case 0:
                         //解除黑名单
-                        setBlackList(position);
+                        removeBlackList(position);
                         break;
                     default:
                         break;
@@ -135,17 +135,21 @@ public class BlackListActivity extends BaseActivity implements View.OnClickListe
     }
 
     /**
-     * 加入/解除黑名单
+     * 解除黑名单
      */
-    private void setBlackList(final int position){
+    private void removeBlackList(final int position){
         new BaseHttpAsyncTask<Void, Void, BaseResult>(this, false){
 
             @Override
             protected void onCompleteTask(BaseResult baseResult) {
                 if(baseResult.getCode() == BaseResult.SUCCESS){
-                    showToastMsg("操作成功");
+                    showToastMsg("已经解除黑名单");
                     blackInfoList.remove(position);
                     adapter.notifyDataSetChanged();
+                }else if(baseResult.getCode() == 100){
+                    showToastMsg("该用户没有在黑名单中");
+//                    blackInfoList.remove(position);
+//                    adapter.notifyDataSetChanged();
                 }else {
                     if(StringUtil.isBlank(baseResult.getMsg())){
                         showToastMsg("解除黑名单失败");
@@ -157,7 +161,7 @@ public class BlackListActivity extends BaseActivity implements View.OnClickListe
 
             @Override
             protected BaseResult run(Void... params) {
-                return HttpRequestUtil.getInstance().setBlackList(readPreference("token"),
+                return HttpRequestUtil.getInstance().removeBlackList(readPreference("token"),
                         blackInfoList.get(position).getUid());
             }
         }.execute();

@@ -972,7 +972,7 @@ public class HttpRequestUtil {
                 RemindLikeCustomResult.class, params);
     }
 /**
-     * 加入/解除黑名单
+     * 加入黑名单
      * @param token
      * @param to_uid
      * @return
@@ -982,6 +982,20 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("token",token));
         params.add(new BasicNameValuePair("to_uid",to_uid));
         return HttpDecoder.postForObject(getUrl("user/blocks"),
+                BaseResult.class, params);
+    }
+
+    /**
+     * 解除黑名单
+     * @param token
+     * @param to_uid
+     * @return
+     */
+    public BaseResult removeBlackList(String token, String to_uid){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("to_uid",to_uid));
+        return HttpDecoder.postForObject(getUrl("user/blocks/delete"),
                 BaseResult.class, params);
     }
 
