@@ -90,6 +90,10 @@ private void init(){
                     writePreference("name",result.getLogin().getName());
                     writePreference("age",result.getLogin().getAge());
                     writePreference("gender",result.getLogin().getGender());
+                    writePreference("address",result.getLogin().getAddress());
+                    writePreference("emotion",result.getLogin().getMaritalstatus());
+                    writePreference("wantgo",result.getLogin().getWantgo());
+                    writePreference("tags",result.getLogin().getTags());
                     writePreference("headphoto",result.getLogin().getHeadPhoto());
                     writePreference("job",result.getLogin().getJob());
                     writePreference("fanscount", result.getLogin().getFanscount());

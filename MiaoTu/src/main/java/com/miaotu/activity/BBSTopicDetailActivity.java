@@ -653,9 +653,11 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             protected void onCompleteTask(BaseResult baseResult) {
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
                     if(!islike){
+                        showToastMsg("喜欢成功");
                         iv.setBackgroundResource(R.drawable.icon_friend_like);
                         isLike = 1001;
                     }else {
+                        showToastMsg("取消喜欢成功");
                         iv.setBackgroundResource(R.drawable.icon_friend_dislike);
                         isLike = 1002;
                     }

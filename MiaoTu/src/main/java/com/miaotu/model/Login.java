@@ -40,6 +40,14 @@ public class Login {
     private String phone;
     @JsonProperty("Email")
     private String email;
+    @JsonProperty("Address")
+    private String address;
+    @JsonProperty("MaritalStatus")
+    private String maritalstatus;
+    @JsonProperty("WantGo")
+    private String wantgo;
+    @JsonProperty("Tags")
+    private String tags;
 
     public String getUid() {
         return uid;
@@ -175,5 +183,37 @@ public class Login {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getMaritalstatus() {
+        return maritalstatus;
+    }
+
+    public void setMaritalstatus(String maritalstatus) {
+        this.maritalstatus = maritalstatus;
+    }
+
+    public String getWantgo() {
+        return wantgo;
+    }
+
+    public void setWantgo(String wantgo) {
+        this.wantgo = wantgo;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 }

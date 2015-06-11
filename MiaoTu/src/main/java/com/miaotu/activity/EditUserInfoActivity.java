@@ -141,6 +141,17 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
         alltags = new ArrayList<String>();
         String headimg = readPreference("headphoto");
         UrlImageViewHelper.setUrlDrawable(iv_head_photo, headimg, R.drawable.icon_default_head_photo);
+        et_nickname.setText(readPreference("name"));
+        tv_gender.setText(readPreference("gender"));
+        tv_age.setText(readPreference("age"));
+        tv_address.setText(readPreference("address"));
+        et_emotion.setText(readPreference("emotion"));
+        et_job.setText(readPreference("job"));
+        et_wantgo.setText(readPreference("wantgo"));
+        String tags = readPreference("tags");
+        for (String content:tags.split(",")){
+            addTag(content);
+        }
     }
 
     private int position;
@@ -181,37 +192,12 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.btn_add:
                 String content = et_tag.getText().toString().trim();
-                if (!StringUtil.isBlank(content)) {
-                    final View tagview = LayoutInflater.from(EditUserInfoActivity.this).inflate(
-                            R.layout.item_tag, null);
-                    TextView tv_tag = (TextView) tagview.findViewById(R.id.tv_tag);
-                    final ImageView iv_del = (ImageView) tagview.findViewById(R.id.iv_tag);
-                    tv_tag.setText(content);
-                    tagview.setTag(position);
-                    alltags.add(content);
-                    tagview.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            fl_tags.removeView(tagview);
-                            fl_tags.requestLayout();
-                            int pos = (int) tagview.getTag();
-                            if (pos < alltags.size()) {
-                                alltags.remove(pos);
-                            }
-                        }
-                    });
-                    FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT,
-                            FlowLayout.LayoutParams.WRAP_CONTENT);
-                    params.bottomMargin = Util.dip2px(EditUserInfoActivity.this, 10);
-                    params.rightMargin = Util.dip2px(EditUserInfoActivity.this, 10);
-                    tagview.setLayoutParams(params);
-                    fl_tags.addView(tagview);
-                    fl_tags.requestLayout();
-                    et_tag.setText("");
-                    position++;
-                }
+                addTag(content);
                 break;
             case R.id.tv_right:
+                if (isEmpty()) {
+                    return;
+                }
                 String token = readPreference("token");
                 userinfo.setToken(token);
                 userinfo.setNickname(et_nickname.getText().toString().trim());
@@ -274,6 +260,19 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                     if (!StringUtil.isBlank(info.getGender())) {
                         writePreference("gender", info.getGender());
                     }
+                    if (!StringUtil.isBlank(info.getAddress())) {
+                        writePreference("address", info.getAddress());
+                    }
+                    if (!StringUtil.isBlank(info.getMarital_status())) {
+                        writePreference("emotion", info.getMarital_status());
+                    }
+                    if (!StringUtil.isBlank(info.getWant_go())) {
+                        writePreference("wantgo", info.getWant_go());
+                    }
+                    if (!StringUtil.isBlank(info.getTags())) {
+                        writePreference("tags", info.getTags());
+                    }
+
 //                    UrlImageViewHelper.setUrlDrawable(iv_head_photo, info.getHear_url(),
 //                            R.drawable.icon_default_head_photo);
                 } else {
@@ -578,5 +577,40 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                 dialog.dismiss();
             }
         });
+    }
+
+    /**
+     * 添加标签
+     */
+    private void addTag(String content){
+        if (!StringUtil.isBlank(content)) {
+            final View tagview = LayoutInflater.from(EditUserInfoActivity.this).inflate(
+                    R.layout.item_tag, null);
+            TextView tv_tag = (TextView) tagview.findViewById(R.id.tv_tag);
+            final ImageView iv_del = (ImageView) tagview.findViewById(R.id.iv_tag);
+            tv_tag.setText(content);
+            tagview.setTag(position);
+            alltags.add(content);
+            tagview.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    fl_tags.removeView(tagview);
+                    fl_tags.requestLayout();
+                    int pos = (int) tagview.getTag();
+                    if (pos < alltags.size()) {
+                        alltags.remove(pos);
+                    }
+                }
+            });
+            FlowLayout.LayoutParams params = new FlowLayout.LayoutParams(FlowLayout.LayoutParams.WRAP_CONTENT,
+                    FlowLayout.LayoutParams.WRAP_CONTENT);
+            params.bottomMargin = Util.dip2px(EditUserInfoActivity.this, 10);
+            params.rightMargin = Util.dip2px(EditUserInfoActivity.this, 10);
+            tagview.setLayoutParams(params);
+            fl_tags.addView(tagview);
+            fl_tags.requestLayout();
+            et_tag.setText("");
+            position++;
+        }
     }
 }
