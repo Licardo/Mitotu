@@ -86,7 +86,10 @@ public class AddBlackListDialog extends Dialog {
                 if (result.getCode() == BaseResult.SUCCESS) {
                     ((BaseActivity)context).showToastMsg("拉黑成功！");
                     ((BaseActivity)context).finish();
-                } else {
+                } else if (result.getCode() == 100){
+                    ((BaseActivity)context).showToastMsg("该用户已经加入黑名单！");
+                    ((BaseActivity)context).finish();
+                }else {
                     if(StringUtil.isEmpty(result.getMsg())){
                         ((BaseActivity)context).showToastMsg("拉黑失败！");
                     }else{
