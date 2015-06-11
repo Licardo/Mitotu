@@ -33,6 +33,7 @@ public class BBSTopicRemindActivity extends BaseActivity implements View.OnClick
         setContentView(R.layout.activity_new_message_remind);
 
         initView();
+        initData();
     }
 
     private void initView(){
@@ -46,13 +47,29 @@ public class BBSTopicRemindActivity extends BaseActivity implements View.OnClick
         tvTitle.setText("新消息通知提醒");
     }
 
+    private void initData(){
+        isSelected1 = true;
+        if ("on".equals(readPreference("msgnotification"))){
+            isSelected2 = false;
+        }else {
+            isSelected2 = true;
+        }
+        if ("on".equals(readPreference("msgdetail"))){
+            isSelected1 = false;
+        }else {
+            isSelected1 = true;
+        }
+        onClick(iv_receptmsg);
+        onClick(iv_msgremind);
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.iv_msgremind:
                 if(!isSelected1){
+                    writePreference("msgdetail","on");
                     iv_msgremind.setBackgroundResource(R.drawable.icon_open);
-                    writePreference("msgnotification","on");
                     EMChatOptions chatOptions = EMChatManager.getInstance().getChatOptions();
                     chatOptions.setNotifyBySoundAndVibrate(false);
                     chatOptions.setNotificationEnable(false);
@@ -98,6 +115,7 @@ public class BBSTopicRemindActivity extends BaseActivity implements View.OnClick
                         }
                     });
                 }else {
+                    writePreference("msgdetail","off");
                     iv_msgremind.setBackgroundResource(R.drawable.icon_close);
                     EMChatOptions chatOptions = EMChatManager.getInstance().getChatOptions();
                     chatOptions.setNotifyBySoundAndVibrate(false);
@@ -106,7 +124,7 @@ public class BBSTopicRemindActivity extends BaseActivity implements View.OnClick
                     chatOptions.setNotifyText(new OnMessageNotifyListener() {
                         @Override
                         public String onNewMessageNotify(EMMessage emMessage) {
-                            String text = "";
+                            String text = "妙途发来一条消息";
                             return text;
                         }
 
