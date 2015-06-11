@@ -74,7 +74,6 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
         rgTitle = (RadioGroup) root.findViewById(R.id.rg_title);
         tab1 = (RadioButton) root.findViewById(R.id.tab1);
         tab2 = (RadioButton) root.findViewById(R.id.tab2);
-//        ivDot = (ImageView) root.findViewById(R.id.iv_msg_flg);
     }
 
     private void bindView() {
