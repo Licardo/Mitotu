@@ -68,7 +68,11 @@ private View root;
 
     private void init() {
         fragmentManager = getChildFragmentManager();
-        tvRight.setText(readPreference("located_city"));
+        if(readPreference("located_city").length()>4){
+            tvRight.setText(readPreference("located_city").substring(0,3)+"...");
+        }else{
+            tvRight.setText(readPreference("located_city"));
+        }
         setTabSelection(0);
     }
 
@@ -155,7 +159,11 @@ private View root;
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == 1) {
             ((MainActivity) getActivity()).writePreference("located_city", data.getStringExtra("city"));
-            tvRight.setText(readPreference("located_city"));
+            if(readPreference("located_city").length()>4){
+                tvRight.setText(readPreference("located_city").substring(0,4)+"...");
+            }else{
+                tvRight.setText(readPreference("located_city"));
+            }
         }
     }
 }

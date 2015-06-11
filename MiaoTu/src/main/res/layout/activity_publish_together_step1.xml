@@ -490,6 +490,7 @@
                     android:textSize="14sp"
                     android:textColor="#646464"
                     android:maxLength="10"
+                    android:singleLine="true"
                     android:paddingLeft="5dp"
                     />
                 <Button

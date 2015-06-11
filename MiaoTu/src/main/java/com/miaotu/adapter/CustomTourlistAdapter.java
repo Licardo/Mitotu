@@ -153,6 +153,7 @@ public class CustomTourlistAdapter extends BaseAdapter {
         });
         if(mList.get(position).getTags()!=null&&mList.get(position).getTags().length()!=0){
             String[]tags=mList.get(position).getTags().split(",");
+            holder.layoutTag.removeAllViews();
             for(String tag:tags){
                 TextView textView = new TextView(mContext);
                 textView.setText(tag);

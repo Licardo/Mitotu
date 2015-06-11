@@ -41,7 +41,7 @@
                 android:id="@+id/tv_tab_first"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="首页"
+                android:text="旅行"
                 android:textSize="10sp"
                 android:textColor="@color/text_orange" />
         </LinearLayout>

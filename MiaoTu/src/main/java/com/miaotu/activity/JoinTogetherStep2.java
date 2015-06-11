@@ -60,6 +60,7 @@ private boolean validate(){
                     }
                     if (result.getCode() == BaseResult.SUCCESS) {
                         showToastMsg("报名成功！");
+                        setResult(1);
                     } else {
                         if(StringUtil.isEmpty(result.getMsg())){
                             showToastMsg("报名约游失败");
