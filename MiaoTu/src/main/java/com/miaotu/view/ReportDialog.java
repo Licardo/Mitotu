@@ -25,7 +25,7 @@ public class ReportDialog extends Dialog {
 	private Context context;
 	private TextView addBlackList,addBackListAndReport;
 
-	public ReportDialog(final Activity context, final String uid) {
+	public ReportDialog(final Activity context, final String uid, final String name) {
 		super(context, R.style.dialog_report);
 		LayoutInflater lay = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -37,7 +37,7 @@ public class ReportDialog extends Dialog {
             public void onClick(View view) {
                 //拉黑菜单
                 dismiss();
-                AddBlackListDialog addBlackListDialog = new AddBlackListDialog(context,uid);
+                AddBlackListDialog addBlackListDialog = new AddBlackListDialog(context,uid,name);
                 addBlackListDialog.show();
             }
         });

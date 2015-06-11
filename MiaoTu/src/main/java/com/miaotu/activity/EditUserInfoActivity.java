@@ -167,10 +167,13 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                     final Dialog dialog = new AlertDialog.Builder(EditUserInfoActivity.this).create();
                     dialog.setCancelable(true);
                     dialog.show();
-                    dialog.setContentView(R.layout.dialog_message_empty);
-                    Button btnCancle = (Button) dialog.findViewById(R.id.btn_cancel);
-                    Button btnConfirm = (Button) dialog.findViewById(R.id.btn_confirm);
-                    TextView tvContent = (TextView) dialog.findViewById(R.id.tv_content);
+                    View v = LayoutInflater.from(EditUserInfoActivity.this).inflate(
+                            R.layout.dialog_message_empty, null);
+                    v.setBackgroundResource(R.drawable.bg_dialog_choose_register);
+                    dialog.setContentView(v);
+                    Button btnCancle = (Button) v.findViewById(R.id.btn_cancel);
+                    Button btnConfirm = (Button) v.findViewById(R.id.btn_confirm);
+                    TextView tvContent = (TextView) v.findViewById(R.id.tv_content);
                     btnCancle.setText("否");
                     btnConfirm.setText("是");
                     tvContent.setText("是否保存已填信息？");

@@ -316,7 +316,7 @@ public class ChatsActivity extends BaseActivity implements OnClickListener{
                 @Override
                 public void onClick(View view) {
                     //显示拉黑dialog
-                    ReportDialog dialog = new ReportDialog(ChatsActivity.this, uid);
+                    ReportDialog dialog = new ReportDialog(ChatsActivity.this, uid, name);
                     dialog.show();
                 }
             });
