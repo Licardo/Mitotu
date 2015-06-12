@@ -30,6 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:layout_margin="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:background="@drawable/bg_edittext"
             android:textColor="#646464"
             android:textSize="14sp" />
