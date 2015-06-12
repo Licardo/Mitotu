@@ -86,7 +86,7 @@ public class FourthPageFragment extends BaseFragment implements View.OnClickList
     /**
      * 初始化用户信息
      */
-    private void initUserInfo() {
+    private void/**/ initUserInfo() {
         String headimg = readPreference("headphoto");
         String identity = readPreference("job");
         String age = readPreference("age");

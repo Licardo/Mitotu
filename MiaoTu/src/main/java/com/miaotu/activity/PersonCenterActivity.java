@@ -382,7 +382,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                         changeBtnFollow(false);
                         result.getPersonInfo().setIslike("false");
                         showToastMsg("已取消关注");
-                        count--;
+                        count-=1;
                         if (count < 1){
                             count = 0;
                         }
@@ -390,8 +390,9 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                         changeBtnFollow(true);
                         result.getPersonInfo().setIslike("true");
                         showToastMsg("已关注");
-                        count++;
+                        count+=1;
                     }
+                    setResult(1001);
                     writePreference("followcount", count+"");
                 } else {
                     if (StringUtil.isBlank(baseResult.getMsg())) {

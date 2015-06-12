@@ -141,5 +141,8 @@ public class MyLikeAndFansActivity extends BaseFragmentActivity implements View.
         if (requestCode == 3 && resultCode == 1) {
             (MyLikeAndFansActivity.this).writePreference("movement_city", data.getStringExtra("city"));
         }
+        if (resultCode == 1001){
+            mTab01.getLikeList();
+        }
     }
 }
