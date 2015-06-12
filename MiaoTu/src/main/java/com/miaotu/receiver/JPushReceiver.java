@@ -165,6 +165,17 @@ public class JPushReceiver extends BroadcastReceiver {
 				Intent msgIntent = new Intent(ACTION_JPUSH_SYS_MESSAGE_RECIEVE);
 				msgIntent.putExtras(new Bundle());
 				context.sendOrderedBroadcast(msgIntent,null);
+            }else if(rootJson.get("Type").equals("state")){
+				//消息-参加约游
+				SharedPreferences sharedPreferences = mContext.getSharedPreferences("COMMON",
+						mContext.MODE_PRIVATE);
+				SharedPreferences.Editor editor = sharedPreferences.edit();
+				editor.putString("topic_comment", "1");
+				editor.commit();
+				LogUtil.d("插入收到的系统消息：妙友回复");
+				Intent msgIntent = new Intent(ACTION_JPUSH_TOPIC_MESSAGE_RECIEVE);
+				msgIntent.putExtras(new Bundle());
+				context.sendOrderedBroadcast(msgIntent,null);
             }
 		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block

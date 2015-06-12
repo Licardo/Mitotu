@@ -224,16 +224,6 @@ public class MainActivity extends BaseFragmentActivity implements
     }
 
 
-//    /**
-//     * 刷新首页信息
-//     * */
-//    public void refreshFirstPageInfo(){
-//        if (StringUtil.isEmpty(readPreference("movement_city"))) {
-//            writePreference("movement_city", readPreference("located_city"));
-//        }
-//        mTab01.getFirstPageInfo(false);
-//    }
-
     /**
      * 根据传入的index参数来设置选中的tab页。
      */
@@ -515,7 +505,13 @@ public class MainActivity extends BaseFragmentActivity implements
             abortBroadcast();
             //收到社区回复提醒
             if(mTab02 != null){
-//                mTab02.refreshMessage();
+                mTab02.refreshMessage();
+            }
+            if ("off".equals(readPreference("msgnotification"))) {
+                // 如果开启免打扰并且当前时间是23:00以后09:00之前，没有声音或震动提示
+            } else {
+                MediaPlayer player = MediaPlayer.create(MainActivity.this, R.raw.ring);
+                player.start();
             }
         }
     }
@@ -697,8 +693,12 @@ public class MainActivity extends BaseFragmentActivity implements
 //            count += getInviteMessageNum();
             count += getLikeMessageNum();
             count += EMChatManager.getInstance().getUnreadMsgsCount();
-            count +=Integer.parseInt(readPreference("tour_like_count"));
-            count +=Integer.parseInt(readPreference("tour_join_count"));
+            if(!StringUtil.isEmpty(readPreference("tour_like_count"))){
+                count +=Integer.parseInt(readPreference("tour_like_count"));
+            }
+            if(!StringUtil.isEmpty(readPreference("tour_join_count"))){
+                count +=Integer.parseInt(readPreference("tour_join_count"));
+            }
             if (count > 99) {
                 ivMsgFlg.setText("99+");
             } else {
