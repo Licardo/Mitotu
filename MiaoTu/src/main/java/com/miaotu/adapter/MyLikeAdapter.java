@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
+import com.miaotu.activity.BaseFragmentActivity;
 import com.miaotu.activity.PersonCenterActivity;
 import com.miaotu.model.BlackInfo;
 import com.miaotu.view.CircleImageView;
@@ -76,7 +77,8 @@ public class MyLikeAdapter extends BaseAdapter{
                 int pos = (int) view.getTag();
                 Intent intent = new Intent(context, PersonCenterActivity.class);
                 intent.putExtra("uid", blackInfos.get(pos).getUid());
-                context.startActivity(intent);
+//                context.startActivity(intent);
+                ((BaseFragmentActivity)context).startActivityForResult(intent, 1001);
             }
         });
         return view;

@@ -249,10 +249,22 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                     .findViewById(R.id.tv_top_date)).setText(topic.getCreated());
             ImageView ivLike = (ImageView) view.findViewById(R.id.iv_like);
 
+
             if ("false".equals(topic.getIslike())) {
                 ivLike.setBackgroundResource(R.drawable.icon_friend_dislike);
+                int pos = isExist(topic);
+                if (pos != -1){
+                    topic.getLikelist().remove(pos);
+                }
             } else {
                 ivLike.setBackgroundResource(R.drawable.icon_friend_like);
+                if (isExist(topic) == -1){
+                    LikeInfo info = new LikeInfo();
+                    info.setUid(readPreference("uid"));
+                    info.setHeadurl(readPreference("headphoto"));
+                    likecount = topic.getLikelist().size();
+                    topic.getLikelist().add(info);
+                }
             }
             ivLike.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -284,8 +296,6 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             String sid = getIntent().getStringExtra("sid");
             getDetail(true, sid);
         }
-
-
     }
 
     private void getComments(boolean isShow) {
@@ -326,12 +336,6 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                 return HttpRequestUtil.getInstance().getTopicComments(topic.getSid(),
                         readPreference("token"), curPageCount+"");
             }
-
-//            @Override
-//            protected void onError() {
-//                // TODO Auto-generated method stub
-//
-//            }
 
             @Override
             protected void finallyRun() {
@@ -490,8 +494,19 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                     ImageView ivLike = (ImageView) view.findViewById(R.id.iv_like);
                     if ("false".equals(topic.getIslike())) {
                         ivLike.setBackgroundResource(R.drawable.icon_friend_dislike);
+                        int pos = isExist(topic);
+                        if (pos != -1){
+                            topic.getLikelist().remove(pos);
+                        }
                     } else {
                         ivLike.setBackgroundResource(R.drawable.icon_friend_like);
+                        if (isExist(topic) == -1){
+                            LikeInfo info = new LikeInfo();
+                            info.setUid(readPreference("uid"));
+                            info.setHeadurl(readPreference("headphoto"));
+                            likecount = topic.getLikelist().size();
+                            topic.getLikelist().add(info);
+                        }
                     }
                     ivLike.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -705,5 +720,22 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
         }else { //取消头像
             llLikePhoto.removeViewAt(position);
         }
+    }
+
+    /**
+     * 我的头像是否存在
+     * @return
+     */
+    private int isExist(Topic topic){
+        int position = -1;
+        int i = 0;
+        for (LikeInfo info:topic.getLikelist()){
+            if (readPreference("uid").equals(info.getUid())){
+                position = i;
+                break;
+            }
+            i++;
+        }
+       return position;
     }
 }

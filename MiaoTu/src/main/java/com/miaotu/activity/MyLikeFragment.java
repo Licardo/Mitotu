@@ -1,5 +1,6 @@
 package com.miaotu.activity;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -56,7 +57,6 @@ public class MyLikeFragment extends BaseFragment implements View.OnClickListener
             public void create(SwipeMenu menu) {
                 SwipeMenuItem deleteItem = new SwipeMenuItem(MyLikeFragment.this.getActivity());
                 deleteItem.setBackground(new ColorDrawable(getResources().getColor(R.color.swipe_delete)));
-//                deleteItem.setBackground(R.drawable.icon_msg_delete);
                 deleteItem.setWidth(Util.dip2px(MyLikeFragment.this.getActivity(), 80));
                 deleteItem.setTitle("取消关注");
                 deleteItem.setTitleColor(getResources().getColor(R.color.white));
