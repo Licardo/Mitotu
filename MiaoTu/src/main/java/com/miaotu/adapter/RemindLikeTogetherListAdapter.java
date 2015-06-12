@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
+import com.miaotu.activity.PersonCenterActivity;
 import com.miaotu.activity.TogetherDetailActivity;
 import com.miaotu.model.RemindLike;
 import com.miaotu.model.RemindLikeTogether;
@@ -63,6 +64,14 @@ public class RemindLikeTogetherListAdapter extends BaseAdapter{
             holder = (ViewHolder) view.getTag();
         }
         UrlImageViewHelper.setUrlDrawable(holder.ivPhoto, remindLikes.get(i).getRemindLikeTogetherInfo().getHeadUrl(), R.drawable.icon_default_head_photo);
+        holder.ivPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PersonCenterActivity.class);
+                intent.putExtra("uid", remindLikes.get(i).getRemindLikeTogetherInfo().getUid());
+                context.startActivity(intent);
+            }
+        });
         UrlImageViewHelper.setUrlDrawable(holder.ivPic, remindLikes.get(i).getRemindLikeTogetherInfo().getPicUrl(), R.drawable.icon_default_head_photo);
         holder.ivPic.setOnClickListener(new View.OnClickListener() {
             @Override
