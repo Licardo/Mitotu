@@ -377,15 +377,22 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
             @Override
             protected void onCompleteTask(BaseResult baseResult) {
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
+                    int count = Integer.parseInt(readPreference("followcount"));
                     if("true".equals(result.getPersonInfo().getIslike())){
                         changeBtnFollow(false);
                         result.getPersonInfo().setIslike("false");
                         showToastMsg("已取消关注");
+                        count--;
+                        if (count < 1){
+                            count = 0;
+                        }
                     }else{
                         changeBtnFollow(true);
                         result.getPersonInfo().setIslike("true");
                         showToastMsg("已关注");
+                        count++;
                     }
+                    writePreference("followcount", count+"");
                 } else {
                     if (StringUtil.isBlank(baseResult.getMsg())) {
                         showToastMsg("操作失败");
