@@ -230,7 +230,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                 getCityDialog();
                 break;
             case R.id.tv_age:
-                getBirthdayDialog();
+                getAgeDialog();
                 break;
             case R.id.tv_gender:
                 getGenderDialog();
@@ -551,11 +551,11 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
     }
 
     // 获取生日dialog
-    private void getBirthdayDialog() {
+    private void getAgeDialog() {
         // 为dialog的listview赋值
         LayoutInflater lay = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = lay.inflate(R.layout.dialog_birthday_layout, null);
+        View v = lay.inflate(R.layout.dialog_age_layout, null);
         final WheelView wvDay = (WheelView) v.findViewById(R.id.wv_day);
 
         final String months[] = new String[100];

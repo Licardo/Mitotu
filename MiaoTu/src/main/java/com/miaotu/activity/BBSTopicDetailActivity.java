@@ -69,6 +69,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
     private TextView tvPublishComment;
     private TextView tvTipComment;
     private int isLike; //1001喜欢,1002取消喜欢
+    private int likecount;  //记录喜欢数量
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,7 +167,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
         lvTopics.setAdapter(adapter);
         if (topic != null) {
             LayoutInflater inflater = LayoutInflater.from(this);
-            View view = inflater.inflate(R.layout.item_topic_detail, null);
+            final View view = inflater.inflate(R.layout.item_topic_detail, null);
 //            tvTitle.setText(topic.getTitle());
             tvTipComment = (TextView) view.findViewById(R.id.tv_tip_comment);
             ((TextView) view.findViewById(R.id.tv_nickname)).setText(topic.getNickname());
@@ -254,46 +255,46 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             }
             ivLike.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
+                public void onClick(View v) {
                     if ("false".equals(topic.getIslike())) {
-                        likeState(topic.getSid(), false, (ImageView) view);   //添加喜欢
+                        likeState(topic.getSid(), false, (ImageView) v);   //添加喜欢
                         topic.setIslike("true");
+                        LikeInfo info = new LikeInfo();
+                        info.setUid(readPreference("uid"));
+                        info.setHeadurl(readPreference("headphoto"));
+                        topic.getLikelist().add(info);
+                        likecount = topic.getLikelist().size();
+                        modifyLikelist(view, likecount, true);
+                        view.findViewById(R.id.ll_likeuser).setVisibility(View.VISIBLE);
                     } else {
-                        likeState(topic.getSid(), true, (ImageView) view);    //取消喜欢
+                        likeState(topic.getSid(), true, (ImageView) v);    //取消喜欢
                         topic.setIslike("false");
+                        int i = 0;
+                        for (LikeInfo info:topic.getLikelist()){
+                            if(readPreference("uid").equals(info.getUid())){
+                                topic.getLikelist().remove(info);
+                                //移除头像
+                                modifyLikelist(view, i, false);
+                            }
+                            i++;
+                        }
+                        if (topic.getLikelist().size() == 1&&
+                                readPreference("uid").equals(
+                                        topic.getLikelist().get(0).getUid())){
+                            view.findViewById(R.id.ll_likeuser).setVisibility(View.GONE);
+                        }
                     }
                 }
             });
 
-            LinearLayout llLikeUser = (LinearLayout) view.findViewById(R.id.ll_likeuser);
             if(topic.getLikelist().size() > 0){
-                for(int i=0;i<topic.getLikelist().size();i++){
-
-                    LinearLayout llLikePhoto = (LinearLayout) view.findViewById(R.id.ll_likephoto);
-                    CircleImageView imageView = new CircleImageView(this);
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Util.dip2px(this, 30), Util.dip2px(this, 30));
-                    params.rightMargin = Util.dip2px(this, 10);
-                    imageView.setLayoutParams(params);
-                    UrlImageViewHelper.setUrlDrawable(imageView,
-                            topic.getLikelist().get(i).getHeadurl() + "100×100",
-                            R.drawable.icon_default_bbs_photo);
-                    imageView.setTag(i);
-                    imageView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            int pos = (int) view.getTag();
-                            Intent intent = new Intent();
-                            intent.setClass(BBSTopicDetailActivity.this, PersonCenterActivity.class);
-                            intent.putExtra("uid", topic.getLikelist().get(pos).getUid());
-                            startActivity(intent);
-                        }
-                    });
-                    llLikePhoto.addView(imageView);
+                for(int i=0;i<topic.getLikelist().size();i++) {
+                    modifyLikelist(view, i, true);
                 }
             }else{
-                llLikeUser.setVisibility(View.GONE);
+                view.findViewById(R.id.ll_likeuser).setVisibility(View.GONE);
             }
-
+            likecount = topic.getLikelist().size();
             lvTopics.getRefreshableView().addHeaderView(view);
             getComments(false);
         } else {
@@ -423,7 +424,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                     topic = result.getTopic();
                     /*tvTitle.setText(topic.getTitle());*/
                     LayoutInflater inflater = LayoutInflater.from(BBSTopicDetailActivity.this);
-                    View view = inflater.inflate(R.layout.item_topic_detail, null);
+                    final View view = inflater.inflate(R.layout.item_topic_detail, null);
                     tvTipComment = (TextView) view.findViewById(R.id.tv_tip_comment);
                     ((TextView) view.findViewById(R.id.tv_nickname)).setText(topic.getNickname());
                     UrlImageViewHelper.setUrlDrawable((CircleImageView) view.findViewById(R.id.iv_head_photo),
@@ -511,46 +512,47 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                     }
                     ivLike.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(View view) {
+                        public void onClick(View v) {
                             if ("false".equals(topic.getIslike())) {
-                                likeState(topic.getSid(), false, (ImageView) view);   //添加喜欢
+                                likeState(topic.getSid(), false, (ImageView) v);   //添加喜欢
                                 topic.setIslike("true");
+                                LikeInfo info = new LikeInfo();
+                                info.setUid(readPreference("uid"));
+                                info.setHeadurl(readPreference("headphoto"));
+                                topic.getLikelist().add(info);
+                                likecount = topic.getLikelist().size();
+                                modifyLikelist(view, likecount, true);
+                                view.findViewById(R.id.ll_likeuser).setVisibility(View.VISIBLE);
                             } else {
-                                likeState(topic.getSid(), true, (ImageView) view);    //取消喜欢
+                                likeState(topic.getSid(), true, (ImageView) v);    //取消喜欢
                                 topic.setIslike("false");
+                                int i = 0;
+                                for (LikeInfo info:topic.getLikelist()){
+                                    if(readPreference("uid").equals(info.getUid())){
+                                        topic.getLikelist().remove(info);
+                                        //移除头像
+                                        modifyLikelist(view, i, false);
+                                    }
+                                    i++;
+                                }
+                                if (topic.getLikelist().size() == 1&&
+                                        readPreference("uid").equals(
+                                                topic.getLikelist().get(0).getUid())){
+                                    view.findViewById(R.id.ll_likeuser).setVisibility(View.GONE);
+                                }
+
                             }
                         }
                     });
 
                     if(topic.getLikelist().size() > 0){
                         for(int i=0;i<topic.getLikelist().size();i++){
-                            LinearLayout llLikePhoto = (LinearLayout) view.findViewById(R.id.ll_likephoto);
-                            CircleImageView imageView = new CircleImageView(BBSTopicDetailActivity.this);
-                            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                                    Util.dip2px(BBSTopicDetailActivity.this, 30),
-                                    Util.dip2px(BBSTopicDetailActivity.this, 30));
-                            params.rightMargin = Util.dip2px(BBSTopicDetailActivity.this, 10);
-                            imageView.setLayoutParams(params);
-                            UrlImageViewHelper.setUrlDrawable(imageView,
-                                    topic.getLikelist().get(i).getHeadurl() + "100×100",
-                                    R.drawable.icon_default_bbs_photo);
-                            imageView.setTag(i);
-                            imageView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    int pos = (int) view.getTag();
-                                    Intent intent = new Intent();
-                                    intent.setClass(BBSTopicDetailActivity.this, PersonCenterActivity.class);
-                                    intent.putExtra("uid", topic.getLikelist().get(pos).getUid());
-                                    startActivity(intent);
-                                }
-                            });
-                            llLikePhoto.addView(imageView);
+                            modifyLikelist(view, i, true);
                         }
                     }else{
                         view.findViewById(R.id.ll_likeuser).setVisibility(View.GONE);
                     }
-
+                    likecount = topic.getLikelist().size();
                     lvTopics.getRefreshableView().addHeaderView(view);
                     getComments(false);
 
@@ -680,5 +682,38 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    /**
+     * 添加到喜欢的列表中
+     * @param view
+     * @param position
+     */
+    private void modifyLikelist(View view, final int position, boolean flag){
+        LinearLayout llLikePhoto = (LinearLayout) view.findViewById(R.id.ll_likephoto);
+        if (flag) {
+
+            CircleImageView imageView = new CircleImageView(this);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Util.dip2px(this, 30), Util.dip2px(this, 30));
+            params.rightMargin = Util.dip2px(this, 10);
+            imageView.setLayoutParams(params);
+            UrlImageViewHelper.setUrlDrawable(imageView,
+                    topic.getLikelist().get(position).getHeadurl() + "100×100",
+                    R.drawable.icon_default_bbs_photo);
+            imageView.setTag(position);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    int pos = (int) view.getTag();
+                    Intent intent = new Intent();
+                    intent.setClass(BBSTopicDetailActivity.this, PersonCenterActivity.class);
+                    intent.putExtra("uid", topic.getLikelist().get(pos).getUid());
+                    startActivity(intent);
+                }
+            });
+            llLikePhoto.addView(imageView);
+        }else { //取消头像
+            llLikePhoto.removeViewAt(position);
+        }
     }
 }
