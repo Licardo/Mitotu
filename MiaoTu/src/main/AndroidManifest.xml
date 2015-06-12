@@ -399,6 +399,7 @@
             >
         </activity>
         <activity android:name=".activity.MyLikeAndFansActivity"></activity>
+        <activity android:name=".activity.GroupEditActivity"></activity>
     </application>
 
 </manifest>

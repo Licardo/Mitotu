@@ -21,6 +21,8 @@ import com.miaotu.result.BlackResult;
 import com.miaotu.result.CustomTourResult;
 import com.miaotu.result.DeleteTopicMessageResult;
 import com.miaotu.result.EveryDayResult;
+import com.miaotu.result.GroupDetailResult;
+import com.miaotu.result.GroupUserListResult;
 import com.miaotu.result.JoinedListResult;
 import com.miaotu.result.MyTogetherResult;
 import com.miaotu.result.LikeResult;
@@ -1175,4 +1177,62 @@ public class HttpRequestUtil {
                 BaseResult.class, params);
     }
 
+    /**
+     * 群组详情
+     * @param token
+     * @param gid
+     * @return
+     */
+    public GroupDetailResult getGroupDetail(String token, String gid){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token", token));
+        params.add(new BasicNameValuePair("gid", gid));
+        return HttpDecoder.getForObject(getUrl("group"),
+                GroupDetailResult.class, params);
+    }
+
+    /**
+     * 群组用户列表
+     * @param token
+     * @param gid
+     * @return
+     */
+    public GroupUserListResult getGroupList(String token, String gid){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token", token));
+        params.add(new BasicNameValuePair("gid", gid));
+        return HttpDecoder.getForObject(getUrl("group/users"),
+                GroupUserListResult.class, params);
+    }
+
+    /**
+     * 群组详细信息编辑
+     * @param token
+     * @param gid
+     * @return
+     */
+    public BaseResult editGroupDetail(String token, String gid, String name, String notice){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token", token));
+        params.add(new BasicNameValuePair("gid", gid));
+        params.add(new BasicNameValuePair("name", name));
+        params.add(new BasicNameValuePair("notice", notice));
+        return HttpDecoder.postForObject(getUrl("group"),
+                BaseResult.class, params);
+    }
+
+    /**
+     * 从群组中移除用户
+     * @param token
+     * @param gid
+     * @return
+     */
+    public BaseResult removeGroupUser(String token, String gid, String uid){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token", token));
+        params.add(new BasicNameValuePair("gid", gid));
+        params.add(new BasicNameValuePair("uid", uid));
+        return HttpDecoder.postForObject(getUrl("group/user"),
+                BaseResult.class, params);
+    }
 }

@@ -330,7 +330,7 @@ public class ChatsActivity extends BaseActivity implements OnClickListener{
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(ChatsActivity.this,GroupDetailActivity.class);
-                    intent.putExtra("groupImId",toChatUsername);
+                    intent.putExtra("gid",toChatUsername);
 //                    intent.putExtra("groupId",getIntent().getStringExtra("groupId"));
                     startActivity(intent);
                 }
