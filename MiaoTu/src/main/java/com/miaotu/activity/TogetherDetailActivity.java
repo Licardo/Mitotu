@@ -503,7 +503,7 @@ private Together together;
             PersonInfo personInfo = new PersonInfo();
             personInfo.setHeadurl(readPreference("headphoto"));
             personInfo.setUid(readPreference("uid"));
-            togetherDetailResult.getTogether().getJoinList().add(0,personInfo);
+            togetherDetailResult.getTogether().getJoinList().add(0, personInfo);
             writeDetail(togetherDetailResult);
         }
     }
@@ -583,7 +583,7 @@ private Together together;
                 if(togetherDetailResult.getTogether().isAddGroup()){
                     Intent groupChatIntent = new Intent(TogetherDetailActivity.this, ChatsActivity.class);
                     groupChatIntent.putExtra("groupImId", togetherDetailResult.getTogether().getGroupId());
-                    groupChatIntent.putExtra("groupName", togetherDetailResult.getTogether().getComment());
+                    groupChatIntent.putExtra("groupName", togetherDetailResult.getTogether().getStartDate()+togetherDetailResult.getTogether().getOriginCity()+"至"+togetherDetailResult.getTogether().getDesCity());
                     groupChatIntent.putExtra("chatType", 2);
                     startActivity(groupChatIntent);
                 }else{

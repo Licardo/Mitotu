@@ -693,8 +693,8 @@ public class MainActivity extends BaseFragmentActivity implements
 //            count += getInviteMessageNum();
             count += getLikeMessageNum();
             count += EMChatManager.getInstance().getUnreadMsgsCount();
-            count +=Integer.parseInt(readPreference("tour_like_count"));
-            count +=Integer.parseInt(readPreference("tour_join_count"));
+            count +=Integer.parseInt(readPreference("tour_like_count","0"));
+            count +=Integer.parseInt(readPreference("tour_join_count","0"));
             if (count > 99) {
                 ivMsgFlg.setText("99+");
             } else {
