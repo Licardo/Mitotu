@@ -372,6 +372,7 @@ private Together together;
                         for(PersonInfo p:togetherDetailResult.getTogether().getLikeList()){
                             if(p.getUid().equals(readPreference("uid"))){
                                 togetherDetailResult.getTogether().getLikeList().remove(p);
+                                break;
                             }
                         }
                         togetherDetailResult.getTogether().setIsLike(false);
