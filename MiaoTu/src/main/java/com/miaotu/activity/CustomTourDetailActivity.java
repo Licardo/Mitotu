@@ -1,5 +1,6 @@
 package com.miaotu.activity;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -13,6 +14,8 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.miaotu.R;
+import com.miaotu.model.CustomTour;
+import com.miaotu.util.MD5;
 
 
 public class CustomTourDetailActivity extends BaseActivity {
@@ -92,7 +95,45 @@ private WebView webView;
         public String getLuckyMoney() {
             return readPreference("luckmoney");
         }
-
+        @android.webkit.JavascriptInterface
+        public void chat(String uid,String name,String headphoto) {
+            //私聊
+            if(uid.equals(readPreference("uid"))){
+                showToastMsg("不能和自己聊天！");
+                return ;
+            }
+            Intent chatIntent = new Intent(CustomTourDetailActivity.this, ChatsActivity.class);
+            chatIntent.putExtra("chatType", ChatsActivity.CHATTYPE_SINGLE);
+            chatIntent.putExtra("id", MD5.md5(uid));
+            chatIntent.putExtra("uid", uid);
+            chatIntent.putExtra("name", name);
+            chatIntent.putExtra("headphoto", headphoto);
+            startActivity(chatIntent);
+        }
+        @android.webkit.JavascriptInterface
+        public void groupChat(String groupId,String groupName) {
+            //群聊
+            Intent groupChatIntent = new Intent(CustomTourDetailActivity.this, ChatsActivity.class);
+            groupChatIntent.putExtra("groupImId", groupId);
+            groupChatIntent.putExtra("groupName", groupName);
+            groupChatIntent.putExtra("chatType", 2);
+            startActivity(groupChatIntent);
+        }
+        @android.webkit.JavascriptInterface
+        public void like(boolean isLike) {
+            if(isLike){
+                //喜欢成功
+            }else{
+                //取消喜欢成功
+            }
+        }
+        @android.webkit.JavascriptInterface
+        public void enterUser(String uid) {
+            // 个人中心
+            Intent userIntent = new Intent(CustomTourDetailActivity.this,PersonCenterActivity.class);
+            userIntent.putExtra("uid", uid);
+            startActivity(userIntent);
+        }
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK) &&   webView .canGoBack()) {
