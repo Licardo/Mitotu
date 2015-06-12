@@ -27,6 +27,7 @@ import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.jpush.MessageCountDatabaseHelper;
 import com.miaotu.form.MFriendsInfo;
+import com.miaotu.model.LikeInfo;
 import com.miaotu.model.Topic;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.TopicListResult;
@@ -350,9 +351,19 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
         if (resultCode == 1001){        //喜欢
             topicList.get(requestCode).setIslike("true");
             adapter.notifyDataSetChanged();
+            LikeInfo info = new LikeInfo();
+            info.setUid(readPreference("uid"));
+            info.setHeadurl(readPreference("headphoto"));
+            topicList.get(requestCode).getLikelist().add(info);
         }else if (resultCode == 1002){   //取消喜欢
             topicList.get(requestCode).setIslike("false");
             adapter.notifyDataSetChanged();
+            for (LikeInfo info:topicList.get(requestCode).getLikelist()){
+                if(readPreference("uid").equals(info.getUid())){
+                    topicList.get(requestCode).getLikelist().remove(info);
+                    break;
+                }
+            }
         }
     }
 

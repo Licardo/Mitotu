@@ -11,9 +11,17 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
+import com.miaotu.adapter.GroupUserAdapter;
+import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
+import com.miaotu.model.GroupDetailInfo;
+import com.miaotu.model.GroupUserInfo;
 import com.miaotu.result.BaseResult;
+import com.miaotu.result.GroupDetailResult;
+import com.miaotu.result.GroupUserListResult;
 import com.miaotu.util.StringUtil;
 import com.miaotu.view.CircleImageView;
 
@@ -22,15 +30,14 @@ import java.util.List;
 
 public class GroupDetailActivity extends BaseActivity implements OnClickListener {
 
-	private Button btnLeft;
-	private Button btnRight;
+	private TextView tvLeft;
+	private TextView tvRight;
 	private TextView tvTitle;
     private TextView tvGroupName,tvGroupNo,btnDismiss,tvAnnoncement;
-
-    private CircleImageView ivHead1,ivHead2,ivHead3,ivHead4,ivHead5,ivHead6,ivHead7,ivHead8,ivHead9;
-    private List<CircleImageView> headPhotoViewList;
     private ListView lvGroupMember;
-    private String groupImId;
+    private String gid;
+    private GroupUserAdapter adapter;
+    private List<GroupUserInfo> groupUserInfos;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,12 +53,13 @@ public class GroupDetailActivity extends BaseActivity implements OnClickListener
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		btnLeft = null;
+        tvLeft = null;
 		tvTitle = null;
 	}
 
 	private void findView() {
-		btnLeft = (Button) findViewById(R.id.btn_left);
+        tvLeft = (TextView) findViewById(R.id.tv_left);
+        tvRight = (TextView) findViewById(R.id.tv_right);
 		tvTitle = (TextView) findViewById(R.id.tv_title);
 
         tvGroupName = (TextView) findViewById(R.id.tv_group_name);
@@ -59,116 +67,86 @@ public class GroupDetailActivity extends BaseActivity implements OnClickListener
         btnDismiss = (TextView) findViewById(R.id.btn_dismiss);
         tvAnnoncement = (TextView) findViewById(R.id.tv_annoncement);
         lvGroupMember = (ListView) findViewById(R.id.lv_group_member);
-        ivHead1 = (CircleImageView) findViewById(R.id.iv_head_photo1);
-        ivHead2 = (CircleImageView) findViewById(R.id.iv_head_photo2);
-        ivHead3 = (CircleImageView) findViewById(R.id.iv_head_photo3);
-        ivHead4 = (CircleImageView) findViewById(R.id.iv_head_photo4);
-        ivHead5 = (CircleImageView) findViewById(R.id.iv_head_photo5);
-        ivHead6 = (CircleImageView) findViewById(R.id.iv_head_photo6);
-        ivHead7 = (CircleImageView) findViewById(R.id.iv_head_photo7);
-        ivHead8 = (CircleImageView) findViewById(R.id.iv_head_photo8);
-        ivHead9 = (CircleImageView) findViewById(R.id.iv_head_photo9);
-        headPhotoViewList = new ArrayList<CircleImageView>();
-        headPhotoViewList.add(ivHead1);
-        headPhotoViewList.add(ivHead2);
-        headPhotoViewList.add(ivHead3);
-        headPhotoViewList.add(ivHead4);
-        headPhotoViewList.add(ivHead5);
-        headPhotoViewList.add(ivHead6);
-        headPhotoViewList.add(ivHead7);
-        headPhotoViewList.add(ivHead8);
-        headPhotoViewList.add(ivHead9);
 	}
 
 	private void bindView() {
-		btnLeft.setVisibility(View.VISIBLE);
+        tvRight.setVisibility(View.GONE);
 		tvTitle.setVisibility(View.VISIBLE);
-		btnLeft.setOnClickListener(this);
-		btnRight.setOnClickListener(this);
+        tvLeft.setOnClickListener(this);
+        tvRight.setOnClickListener(this);
         btnDismiss.setOnClickListener(this);
 	}
 
 	private void initView() {
-		tvTitle.setText("团聊");
+		tvTitle.setText("团资料");
+        tvRight.setText("管理");
 	}
     private void init(){
-        groupImId = getIntent().getStringExtra("groupImId");
-        getDetail();
+        groupUserInfos = new ArrayList<>();
+        adapter = new GroupUserAdapter(this, groupUserInfos);
+        lvGroupMember.setAdapter(adapter);
+        gid = getIntent().getStringExtra("gid");
+        getGroupDetail();
+        getGroupUserList();
     }
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		case R.id.btn_left:
+		case R.id.tv_left:
 			GroupDetailActivity.this.finish();
 			break;
-            case R.id.tv_right:
-//			    Intent intent = new Intent(GroupDetailActivity.this,GroupEditActivity.class);
-//                intent.putExtra("groupImId",groupImId);
-//                startActivityForResult(intent, 1);
-			break;
+        case R.id.tv_right:
+            Intent intent = new Intent(GroupDetailActivity.this,GroupEditActivity.class);
+            intent.putExtra("gid",gid);
+            intent.putExtra("name",tvGroupName.getText().toString());
+            intent.putExtra("notice",tvAnnoncement.getText().toString());
+            startActivityForResult(intent, 1);
+        break;
         case R.id.btn_dismiss:
             //解散团聊
             break;
 		}
 	}
-    private void getDetail() {
-//        new BaseHttpAsyncTask<Void, Void, GroupDetailResult>(this, true) {
-//            @Override
-//            protected void onCompleteTask(GroupDetailResult result) {
-//                if(tvTitle==null){
-//                    return;
-//                }
-//                if(result.getCode()== BaseResult.SUCCESS){
-//                    writeDetail(result);
-//                }else{
-//                    if(!StringUtil.isEmpty(result.getMsg())){
-//                        showToastMsg(result.getMsg());
-//                    }else{
-//                        showToastMsg("获取群聊信息失败！");
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            protected GroupDetailResult run(Void... params) {
-//                return HttpRequestUtil.getInstance().getGroupDetail(
-//                        readPreference("token"), groupImId);
-//            }
-//
-//            @Override
-//            protected void onError() {
-//            }
-//
-//        }.execute();
+
+    /**
+     * 获取团资料详情
+     */
+    private void getGroupDetail() {
+        new BaseHttpAsyncTask<Void, Void, GroupDetailResult>(this, false) {
+            @Override
+            protected void onCompleteTask(GroupDetailResult result) {
+                if(result.getCode()== BaseResult.SUCCESS){
+                    writeDetail(result);
+                }else{
+                    if(!StringUtil.isEmpty(result.getMsg())){
+                        showToastMsg(result.getMsg());
+                    }else{
+                        showToastMsg("获取群聊信息失败！");
+                    }
+                }
+            }
+
+            @Override
+            protected GroupDetailResult run(Void... params) {
+                return HttpRequestUtil.getInstance().getGroupDetail(
+                        readPreference("token"), gid);
+            }
+
+        }.execute();
     }
-//    private void writeDetail(GroupDetailResult result){
-//        tvGroupName.setText(result.getGroup().getName());
-//        tvGroupNo.setText("团号"+result.getGroup().getId());
-//        tvAnnoncement.setText(result.getGroup().getNotice());
-//        if(result.getGroup().getIdentity().equals("owner")){
-//            btnDismiss.setVisibility(View.VISIBLE);
-//            btnRight.setText("管理");
-//            btnRight.setVisibility(View.VISIBLE);
-//            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) btnRight.getLayoutParams();
-//            params.width = RelativeLayout.LayoutParams.WRAP_CONTENT;
-//            params.height = RelativeLayout.LayoutParams.WRAP_CONTENT;
-//            btnRight.setLayoutParams(params);
-//        }else{
-//            btnDismiss.setVisibility(View.GONE);
-//        }
-//        int i = 0;
-//        for(Member m:result.getGroup().getMemberList()){
-//            if(i>=9){
-//                break;
-//            }
-//            UrlImageViewHelper.setUrlDrawable(headPhotoViewList.get(i),m.getPhoto().getUrl()+"&size=100x100");
-//            headPhotoViewList.get(i).setVisibility(View.VISIBLE);
-//            i++;
-//        }
-//        memberList.clear();
-//        memberList.addAll(result.getGroup().getMemberList());
-//        groupDetailListAdapter.notifyDataSetChanged();
-//    }
+    private void writeDetail(GroupDetailResult result) {
+        if (result.getInfolist() == null){
+            return;
+        }
+        GroupDetailInfo info = result.getInfolist();
+        tvGroupName.setText(info.getName());
+        tvGroupNo.setText("团号：" + info.getGid());
+        tvAnnoncement.setText(info.getNotice());
+        if(info.getIsowner().equals("true")){
+            tvRight.setText("管理");
+            tvRight.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -176,9 +154,42 @@ public class GroupDetailActivity extends BaseActivity implements OnClickListener
         switch(requestCode){
             case 1:
                 if(resultCode==1){
-                    getDetail();
+                    getGroupDetail();
+                    getGroupUserList();
                 }
                 break;
         }
+    }
+
+    /**
+     * 获取群用户信息
+     */
+    private void getGroupUserList(){
+        new BaseHttpAsyncTask<Void, Void, GroupUserListResult>(this, true) {
+            @Override
+            protected void onCompleteTask(GroupUserListResult result) {
+                if(result.getCode()== BaseResult.SUCCESS){
+                    groupUserInfos.clear();
+                    if (result.getGroupUserInfoList() == null){
+                        adapter.notifyDataSetChanged();
+                        return;
+                    }
+                    groupUserInfos.addAll(result.getGroupUserInfoList());
+                    adapter.notifyDataSetChanged();
+                }else{
+                    if(!StringUtil.isEmpty(result.getMsg())){
+                        showToastMsg(result.getMsg());
+                    }else{
+                        showToastMsg("获取群用户失败！");
+                    }
+                }
+            }
+
+            @Override
+            protected GroupUserListResult run(Void... params) {
+                return HttpRequestUtil.getInstance().getGroupList(
+                        readPreference("token"), gid);
+            }
+        }.execute();
     }
 }
