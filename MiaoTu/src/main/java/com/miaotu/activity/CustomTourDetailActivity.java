@@ -35,6 +35,7 @@ private WebView webView;
     private TextView tvLeft,tvTitle;
     Handler mHandler = new Handler();
     private String orderId,uid,nickname,headUrl,groupId,groupName;
+    private boolean isPay=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -193,6 +194,7 @@ private WebView webView;
         @android.webkit.JavascriptInterface
         public void pay(String orderId,String uid,String nickname,String headUrl,String groupId,String groupName) {
             // 支付
+            CustomTourDetailActivity.this.uid = uid;
             CustomTourDetailActivity.this.orderId = orderId;
             CustomTourDetailActivity.this.nickname = nickname;
             CustomTourDetailActivity.this.headUrl = headUrl;
@@ -202,7 +204,17 @@ private WebView webView;
         }
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if ((keyCode == KeyEvent.KEYCODE_BACK) &&   webView .canGoBack()) {
+        if(isPay){
+            webView.loadUrl("http://m.miaotu.com/App/detail/?aid=" + getIntent().getStringExtra("id")+"&token="+readPreference("token"));
+            webView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    webView.clearHistory();
+                }
+            }, 1000);
+            return true;
+        }
+        if ((keyCode == KeyEvent.KEYCODE_BACK) &&   webView .canGoBack()&&!isPay) {
             webView.goBack();
             return true;
         }
@@ -263,9 +275,15 @@ private WebView webView;
                 if(result.equals("success")){
                     //支付成
                     showToastMsg("付款完成！");
+//                    webView.loadUrl("http://m.miaotu.com/App/joinRes?uid="+uid+"&nickname="+nickname+"&headurl="+headUrl+"&gid="+groupId+"&groupname"+groupName);
                     webView.loadUrl("http://m.miaotu.com/App/joinRes");
-                    webView.clearCache(true);
-                    webView.addJavascriptInterface(new JSInterface(), "native");
+                    webView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            webView.clearHistory();
+                        }
+                    }, 1000);
+                    isPay=true;
                 }else{
                     Toast.makeText(this, "付款未完成", Toast.LENGTH_SHORT).show();
                 }
