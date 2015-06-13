@@ -143,7 +143,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
         UrlImageViewHelper.setUrlDrawable(iv_head_photo, headimg, R.drawable.icon_default_head_photo);
         et_nickname.setText(readPreference("name"));
         tv_gender.setText(readPreference("gender"));
-        tv_age.setText(readPreference("age"));
+        tv_age.setText(readPreference("age")+"岁");
         tv_address.setText(readPreference("address"));
         et_emotion.setText(readPreference("emotion"));
         et_job.setText(readPreference("job"));
