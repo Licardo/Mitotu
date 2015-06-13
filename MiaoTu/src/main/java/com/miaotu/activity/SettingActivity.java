@@ -128,7 +128,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
             case R.id.btn_exit:
                 writePreference("login_state", "out");
                 writePreference("gender", "");
-                writePreference("tour_join_count","");
+                writePreference("tour_join_count","0");
                 writePreference("tour_like_name","");
                 writePreference("tour_join_name","");
                 writePreference("like_date","");
@@ -136,6 +136,9 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
                 writePreference("tour_join_date","");
                 writePreference("im_content","");
                 writePreference("im_date","");
+                writePreference("sys_date","");
+                writePreference("sys_name","");
+                writePreference("sys_count","");
                 JPushInterface.stopPush(SettingActivity.this);
                 // XmppConnection.getInstance().closeConnection();
                 setResult(1);

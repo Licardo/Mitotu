@@ -119,6 +119,8 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
         if(!StringUtil.isEmpty(readPreference("like_date"))){
             tvLikeContent.setText("又有新伙伴关注你啦！快去看看吧");
         }
+        tvSysDate.setText(readPreference("sys_date"));
+        tvSysContent.setText(readPreference("sys_name"));
         tvLikeTourDate.setText(readPreference("tour_like_date"));
         tvLikeDate.setText(readPreference("like_date"));
         tvJoinDate.setText(readPreference("tour_join_date"));
@@ -149,6 +151,10 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
             case R.id.layout_join:
                 Intent intent3 = new Intent(getActivity(),RemindJoinTourActivity.class);
                 startActivity(intent3);
+                break;
+            case R.id.layout_sys:
+                Intent intent4 = new Intent(getActivity(),SystemMsgListActivity.class);
+                startActivity(intent4);
                 break;
         }
     }

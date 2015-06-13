@@ -165,6 +165,21 @@ public class JPushReceiver extends BroadcastReceiver {
 				Intent msgIntent = new Intent(ACTION_JPUSH_SYS_MESSAGE_RECIEVE);
 				msgIntent.putExtras(new Bundle());
 				context.sendOrderedBroadcast(msgIntent,null);
+            }else if(rootJson.get("Type").equals("system")){
+				//消息-系统消息
+				LikeMessage likeMessage = new LikeMessage();
+				likeMessage = mapper.readValue(rootJson.getJSONObject("Content").toString(), LikeMessage.class);
+				SharedPreferences sharedPreferences = mContext.getSharedPreferences("COMMON",
+						mContext.MODE_PRIVATE);
+				SharedPreferences.Editor editor = sharedPreferences.edit();
+				editor.putString("sys_date", "" + rootJson.get("Time"));
+				editor.putString("sys_name", "" + likeMessage.getContent());
+				editor.putString("sys_count", "" + (1+Integer.parseInt(sharedPreferences.getString("sys_count", "0"))));
+				editor.commit();
+				LogUtil.d("插入收到的系统消息：系统消息");
+				Intent msgIntent = new Intent(ACTION_JPUSH_SYS_MESSAGE_RECIEVE);
+				msgIntent.putExtras(new Bundle());
+				context.sendOrderedBroadcast(msgIntent,null);
             }else if(rootJson.get("Type").equals("state")){
 				//消息-参加约游
 				SharedPreferences sharedPreferences = mContext.getSharedPreferences("COMMON",

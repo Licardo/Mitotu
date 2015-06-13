@@ -79,8 +79,16 @@ public class CustomTourlistAdapter extends BaseAdapter {
 					R.layout.item_custom_tour, null);
 			holder.tvNickname = (TextView) convertView.findViewById(R.id.tv_username);
 			holder.ivHeadPhoto = (CircleImageView) convertView.findViewById(R.id.iv_head_photo);
+
 			holder.ivSummary = (ImageView) convertView
 					.findViewById(R.id.iv_background);
+            WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
+            Point size = new Point();
+            wm.getDefaultDisplay().getSize(size);
+            int width = size.x;
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                    width, width * 202 / 339);
+            holder.ivSummary.setLayoutParams(params);
             holder.tvEndTime = (TextView) convertView
 					.findViewById(R.id.tv_age);
             holder.tvPrice = (TextView) convertView
@@ -170,13 +178,7 @@ public class CustomTourlistAdapter extends BaseAdapter {
         holder.tvEndTime.setText(mList.get(position).getEndTime()+"截止报名");
         holder.tvTitle.setText(mList.get(position).getTitle());
         holder.tvPrice.setText(mList.get(position).getMtPrice()+"元");
-        WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
-        Point size = new Point();
-        wm.getDefaultDisplay().getSize(size);
-        int width = size.x;
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width,width*404/678);
-        holder.ivSummary.setLayoutParams(params);
-        UrlImageViewHelper.setUrlDrawable(holder.ivSummary,mList.get(position).getPicUrl()+"678x404",R.drawable.default_avatar);
+        UrlImageViewHelper.setUrlDrawable(holder.ivSummary,mList.get(position).getPicUrl()+"678x404",R.drawable.icon_default_big_pic);
 		return convertView;
 	}
 
