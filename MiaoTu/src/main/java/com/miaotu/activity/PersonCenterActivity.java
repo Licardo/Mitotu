@@ -158,7 +158,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         }
         if(!StringUtil.isBlank(personInfoResult.getPersonInfo().getAge())){
             rl_age.setVisibility(View.VISIBLE);
-            tv_content_age.setText(personInfoResult.getPersonInfo().getAge());
+            tv_content_age.setText(personInfoResult.getPersonInfo().getAge()+"岁");
         }
         if(!StringUtil.isBlank(personInfoResult.getPersonInfo().getMaritalstatus())){
             rl_emotion.setVisibility(View.VISIBLE);
