@@ -1,11 +1,13 @@
 package com.miaotu.activity;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
@@ -20,6 +22,7 @@ import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.model.RemindLike;
 import com.miaotu.model.RemindSys;
 import com.miaotu.result.BaseResult;
+import com.miaotu.result.DeleteTopicMessageResult;
 import com.miaotu.result.RemindLikeResult;
 import com.miaotu.result.RemindSysResult;
 import com.miaotu.util.StringUtil;
@@ -51,7 +54,7 @@ private TextView tvTitle,tvLeft;
     }
     private void init(){
         tvTitle.setText("系统消息");
-        writePreference("sys_count","0");
+        writePreference("sys_count", "0");
         MessageFragment.getInstance().refresh();
         remindSyses = new ArrayList<RemindSys>();
         adapter = new RemindSysListAdapter(this, remindSyses);
@@ -61,7 +64,6 @@ private TextView tvTitle,tvLeft;
             public void create(SwipeMenu menu) {
                 SwipeMenuItem deleteItem = new SwipeMenuItem(SystemMsgListActivity.this);
                 deleteItem.setBackground(new ColorDrawable(getResources().getColor(R.color.swipe_delete)));
-//                deleteItem.setBackground(R.drawable.icon_msg_delete);
                 deleteItem.setWidth(Util.dip2px(SystemMsgListActivity.this, 80));
                 deleteItem.setTitle("删除");
                 deleteItem.setTitleColor(getResources().getColor(R.color.white));
@@ -76,7 +78,7 @@ private TextView tvTitle,tvLeft;
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch (index) {
                     case 0:
-                        //解除黑名单
+                        //删除消息
                         delLike(position);
                         break;
                     default:
@@ -84,6 +86,12 @@ private TextView tvTitle,tvLeft;
                 }
 
                 return false;
+            }
+        });
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                readMessage(i);
             }
         });
         getRemindList();
@@ -138,10 +146,44 @@ private TextView tvTitle,tvLeft;
 
             @Override
             protected BaseResult run(Void... params) {
-                return HttpRequestUtil.getInstance().delLikeRemind(readPreference("token"), remindSyses.get(position).getId());
+                return HttpRequestUtil.getInstance().delLikeRemind(
+                        readPreference("token"), remindSyses.get(position).getId());
             }
         }.execute();
     }
+
+    /**
+     * 消息已读处理
+     * @param position
+     */
+    private void readMessage(final int position){
+        new BaseHttpAsyncTask<Void, Void, DeleteTopicMessageResult>(this, false){
+
+            @Override
+            protected void onCompleteTask(DeleteTopicMessageResult deleteTopicMessageResult) {
+                if (deleteTopicMessageResult.getCode() == BaseResult.SUCCESS){
+                    Intent intent = new Intent(SystemMsgListActivity.this, SystemMsgDetailActivity.class);
+                    intent.putExtra("msgtitle", remindSyses.get(position).getTitle());
+                    intent.putExtra("msgdate", remindSyses.get(position).getCreated());
+                    intent.putExtra("msgcontent", remindSyses.get(position).getContent().getContent());
+                    startActivity(intent);
+                }else {
+                    if (StringUtil.isBlank(deleteTopicMessageResult.getMsg())){
+                        showToastMsg("读取消息出错");
+                    }else {
+                        showToastMsg(deleteTopicMessageResult.getMsg());
+                    }
+                }
+            }
+
+            @Override
+            protected DeleteTopicMessageResult run(Void... params) {
+                return HttpRequestUtil.getInstance().readTopicMessage(
+                        readPreference("token"), remindSyses.get(position).getId());
+            }
+        }.execute();
+    }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){

@@ -73,6 +73,7 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
         layoutLike.setOnClickListener(this);
         layoutLikeTour.setOnClickListener(this);
         layoutJoin.setOnClickListener(this);
+        layoutSys.setOnClickListener(this);
     }
     private void init(){
         refresh();

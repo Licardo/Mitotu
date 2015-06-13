@@ -2,10 +2,12 @@ package com.miaotu.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+
 /**
  * Created by ying on 2015/6/3.
  */
-public class RemindSys {
+public class RemindSys implements Serializable{
     @JsonProperty("Id")
     private String id;
     @JsonProperty("Created")

@@ -1,10 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ImageView
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp">
+
+        <ImageView
+            android:id="@+id/iv_idot"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/icon_remind_msg"
+            android:scaleType="fitCenter" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_toRightOf="@id/iv_idot"
+            android:text="发团消息提醒"
+            android:textColor="#505050"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/iv_right"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignBottom="@id/tv_title"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/icon_system_msg_right" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_title"
+            android:layout_toLeftOf="@id/iv_right"
+            android:text="5月15号"
+            android:textColor="#b4b4b4"
+            android:textSize="12sp" />
+    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="31dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:lineSpacingExtra="6dp"
+        android:textColor="#969696"
+        android:textSize="14sp"
+        android:text="垃圾啊老规矩辣椒噶按家具啊gljagllgja老规矩辣椒干辣椒旮旯"
         />
-</RelativeLayout>
+</LinearLayout>

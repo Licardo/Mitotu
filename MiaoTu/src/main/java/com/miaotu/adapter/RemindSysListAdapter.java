@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
@@ -53,21 +54,29 @@ public class RemindSysListAdapter extends BaseAdapter{
         if(view == null){
             view = mLayoutInflater.inflate(R.layout.item_remind_sys, null);
             holder = new ViewHolder();
-            holder.ivPhoto = (CircleImageView) view.findViewById(R.id.iv_userhead);
-            holder.tvDate = (TextView) view.findViewById(R.id.tv_time);
-            holder.tvName = (TextView) view.findViewById(R.id.tv_name);
+            holder.ivIdot = (ImageView) view.findViewById(R.id.iv_idot);
+            holder.tvDate = (TextView) view.findViewById(R.id.tv_date);
+            holder.tvTitle = (TextView) view.findViewById(R.id.tv_title);
+            holder.tvContent = (TextView) view.findViewById(R.id.tv_content);
             view.setTag(holder);
         }else {
             holder = (ViewHolder) view.getTag();
         }
         holder.tvDate.setText(remindLikes.get(i).getCreated());
-        holder.tvName.setText(remindLikes.get(i).getTitle());
+        holder.tvTitle.setText(remindLikes.get(i).getTitle());
+        holder.tvContent.setText(remindLikes.get(i).getContent().getContent());
+        if ("1".equals(remindLikes.get(i).getStatus())){
+            holder.ivIdot.setVisibility(View.GONE);
+        }else {
+            holder.ivIdot.setVisibility(View.VISIBLE);
+        }
         return view;
     }
 
     public class ViewHolder{
-        CircleImageView ivPhoto;
-        TextView tvName;
+        ImageView ivIdot;
+        TextView tvTitle;
         TextView tvDate;
+        TextView tvContent;
     }
 }
