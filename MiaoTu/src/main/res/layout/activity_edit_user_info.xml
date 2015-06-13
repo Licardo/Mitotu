@@ -62,7 +62,7 @@
                     android:layout_height="60dp"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="20dp"
-                    android:src="@drawable/icon_default_head" />
+                    android:src="@drawable/default_avatar" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -99,6 +99,7 @@
                     android:layout_toRightOf="@id/view1"
                     android:background="#f1f1f1"
                     android:gravity="center_vertical"
+                    android:maxLength="8"
                     android:hint="请输入您的昵称"
                     android:textColorHint="#b4b4b4"
                     android:textColor="#646464"

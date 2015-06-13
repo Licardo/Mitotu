@@ -140,7 +140,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
         userinfo = new ModifyPersonInfo();
         alltags = new ArrayList<String>();
         String headimg = readPreference("headphoto");
-        UrlImageViewHelper.setUrlDrawable(iv_head_photo, headimg, R.drawable.icon_default_head_photo);
+        UrlImageViewHelper.setUrlDrawable(iv_head_photo, headimg, R.drawable.default_avatar);
         et_nickname.setText(readPreference("name"));
         tv_gender.setText(readPreference("gender"));
         tv_age.setText(readPreference("age")+"岁");
@@ -354,7 +354,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                 if (result.getCode() == BaseResult.SUCCESS) {
                     photourl = result.getPhotoList().get(0);
                     UrlImageViewHelper.setUrlDrawable(iv_head_photo, photourl,
-                            R.drawable.icon_default_head_photo);
+                            R.drawable.default_avatar);
                     ModifyPersonInfo info = new ModifyPersonInfo();
                     info.setToken(readPreference("token"));
                     info.setHear_url(photourl);

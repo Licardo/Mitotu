@@ -114,7 +114,7 @@ public class TopiclistAdapter extends BaseAdapter {
         // 对ListView的Item中的控件的操作
         UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto,
                 mList.get(position).getHead_url() + "100x100",
-                R.drawable.icon_default_head_photo);
+                R.drawable.default_avatar);
 
         holder.ivHeadPhoto.setTag(position);
         holder.ivHeadPhoto.setOnClickListener(new OnClickListener() {
@@ -180,7 +180,7 @@ public class TopiclistAdapter extends BaseAdapter {
             holder.layoutPhotos.addView(imageView);
             UrlImageViewHelper.setUrlDrawable(imageView,
                     photoInfo.getUrl() + "210x210",
-                    R.drawable.icon_default_bbs_photo);
+                    R.drawable.icon_default_image);
             final int p = i;
             imageView.setOnClickListener(new OnClickListener() {
                 @Override

@@ -94,7 +94,7 @@ public class FourthPageFragment extends BaseFragment implements View.OnClickList
         String gender = readPreference("gender");
         String followcount = readPreference("followcount");
         String fanscount = readPreference("fanscount");
-        UrlImageViewHelper.setUrlDrawable(iv_userhead, headimg, R.drawable.icon_default_head_photo);
+        UrlImageViewHelper.setUrlDrawable(iv_userhead, headimg, R.drawable.default_avatar);
         if ("男".equals(gender)) {
             iv_usergender.setBackgroundResource(R.drawable.mine_boy);
         }

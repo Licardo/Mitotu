@@ -57,7 +57,7 @@
             android:layout_below="@id/rl_image"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="-15dp"
-            android:src="@drawable/chat_image_selector"
+            android:src="@drawable/default_avatar"
             app:border_color="#f1f3f6"
             app:border_width="2dp" />
 

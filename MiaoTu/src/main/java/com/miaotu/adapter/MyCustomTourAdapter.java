@@ -81,8 +81,10 @@ public class MyCustomTourAdapter extends BaseAdapter{
         holder.tvPrice.setText(info.getMtPrice());
         holder.tvName.setText(info.getNickname());
         holder.tvEndDate.setText(info.getEndDate()+"截止报名");
-        UrlImageViewHelper.setUrlDrawable(holder.ivBackground, info.getPicUrl(), R.drawable.bg_choose_login);
-        UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto, info.getHeadUrl(), R.drawable.icon_default_head);
+        UrlImageViewHelper.setUrlDrawable(holder.ivBackground,
+                info.getPicUrl(), R.drawable.icon_default_background);
+        UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto,
+                info.getHeadUrl(), R.drawable.default_avatar);
         holder.tvJoin.setTag(i);
         holder.tvJoin.setOnClickListener(new View.OnClickListener() {
             @Override

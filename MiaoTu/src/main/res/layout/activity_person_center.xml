@@ -123,7 +123,7 @@
                     android:layout_below="@id/iv_background"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="-15dp"
-                    android:src="@drawable/icon_default_head"
+                    android:src="@drawable/default_avatar"
                     app:border_color="#f1f3f6"
                     app:border_width="2dp" />
 
@@ -135,7 +135,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_toRightOf="@id/iv_head_photo"
-                    android:text="Great"
+                    android:text="妙途"
                     android:textColor="#646464"
                     android:textSize="14sp" />
 

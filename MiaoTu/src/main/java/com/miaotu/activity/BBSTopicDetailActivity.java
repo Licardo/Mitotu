@@ -174,7 +174,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             ((TextView) view.findViewById(R.id.tv_nickname)).setText(topic.getNickname());
             UrlImageViewHelper.setUrlDrawable((CircleImageView) view.findViewById(R.id.iv_head_photo),
                     topic.getHead_url() + "100x100",
-                    R.drawable.icon_default_head_photo);
+                    R.drawable.default_avatar);
             view.findViewById(R.id.iv_head_photo).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -206,7 +206,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                 imageView.setLayoutParams(params);
                 UrlImageViewHelper.setUrlDrawable(imageView,
                         photoInfo.getUrl() + "210x210",
-                        R.drawable.icon_default_bbs_photo);
+                        R.drawable.icon_default_image);
                 imageView.setTag(i);
                 imageView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -416,7 +416,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                     ((TextView) view.findViewById(R.id.tv_nickname)).setText(topic.getNickname());
                     UrlImageViewHelper.setUrlDrawable((CircleImageView) view.findViewById(R.id.iv_head_photo),
                             topic.getHead_url() + "100x100",
-                            R.drawable.icon_default_head_photo);
+                            R.drawable.default_avatar);
                     view.findViewById(R.id.iv_head_photo).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -449,7 +449,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                         imageView.setLayoutParams(params);
                         UrlImageViewHelper.setUrlDrawable(imageView,
                                 photoInfo.getUrl() + "210x210",
-                                R.drawable.icon_default_head_photo);
+                                R.drawable.icon_default_image);
                         imageView.setTag(i);
                         imageView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -704,7 +704,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             imageView.setLayoutParams(params);
             UrlImageViewHelper.setUrlDrawable(imageView,
                     topic.getLikelist().get(position).getHeadurl() + "100×100",
-                    R.drawable.icon_default_bbs_photo);
+                    R.drawable.default_avatar);
             imageView.setTag(position);
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
