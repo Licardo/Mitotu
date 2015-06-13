@@ -129,9 +129,9 @@ public class MainActivity extends BaseFragmentActivity implements
                         .imageDownloader(new BaseImageDownloader(this, 5000, 30000)).build());
 
         if (readPreference("login_state").equals("in")) {
+            JPushInterface.init(getApplicationContext());
             JPushInterface.setDebugMode(true);
             JPushInterface.setAliasAndTags(this, MD5.md5(readPreference("uid")), null);
-            JPushInterface.init(getApplicationContext());
             JPushInterface.resumePush(getApplicationContext());
 
             initImReceiver();

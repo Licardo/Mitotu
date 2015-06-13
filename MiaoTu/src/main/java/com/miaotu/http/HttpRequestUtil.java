@@ -41,6 +41,7 @@ import com.miaotu.result.RedPackageListResult;
 import com.miaotu.result.RemindLikeCustomResult;
 import com.miaotu.result.RemindLikeResult;
 import com.miaotu.result.RemindLikeTogetherResult;
+import com.miaotu.result.RemindSysResult;
 import com.miaotu.result.SearchTourResult;
 import com.miaotu.result.SearchUserResult;
 import com.miaotu.result.SymbolResult;
@@ -235,7 +236,19 @@ public class HttpRequestUtil {
                 params);
 
     }
+    /**
+     * 支付订单
+     * @return
+     */
+    public String payOrder (String channel,String orderNo,String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("channel",channel));
+        params.add(new BasicNameValuePair("order_no",orderNo));
+        return HttpDecoder.postForString("http://121.41.105.30:8011/v1/order/pay",
+                params);
 
+    }
     /**
      * 喜欢约游
      *
@@ -908,7 +921,7 @@ public class HttpRequestUtil {
     }
 
     /**
-     * 获取提醒列表
+     * 获取关注提醒列表
      * @param token
      * @return
      */
@@ -919,6 +932,19 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("num","1000"));
         return HttpDecoder.getForObject(getUrl("user/msg/like"),
                 RemindLikeResult.class, params);
+    }
+    /**
+     * 获取系统消息提醒列表
+     * @param token
+     * @return
+     */
+    public RemindSysResult getRemindSysList(String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("page","1"));
+        params.add(new BasicNameValuePair("num","1000"));
+        return HttpDecoder.getForObject(getUrl("user/msg/system"),
+                RemindSysResult.class, params);
     }
 
     /**

@@ -404,6 +404,30 @@
             android:name=".activity.SystemMsgListActivity"
             android:label="@string/title_activity_system_msg_list" >
         </activity>
+        <!--支付相关开始-->
+        <activity
+            android:name="com.pingplusplus.android.PaymentActivity"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" >
+        </activity>
+
+        <activity-alias
+            android:name=".wxapi.WXPayEntryActivity"
+            android:targetActivity="com.pingplusplus.android.PaymentActivity"
+            android:exported="true"/>
+
+        <!--支付结束-->
     </application>
 
 </manifest>
