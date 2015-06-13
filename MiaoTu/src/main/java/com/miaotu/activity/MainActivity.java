@@ -567,7 +567,7 @@ public class MainActivity extends BaseFragmentActivity implements
                 LogUtil.d("main收到IM消息" + "from:" + message
                         .getStringAttribute("nick_name")
                         + " type:" + msgType+"headphoto"+message
-                        .getStringAttribute("headphoto"));
+                        .getStringAttribute("headphoto")+"uid "+message.getStringAttribute("uid"));
                 IMDatabaseHelper imDatabaseHelper = new IMDatabaseHelper(
                         getApplicationContext());
                 imDatabaseHelper.saveContactInfo(contactInfo);
