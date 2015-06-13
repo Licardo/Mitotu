@@ -1,0 +1,20 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.miaotu.activity.SystemMsgListActivity">
+<include
+    layout="@layout/top_bar"
+    ></include>
+    <com.baoyz.swipemenulistview.SwipeMenuListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:divider="#b4b4b4"
+        android:dividerHeight="1px"
+        android:listSelector="@android:color/transparent"
+        android:descendantFocusability="afterDescendants"
+        android:background="@color/white"
+        android:scrollbars="none">
+    </com.baoyz.swipemenulistview.SwipeMenuListView>
+</LinearLayout>

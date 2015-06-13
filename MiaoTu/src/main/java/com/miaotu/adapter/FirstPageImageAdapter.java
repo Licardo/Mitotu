@@ -63,7 +63,7 @@ public class FirstPageImageAdapter extends PagerAdapter implements OnClickListen
 		LinearLayout linearLayout =  (LinearLayout) mInflater.inflate(layoutId, null);
 		ImageView imageItem = (ImageView) linearLayout.findViewById(viewId);
 		imageItem.setTag(position);
-		UrlImageViewHelper.setUrlDrawable(imageItem, imagePathes.get(position),R.drawable.default_avatar);
+		UrlImageViewHelper.setUrlDrawable(imageItem, imagePathes.get(position),R.drawable.icon_default_big_pic);
 		if(clickAble){
 			imageItem.setOnClickListener(this);
 		}

@@ -151,4 +151,5 @@
     <string name="title_activity_every_day_pic">EveryDayPicActivity</string>
     <string name="title_activity_find_password">FindPasswordActivity</string>
     <string name="title_activity_protocol">ProtocolActivity</string>
+    <string name="title_activity_system_msg_list">SystemMsgListActivity</string>
 </resources>

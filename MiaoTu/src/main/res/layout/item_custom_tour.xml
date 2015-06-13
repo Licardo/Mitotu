@@ -15,14 +15,13 @@
         <RelativeLayout
             android:id="@+id/rl_image"
             android:layout_width="match_parent"
-            android:layout_height="150dp">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/iv_background"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:scaleType="fitXY"
-                android:src="@drawable/bg_choose_login"
                 android:visibility="visible" />
 
             <ImageView

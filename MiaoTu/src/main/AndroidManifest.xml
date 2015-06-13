@@ -398,8 +398,12 @@
             android:label="@string/title_activity_every_day_pic"
             >
         </activity>
-        <activity android:name=".activity.MyLikeAndFansActivity"></activity>
-        <activity android:name=".activity.GroupEditActivity"></activity>
+        <activity android:name=".activity.MyLikeAndFansActivity" />
+        <activity android:name=".activity.GroupEditActivity" />
+        <activity
+            android:name=".activity.SystemMsgListActivity"
+            android:label="@string/title_activity_system_msg_list" >
+        </activity>
     </application>
 
 </manifest>

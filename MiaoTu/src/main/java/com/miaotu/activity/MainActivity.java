@@ -699,6 +699,9 @@ public class MainActivity extends BaseFragmentActivity implements
             if(!StringUtil.isEmpty(readPreference("tour_join_count"))){
                 count +=Integer.parseInt(readPreference("tour_join_count"));
             }
+            if(!StringUtil.isEmpty(readPreference("sys_count"))){
+                count +=Integer.parseInt(readPreference("sys_count"));
+            }
             if (count > 99) {
                 ivMsgFlg.setText("99+");
             } else {
