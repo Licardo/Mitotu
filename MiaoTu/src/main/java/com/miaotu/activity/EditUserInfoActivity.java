@@ -130,10 +130,6 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                 fl_tags.getChildCount() < 1) {
             empty = true;
         }
-        if (et_nickname.getText().toString().length() < 3){
-            empty = false;
-            showToastMsg("昵称大于三个字符");
-        }
         return empty;
     }
 
