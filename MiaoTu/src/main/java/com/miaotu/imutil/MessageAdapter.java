@@ -329,8 +329,8 @@ public class MessageAdapter extends BaseAdapter{
 				}
 			});
 		}else{
-			UrlImageViewHelper.setUrlDrawable(holder.head_iv,activity.readPreference("url")
-					+ "&size=100x100", R.drawable.icon_default_head_photo);
+			UrlImageViewHelper.setUrlDrawable(holder.head_iv,activity.readPreference("headphoto")
+					+ "100x100", R.drawable.icon_default_head_photo);
 			holder.head_iv.setOnClickListener(null);
 		}
 		// 群聊时，显示接收的消息的发送人的名称
@@ -358,7 +358,7 @@ public class MessageAdapter extends BaseAdapter{
                 }
 			    holder.tv_userId.setText(contactInfo.getNickName());
                 UrlImageViewHelper.setUrlDrawable(holder.head_iv,contactInfo.getHeadPhoto()
-                        + "&size=100x100", R.drawable.icon_default_head_photo);
+                        + "100x100", R.drawable.icon_default_head_photo);
 				holder.head_iv.setOnClickListener(new OnClickListener() {
 
 					@Override

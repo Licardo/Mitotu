@@ -957,10 +957,10 @@ private void sendPicture(final String filePath) {
 		message.setChatType(ChatType.GroupChat);
 
 	message.setReceipt(to);
-	message.setAttribute("uid", readPreference("id"));
-	message.setAttribute("nick_name", readPreference("nick_name"));
-    message.setAttribute("headphoto", readPreference("url")
-            + "&size=100x100");
+	message.setAttribute("uid", readPreference("uid"));
+	message.setAttribute("nick_name", readPreference("name"));
+	message.setAttribute("headphoto", readPreference("headphoto")
+			+ "100x100");
 	ImageMessageBody body = new ImageMessageBody(new File(filePath));
 	// 默认超过100k的图片会压缩后发给对方，可以设置成发送原图
 	// body.setSendOriginalImage(true);
@@ -987,10 +987,10 @@ private void sendPicture(final String filePath) {
 				message.setChatType(ChatType.GroupChat);
 			String to = toChatUsername;
 			message.setReceipt(to);
-			message.setAttribute("uid", readPreference("id"));
-			message.setAttribute("nick_name", readPreference("nick_name"));
-            message.setAttribute("headphoto", readPreference("url")
-                    + "&size=100x100");
+			message.setAttribute("uid", readPreference("uid"));
+			message.setAttribute("nick_name", readPreference("name"));
+			message.setAttribute("headphoto", readPreference("headphoto")
+					+ "100x100");
 			VideoMessageBody body = new VideoMessageBody(videoFile, thumbPath, length, videoFile.length());
 			message.addBody(body);
 			conversation.addMessage(message);
@@ -1466,10 +1466,10 @@ private void sendPicture(final String filePath) {
 			if (chatType == CHATTYPE_GROUP)
 				message.setChatType(ChatType.GroupChat);
 			message.setReceipt(toChatUsername);
-			message.setAttribute("uid", readPreference("id"));
-			message.setAttribute("nick_name", readPreference("nick_name"));
-            message.setAttribute("headphoto", readPreference("url")
-                    + "&size=100x100");
+			message.setAttribute("uid", readPreference("uid"));
+			message.setAttribute("nick_name", readPreference("name"));
+			message.setAttribute("headphoto", readPreference("headphoto")
+					+ "100x100");
 			int len = Integer.parseInt(length);
 			VoiceMessageBody body = new VoiceMessageBody(new File(filePath), len);
 			message.addBody(body);

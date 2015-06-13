@@ -79,7 +79,7 @@ public class RemindLikeActivity extends BaseActivity implements View.OnClickList
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 switch (index) {
                     case 0:
-                        //解除黑名单
+                        //删除消息
                         delLike(position);
                         break;
                     default:

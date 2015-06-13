@@ -10,8 +10,12 @@ public class RemindSys {
     private String id;
     @JsonProperty("Created")
     private String created;
+    @JsonProperty("Title")
+    private String title;
+    @JsonProperty("Status")
+    private String status;
     @JsonProperty("Content")
-    private PersonInfo personInfo;
+    private RemindSysContent content;
 
     public String getId() {
         return id;
@@ -29,11 +33,27 @@ public class RemindSys {
         this.created = created;
     }
 
-    public PersonInfo getPersonInfo() {
-        return personInfo;
+    public String getTitle() {
+        return title;
     }
 
-    public void setPersonInfo(PersonInfo personInfo) {
-        this.personInfo = personInfo;
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public RemindSysContent getContent() {
+        return content;
+    }
+
+    public void setContent(RemindSysContent content) {
+        this.content = content;
     }
 }
