@@ -135,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="6dp"
-                    android:text="100km"
+                    android:text=""
                     android:textColor="#b4b4b4"
                     android:textSize="10sp" />
             </LinearLayout>
