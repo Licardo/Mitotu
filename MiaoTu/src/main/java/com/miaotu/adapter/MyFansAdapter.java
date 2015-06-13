@@ -71,7 +71,8 @@ public class MyFansAdapter extends BaseAdapter{
         }else {
             holder = (ViewHolder) view.getTag();
         }
-        UrlImageViewHelper.setUrlDrawable(holder.ivPhoto, blackInfos.get(i).getHeadurl(), R.drawable.icon_default_head_photo);
+        UrlImageViewHelper.setUrlDrawable(holder.ivPhoto,
+                blackInfos.get(i).getHeadurl(), R.drawable.default_avatar);
         holder.tvContent.setText(blackInfos.get(i).getState());
         holder.tvName.setText(blackInfos.get(i).getNickname());
         if ("true".equals(blackInfos.get(i).getIslike())){

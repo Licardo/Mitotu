@@ -147,7 +147,7 @@ public class TogetherlistAdapter extends BaseAdapter {
 		// 对ListView的Item中的控件的操作
 		UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto,
                 mList.get(position).getHeadPhoto() + "100x100",
-                R.drawable.icon_default_head_photo);
+                R.drawable.default_avatar);
         holder.ivHeadPhoto.setTag(position);
         holder.ivHeadPhoto.setOnClickListener(new OnClickListener() {
             @Override
@@ -226,16 +226,17 @@ public class TogetherlistAdapter extends BaseAdapter {
                 holder.layoutImg.addView(relativeLayout);
                 UrlImageViewHelper.setUrlDrawable(imageView,
                         photoInfo.getUrl() + "240x240",
-                        R.drawable.default_avatar);
+                        R.drawable.icon_default_image);
             }else{
                 ImageView imageView = new ImageView(mContext);
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(Util.dip2px(mContext, 80), Util.dip2px(mContext, 80));
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        Util.dip2px(mContext, 80), Util.dip2px(mContext, 80));
                 params.rightMargin = Util.dip2px(mContext, 10);
                 imageView.setLayoutParams(params);
                 holder.layoutImg.addView(imageView);
                 UrlImageViewHelper.setUrlDrawable(imageView,
                         photoInfo.getUrl() + "240x240",
-                        R.drawable.default_avatar);
+                        R.drawable.icon_default_image);
             }
         }
         holder.tvDistance.setText(mList.get(position).getDistance() + "km");
@@ -265,7 +266,9 @@ public class TogetherlistAdapter extends BaseAdapter {
 
             @Override
             protected BaseResult run(Void... params) {
-                return HttpRequestUtil.getInstance().likeTogether(((BaseFragmentActivity)mContext).readPreference("token"),mList.get(position).getId());
+                return HttpRequestUtil.getInstance().likeTogether(
+                        ((BaseFragmentActivity)mContext).readPreference("token"),
+                        mList.get(position).getId());
             }
 
         }.execute();

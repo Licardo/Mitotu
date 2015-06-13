@@ -27,7 +27,7 @@
                 android:layout_height="30dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/headphototest2"
+                android:src="@drawable/default_avatar"
                 app:border_width="0dp" />
 
             <TextView
@@ -135,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="6dp"
-                    android:text="100km"
+                    android:text=""
                     android:textColor="#b4b4b4"
                     android:textSize="10sp" />
             </LinearLayout>

@@ -58,7 +58,8 @@ public class BlackListAdapter extends BaseAdapter{
         }else {
             holder = (ViewHolder) view.getTag();
         }
-        UrlImageViewHelper.setUrlDrawable(holder.ivPhoto, blackInfos.get(i).getHeadurl(), R.drawable.icon_default_head_photo);
+        UrlImageViewHelper.setUrlDrawable(holder.ivPhoto,
+                blackInfos.get(i).getHeadurl(), R.drawable.default_avatar);
         holder.tvDate.setText(blackInfos.get(i).getCreated());
         holder.tvName.setText(blackInfos.get(i).getNickname());
         return view;

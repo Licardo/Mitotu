@@ -156,7 +156,11 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
                 break;
             case R.id.tv_right:
                 if (validate()) {
-                    getPhotoUrl();
+                    if (photoList.size() > 0){
+                        getPhotoUrl();
+                    }else {
+                        publishTopic(null);
+                    }
                 }
                 break;
             case R.id.tv_left:
@@ -204,8 +208,13 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
             @Override
             protected BaseResult run(Void... params) {
                 String images = "";
-                for (String img:imgs){
-                    images += img+",";
+                if (imgs != null) {
+                    for (String img : imgs) {
+                        images += img + ",";
+                    }
+                }
+                if (StringUtil.isBlank(images)){
+                    images = ",";
                 }
                 return HttpRequestUtil.getInstance().publishTopic(
                         (String) layoutMovement.getTag(), readPreference("token"),

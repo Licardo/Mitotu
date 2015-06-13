@@ -10,7 +10,7 @@
         android:layout_height="30dp"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/bg_circle_selected" />
+        android:background="@drawable/default_avatar" />
 
     <LinearLayout
         android:layout_width="wrap_content"

@@ -27,7 +27,7 @@
                 android:layout_gravity="top"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/headphototest2"
+                android:src="@drawable/default_avatar"
                 app:border_width="0dp" />
 
             <LinearLayout

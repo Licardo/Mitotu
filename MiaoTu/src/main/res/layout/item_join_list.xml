@@ -35,17 +35,6 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/tv_nickname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/tv_name"
-                android:layout_marginLeft="5dp"
-                android:text="(昵称：饭团团)"
-                android:textColor="#b4b4b4"
-                android:textSize="12sp" />
-
-            <TextView
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,6 +44,20 @@
                 android:text="5月30日"
                 android:textColor="#b4b4b4"
                 android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/tv_name"
+                android:layout_toLeftOf="@id/tv_date"
+                android:singleLine="true"
+                android:layout_marginLeft="5dp"
+                android:text="(昵称：饭团团饭团团饭团团饭团团饭团团)"
+                android:textColor="#b4b4b4"
+                android:textSize="12sp" />
+
         </RelativeLayout>
 
         <View

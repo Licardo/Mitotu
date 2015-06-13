@@ -18,7 +18,7 @@
             android:layout_height="30dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/location_msg"
+            android:src="@drawable/default_avatar"
             app:border_width="0dp" />
 
         <ImageView
