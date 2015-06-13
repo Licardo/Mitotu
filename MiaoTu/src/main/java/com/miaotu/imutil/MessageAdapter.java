@@ -358,15 +358,15 @@ public class MessageAdapter extends BaseAdapter{
                 }
 			    holder.tv_userId.setText(contactInfo.getNickName());
                 UrlImageViewHelper.setUrlDrawable(holder.head_iv,contactInfo.getHeadPhoto()
-                        + "100x100", R.drawable.icon_default_head_photo);
+                        , R.drawable.icon_default_head_photo);
 				holder.head_iv.setOnClickListener(new OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						Intent intent = new Intent(activity,PersonCenterActivity.class);
-						intent.putExtra("uid", uid);
-						if(!StringUtil.isEmpty(uid)){
+						intent.putExtra("uid", contactInfo.getUid());
+						if(!StringUtil.isEmpty(contactInfo.getUid())){
 							activity.startActivity(intent);
 						}
 					}
