@@ -162,6 +162,7 @@ private TextView tvTitle,tvLeft;
             @Override
             protected void onCompleteTask(DeleteTopicMessageResult deleteTopicMessageResult) {
                 if (deleteTopicMessageResult.getCode() == BaseResult.SUCCESS){
+                    remindSyses.get(position).setStatus("1");
                     Intent intent = new Intent(SystemMsgListActivity.this, SystemMsgDetailActivity.class);
                     intent.putExtra("msgtitle", remindSyses.get(position).getTitle());
                     intent.putExtra("msgdate", remindSyses.get(position).getCreated());
