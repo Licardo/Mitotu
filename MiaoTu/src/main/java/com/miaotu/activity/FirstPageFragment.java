@@ -166,12 +166,19 @@ private View root;
             }
         }
 
+        showToastMsg("yingbi傻逼");
         switch (resultCode) {
-            case 1001:  //喜欢
+            case 1001:  //喜欢一起去
                 mTab01.modifyLikeView(requestCode, true);
                 break;
-            case 1002:  //不喜欢
+            case 1002:  //不喜欢一起去
                 mTab01.modifyLikeView(requestCode, false);
+                break;
+            case 1003:  //喜欢秒旅团
+                mTab02.modifyLikeView(requestCode, true);
+                break;
+            case 1004:  //不喜欢秒旅团
+                mTab02.modifyLikeView(requestCode, false);
                 break;
         }
     }
