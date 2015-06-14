@@ -231,8 +231,16 @@ private Together together;
         adapter= new ImageItemAdapter(this,result.getTogether().getPicList());
         gvPhotos.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        tvJoined.setText("报名 " + result.getTogether().getJoinCount());
-        tvLiked.setText("喜欢 " + result.getTogether().getLikeCount());
+        if (result.getTogether().getJoinList() == null){
+            tvJoined.setText("报名 0");
+        }else {
+            tvJoined.setText("报名 " + result.getTogether().getJoinList().size());
+        }
+        if (result.getTogether().getLikeList() == null){
+            tvLiked.setText("喜欢 0");
+        }else {
+            tvLiked.setText("喜欢 " + result.getTogether().getLikeList().size());
+        }
         tvJoined.setTextColor(getResources().getColor(R.color.grey));
 
         tvStartDate.setText(result.getTogether().getStartDate());
@@ -399,7 +407,7 @@ private Together together;
                         String strcount = tvLiked.getText().toString().substring(2).trim();
                         int count = Integer.parseInt(strcount);
                         count+=1;
-                        togetherDetailResult.getTogether().setLikeCount(count+"");
+                        togetherDetailResult.getTogether().setLikeCount(count + "");
                         setResult(1001);
                     }
                     writeDetail(togetherDetailResult);
@@ -518,6 +526,8 @@ private Together together;
             personInfo.setHeadurl(readPreference("headphoto"));
             personInfo.setUid(readPreference("uid"));
             togetherDetailResult.getTogether().getJoinList().add(0, personInfo);
+            togetherDetailResult.getTogether().setJoinCount(
+                    togetherDetailResult.getTogether().getJoinList().size()+"");
             writeDetail(togetherDetailResult);
         }
     }
