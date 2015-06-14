@@ -376,6 +376,14 @@ private Together together;
                             }
                         }
                         togetherDetailResult.getTogether().setIsLike(false);
+                        String strcount = tvLiked.getText().toString().substring(2).trim();
+                        int count = Integer.parseInt(strcount);
+                        count-=1;
+                        if (count < 0){
+                            count = 0;
+                        }
+                        togetherDetailResult.getTogether().setLikeCount(count + "");
+                        setResult(1002);
                     }else{
                         showToastMsg("喜欢成功！");
                         ivLike.setBackgroundResource(R.drawable.icon_like);
@@ -388,6 +396,11 @@ private Together together;
                         }
                         togetherDetailResult.getTogether().getLikeList().add(0, personInfo);
                         togetherDetailResult.getTogether().setIsLike(true);
+                        String strcount = tvLiked.getText().toString().substring(2).trim();
+                        int count = Integer.parseInt(strcount);
+                        count+=1;
+                        togetherDetailResult.getTogether().setLikeCount(count+"");
+                        setResult(1001);
                     }
                     writeDetail(togetherDetailResult);
                 } else {

@@ -93,7 +93,7 @@ private View root;
                 Intent intent = new Intent(getActivity(),
                         TogetherDetailActivity.class);
                 intent.putExtra("id", mList.get(position - 2).getId());
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, position - 2);
             }
         });
         lvPull.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
@@ -314,5 +314,14 @@ private View root;
         switch (view.getId()) {
 
         }
+    }
+
+    /**
+     * 设置喜欢控件显示
+     * @param position
+     */
+    public void modifyLikeView(int position, boolean flag){
+        mList.get(position).setIsLike(flag);
+        adapter.notifyDataSetChanged();
     }
 }

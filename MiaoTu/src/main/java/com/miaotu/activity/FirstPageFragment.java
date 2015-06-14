@@ -165,5 +165,14 @@ private View root;
                 tvRight.setText(readPreference("located_city"));
             }
         }
+
+        switch (resultCode) {
+            case 1001:  //喜欢
+                mTab01.modifyLikeView(requestCode, true);
+                break;
+            case 1002:  //不喜欢
+                mTab01.modifyLikeView(requestCode, false);
+                break;
+        }
     }
 }
