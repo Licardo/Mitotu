@@ -93,7 +93,7 @@ private View root;
                 Intent intent = new Intent(getActivity(),
                         TogetherDetailActivity.class);
                 intent.putExtra("id", mList.get(position - 2).getId());
-                startActivityForResult(intent, position - 2);
+                getParentFragment().startActivityForResult(intent, position - 2);
             }
         });
         lvPull.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {

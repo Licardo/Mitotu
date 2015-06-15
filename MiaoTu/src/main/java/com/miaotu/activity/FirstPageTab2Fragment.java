@@ -91,7 +91,7 @@ private View root;
                 Intent intent = new Intent(getActivity(),
                         CustomTourDetailActivity.class);
                 intent.putExtra("id", mList.get(position - 2).getId());
-                startActivityForResult(intent, position - 2);
+                getParentFragment().startActivityForResult(intent, position - 2);
             }
         });
         lvPull.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
@@ -319,7 +319,6 @@ private View root;
      * @param flag
      */
     public void modifyLikeView(int postion, boolean flag){
-        showToastMsg(postion + "////");
         mList.get(postion).setIsLike(flag);
         adapter.notifyDataSetChanged();
     }

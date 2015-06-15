@@ -165,8 +165,6 @@ private View root;
                 tvRight.setText(readPreference("located_city"));
             }
         }
-
-        showToastMsg("yingbi傻逼");
         switch (resultCode) {
             case 1001:  //喜欢一起去
                 mTab01.modifyLikeView(requestCode, true);
