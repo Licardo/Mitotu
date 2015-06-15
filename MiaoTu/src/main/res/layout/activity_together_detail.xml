@@ -96,6 +96,7 @@
             android:lineSpacingExtra="6dp"
             />
         <View
+            android:id="@+id/iv_line"
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:background="#b4b4b4"

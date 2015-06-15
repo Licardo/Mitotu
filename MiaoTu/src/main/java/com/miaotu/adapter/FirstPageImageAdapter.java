@@ -9,28 +9,36 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
+import com.miaotu.activity.CustomTourDetailActivity;
+import com.miaotu.activity.HomeBannerWebActivity;
+import com.miaotu.activity.TogetherDetailActivity;
+import com.miaotu.model.Banner;
 
 import java.util.List;
 
 public class FirstPageImageAdapter extends PagerAdapter implements OnClickListener {
 
 	private Context context;
-	private List<String> imagePathes;
+//	private List<String> imagePathes;
+	private List<Banner> banners;
 	private boolean clickAble = false;//是否可以点击
     private int viewId;	//轮播控件中imageView的id
     private int layoutId;	//包含轮播控件中ImageView的布局文件Id
     private LayoutInflater mInflater;
-	public FirstPageImageAdapter(Context context, List<String> imagePathes, int layoutId, int viewId){
-		this.imagePathes = imagePathes;
+	public FirstPageImageAdapter(Context context, List<Banner> banners, int layoutId, int viewId){
+//		this.imagePathes = imagePathes;
+		this.banners = banners;
 		this.context = context;
 		this.layoutId = layoutId;
 		this.viewId = viewId;
 	}
-	public FirstPageImageAdapter(Context context, List<String> imagePathes, boolean clickAble, int layoutId, int viewId){
-		this.imagePathes = imagePathes;
+	public FirstPageImageAdapter(Context context, List<Banner> banners, boolean clickAble, int layoutId, int viewId){
+//		this.imagePathes = imagePathes;
+		this.banners = banners;
 		this.context = context;
 		this.clickAble = clickAble;
 		this.viewId = viewId;
@@ -38,7 +46,7 @@ public class FirstPageImageAdapter extends PagerAdapter implements OnClickListen
 	}
 	@Override
 	public int getCount() {
-		return imagePathes.size()*10000;
+		return banners.size()*10000;
 	}
 
 	@Override
@@ -58,16 +66,37 @@ public class FirstPageImageAdapter extends PagerAdapter implements OnClickListen
 	@Override
 	public Object instantiateItem(ViewGroup container, int position) {
 		int positionOritional = position;
-		position = position%imagePathes.size();
+		position = position%banners.size();
 		mInflater = LayoutInflater.from(context);
 		LinearLayout linearLayout =  (LinearLayout) mInflater.inflate(layoutId, null);
 		ImageView imageItem = (ImageView) linearLayout.findViewById(viewId);
 		imageItem.setTag(position);
-		UrlImageViewHelper.setUrlDrawable(imageItem, imagePathes.get(position),R.drawable.icon_default_big_pic);
+		UrlImageViewHelper.setUrlDrawable(imageItem, banners.get(position).getPicUrl(), R.drawable.icon_default_big_pic);
 		if(clickAble){
 			imageItem.setOnClickListener(this);
 		}
 		linearLayout.removeAllViews();
+		final Banner banner = banners.get(position);
+		imageItem.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if ("1".equals(banner.getType())){	//进入秒旅团详情页
+					Intent customtourIntent = new Intent(context, CustomTourDetailActivity.class);
+					customtourIntent.putExtra("id", banner.getExtend());
+					context.startActivity(customtourIntent);
+				}else if ("2".equals(banner.getType())){	//进入一起去详情页
+					Intent togetherIntent = new Intent(context, TogetherDetailActivity.class);
+					togetherIntent.putExtra("id", banner.getExtend());
+					context.startActivity(togetherIntent);
+				}else if ("3".equals(banner.getType())){	//网页
+					Intent webIntent = new Intent(context, HomeBannerWebActivity.class);
+					webIntent.putExtra("url", banner.getExtend());
+					context.startActivity(webIntent);
+				}else {	//其他
+					Toast.makeText(context, "活动已过期", Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
 		container.addView(imageItem);
 		return imageItem;
 	}

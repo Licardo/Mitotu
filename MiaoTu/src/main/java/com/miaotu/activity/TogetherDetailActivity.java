@@ -78,6 +78,7 @@ private Together together;
     private TextView tvPublishComment;
     private TogetherDetailResult togetherDetailResult;
     final ArrayList<PhotoModel> photoList = new ArrayList<PhotoModel>();
+    private View ivLine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +132,8 @@ private Together together;
         ivChat = (ImageView) findViewById(R.id.iv_chat);
         ivGroupChat = (ImageView) findViewById(R.id.iv_group_chat);
         ivShare = (ImageView) findViewById(R.id.iv_share);
+
+        ivLine = findViewById(R.id.iv_line);
     }
     private void bindView(){
         layoutJoinMore.setOnClickListener(this);
@@ -231,6 +234,13 @@ private Together together;
         adapter= new ImageItemAdapter(this,result.getTogether().getPicList());
         gvPhotos.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        if (result.getTogether().getPicList() == null ||
+                result.getTogether().getPicList().size() < 1){
+            ivLine.setVisibility(View.GONE);
+        }else {
+            ivLine.setVisibility(View.VISIBLE);
+        }
+
         if (result.getTogether().getJoinList() == null){
             tvJoined.setText("报名 0");
         }else {

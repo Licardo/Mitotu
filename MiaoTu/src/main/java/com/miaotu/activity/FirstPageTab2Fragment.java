@@ -181,30 +181,30 @@ private View root;
                     }
                     if(result.getBannerList()!=null){
                         try {
-                            List<String> imagePathes = new ArrayList<String>();
+                            List<Banner> banners = new ArrayList<Banner>();
                             for (Banner banner : result.getBannerList()) {
                                 if (banner.getBid() != null) {
-                                    imagePathes.add(banner.getPicUrl());
+                                    banners.add(banner);
                                 } else {
-                                    imagePathes.add("");
+//                                    imagePathes.add("");
                                 }
 
                             }
 
                             gallery.bottomFrame = layoutContainer;
                             gallery.setAutoPlay(false);// 设置自动播放
-                            gallery.setImageSize(imagePathes.size());
+                            gallery.setImageSize(banners.size());
                             gallery.initPoints();
                             if(!run) {
                                 startPlayPic();
                             }
                             gallery.setPageMargin(0);
                             FirstPageImageAdapter adapter = new FirstPageImageAdapter(
-                                    getActivity(), imagePathes,
+                                    getActivity(), banners,
                                     true,R.layout.gallery_item_first_page,
                                     R.id.iv_gallery);// 最后一个参数true表示设置可以点击
                             gallery.setAdapter(adapter);
-                            gallery.setCurrentItem(imagePathes.size() * 5000);
+                            gallery.setCurrentItem(banners.size() * 5000);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
