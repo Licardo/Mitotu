@@ -47,7 +47,18 @@ private WebView webView;
         tvLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                if(isPay){
+                    webView.loadUrl("http://m.miaotu.com/App/detail/?aid=" + getIntent().getStringExtra("id")+"&token="+readPreference("token"));
+                    webView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            webView.clearHistory();
+                        }
+                    }, 1000);
+                    isPay=false;
+                }else if(webView .canGoBack()){
+                    webView.goBack();
+                }
             }
         });
         WebSettings wSet = webView.getSettings();
@@ -220,6 +231,7 @@ private WebView webView;
                     webView.clearHistory();
                 }
             }, 1000);
+            isPay=false;
             return true;
         }
         if ((keyCode == KeyEvent.KEYCODE_BACK) &&   webView .canGoBack()&&!isPay) {
