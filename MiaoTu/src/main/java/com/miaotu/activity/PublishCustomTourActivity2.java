@@ -2,7 +2,6 @@ package com.miaotu.activity;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 import com.miaotu.R;
 
 
-public class PublishCustomTourActivity extends BaseActivity {
+public class PublishCustomTourActivity2 extends BaseActivity {
 private WebView webView;
     private TextView tvTitle,tvLeft;
     private Button btnNext;
@@ -21,7 +20,7 @@ private WebView webView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_custom_publish1);
+        setContentView(R.layout.activity_custom_publish2);
         webView = (WebView) findViewById(R.id.webview);
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvLeft = (TextView) findViewById(R.id.tv_left);
@@ -38,7 +37,7 @@ private WebView webView;
 
             }
         });
-        tvTitle.setText("发起定制");
+        tvTitle.setText("定制约游");
         WebSettings wSet = webView.getSettings();
         wSet.setJavaScriptEnabled(true);
 
