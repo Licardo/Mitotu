@@ -58,8 +58,9 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
     DraggableGridView dgv;
     private ArrayList<PhotoModel> photoList;
     private List<File>files;
-    private TextView tvDesCity,tvOriginCity,tvStartDate,tvEndDate,tvPhotoNum;
-    private RadioGroup rgCount,rgFee;
+    private TextView tvStartDate,tvEndDate,tvPhotoNum;
+    private EditText etDesCity,etOrigiCity;
+    private RadioGroup rgFee;
     private FlowRadioGroup rgRequirement;
     private EditText etTag,tvGatherLocation;
     private FlowLayout layoutTags;
@@ -68,6 +69,7 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
     private WheelTwoColumnDialog dialog;
     PublishTogether publishTogether;
     private TextView tvTitle,tvLeft;
+    private TextView tvSelectWantGo,tvSelectOrigion,tvCount;
     public static DisplayImageOptions imageOptions = new DisplayImageOptions.Builder()
             .showImageOnLoading(com.photoselector.R.drawable.ic_picture_loading)
             .showImageOnFail(com.photoselector.R.drawable.ic_picture_loadfailed)
@@ -84,12 +86,12 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
     }
     private void findView(){
         dgv = ((DraggableGridView)findViewById(R.id.dgv));
-        tvDesCity = (TextView) findViewById(R.id.tv_des_city);
-        tvOriginCity = (TextView) findViewById(R.id.tv_origin_city);
+        etDesCity = (EditText) findViewById(R.id.et_des_city);
+        etOrigiCity = (EditText) findViewById(R.id.et_origin_city);
         tvGatherLocation = (EditText) findViewById(R.id.tv_gather_location);
         tvStartDate = (TextView) findViewById(R.id.tv_start_date);
         tvEndDate = (TextView) findViewById(R.id.tv_end_date);
-        rgCount = (RadioGroup) findViewById(R.id.rg_count);
+        tvCount = (TextView) findViewById(R.id.tv_count);
         rgFee = (RadioGroup) findViewById(R.id.rg_fee);
         rgRequirement = (FlowRadioGroup) findViewById(R.id.rg_requirement);
         etTag = (EditText) findViewById(R.id.et_tag);
@@ -99,15 +101,18 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
         tvPhotoNum = (TextView) findViewById(R.id.tv_photo_num);
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvLeft = (TextView) findViewById(R.id.tv_left);
+        tvSelectOrigion = (TextView) findViewById(R.id.tv_select_origin);
+        tvSelectWantGo = (TextView) findViewById(R.id.tv_select_wantgo);
     }
     private void bindView(){
-        tvDesCity.setOnClickListener(this);
         tvLeft.setOnClickListener(this);
-        tvOriginCity.setOnClickListener(this);
         tvStartDate.setOnClickListener(this);
         tvEndDate.setOnClickListener(this);
         layoutNext.setOnClickListener(this);
         btnTagAdd.setOnClickListener(this);
+        tvSelectWantGo.setOnClickListener(this);
+        tvSelectOrigion.setOnClickListener(this);
+        tvCount.setOnClickListener(this);
         dgv.setOnRearrangeListener(new OnRearrangeListener() {
             public void onRearrange(int oldIndex, int newIndex) {
                 photoList.add(newIndex, photoList.remove(oldIndex));
@@ -230,11 +235,11 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
         day.setCurrentItem(curDay - 1, true);
     }
     private boolean validate(){
-        if(StringUtil.isBlank(tvDesCity.getText().toString())){
+        if(StringUtil.isBlank(etDesCity.getText().toString())){
             showToastMsg("请选择目的城市！");
             return false;
         }
-        if(StringUtil.isBlank(tvOriginCity.getText().toString())){
+        if(StringUtil.isBlank(etOrigiCity.getText().toString())){
             showToastMsg("请选择出发城市！");
             return false;
         }
@@ -243,12 +248,12 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
     private void next(){
         Intent intent = new Intent(PublishTogetherStep1Activity.this,PublishTogetherStep2Activity.class);
 
-        publishTogether.setDesCity(tvDesCity.getText().toString());
-        publishTogether.setOriginCity(tvOriginCity.getText().toString());
+        publishTogether.setDesCity(etDesCity.getText().toString());
+        publishTogether.setOriginCity(etOrigiCity.getText().toString());
         publishTogether.setOriginLocation(tvGatherLocation.getText().toString());
         publishTogether.setStartDate(tvStartDate.getText().toString());
         publishTogether.setEndDate(tvEndDate.getText().toString());
-        publishTogether.setNumber(((RadioButton) findViewById(rgCount.getCheckedRadioButtonId())).getText().toString());
+        publishTogether.setNumber(tvCount.getText().toString());
         publishTogether.setRequirement(((RadioButton) findViewById(rgRequirement.getCheckedRadioButtonId())).getText().toString());
         publishTogether.setFee(((RadioButton)findViewById(rgFee.getCheckedRadioButtonId())).getText().toString());
         String tags = "";
@@ -317,10 +322,10 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==1){
             if(requestCode==1){
-                tvDesCity.setText(data.getStringExtra("city"));
+                etDesCity.setText(data.getStringExtra("city"));
             }
             if(requestCode==2){
-                tvOriginCity.setText(data.getStringExtra("city"));
+                etOrigiCity.setText(data.getStringExtra("city"));
             }
         }
         if(requestCode==3&&resultCode==RESULT_OK){
@@ -401,16 +406,16 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
             case R.id.tv_left:
                 finish();
                 break;
-            case R.id.tv_des_city:
-                //目的城市
-                Intent cityIntent = new Intent(PublishTogetherStep1Activity.this,CityListActivity.class);
-                startActivityForResult(cityIntent, 1);
-                break;
-            case R.id.tv_origin_city:
-                //出发城市
-                Intent city2Intent = new Intent(PublishTogetherStep1Activity.this,CityListActivity.class);
-                startActivityForResult(city2Intent, 2);
-                break;
+//            case R.id.tv_des_city:
+//                //目的城市
+//                Intent cityIntent = new Intent(PublishTogetherStep1Activity.this,CityListActivity.class);
+//                startActivityForResult(cityIntent, 1);
+//                break;
+//            case R.id.tv_origin_city:
+//                //出发城市
+//                Intent city2Intent = new Intent(PublishTogetherStep1Activity.this,CityListActivity.class);
+//                startActivityForResult(city2Intent, 2);
+//                break;
             case R.id.tv_start_date:
                 //出发日期
                 getDateDialog(view);
@@ -455,6 +460,48 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
                     }
                 }
                 break;
+            case R.id.tv_select_origin: //出发城市
+                //出发城市
+                Intent city2Intent = new Intent(PublishTogetherStep1Activity.this,CityListActivity.class);
+                startActivityForResult(city2Intent, 2);
+                break;
+            case R.id.tv_select_wantgo: //目的地
+                //目的城市
+                Intent cityIntent = new Intent(PublishTogetherStep1Activity.this,CityListActivity.class);
+                startActivityForResult(cityIntent, 1);
+                break;
+            case R.id.tv_count:
+                getFriendsDialog();
+                break;
         }
+    }
+
+    // 获取旅伴人数dialog
+    private void getFriendsDialog() {
+        // 为dialog的listview赋值
+        LayoutInflater lay = (LayoutInflater) this
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = lay.inflate(R.layout.dialog_age_layout, null);
+        final WheelView wvDay = (WheelView) v.findViewById(R.id.wv_day);
+
+        final String months[] = new String[]{"1", "2","3","4","5","6", "7","8","9","10",
+                "11", "12","13","14","15","16", "17","18","19","20","不限"};
+        wvDay.setViewAdapter(new DateArrayAdapter(this, months, 0));
+        // 创建dialog
+        dialog = new WheelTwoColumnDialog(this, R.style.Dialog_Fullscreen, v);
+        dialog.setOnConfirmListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+//                int monthIndex = wvMonth.getCurrentItem();
+                int dayIndex = wvDay.getCurrentItem();
+                String currentCount = (dayIndex + 1) + "";
+                if (dayIndex == 20){
+                    currentCount = "不限";
+                }
+                tvCount.setText(currentCount);
+                dialog.dismiss();
+            }
+        });
     }
 }
