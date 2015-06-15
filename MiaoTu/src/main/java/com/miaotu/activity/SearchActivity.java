@@ -27,6 +27,7 @@ private LinearLayout layoutSearch,layoutClear,layoutResult;
     private SearchResultTab2Fragment mTab02 ;
     private String key;
     private TextView tvCancel;
+    private int index;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +56,11 @@ private LinearLayout layoutSearch,layoutClear,layoutResult;
                 switch (i){
                     case R.id.rb_search1:
                         setTabSelection(0);
+                        index = 0;
                         break;
                     case R.id.rb_search2:
                         setTabSelection(1);
+                        index = 1;
                         break;
                 }
             }
@@ -131,15 +134,19 @@ private LinearLayout layoutSearch,layoutClear,layoutResult;
             case R.id.layout_search:
                 //点击搜索
                 if(StringUtil.isBlank(etKey.getText().toString())){
-                    showToastMsg("请输入关键词！");
-                    return;
-                }
-                key = StringUtil.trimAll(etKey.getText().toString());
-                ivInit.setVisibility(View.GONE);
-                layoutResult.setVisibility(View.VISIBLE);
-                setTabSelection(0);
+                showToastMsg("请输入关键词！");
+                return;
+            }
+            key = StringUtil.trimAll(etKey.getText().toString());
+            ivInit.setVisibility(View.GONE);
+            layoutResult.setVisibility(View.VISIBLE);
+            setTabSelection(index);
+            if (index == 0){
                 rgTab.check(R.id.rb_search1);
-                break;
+            }else {
+                rgTab.check(R.id.rb_search2);
+            }
+            break;
             case R.id.layout_clear:
                 //点击清除
                 etKey.setText("");
