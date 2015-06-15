@@ -346,19 +346,19 @@ public class RedPackageActivity extends BaseActivity implements OnClickListener 
 //        oks.setTitle("快来围观我今天的运势！" + "\n http://m.miaotu.com/share/share_divine.php?user_id="+readPreference("id")+"&date="+currentDate);
         oks.setTitle("快来围观我今天的运势！");
         // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-        oks.setTitleUrl("http://m.miaotu.com/share/share_divine.php?user_id="+readPreference("uid")+"&date="+currentDate);
+        oks.setTitleUrl("http://m.miaotu.com/App/devine/?user_id="+readPreference("uid")+"&date="+currentDate);
         // text是分享文本，所有平台都需要这个字段
-        oks.setText("我得到了妙途奖励的旅行红包啦，谁和我一起出去玩儿呢？" + "\n http://m.miaotu.com/share/share_divine.php?user_id="+readPreference("uid")+"&date="+currentDate);
+        oks.setText("我得到了妙途奖励的旅行红包啦，谁和我一起出去玩儿呢？" + "\n http://m.miaotu.com/App/devine/?user_id="+readPreference("uid")+"&date="+currentDate);
         // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
         oks.setImageUrl("http://m.miaotu.com/share/image/share_divine.png");
         // url仅在微信（包括好友和朋友圈）中使用
-        oks.setUrl("http://m.miaotu.com/share/share_divine.php?user_id="+readPreference("uid")+"&date="+currentDate);
+        oks.setUrl("http://m.miaotu.com/App/devine/?user_id="+readPreference("uid")+"&date="+currentDate);
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
-        oks.setComment("我得到了妙途奖励的旅行红包啦，谁和我一起出去玩儿呢？" + "\n http://m.miaotu.com/share/share_divine.php?user_id="+readPreference("uid")+"&date="+currentDate);
+        oks.setComment("我得到了妙途奖励的旅行红包啦，谁和我一起出去玩儿呢？" + "\n http://m.miaotu.com/App/devine/?user_id="+readPreference("uid")+"&date="+currentDate);
         // site是分享此内容的网站名称，仅在QQ空间使用
         oks.setSite(getString(R.string.app_name));
         // siteUrl是分享此内容的网站地址，仅在QQ空间使用
-        oks.setSiteUrl("http://m.miaotu.com/share/share_divine.php?user_id="+readPreference("uid")+"&date="+currentDate);
+        oks.setSiteUrl("http://m.miaotu.com/App/devine/?user_id="+readPreference("uid")+"&date="+currentDate);
         // 启动分享GUI
         oks.show(this);
     }
