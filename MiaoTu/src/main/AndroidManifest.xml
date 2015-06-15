@@ -365,8 +365,8 @@
         <activity
             android:name=".activity.PublishCustomTourActivity2"
             android:label="@string/title_activity_custom_tour"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.SearchActivity"
@@ -513,6 +513,10 @@
         <activity
             android:name=".activity.SystemMsgDetailActivity"
             android:label="@string/title_activity_system_msg_detail" >
+        </activity>
+        <activity
+            android:name=".activity.HomeBannerWebActivity"
+            android:label="@string/title_activity_home_banner_web" >
         </activity>
     </application>
 
