@@ -100,6 +100,8 @@
                 android:hint="集合地址（选填）"
                 android:textColorHint="#b4b4b4"
                 android:gravity="center|left"
+                android:singleLine="true"
+                android:maxLength="20"
                 />
         </LinearLayout>
         <LinearLayout
