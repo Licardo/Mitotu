@@ -48,13 +48,29 @@
                         android:textColor="#646464"
                         />
                 </LinearLayout>
-                <TextView
-                    android:id="@+id/tv_des_city"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:background="@drawable/bg_edittext"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="20dp">
+                    <TextView
+                        android:id="@+id/tv_select_wantgo"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/bg_select_city"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="#646464"
+                        android:text="选择城市"
+                        />
+                <EditText
+                    android:id="@+id/et_des_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_toLeftOf="@id/tv_select_wantgo"
+                    android:background="@drawable/bg_edittext"
                     android:paddingLeft="10dp"
                     android:textSize="14sp"
                     android:textColor="#646464"
@@ -62,6 +78,7 @@
                     android:textColorHint="#b4b4b4"
                     android:gravity="center|left"
                     />
+                </RelativeLayout>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -72,13 +89,29 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginBottom="10dp"
                     />
-                <TextView
-                    android:id="@+id/tv_origin_city"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:background="@drawable/bg_edittext"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_marginRight="20dp">
+                    <TextView
+                        android:id="@+id/tv_select_origin"
+                        android:layout_width="70dp"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/bg_select_city"
+                        android:gravity="center"
+                        android:textSize="14sp"
+                        android:textColor="#646464"
+                        android:text="选择城市"
+                        />
+                <EditText
+                    android:id="@+id/et_origin_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_toLeftOf="@id/tv_select_origin"
+                    android:background="@drawable/bg_edittext"
                     android:paddingLeft="10dp"
                     android:textSize="14sp"
                     android:textColor="#646464"
@@ -86,6 +119,7 @@
                     android:textColorHint="#b4b4b4"
                     android:gravity="center|left"
                     />
+                </RelativeLayout>
                 <EditText
                     android:id="@+id/tv_gather_location"
                     android:layout_width="match_parent"

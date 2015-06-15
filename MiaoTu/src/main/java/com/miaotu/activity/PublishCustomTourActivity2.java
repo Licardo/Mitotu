@@ -29,8 +29,9 @@ import kankan.wheel.widget.WheelView;
 
 
 public class PublishCustomTourActivity2 extends BaseActivity implements OnClickListener{
-    private TextView tvTitle,tvLeft,tvDesCity,tvOriginCity,tvStartDate,tvEndDate;
-    private EditText etOriginLocaiton;
+    private TextView tvTitle,tvLeft,tvStartDate,tvEndDate;
+    private EditText etOriginLocaiton,etDesCity,etOriginCity;
+    private TextView tvWantgo,tvOrigin;
     private Button btnNext;
     private PublishCustomForm customForm;
     private WheelTwoColumnDialog dialog;
@@ -45,18 +46,20 @@ public class PublishCustomTourActivity2 extends BaseActivity implements OnClickL
     private void findView(){
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvLeft = (TextView) findViewById(R.id.tv_left);
-        tvDesCity = (TextView) findViewById(R.id.tv_des_city);
-        tvOriginCity = (TextView) findViewById(R.id.tv_origin_city);
+        etDesCity = (EditText) findViewById(R.id.et_des_city);
+        etOriginCity = (EditText) findViewById(R.id.et_origin_city);
         tvStartDate = (TextView) findViewById(R.id.tv_start_date);
         tvEndDate = (TextView) findViewById(R.id.tv_end_date);
         etOriginLocaiton = (EditText) findViewById(R.id.tv_gather_location);
         btnNext = (Button) findViewById(R.id.btn_next);
+        tvWantgo = (TextView) findViewById(R.id.tv_select_wantgo);
+        tvOrigin = (TextView) findViewById(R.id.tv_select_origin);
     };
     private void bindView(){
         tvLeft.setOnClickListener(this);
         btnNext.setOnClickListener(this);
-        tvOriginCity.setOnClickListener(this);
-        tvDesCity.setOnClickListener(this);
+        tvOrigin.setOnClickListener(this);
+        tvWantgo.setOnClickListener(this);
         tvStartDate.setOnClickListener(this);
         tvEndDate.setOnClickListener(this);
     };
@@ -67,11 +70,11 @@ public class PublishCustomTourActivity2 extends BaseActivity implements OnClickL
         customForm = new PublishCustomForm();
     };
     private boolean validate(){
-        if(StringUtil.isEmpty(tvDesCity.getText().toString())){
+        if(StringUtil.isEmpty(etDesCity.getText().toString())){
             showToastMsg("请输入目的城市！");
             return false;
         }
-        if(StringUtil.isEmpty(tvOriginCity.getText().toString())){
+        if(StringUtil.isEmpty(etOriginCity.getText().toString())){
             showToastMsg("请输入出发城市！");
             return false;
         }
@@ -159,10 +162,10 @@ public class PublishCustomTourActivity2 extends BaseActivity implements OnClickL
         }
         if(resultCode==1){
             if(requestCode==1){
-                tvDesCity.setText(data.getStringExtra("city"));
+                etDesCity.setText(data.getStringExtra("city"));
             }
             if(requestCode==2){
-                tvOriginCity.setText(data.getStringExtra("city"));
+                etOriginCity.setText(data.getStringExtra("city"));
             }
         }
     }
@@ -172,8 +175,8 @@ public class PublishCustomTourActivity2 extends BaseActivity implements OnClickL
         switch (view.getId()){
             case R.id.btn_next:
                 if(validate()){
-                    customForm.setDesCity(tvDesCity.getText().toString());
-                    customForm.setOriginCity(tvOriginCity.getText().toString());
+                    customForm.setDesCity(etDesCity.getText().toString());
+                    customForm.setOriginCity(etOriginCity.getText().toString());
                     customForm.setOriginLocation(etOriginLocaiton.getText().toString());
                     customForm.setStartDate(tvStartDate.getText().toString());
                     customForm.setEndDate(tvEndDate.getText().toString());
@@ -185,12 +188,12 @@ public class PublishCustomTourActivity2 extends BaseActivity implements OnClickL
             case R.id.tv_left:
                 finish();
                 break;
-            case R.id.tv_des_city:
+            case R.id.tv_select_wantgo:
                 //目的城市
                 Intent cityIntent = new Intent(PublishCustomTourActivity2.this,CityListActivity.class);
                 startActivityForResult(cityIntent, 1);
                 break;
-            case R.id.tv_origin_city:
+            case R.id.tv_select_origin:
                 //出发城市
                 Intent city2Intent = new Intent(PublishCustomTourActivity2.this,CityListActivity.class);
                 startActivityForResult(city2Intent, 2);
