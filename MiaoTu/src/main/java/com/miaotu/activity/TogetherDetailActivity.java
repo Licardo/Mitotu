@@ -510,8 +510,12 @@ private Together together;
         // text是分享文本，所有平台都需要这个字段
         oks.setText(togetherDetailResult.getTogether().getComment() + "\n http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
         // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-        oks.setImageUrl(togetherDetailResult.getTogether().getPicList().get(0).getUrl()
-                + "&size=200x200");
+        if (togetherDetailResult.getTogether().getPicList() != null &&
+                togetherDetailResult.getTogether().getPicList().size() > 0){
+
+            oks.setImageUrl(togetherDetailResult.getTogether().getPicList().get(0).getUrl()
+                    + "&size=200x200");
+        }
         // url仅在微信（包括好友和朋友圈）中使用
         oks.setUrl("http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用

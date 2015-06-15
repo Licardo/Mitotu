@@ -58,6 +58,8 @@ private WebView webView;
                     isPay=false;
                 }else if(webView .canGoBack()){
                     webView.goBack();
+                }else {
+                    finish();
                 }
             }
         });
