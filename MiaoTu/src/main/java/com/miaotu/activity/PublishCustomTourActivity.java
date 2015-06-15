@@ -1,5 +1,6 @@
 package com.miaotu.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
@@ -35,7 +36,8 @@ private WebView webView;
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent =new Intent(PublishCustomTourActivity.this,PublishCustomTourActivity2.class);
+                startActivityForResult(intent,1);
             }
         });
         tvTitle.setText("发起定制");
@@ -50,5 +52,12 @@ private WebView webView;
         });
         webView.loadUrl("http://m.miaotu.com/App/creat");
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==1&&resultCode==1){
+            finish();
+        }
     }
 }
