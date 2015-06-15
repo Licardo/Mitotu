@@ -373,6 +373,11 @@
             android:label="@string/title_activity_custom_tour"
             android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
             android:screenOrientation="portrait">
+        </activity><activity
+            android:name=".activity.PublishCustomTourActivity4"
+            android:label="@string/title_activity_custom_tour"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".activity.SearchActivity"
