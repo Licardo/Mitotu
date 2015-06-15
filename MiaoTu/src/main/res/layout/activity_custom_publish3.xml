@@ -105,11 +105,11 @@
                     <RelativeLayout
                         android:layout_width="70dp"
                         android:layout_height="70dp"
-                        android:background="@drawable/bg_id_1"
                         >
                         <ImageView
                             android:id="@+id/iv_id_1"
                             android:layout_width="match_parent"
+                            android:src="@drawable/bg_id_1"
                             android:layout_height="match_parent" />
                         <TextView
                             android:id="@+id/tv_del1"
@@ -124,11 +124,11 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:layout_marginLeft="10dp"
-                        android:background="@drawable/bg_id_2"
                         >
                         <ImageView
                             android:id="@+id/iv_id_2"
                             android:layout_width="match_parent"
+                            android:src="@drawable/bg_id_2"
                             android:layout_height="match_parent" />
                         <TextView
                             android:id="@+id/tv_del2"
