@@ -113,7 +113,7 @@ private WebView webView;
             });
         }
         @android.webkit.JavascriptInterface
-        public String getToken() {
+          public String getToken() {
             return readPreference("token");
         }
         @android.webkit.JavascriptInterface

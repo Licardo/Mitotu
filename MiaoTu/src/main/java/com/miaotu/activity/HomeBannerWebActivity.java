@@ -1,5 +1,6 @@
 package com.miaotu.activity;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -26,6 +27,17 @@ public class HomeBannerWebActivity extends BaseActivity {
 
     private void initData(){
         webView.loadUrl(getIntent().getStringExtra("url"));
+    }
+
+    public final class JSInterface {
+
+        @android.webkit.JavascriptInterface
+        public void enterCustomTourDetail(String id){
+            //线路详情
+            Intent intent = new Intent(HomeBannerWebActivity.this, CustomTourDetailActivity.class);
+            intent.putExtra("id", id);
+            startActivity(intent);
+        }
     }
 
 }
