@@ -1,19 +1,20 @@
 package com.miaotu.result;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.miaotu.model.LuckyInfo;
 
 /**
  * Created by Jayden on 2015/5/28.
  */
 public class LuckyResult extends BaseResult{
     @JsonProperty("Items")
-    private String value;
+    private LuckyInfo luckyInfo;
 
-    public String getValue() {
-        return value;
+    public LuckyInfo getLuckyInfo() {
+        return luckyInfo;
     }
 
-    public void setValue(String value) {
-        this.value = value;
+    public void setLuckyInfo(LuckyInfo luckyInfo) {
+        this.luckyInfo = luckyInfo;
     }
 }

@@ -35,6 +35,7 @@ import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.model.RedPackage;
 import com.miaotu.result.BaseResult;
+import com.miaotu.result.LuckyResult;
 import com.miaotu.result.MoneyResult;
 import com.miaotu.result.RedPackageListResult;
 import com.miaotu.result.SymbolResult;
@@ -452,10 +453,10 @@ public class RedPackageActivity extends BaseActivity implements OnClickListener 
             showToastMsg("兑换码不能为空！");
             return;
         } else {
-            new BaseHttpAsyncTask<Void, Void, BaseResult>(this,
+            new BaseHttpAsyncTask<Void, Void, LuckyResult>(this,
                     true) {
                 @Override
-                protected void onCompleteTask(BaseResult result) {
+                protected void onCompleteTask(LuckyResult result) {
                     if (tvTitle == null) {
                         return;
                     }
@@ -478,7 +479,7 @@ public class RedPackageActivity extends BaseActivity implements OnClickListener 
                 }
 
                 @Override
-                protected BaseResult run(Void... params) {
+                protected LuckyResult run(Void... params) {
                     return HttpRequestUtil
                             .getInstance().
                                     exchangeCouponCode(readPreference("token"), code);
