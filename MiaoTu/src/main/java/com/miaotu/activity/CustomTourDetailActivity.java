@@ -189,10 +189,18 @@ private WebView webView;
         }
         @android.webkit.JavascriptInterface
         public void like(boolean isLike) {
+            webView.post(new Runnable() {
+                @Override
+                public void run() {
+                    webView.reload();
+                }
+            });
             if(isLike){
                 //喜欢成功
+                setResult(1003);
             }else{
                 //取消喜欢成功
+               setResult(1004);
             }
         }
         @android.webkit.JavascriptInterface

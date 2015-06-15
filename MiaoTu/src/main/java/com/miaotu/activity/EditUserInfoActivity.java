@@ -205,8 +205,12 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                 userinfo.setToken(token);
                 userinfo.setNickname(et_nickname.getText().toString().trim());
                 userinfo.setGender(tv_gender.getText().toString().trim());
-                userinfo.setAge(tv_age.getText().toString().trim().substring(0,
-                        tv_age.getText().toString().length() - 1));
+                if (StringUtil.isBlank(tv_age.getText().toString().trim())){
+                    userinfo.setAge("");
+                }else {
+                    userinfo.setAge(tv_age.getText().toString().trim().substring(0,
+                            tv_age.getText().toString().length() - 1));
+                }
                 userinfo.setAddress(tv_address.getText().toString().trim());
                 userinfo.setMarital_status(et_emotion.getText().toString().trim());
                 userinfo.setWork(et_job.getText().toString().trim());
@@ -526,7 +530,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
         // 为dialog的listview赋值
         LayoutInflater lay = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = lay.inflate(R.layout.dialog_birthday_layout, null);
+        View v = lay.inflate(R.layout.dialog_age_layout, null);
         final WheelView wvDay = (WheelView) v.findViewById(R.id.wv_day);
 
         final String months[] = new String[]{"男", "女"};

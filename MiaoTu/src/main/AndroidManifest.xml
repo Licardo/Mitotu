@@ -71,8 +71,8 @@
         </activity>
         <activity
             android:name=".activity.ShowVideoActivity"
-            android:theme="@style/horizontal_slide"
             android:screenOrientation="portrait"
+            android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <!-- choose video -->
@@ -189,7 +189,7 @@
             android:name=".activity.EditUserInfoActivity"
             android:label="@string/title_activity_edit_user_info"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
         <!-- 极光推送 -->
 
@@ -303,60 +303,64 @@
             android:name=".activity.PersonCenterActivity"
             android:label="@string/title_activity_person_center"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activity.PublishTogetherStep2Activity"
             android:label="@string/title_activity_publish_together_step2"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activity.TogetherDetailActivity"
             android:label="@string/title_activity_together_detail"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activity.BBSTopicRemindActivity"
             android:label="@string/title_activity_new_message_remind"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activity.SettingActivity"
             android:label="@string/SettingActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
-        <activity android:name=".activity.AccountSafetyActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activity.AccountSafetyActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
-        <activity android:name=".activity.BBSPublishTopicActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activity.BBSPublishTopicActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
-        <activity android:name=".activity.BBSMessageActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activity.BBSMessageActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
-        <activity android:name=".activity.BBSTopicDetailActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activity.BBSTopicDetailActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activity.JoinTogetherStep1"
             android:label="@string/title_activity_join_together_step1"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activity.JoinTogetherStep2"
             android:label="@string/title_activity_join_together_step2"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activity.CustomTourDetailActivity"
             android:label="@string/title_activity_custom_tour"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.PublishCustomTourActivity"
             android:label="@string/title_activity_custom_tour"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.PublishCustomTourActivity2"
@@ -368,116 +372,121 @@
             android:name=".activity.SearchActivity"
             android:label="@string/title_activity_search"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.IntroduceActivity"
             android:label="@string/title_activity_introduce"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.FeedBackActivity"
             android:label="@string/title_activity_feed_back"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-        <activity android:name=".activity.AboutActivity"
+        <activity
+            android:name=".activity.AboutActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-        <activity android:name=".activity.RedPackageActivity"
+        <activity
+            android:name=".activity.RedPackageActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.BlackListActivity"
             android:label="@string/title_activity_black_list"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.MyCustomTourActivity"
             android:label="@string/title_activity_my_custom_tour"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-        <activity android:name=".activity.TogetherAndCustomTourActivity"
+        <activity
+            android:name=".activity.TogetherAndCustomTourActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.PublishStateActivity"
             android:label="@string/title_activity_publish_state"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.MyTogetherActivity"
             android:label="@string/title_activity_together"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.RemindLikeActivity"
             android:label="@string/title_activity_remind_like"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.RedPackageIntroduceActivity"
             android:label="@string/title_activity_gift_money_introduce"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.FunctionIntroduceActivity"
             android:label="@string/title_activity_function_introduce"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-        <activity android:name=".activity.AppRecommendActivity"
+        <activity
+            android:name=".activity.AppRecommendActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.JoinedListActivity"
             android:label="@string/title_activity_joined_list"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.EveryDayPicActivity"
             android:label="@string/title_activity_every_day_pic"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.FindPasswordActivity"
             android:label="@string/title_activity_find_password"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.ProtocolActivity"
             android:label="@string/title_activity_protocol"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            >
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-        <activity android:name=".activity.MyLikeAndFansActivity"
+        <activity
+            android:name=".activity.MyLikeAndFansActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
-        <activity android:name=".activity.GroupEditActivity"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activity.GroupEditActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden"/>
+            android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activity.SystemMsgListActivity"
             android:label="@string/title_activity_system_msg_list"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
+            android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
-        <!--支付相关开始-->
+        <!-- 支付相关开始 -->
         <activity
             android:name="com.pingplusplus.android.PaymentActivity"
             android:launchMode="singleTop"
@@ -497,10 +506,14 @@
 
         <activity-alias
             android:name=".wxapi.WXPayEntryActivity"
-            android:targetActivity="com.pingplusplus.android.PaymentActivity"
-            android:exported="true"/>
+            android:exported="true"
+            android:targetActivity="com.pingplusplus.android.PaymentActivity" />
 
-        <!--支付结束-->
+        <!-- 支付结束 -->
+        <activity
+            android:name=".activity.SystemMsgDetailActivity"
+            android:label="@string/title_activity_system_msg_detail" >
+        </activity>
     </application>
 
 </manifest>
