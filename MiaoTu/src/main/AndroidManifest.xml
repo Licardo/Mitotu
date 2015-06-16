@@ -530,23 +530,33 @@
         <!-- 支付结束 -->
         <activity
             android:name=".activity.SystemMsgDetailActivity"
-            android:label="@string/title_activity_system_msg_detail" >
+            android:label="@string/title_activity_system_msg_detail"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
             android:name=".activity.HomeBannerWebActivity"
-            android:label="@string/title_activity_home_banner_web" >
+            android:label="@string/title_activity_home_banner_web"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
             android:name=".activity.JoinFinishedActicity"
-            android:label="@string/title_activity_join_finished_acticity" >
+            android:label="@string/title_activity_join_finished_acticity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
             android:name=".activity.SearchResultTogetherActivity"
-            android:label="@string/title_activity_search_result_together" >
+            android:label="@string/title_activity_search_result_together"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
         <activity
             android:name=".activity.SearchResultCustomTourActicity"
-            android:label="@string/title_activity_search_result_custom_tour_acticity" >
+            android:label="@string/title_activity_search_result_custom_tour_acticity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
     </application>
 
