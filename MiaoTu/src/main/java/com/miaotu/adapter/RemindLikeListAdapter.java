@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.easemob.util.DateUtils;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.activity.BaseActivity;
@@ -16,6 +17,8 @@ import com.miaotu.model.BlackInfo;
 import com.miaotu.model.RemindLike;
 import com.miaotu.view.CircleImageView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -70,7 +73,11 @@ public class RemindLikeListAdapter extends BaseAdapter{
                 context.startActivity(intent);
             }
         });
-        holder.tvDate.setText(remindLikes.get(i).getCreated());
+        try {
+            holder.tvDate.setText(DateUtils.getTimestampString(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(remindLikes.get(i).getCreated())));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         holder.tvName.setText(remindLikes.get(i).getPersonInfo().getNickname());
         return view;
     }

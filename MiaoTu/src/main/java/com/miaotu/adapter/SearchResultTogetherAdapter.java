@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.easemob.util.DateUtils;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.model.PhotoInfo;
@@ -20,6 +21,8 @@ import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -71,7 +74,11 @@ public class SearchResultTogetherAdapter extends BaseAdapter{
         }
         UrlImageViewHelper.setUrlDrawable(holder.ivHeadUrl, togetherList.get(position).getHeadPhoto(), R.drawable.default_avatar);
         holder.tvName.setText(togetherList.get(position).getNickname());
-        holder.tvTime.setText(togetherList.get(position).getStartDate());
+        try {
+            holder.tvTime.setText(DateUtils.getTimestampString(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(togetherList.get(position).getPublishDate())));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         if (StringUtil.isBlank(togetherList.get(position).getDistance())){
             togetherList.get(position).setDistance("0");
         }

@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.easemob.util.DateUtils;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.activity.BaseActivity;
@@ -41,6 +42,8 @@ import com.photoselector.model.PhotoModel;
 import com.photoselector.ui.PhotoPreviewActivity;
 import com.photoselector.util.CommonUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -129,7 +132,11 @@ public class TopiclistAdapter extends BaseAdapter {
         holder.tvNickname.setText(mList.get(position).getNickname());
 //        holder.tvTitle.setText(mList.get(position).getTitle());
         holder.tvContent.setText(mList.get(position).getContent());
-        holder.tvTopDate.setText(mList.get(position).getCreated());
+        try {
+            holder.tvTopDate.setText(DateUtils.getTimestampString(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(mList.get(position).getCreated())));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         if ("false".equals(mList.get(position).getIslike())) {
             holder.ivLike.setBackgroundResource(R.drawable.icon_friend_dislike);
         } else {

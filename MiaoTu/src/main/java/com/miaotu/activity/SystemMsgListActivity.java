@@ -14,6 +14,7 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
+import com.easemob.util.DateUtils;
 import com.miaotu.R;
 import com.miaotu.adapter.RemindLikeListAdapter;
 import com.miaotu.adapter.RemindSysListAdapter;
@@ -28,6 +29,8 @@ import com.miaotu.result.RemindSysResult;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -167,7 +170,11 @@ private TextView tvTitle,tvLeft;
                     adapter.notifyDataSetChanged();
                     Intent intent = new Intent(SystemMsgListActivity.this, SystemMsgDetailActivity.class);
                     intent.putExtra("msgtitle", remindSyses.get(position).getTitle());
-                    intent.putExtra("msgdate", remindSyses.get(position).getCreated());
+                    try {
+                        intent.putExtra("msgdate", DateUtils.getTimestampString(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(remindSyses.get(position).getCreated())));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                     intent.putExtra("msgcontent", remindSyses.get(position).getContent().getContent());
                     startActivity(intent);
                 }else {

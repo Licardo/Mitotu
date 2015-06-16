@@ -34,6 +34,8 @@ import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 import com.miaotu.view.FlowLayout;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 
@@ -133,7 +135,7 @@ public class CustomTourlistAdapter extends BaseAdapter {
         }else{
             holder.tvCount.setVisibility(View.VISIBLE);
             holder.tvJoinList.setVisibility(View.GONE);
-            holder.tvCount.setText("已报名"+mList.get(position).getJoinCount()+"人"+" 评论"+mList.get(position).getLikeCount()+"人");
+            holder.tvCount.setText("已报名" + mList.get(position).getJoinCount() + "人" + " 评论" + mList.get(position).getLikeCount() + "人");
         }
         holder.tvJoinList.setTag(position);
         holder.tvJoinList.setOnClickListener(new View.OnClickListener() {
@@ -174,8 +176,16 @@ public class CustomTourlistAdapter extends BaseAdapter {
                 holder.layoutTag.addView(textView);
             }
         }
-        holder.tvDate.setText(mList.get(position).getStartDate()+"-"+mList.get(position).getEndDate());
-        holder.tvEndTime.setText(mList.get(position).getEndTime()+"截止报名");
+        try {
+            holder.tvDate.setText(new SimpleDateFormat("MM月dd日").format(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(mList.get(position).getStartDate()))+"-"+new SimpleDateFormat("MM月dd日").format(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(mList.get(position).getEndDate())));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        try {
+            holder.tvEndTime.setText(new SimpleDateFormat("MM-dd").format(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(mList.get(position).getEndTime()))+"截止报名");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         holder.tvTitle.setText(mList.get(position).getTitle());
         holder.tvPrice.setText(mList.get(position).getMtPrice()+"元");
         UrlImageViewHelper.setUrlDrawable(holder.ivSummary,mList.get(position).getPicUrl()+"678x404",R.drawable.icon_default_big_pic);

@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +20,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.easemob.util.DateUtils;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
@@ -40,6 +40,8 @@ import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 import com.miaotu.view.GuideGallery;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,7 +112,11 @@ private View root;
                             LinearLayout layoutItem = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.item_search_tour_result,null);
                             UrlImageViewHelper.setUrlDrawable((CircleImageView)(layoutItem.findViewById(R.id.iv_head_photo)),together.getHeadPhoto(),R.drawable.default_avatar);
                             ((TextView)layoutItem.findViewById(R.id.tv_name)).setText(together.getNickname());
-                            ((TextView)layoutItem.findViewById(R.id.tv_time)).setText(together.getPublishDate());
+                            try {
+                                ((TextView)layoutItem.findViewById(R.id.tv_time)).setText(DateUtils.getTimestampString(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(together.getPublishDate())));
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                             ((TextView)layoutItem.findViewById(R.id.tv_distance)).setText(together.getDistance());
                             ((TextView)layoutItem.findViewById(R.id.tv_comment)).setText(together.getComment());
                             layoutItem.setTag(together.getId());
@@ -139,7 +145,11 @@ private View root;
                             LinearLayout layoutItem = (LinearLayout) getActivity().getLayoutInflater().inflate(R.layout.item_search_tour_result,null);
                             UrlImageViewHelper.setUrlDrawable((CircleImageView)(layoutItem.findViewById(R.id.iv_head_photo)),customTour.getHeadUrl(),R.drawable.default_avatar);
                             ((TextView)layoutItem.findViewById(R.id.tv_name)).setText(customTour.getNickname());
-                            ((TextView)layoutItem.findViewById(R.id.tv_time)).setText(customTour.getCreated());
+                            try {
+                                ((TextView)layoutItem.findViewById(R.id.tv_time)).setText(DateUtils.getTimestampString(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(customTour.getCreated())));
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
                             layoutItem.findViewById(R.id.tv_distance).setVisibility(View.GONE);
                             ((TextView)layoutItem.findViewById(R.id.tv_comment)).setText(customTour.getDescription());
                             layoutItem.setTag(customTour.getId());
