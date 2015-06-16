@@ -80,6 +80,7 @@
                 android:layout_marginLeft="30dp"
                 />
         <RadioGroup
+            android:id="@+id/rg_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -95,7 +96,8 @@
                 android:button="@null"
                 android:background="@drawable/selector_share_circle"
                 android:checked="true"
-                /><RadioButton
+                />
+            <RadioButton
             android:id="@+id/rb_share_wechat"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -103,7 +105,8 @@
                 android:button="@null"
                 android:background="@drawable/selector_share_wechat"
                 android:checked="false"
-                /><RadioButton
+                />
+            <RadioButton
             android:id="@+id/rb_share_weibo"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -111,7 +114,8 @@
                 android:button="@null"
                 android:background="@drawable/selector_share_weibo"
                 android:checked="false"
-                /><RadioButton
+                />
+            <RadioButton
             android:id="@+id/rb_share_zone"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
