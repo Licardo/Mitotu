@@ -72,7 +72,7 @@ private Together together;
     private LinearLayout layoutJoinedPhotos,layoutInterestPhotos,layoutInterestPart,layoutJoinedPart;
     private ImageView ivJoinedTriangle,ivInterestTriangle,ivChat,ivGroupChat,ivShare;
     private LinearLayout layoutLike,layoutComment,layoutJoin,layoutMenu,layoutCommentList;
-    private LinearLayout layoutJoinMore,layoutLikeMore;
+    private LinearLayout layoutJoinMore,layoutLikeMore,layoutAll;
     private boolean islike;
     private EditText etComment;
     private TextView tvPublishComment;
@@ -128,6 +128,7 @@ private Together together;
         layoutCommentList = (LinearLayout) findViewById(R.id.layout_comment_list);
         layoutJoinMore = (LinearLayout) findViewById(R.id.layout_joined_more);
         layoutLikeMore = (LinearLayout) findViewById(R.id.layout_interest_more);
+        layoutAll = (LinearLayout) findViewById(R.id.layout_all);
 
         ivChat = (ImageView) findViewById(R.id.iv_chat);
         ivGroupChat = (ImageView) findViewById(R.id.iv_group_chat);
@@ -149,6 +150,7 @@ private Together together;
         ivChat.setOnClickListener(this);
         ivGroupChat.setOnClickListener(this);
         ivShare.setOnClickListener(this);
+        layoutAll.setOnClickListener(this);
         gvPhotos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -631,6 +633,11 @@ private Together together;
             case R.id.iv_share:
                 //分享
                 showShare();
+                break;
+            case R.id.layout_all:
+                //隐藏评论框
+                layoutMenu.setVisibility(View.VISIBLE);
+                layoutPublishComment.setVisibility(View.GONE);
                 break;
             case R.id.layout_join:
                 // 参加

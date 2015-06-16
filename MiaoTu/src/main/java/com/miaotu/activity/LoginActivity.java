@@ -1,5 +1,6 @@
 package com.miaotu.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import com.miaotu.result.LoginResult;
 import com.miaotu.util.LogUtil;
 import com.miaotu.util.MD5;
 import com.miaotu.util.StringUtil;
+import com.miaotu.view.LoadingDlg;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -43,6 +45,7 @@ private TextView tvLeft,tvTitle,tvFindPassword;
     private Button btnLogin;
     private EditText etTel,etPassword;
     private ImageView ivWeibo,ivQQ,ivWechat;
+    protected Dialog loadingDlg; // 加载对话框
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +79,7 @@ private void init(){
 }
     //登陆
     private void login(final RegisterInfo registerInfo, final boolean isTel) {
-        new BaseHttpAsyncTask<Void, Void, LoginResult>(this, true) {
+        new BaseHttpAsyncTask<Void, Void, LoginResult>(this, false) {
             @Override
             protected void onCompleteTask(LoginResult result) {
                 if(btnLogin==null){
@@ -160,6 +163,12 @@ private void init(){
                 return HttpRequestUtil.getInstance().login(registerInfo);
             }
 
+            @Override
+            protected void finallyRun() {
+                if(loadingDlg!=null){
+                    loadingDlg.dismiss();
+                }
+            }
         }.execute();
     }
     class LoadIMInfoThread extends Thread{
@@ -237,7 +246,7 @@ private void init(){
         if (plat == null) {
             return;
         }
-
+        loadingDlg = LoadingDlg.show(this);
         plat.setPlatformActionListener(this);
         // true不使用SSO授权，false使用SSO授权
         plat.SSOSetting(false);
@@ -286,7 +295,6 @@ private void init(){
                 break;
         }
     }
-
     @Override
     public void onComplete(Platform platform, int i, HashMap<String, Object> res) {
         LogUtil.d("登陆成功！");
@@ -380,11 +388,15 @@ private void init(){
 
     @Override
     public void onError(Platform platform, int i, Throwable throwable) {
-
+        if(loadingDlg!=null){
+            loadingDlg.dismiss();
+        }
     }
 
     @Override
     public void onCancel(Platform platform, int i) {
-
+        if(loadingDlg!=null){
+            loadingDlg.dismiss();
+        }
     }
 }
