@@ -504,26 +504,26 @@ private Together together;
 //        oks.setNotification(R.drawable.ic_launcher,
 //                getString(R.string.app_name));
         // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
-        oks.setTitle(togetherDetailResult.getTogether().getComment() + "\n http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
+        oks.setTitle(togetherDetailResult.getTogether().getComment() + "\n http://m.miaotu.com/ShareLine/?yid=" + togetherDetailResult.getTogether().getId());
         // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-        oks.setTitleUrl("http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
+        oks.setTitleUrl("http://m.miaotu.com/ShareLine/?yid=" + togetherDetailResult.getTogether().getId());
         // text是分享文本，所有平台都需要这个字段
-        oks.setText(togetherDetailResult.getTogether().getComment() + "\n http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
+        oks.setText(togetherDetailResult.getTogether().getComment() + "\n http://m.miaotu.com/ShareLine/?yid=" + togetherDetailResult.getTogether().getId());
         // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
         if (togetherDetailResult.getTogether().getPicList() != null &&
                 togetherDetailResult.getTogether().getPicList().size() > 0){
 
             oks.setImageUrl(togetherDetailResult.getTogether().getPicList().get(0).getUrl()
-                    + "&size=200x200");
+                    + "200x200");
         }
         // url仅在微信（包括好友和朋友圈）中使用
-        oks.setUrl("http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
+        oks.setUrl("http://m.miaotu.com/ShareLine/?yid=" + togetherDetailResult.getTogether().getId());
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
-        oks.setComment(togetherDetailResult.getTogether().getComment() + "\n http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
+        oks.setComment(togetherDetailResult.getTogether().getComment() + "\n http://m.miaotu.com/ShareLine/?yid=" + togetherDetailResult.getTogether().getId());
         // site是分享此内容的网站名称，仅在QQ空间使用
         oks.setSite(getString(R.string.app_name));
         // siteUrl是分享此内容的网站地址，仅在QQ空间使用
-        oks.setSiteUrl("http://m.miaotu.com/journey/detail.php?id=" +togetherDetailResult.getTogether().getId());
+        oks.setSiteUrl("http://m.miaotu.com/ShareLine/?yid=" +togetherDetailResult.getTogether().getId());
 
         // 启动分享GUI
         oks.show(this);
@@ -621,7 +621,7 @@ private Together together;
                 if(togetherDetailResult.getTogether().isAddGroup()){
                     Intent groupChatIntent = new Intent(TogetherDetailActivity.this, ChatsActivity.class);
                     groupChatIntent.putExtra("groupImId", togetherDetailResult.getTogether().getGroupId());
-                    groupChatIntent.putExtra("groupName", togetherDetailResult.getTogether().getStartDate()+togetherDetailResult.getTogether().getOriginCity()+"至"+togetherDetailResult.getTogether().getDesCity());
+                    groupChatIntent.putExtra("groupName", togetherDetailResult.getTogether().getGroupname());
                     groupChatIntent.putExtra("chatType", 2);
                     startActivity(groupChatIntent);
                 }else{

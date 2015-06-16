@@ -91,6 +91,7 @@ private View root;
                 Intent intent = new Intent(getActivity(),
                         CustomTourDetailActivity.class);
                 intent.putExtra("id", mList.get(position - 2).getId());
+                intent.putExtra("picurl", mList.get(position - 2).getPicUrl());
                 getParentFragment().startActivityForResult(intent, position - 2);
             }
         });
