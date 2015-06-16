@@ -1294,4 +1294,20 @@ public class HttpRequestUtil {
         return HttpDecoder.getForObject(getUrl("yueyou/search"),
                 MyTogetherResult.class, params);
     }
+
+    /**
+     * 获取定制约游的搜索结果
+     * @param token
+     * @return
+     */
+    public MyCustomTourResult getSearchResultCustomTour(String token, String keywords,
+                                                      String page, String num){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token", token));
+        params.add(new BasicNameValuePair("keywords", keywords));
+        params.add(new BasicNameValuePair("page", page));
+        params.add(new BasicNameValuePair("num", num));
+        return HttpDecoder.getForObject(getUrl("acticity/search"),
+                MyCustomTourResult.class, params);
+    }
 }
