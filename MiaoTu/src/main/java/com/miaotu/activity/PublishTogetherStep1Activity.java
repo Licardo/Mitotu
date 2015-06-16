@@ -243,7 +243,7 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
             showToastMsg("请选择出发城市！");
             return false;
         }
-        if (tvCount.getText().toString() == null){
+        if (StringUtil.isBlank(tvCount.getText().toString())){
             showToastMsg("选择旅伴人数");
             return false;
         }
