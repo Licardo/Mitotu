@@ -155,4 +155,8 @@
     <string name="title_activity_system_msg_detail">SystemMsgDetailActivity</string>
     <string name="title_activity_home_banner_web">HomeBannerWebActivity</string>
     <string name="title_activity_join_finished_acticity">JoinFinishedActicity</string>
+    <string name="title_activity_search_result_together">SearchResultTogetherActivity</string>
+    <string name="title_activity_search_result_custom_tour_acticity">
+        SearchResultCustomTourActicity
+    </string>
 </resources>
