@@ -38,6 +38,7 @@ import com.miaotu.model.RegisterInfo;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.LoginResult;
 import com.miaotu.result.PhotoUploadResult;
+import com.miaotu.result.PublishTogetherResult;
 import com.miaotu.result.RedPackageListResult;
 import com.miaotu.result.RemindLikeCustomResult;
 import com.miaotu.result.RemindLikeResult;
@@ -389,9 +390,9 @@ public class HttpRequestUtil {
      * @param together
      * @return
      */
-    public BaseResult publishTogether(PublishTogether together) {
+    public PublishTogetherResult publishTogether(PublishTogether together) {
         return HttpDecoder.postForObject(
-                getUrl("yueyou/"), BaseResult.class,
+                getUrl("yueyou/"), PublishTogetherResult.class,
                 transformObject2Map(together));
 
     }
