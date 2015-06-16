@@ -6,7 +6,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.fasterxml.jackson.databind.deser.Deserializers;
@@ -46,7 +48,17 @@ public class JoinFinishedActicity extends BaseActivity {
         hearurl = getIntent().getStringExtra("headurl");
         gid = getIntent().getStringExtra("gid");
         gname = getIntent().getStringExtra("groupname");
+        remark = getIntent().getStringExtra("remark");
+        WebSettings wSet = webView.getSettings();
+        wSet.setJavaScriptEnabled(true);
+        webView.addJavascriptInterface(new JSInterface(), "native");
 
+        webView.setWebViewClient(new WebViewClient() {
+            public boolean shouldOverrideUrlLoading(WebView view, String url) { //  重写此方法表明点击网页里面的链接还是在当前的webview里跳转，不跳到浏览器那边
+                view.loadUrl(url);
+                return true;
+            }
+        });
         webView.loadUrl("http://m.miaotu.com/App/joinRes/?uid="+uid+"&nickname="+nickname+"&headurl="+hearurl+"&gid="+gid+"&groupname="+gname+"&remark="+remark);
     }
 
