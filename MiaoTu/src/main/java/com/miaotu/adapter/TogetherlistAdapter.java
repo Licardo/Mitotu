@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.easemob.util.DateUtils;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.activity.BaseFragmentActivity;
@@ -36,7 +37,10 @@ import com.photoselector.util.CommonUtils;
 
 import org.w3c.dom.Text;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -160,7 +164,11 @@ public class TogetherlistAdapter extends BaseAdapter {
         });
         holder.tvNickname.setText(mList.get(position).getNickname());
         holder.tvDesCity.setText(mList.get(position).getDesCity());
-        holder.tvDate.setText(mList.get(position).getStartDate());
+        try {
+            holder.tvTime.setText(DateUtils.getTimestampString(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(mList.get(position).getPublishDate())));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         holder.tvNum.setText("需要"+mList.get(position).getNum()+"人");
         holder.tvFee.setText(mList.get(position).getFee());
         holder.tvComment.setText(mList.get(position).getComment());
@@ -185,7 +193,6 @@ public class TogetherlistAdapter extends BaseAdapter {
             holder.ivGender.setBackgroundResource(R.drawable.icon_woman);
         }
         holder.tvDate.setText(mList.get(position).getStartDate());
-        holder.tvTime.setText(mList.get(position).getPublishDate());
         if(mList.get(position).getPicList().size()==0){
             holder.layoutImg.setVisibility(View.GONE);
         }else{

@@ -137,7 +137,7 @@ public class ChatAllHistoryAdapter extends ArrayAdapter<EMConversation> {
 
                     holder.name.setText(contactInfo.getNickName());
                     UrlImageViewHelper.setUrlDrawable(holder.avatar,contactInfo.getHeadPhoto()
-                            + "&size=100x100", R.drawable.icon_default_head_photo);
+                            + "100x100", R.drawable.icon_default_head_photo);
                 } catch (EaseMobException e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();

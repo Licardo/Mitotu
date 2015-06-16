@@ -29,10 +29,10 @@ import java.util.List;
  */
 public class MessageFragment extends BaseFragment implements View.OnClickListener{
     private View root;
-    private LinearLayout layoutSys,layoutLikeTour,layoutJoin,layoutChat,layoutLike;
-    private TextView ivSysCount,ivLikeTourCount,ivJoinCount,ivChatCount,ivLikeCount;
-    private TextView tvSysContent,tvLikeTourContent,tvJoinContent,tvChatContent,tvLikeContent;
-    private TextView tvSysDate,tvLikeTourDate,tvJoinDate,tvChatDate,tvLikeDate;
+    private LinearLayout layoutSys,layoutLikeTour,layoutJoin,layoutChat,layoutLike,layoutComment;
+    private TextView ivSysCount,ivLikeTourCount,ivJoinCount,ivChatCount,ivLikeCount,ivCommentCount;
+    private TextView tvSysContent,tvLikeTourContent,tvJoinContent,tvChatContent,tvLikeContent,tvCommnetContent;
+    private TextView tvSysDate,tvLikeTourDate,tvJoinDate,tvChatDate,tvLikeDate,tvCommentDate;
     private static MessageFragment messageFragment;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -50,22 +50,26 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
         layoutJoin = (LinearLayout) root.findViewById(R.id.layout_join);
         layoutChat = (LinearLayout) root.findViewById(R.id.layout_chat);
         layoutLike = (LinearLayout) root.findViewById(R.id.layout_like);
+        layoutComment = (LinearLayout) root.findViewById(R.id.layout_comment);
         ivSysCount = (TextView) root.findViewById(R.id.iv_sys_count);
         ivLikeTourCount = (TextView) root.findViewById(R.id.iv_like_tour_msg);
         ivJoinCount = (TextView) root.findViewById(R.id.iv_join_count);
         ivChatCount = (TextView) root.findViewById(R.id.iv_chat_count);
         ivLikeCount = (TextView) root.findViewById(R.id.iv_like_count);
+        ivCommentCount = (TextView) root.findViewById(R.id.iv_comment_count);
         tvSysContent = (TextView) root.findViewById(R.id.tv_sys_content);
         tvLikeTourContent = (TextView) root.findViewById(R.id.tv_like_tour_content);
         tvJoinContent = (TextView) root.findViewById(R.id.tv_join_content);
         tvChatContent = (TextView) root.findViewById(R.id.tv_chat_content);
         tvLikeContent = (TextView) root.findViewById(R.id.tv_like_content);
+        tvCommnetContent = (TextView) root.findViewById(R.id.tv_comment_content);
 
         tvSysDate = (TextView) root.findViewById(R.id.tv_sys_date);
         tvLikeTourDate = (TextView) root.findViewById(R.id.tv_like_tour_date  );
         tvChatDate = (TextView) root.findViewById(R.id.tv_chat_date);
         tvJoinDate = (TextView) root.findViewById(R.id.tv_join_date);
         tvLikeDate = (TextView) root.findViewById(R.id.tv_like_date);
+        tvCommentDate = (TextView) root.findViewById(R.id.tv_comment_date);
 
     }
     private void bindView(){
@@ -74,6 +78,7 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
         layoutLikeTour.setOnClickListener(this);
         layoutJoin.setOnClickListener(this);
         layoutSys.setOnClickListener(this);
+        layoutComment.setOnClickListener(this);
     }
     private void init(){
         refresh();
@@ -110,6 +115,13 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
         }else{
             ivJoinCount.setVisibility(View.GONE);
         }
+        //是否有回复线路消息
+        if(!StringUtil.isEmpty(readPreference("tour_comment_count"))&&Integer.parseInt(readPreference("tour_comment_count"))>0){
+            ivCommentCount.setText(readPreference("tour_comment_count"));
+            ivCommentCount.setVisibility(View.VISIBLE);
+        }else{
+            ivCommentCount.setVisibility(View.GONE);
+        }
 
         if(!StringUtil.isEmpty(readPreference("tour_like_name"))){
             tvLikeTourContent.setText("@"+readPreference("tour_like_name")+"喜欢您发布的线路了~");
@@ -120,6 +132,9 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
         if(!StringUtil.isEmpty(readPreference("like_date"))){
             tvLikeContent.setText("又有新伙伴关注你啦！快去看看吧");
         }
+        if(!StringUtil.isEmpty(readPreference("tour_comment_name"))){
+            tvCommnetContent.setText(readPreference("tour_comment_name")+" 评论了您的线路。");
+        }
         tvSysDate.setText(readPreference("sys_date"));
         tvSysContent.setText(readPreference("sys_name"));
         tvLikeTourDate.setText(readPreference("tour_like_date"));
@@ -127,6 +142,7 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
         tvJoinDate.setText(readPreference("tour_join_date"));
         tvChatContent.setText(readPreference("im_content"));
         tvChatDate.setText(readPreference("im_date"));
+        tvCommentDate.setText(readPreference("tour_comment_date"));
     }
     private int getLikeMessageNum() {
         MessageDatabaseHelper helper = new MessageDatabaseHelper(getActivity());
@@ -156,6 +172,11 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
             case R.id.layout_sys:
                 Intent intent4 = new Intent(getActivity(),SystemMsgListActivity.class);
                 startActivity(intent4);
+                break;
+            case R.id.layout_comment:
+
+                Intent intent5 = new Intent(getActivity(),SystemMsgListActivity.class);
+                startActivity(intent5);
                 break;
         }
     }
