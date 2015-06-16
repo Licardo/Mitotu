@@ -127,7 +127,6 @@ public class PublishCustomTourActivity3 extends BaseActivity implements OnClickL
                 fos = new File(IMAGE_FILE_LOCATION2);
             }
             if(fos.exists()){
-                showToastMsg("存在并且删除");
                 fos.delete();
             }
             fos.deleteOnExit();

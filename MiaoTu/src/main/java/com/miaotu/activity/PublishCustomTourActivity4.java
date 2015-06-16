@@ -71,9 +71,9 @@ public class PublishCustomTourActivity4 extends BaseActivity implements OnClickL
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     setResult(1);
-//                    Intent intent = new Intent();
-//                    startActivity(intent);
-                    showToastMsg("发布成功");
+                    Intent intent = new Intent(PublishCustomTourActivity4.this,PublishCustomTourActivity5.class);
+                    startActivity(intent);
+                    finish();
                 } else {
                     if (StringUtil.isEmpty(result.getMsg())) {
                         showToastMsg("发布失败！");
