@@ -145,6 +145,7 @@ private ImageView ivPic,ivShare,ivDownload;
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.iv_pic:
+
                 break;
             case R.id.iv_share:
                 showShare();
