@@ -45,7 +45,7 @@ public class RemindCommentCustomFragment extends BaseFragment implements View.On
     }
     private void init(){
         remindLikes = new ArrayList<RemindLikeCustom>();
-        adapter = new RemindLikeCustomListAdapter(getActivity(), remindLikes);
+        adapter = new RemindLikeCustomListAdapter(getActivity(), remindLikes, 2);
         lv.setAdapter(adapter);
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {

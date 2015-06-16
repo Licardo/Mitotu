@@ -52,7 +52,7 @@ public class RemindCommentTourActivity extends BaseFragmentActivity implements V
         });
     }
     private void init(){
-        writePreference("tour_like_count","0");
+        writePreference("tour_comment_count","0");
         MessageFragment.getInstance().refresh();
         tvTitle.setText("评论提醒");
         tvRight.setText("清空");

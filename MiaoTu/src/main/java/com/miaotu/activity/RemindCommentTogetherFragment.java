@@ -45,7 +45,7 @@ public class RemindCommentTogetherFragment extends BaseFragment implements View.
     }
     private void init(){
         remindLikes = new ArrayList<RemindLikeTogether>();
-        adapter = new RemindLikeTogetherListAdapter(getActivity(), remindLikes);
+        adapter = new RemindLikeTogetherListAdapter(getActivity(), remindLikes, 2);
         lv.setAdapter(adapter);
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {

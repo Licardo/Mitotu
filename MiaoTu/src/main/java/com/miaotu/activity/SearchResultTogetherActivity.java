@@ -58,6 +58,7 @@ public class SearchResultTogetherActivity extends BaseActivity implements OnClic
     }
 
     private void initData(){
+        tvTitle.setText("一起去搜索结果");
         togetherList = new ArrayList<>();
         adapter = new SearchResultTogetherAdapter(this, togetherList);
         listView.setAdapter(adapter);

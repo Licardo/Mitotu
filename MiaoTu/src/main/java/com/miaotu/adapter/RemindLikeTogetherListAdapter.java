@@ -27,11 +27,14 @@ public class RemindLikeTogetherListAdapter extends BaseAdapter{
     private Context context;
     private List<RemindLikeTogether> remindLikes;
     private LayoutInflater mLayoutInflater = null;
+    int flag;
 
-    public RemindLikeTogetherListAdapter(Context context, List<RemindLikeTogether> remindLikes){
+    //flag 1:喜欢提醒 2：评论提醒
+    public RemindLikeTogetherListAdapter(Context context, List<RemindLikeTogether> remindLikes, int flag){
         this.context = context;
         this.remindLikes = remindLikes;
         mLayoutInflater = LayoutInflater.from(context);
+        this.flag = flag;
     }
 
     @Override
@@ -59,9 +62,15 @@ public class RemindLikeTogetherListAdapter extends BaseAdapter{
             holder.tvDate = (TextView) view.findViewById(R.id.tv_time);
             holder.tvName = (TextView) view.findViewById(R.id.tv_name);
             holder.ivPic = (ImageView) view.findViewById(R.id.iv_right);
+            holder.tvStatus = (TextView) view.findViewById(R.id.tv_status);
             view.setTag(holder);
         }else {
             holder = (ViewHolder) view.getTag();
+        }
+        if (flag == 1){
+            holder.tvStatus.setText("喜欢了你发起的旅行");
+        }else if (flag == 2){
+            holder.tvStatus.setText("评论了你发起的旅行");
         }
         UrlImageViewHelper.setUrlDrawable(holder.ivPhoto, remindLikes.get(i).getRemindLikeTogetherInfo().getHeadUrl(), R.drawable.icon_default_head_photo);
         holder.ivPhoto.setOnClickListener(new View.OnClickListener() {
@@ -92,5 +101,6 @@ public class RemindLikeTogetherListAdapter extends BaseAdapter{
         ImageView ivPic;
         TextView tvName;
         TextView tvDate;
+        TextView tvStatus;
     }
 }

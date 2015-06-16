@@ -19,15 +19,6 @@
             android:background="@drawable/icon_remind_msg"
             android:scaleType="fitCenter" />
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="6dp"
-            android:layout_toRightOf="@id/iv_idot"
-            android:text="发团消息提醒"
-            android:textColor="#505050"
-            android:textSize="16sp" />
 
         <ImageView
             android:id="@+id/iv_right"
@@ -47,6 +38,17 @@
             android:text="5月15号"
             android:textColor="#b4b4b4"
             android:textSize="12sp" />
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_toRightOf="@id/iv_idot"
+            android:layout_toLeftOf="@id/tv_date"
+            android:singleLine="true"
+            android:text="发团消息提醒"
+            android:textColor="#505050"
+            android:textSize="16sp" />
     </RelativeLayout>
     <TextView
         android:id="@+id/tv_content"

@@ -124,7 +124,7 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
         }
 
         if(!StringUtil.isEmpty(readPreference("tour_like_name"))){
-            tvLikeTourContent.setText("@"+readPreference("tour_like_name")+"喜欢您发布的线路了~");
+            tvLikeTourContent.setText("@" + readPreference("tour_like_name") + "喜欢您发布的线路了~");
         }
         if(!StringUtil.isEmpty(readPreference("tour_join_name"))){
             tvJoinContent.setText("有人报名了您发布的“"+readPreference("tour_join_name")+"”活动");
@@ -174,8 +174,7 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
                 startActivity(intent4);
                 break;
             case R.id.layout_comment:
-
-                Intent intent5 = new Intent(getActivity(),SystemMsgListActivity.class);
+                Intent intent5 = new Intent(getActivity(),RemindCommentTourActivity.class);
                 startActivity(intent5);
                 break;
         }

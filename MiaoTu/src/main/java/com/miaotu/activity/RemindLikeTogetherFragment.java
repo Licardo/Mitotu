@@ -50,7 +50,7 @@ public class RemindLikeTogetherFragment extends BaseFragment implements View.OnC
     }
     private void init(){
         remindLikes = new ArrayList<RemindLikeTogether>();
-        adapter = new RemindLikeTogetherListAdapter(getActivity(), remindLikes);
+        adapter = new RemindLikeTogetherListAdapter(getActivity(), remindLikes, 1);
         lv.setAdapter(adapter);
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
