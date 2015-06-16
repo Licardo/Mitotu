@@ -70,6 +70,8 @@ public class Together implements Serializable{
     private String userTag;
     @JsonProperty("Gid")
     private String groupId;
+    @JsonProperty("GroupName")
+    private String groupname;
     @JsonProperty("IsGroup")
     private boolean isAddGroup;
     @JsonProperty("LikeList")
@@ -349,5 +351,13 @@ public class Together implements Serializable{
 
     public void setIsAddGroup(boolean isAddGroup) {
         this.isAddGroup = isAddGroup;
+    }
+
+    public String getGroupname() {
+        return groupname;
+    }
+
+    public void setGroupname(String groupname) {
+        this.groupname = groupname;
     }
 }

@@ -371,13 +371,14 @@
         <activity
             android:name=".activity.PublishCustomTourActivity3"
             android:label="@string/title_activity_custom_tour"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-            android:screenOrientation="portrait">
-        </activity><activity
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
+        </activity>
+        <activity
             android:name=".activity.PublishCustomTourActivity4"
             android:label="@string/title_activity_custom_tour"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.PublishCustomTourActivity5"
@@ -534,6 +535,10 @@
         <activity
             android:name=".activity.HomeBannerWebActivity"
             android:label="@string/title_activity_home_banner_web" >
+        </activity>
+        <activity
+            android:name=".activity.JoinFinishedActicity"
+            android:label="@string/title_activity_join_finished_acticity" >
         </activity>
     </application>
 

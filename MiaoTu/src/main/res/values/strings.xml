@@ -154,4 +154,5 @@
     <string name="title_activity_system_msg_list">SystemMsgListActivity</string>
     <string name="title_activity_system_msg_detail">SystemMsgDetailActivity</string>
     <string name="title_activity_home_banner_web">HomeBannerWebActivity</string>
+    <string name="title_activity_join_finished_acticity">JoinFinishedActicity</string>
 </resources>

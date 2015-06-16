@@ -1,5 +1,6 @@
 package com.miaotu.activity;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -60,6 +61,15 @@ private boolean validate(){
                     }
                     if (result.getCode() == BaseResult.SUCCESS) {
                         showToastMsg("报名成功！");
+                        Intent intent = new Intent(JoinTogetherStep2.this,
+                                JoinFinishedActicity.class);
+                        intent.putExtra("uid",together.getUid());
+                        intent.putExtra("nickname",together.getNickname());
+                        intent.putExtra("headurl",together.getHeadPhoto());
+                        intent.putExtra("gid",together.getGroupId());
+                        intent.putExtra("groupname",together.getGroupname());
+                        intent.putExtra("remark",together.getComment());
+                        startActivity(intent);
                         setResult(1);
                     } else {
                         if(StringUtil.isEmpty(result.getMsg())){
@@ -72,7 +82,9 @@ private boolean validate(){
 
                 @Override
                 protected BaseResult run(Void... params) {
-                    return HttpRequestUtil.getInstance().joinTogether(readPreference("token"), together.getId(), StringUtil.trimAll(etName.getText().toString()),StringUtil.trimAll(etTel.getText().toString()));
+                    return HttpRequestUtil.getInstance().joinTogether(readPreference("token"),
+                            together.getId(), StringUtil.trimAll(etName.getText().toString()),
+                            StringUtil.trimAll(etTel.getText().toString()));
                 }
 
             }.execute();

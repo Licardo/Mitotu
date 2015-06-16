@@ -21,6 +21,7 @@ import com.miaotu.R;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.model.CustomTour;
+import com.miaotu.model.CustomTourInfo;
 import com.miaotu.util.LogUtil;
 import com.miaotu.util.MD5;
 import com.pingplusplus.android.PaymentActivity;
@@ -29,12 +30,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
+import cn.sharesdk.onekeyshare.OnekeyShareTheme;
+
 
 public class CustomTourDetailActivity extends BaseActivity {
 private WebView webView;
     private TextView tvLeft,tvTitle;
     Handler mHandler = new Handler();
-    private String orderId,uid,nickname,headUrl,groupId,groupName;
+    private String orderId,uid,nickname,headUrl,groupId,groupName,remark;
     private boolean isPay=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +90,36 @@ private WebView webView;
     public final class JSInterface {
         //JavaScript脚本代码可以调用的函数onClick()处理
         @android.webkit.JavascriptInterface
-        public void click(String action) {
-            showToastMsg("点击了"+action);
+        public void share(String remark) {
+            ShareSDK.initSDK(CustomTourDetailActivity.this);
+            OnekeyShare oks = new OnekeyShare();
+            oks.setTheme(OnekeyShareTheme.CLASSIC);
+            // 关闭sso授权
+            oks.disableSSOWhenAuthorize();
+            // 分享时Notification的图标和文字
+//        oks.setNotification(R.drawable.ic_launcher,
+//                getString(R.string.app_name));
+            // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+            oks.setTitle(remark + "\n http://m.miaotu.com/ShareLine/custom/?aid=" + getIntent().getStringExtra("id"));
+            // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+            oks.setTitleUrl("http://m.miaotu.com/ShareLine/custom/?aid=" + getIntent().getStringExtra("id"));
+            // text是分享文本，所有平台都需要这个字段
+            oks.setText(remark + "\n http://m.miaotu.com/ShareLine/custom/?aid=" + getIntent().getStringExtra("id"));
+            // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+
+            oks.setImageUrl(getIntent().getStringExtra("picurl")
+                    + "200x200");
+            // url仅在微信（包括好友和朋友圈）中使用
+            oks.setUrl("http://m.miaotu.com/ShareLine/custom/?aid=" + getIntent().getStringExtra("id"));
+            // comment是我对这条分享的评论，仅在人人网和QQ空间使用
+            oks.setComment(remark + "\n http://m.miaotu.com/ShareLine/custom/?aid=" + getIntent().getStringExtra("id"));
+            // site是分享此内容的网站名称，仅在QQ空间使用
+            oks.setSite(getString(R.string.app_name));
+            // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+            oks.setSiteUrl("http://m.miaotu.com/ShareLine/custom/?aid=" +getIntent().getStringExtra("id"));
+
+            // 启动分享GUI
+            oks.show(CustomTourDetailActivity.this);
         }
         @android.webkit.JavascriptInterface
         public void setTitle(final String title) {
@@ -213,7 +246,7 @@ private WebView webView;
             startActivity(userIntent);
         }
         @android.webkit.JavascriptInterface
-        public void pay(String orderId,String uid,String nickname,String headUrl,String groupId,String groupName) {
+        public void pay(String orderId,String uid,String nickname,String headUrl,String groupId,String groupName,String remark) {
             // 支付
             CustomTourDetailActivity.this.uid = uid;
             CustomTourDetailActivity.this.orderId = orderId;
@@ -221,6 +254,7 @@ private WebView webView;
             CustomTourDetailActivity.this.headUrl = headUrl;
             CustomTourDetailActivity.this.groupId = groupId;
             CustomTourDetailActivity.this.groupName = groupName;
+            CustomTourDetailActivity.this.remark = remark;
             payOrder();
         }
     }
@@ -297,8 +331,8 @@ private WebView webView;
                 if(result.equals("success")){
                     //支付成
                     showToastMsg("付款完成！");
-//                    webView.loadUrl("http://m.miaotu.com/App/joinRes?uid="+uid+"&nickname="+nickname+"&headurl="+headUrl+"&gid="+groupId+"&groupname"+groupName);
-                    webView.loadUrl("http://m.miaotu.com/App/joinRes");
+                    webView.loadUrl("http://m.miaotu.com/App/joinRes/?uid=" + uid + "&nickname=" + nickname + "&headurl=" + headUrl + "&gid=" + groupId + "&groupname=" + groupName +"&remark=" + remark);
+//                    webView.loadUrl("http://m.miaotu.com/App/joinRes");
                     webView.postDelayed(new Runnable() {
                         @Override
                         public void run() {
