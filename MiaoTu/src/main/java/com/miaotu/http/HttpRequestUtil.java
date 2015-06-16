@@ -16,6 +16,7 @@ import com.miaotu.activity.BaseActivity;
 import com.miaotu.annotation.FormProperty;
 import com.miaotu.annotation.Ignore;
 import com.miaotu.form.MFriendsInfo;
+import com.miaotu.form.PublishCustomForm;
 import com.miaotu.model.ModifyPersonInfo;
 import com.miaotu.result.BlackResult;
 import com.miaotu.result.CustomTourResult;
@@ -392,6 +393,19 @@ public class HttpRequestUtil {
         return HttpDecoder.postForObject(
                 getUrl("yueyou/"), BaseResult.class,
                 transformObject2Map(together));
+
+    }
+
+    /**
+     * 发布定制约游
+     *
+     * @param
+     * @return
+     */
+    public BaseResult publishCustom(PublishCustomForm customForm) {
+        return HttpDecoder.postForObject(
+                getUrl("activity/custom"), BaseResult.class,
+                transformObject2Map(customForm));
 
     }
 

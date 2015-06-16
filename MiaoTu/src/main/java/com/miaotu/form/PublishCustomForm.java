@@ -35,6 +35,8 @@ public class PublishCustomForm implements Serializable{
     private String isOutbound;
     @FormProperty("is_tourist")
     private String isTourist;
+    @FormProperty("token")
+    private String token;
 
     public String getDesCity() {
         return desCity;
@@ -138,5 +140,13 @@ public class PublishCustomForm implements Serializable{
 
     public void setIsTourist(String isTourist) {
         this.isTourist = isTourist;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
