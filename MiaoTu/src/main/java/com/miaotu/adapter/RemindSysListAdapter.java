@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.easemob.util.DateUtils;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.activity.PersonCenterActivity;
@@ -16,6 +17,8 @@ import com.miaotu.model.RemindLike;
 import com.miaotu.model.RemindSys;
 import com.miaotu.view.CircleImageView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -62,7 +65,11 @@ public class RemindSysListAdapter extends BaseAdapter{
         }else {
             holder = (ViewHolder) view.getTag();
         }
-        holder.tvDate.setText(remindLikes.get(i).getCreated());
+        try {
+            holder.tvDate.setText(DateUtils.getTimestampString(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(remindLikes.get(i).getCreated())));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         holder.tvTitle.setText(remindLikes.get(i).getTitle());
         holder.tvContent.setText(remindLikes.get(i).getContent().getContent());
         if ("1".equals(remindLikes.get(i).getStatus())){

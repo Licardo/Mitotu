@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.easemob.util.DateUtils;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.model.TopicComment;
@@ -16,6 +17,8 @@ import com.miaotu.model.TopicMessage;
 import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 
@@ -81,7 +84,11 @@ public class TopicMessageAdapter extends BaseAdapter {
                 mList.get(position).getContent().getPicurl());
         holder.tvName.setText(mList.get(position).getContent().getNickname());
         holder.tvStatus.setText(mList.get(position).getTitle());
-        holder.tvTime.setText(mList.get(position).getCreated());
+        try {
+            holder.tvTime.setText(DateUtils.getTimestampString(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(mList.get(position).getCreated())));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return convertView;
     }
 

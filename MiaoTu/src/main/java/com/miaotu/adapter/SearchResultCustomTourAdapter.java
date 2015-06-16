@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.easemob.util.DateUtils;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.model.CustomTour;
@@ -21,6 +22,8 @@ import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -72,7 +75,11 @@ public class SearchResultCustomTourAdapter extends BaseAdapter{
         UrlImageViewHelper.setUrlDrawable(holder.ivHeadUrl, customTours.get(position).getHeadUrl(), R.drawable.default_avatar);
         UrlImageViewHelper.setUrlDrawable(holder.ivImg, customTours.get(position).getPicUrl(), R.drawable.icon_default_big_pic);
         holder.tvName.setText(customTours.get(position).getNickname());
-        holder.tvTime.setText(customTours.get(position).getStartDate());
+        try {
+            holder.tvTime.setText(DateUtils.getTimestampString(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(customTours.get(position).getCreated())));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         holder.tvContent.setText(customTours.get(position).getTitle());
         return view;
     }
