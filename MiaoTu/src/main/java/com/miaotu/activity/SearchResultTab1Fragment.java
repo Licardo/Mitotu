@@ -184,7 +184,10 @@ private View root;
         }
         switch (view.getId()) {
             case R.id.tv_custom_more:
-
+                Intent customtourIntent = new Intent(SearchResultTab1Fragment.this.getActivity(),
+                        SearchResultCustomTourActicity.class);
+                customtourIntent.putExtra("key",((SearchActivity) getActivity()).getKey());
+                startActivity(customtourIntent);
                 break;
             case R.id.tv_together_more:
                 Intent togetherIntent = new Intent(SearchResultTab1Fragment.this.getActivity(),
