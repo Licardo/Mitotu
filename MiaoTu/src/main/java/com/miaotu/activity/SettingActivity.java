@@ -139,6 +139,9 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
                 writePreference("sys_date","");
                 writePreference("sys_name","");
                 writePreference("sys_count","");
+                writePreference("tour_comment_date","");
+                writePreference("tour_comment_name","");
+                writePreference("tour_comment_count","0");
                 JPushInterface.stopPush(SettingActivity.this);
                 // XmppConnection.getInstance().closeConnection();
                 setResult(1);

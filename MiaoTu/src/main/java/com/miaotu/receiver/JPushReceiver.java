@@ -1,6 +1,7 @@
 package com.miaotu.receiver;
 
 import java.io.IOException;
+import java.util.Date;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import cn.jpush.android.api.JPushInterface;
 
+import com.easemob.util.DateUtils;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -127,7 +129,7 @@ public class JPushReceiver extends BroadcastReceiver {
 				SharedPreferences sharedPreferences = mContext.getSharedPreferences("COMMON",
 						mContext.MODE_PRIVATE);
 				SharedPreferences.Editor editor = sharedPreferences.edit();
-				editor.putString("like_date", "" + rootJson.get("Time"));
+				editor.putString("like_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + ""))));
 				editor.commit();
 				MessageDatabaseHelper helper = new MessageDatabaseHelper(context);
 				long l = helper.saveSysMessage(likeMessage);
@@ -142,7 +144,7 @@ public class JPushReceiver extends BroadcastReceiver {
 				SharedPreferences sharedPreferences = mContext.getSharedPreferences("COMMON",
 						mContext.MODE_PRIVATE);
 				SharedPreferences.Editor editor = sharedPreferences.edit();
-				editor.putString("tour_like_date", "" + rootJson.get("Time"));
+				editor.putString("tour_like_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + ""))));
 				editor.putString("tour_like_name", "" + likeMessage.getNickname());
 				editor.putString("tour_like_count", "" + (1+Integer.parseInt(sharedPreferences.getString("tour_like_count", "0"))));
 				editor.commit();
@@ -157,11 +159,26 @@ public class JPushReceiver extends BroadcastReceiver {
 				SharedPreferences sharedPreferences = mContext.getSharedPreferences("COMMON",
 						mContext.MODE_PRIVATE);
 				SharedPreferences.Editor editor = sharedPreferences.edit();
-				editor.putString("tour_join_date", "" + rootJson.get("Time"));
+				editor.putString("tour_join_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + ""))));
 				editor.putString("tour_join_name", "" + likeMessage.getContent());
 				editor.putString("tour_join_count", "" + (1+Integer.parseInt(sharedPreferences.getString("tour_join_count", "0"))));
 				editor.commit();
 				LogUtil.d("插入收到的系统消息：参加约游");
+				Intent msgIntent = new Intent(ACTION_JPUSH_SYS_MESSAGE_RECIEVE);
+				msgIntent.putExtras(new Bundle());
+				context.sendOrderedBroadcast(msgIntent,null);
+            }else if(rootJson.get("Type").equals("yueyou_reply")||rootJson.get("Type").equals("activity_reply")){
+				//消息-参加约游
+				LikeMessage likeMessage = new LikeMessage();
+				likeMessage = mapper.readValue(rootJson.getJSONObject("Content").toString(), LikeMessage.class);
+				SharedPreferences sharedPreferences = mContext.getSharedPreferences("COMMON",
+						mContext.MODE_PRIVATE);
+				SharedPreferences.Editor editor = sharedPreferences.edit();
+				editor.putString("tour_comment_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time")+""))));
+				editor.putString("tour_comment_name", "" + likeMessage.getNickname());
+				editor.putString("tour_comment_count", "" + (1+Integer.parseInt(sharedPreferences.getString("tour_comment_count", "0"))));
+				editor.commit();
+				LogUtil.d("插入收到的系统消息：评论约游");
 				Intent msgIntent = new Intent(ACTION_JPUSH_SYS_MESSAGE_RECIEVE);
 				msgIntent.putExtras(new Bundle());
 				context.sendOrderedBroadcast(msgIntent,null);
@@ -172,7 +189,7 @@ public class JPushReceiver extends BroadcastReceiver {
 				SharedPreferences sharedPreferences = mContext.getSharedPreferences("COMMON",
 						mContext.MODE_PRIVATE);
 				SharedPreferences.Editor editor = sharedPreferences.edit();
-				editor.putString("sys_date", "" + rootJson.get("Time"));
+				editor.putString("sys_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + ""))));
 				editor.putString("sys_name", "" + likeMessage.getContent());
 				editor.putString("sys_count", "" + (1+Integer.parseInt(sharedPreferences.getString("sys_count", "0"))));
 				editor.commit();
