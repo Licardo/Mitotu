@@ -60,13 +60,18 @@ public class CityListActivity extends BaseActivity {
     private TextView tvLocated;
     private LinearLayout layoutLocated;
 
+	private static CityListActivity instance;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_city_list);
 
         tvLocated = (TextView) findViewById(R.id.tv_located_city);
-        tvLocated.setText(readPreference("located_city"));
+		if(StringUtil.isEmpty(readPreference("located_city"))){
+			tvLocated.setText("定位中");
+		}else{
+			tvLocated.setText(readPreference("located_city"));
+		}
         layoutLocated= (LinearLayout) findViewById(R.id.layout_located);
         layoutLocated.setOnClickListener(new OnClickListener() {
             @Override
@@ -126,7 +131,20 @@ public class CityListActivity extends BaseActivity {
 		mCityLit.setOnItemClickListener(new CityListOnItemClick());
 
 	}
-
+	public static CityListActivity getInstance(){
+		return instance;
+	}
+	public void refreshCity(){
+		try {
+			if(StringUtil.isEmpty(readPreference("located_city"))){
+				tvLocated.setText("定位中");
+			}else{
+				tvLocated.setText(readPreference("located_city"));
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+	}
 	private ArrayList<CityModel> getSelectCityNames(String con) {
 		ArrayList<CityModel> names = new ArrayList<CityModel>();
 		//判断查询的内容是不是汉字

@@ -448,6 +448,8 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
                     viewTemp.setLayoutParams(params);
                     layoutTags.addView(viewTemp);
                     layoutTags.requestLayout();
+                }else {
+                    showToastMsg("最多只能添加6个线路标签");
                 }
                 break;
             case R.id.layout_next:
