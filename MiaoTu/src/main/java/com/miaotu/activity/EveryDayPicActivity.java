@@ -25,12 +25,22 @@ import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
+import com.miaotu.model.PhotoInfo;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.EveryDayResult;
 import com.miaotu.util.StringUtil;
+import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
+import com.photoselector.model.PhotoModel;
+import com.photoselector.ui.PhotoPreviewActivity;
+import com.photoselector.util.CommonUtils;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
@@ -127,8 +137,7 @@ private ImageView ivPic,ivShare,ivDownload;
 //        // text是分享文本，所有平台都需要这个字段
 //        oks.setText(togetherDetailResult.getTogether().getComment() + "\n http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
 //        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-//        oks.setImageUrl(togetherDetailResult.getTogether().getPicList().get(0).getUrl()
-//                + "&size=200x200");
+        oks.setImageUrl(url);
 //        // url仅在微信（包括好友和朋友圈）中使用
 //        oks.setUrl("http://m.miaotu.com/journey/detail.php?id=" + togetherDetailResult.getTogether().getId());
 //        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
@@ -145,7 +154,25 @@ private ImageView ivPic,ivShare,ivDownload;
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.iv_pic:
-
+                ImageLoader.getInstance().init(
+                        new ImageLoaderConfiguration.Builder(getApplicationContext())
+                                .memoryCacheExtraOptions(480, 800)//设置缓存图片时候的宽高最大值，默认为屏幕宽高
+//                        .discCacheExtraOptions(480, 800, CompressFormat.JPEG, 75)//设置硬盘缓存，默认格式jpeg，压缩质量70
+                                .threadPoolSize(5)  //设置线程池的最高线程数量
+                                .threadPriority(Thread.NORM_PRIORITY)//设置线程优先级
+                                .denyCacheImageMultipleSizesInMemory()//自动缩放
+                                .memoryCache(new UsingFreqLimitedMemoryCache(4 * 1024 * 1024))//设置缓存大小，UsingFrgLimitMemoryCache类可以扩展
+                                .imageDownloader(new BaseImageDownloader(this, 5000, 30000)).build());
+                PhotoModel photoModel = new PhotoModel();
+                photoModel.setOriginalPath(url);
+                ArrayList<PhotoModel> photoList = new ArrayList<>();
+                photoList.add(photoModel);
+                //点击照片
+                /** 预览照片 */
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("photos", photoList);
+                bundle.putSerializable("position", 0);
+                CommonUtils.launchActivity(EveryDayPicActivity.this, PhotoPreviewActivity.class, bundle);
                 break;
             case R.id.iv_share:
                 showShare();

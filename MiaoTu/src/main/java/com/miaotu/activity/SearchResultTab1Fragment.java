@@ -74,6 +74,8 @@ private View root;
         gap = root.findViewById(R.id.view_gap);
     }
     private void bindView() {
+        tvCustomMore.setOnClickListener(this);
+        tvTogetherMore.setOnClickListener(this);
             }
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
@@ -97,7 +99,7 @@ private View root;
                         layoutEmpty.setVisibility(View.VISIBLE);
                     }
                     if(result.getSearchTour().getTogetherList()!=null){
-                        if(result.getSearchTour().getTogetherList().size()>3){
+                        if(result.getSearchTour().getTogetherList().size()>=3){
                             tvTogetherMore.setVisibility(View.VISIBLE);
                         }else {
                             tvTogetherMore.setVisibility(View.GONE);
@@ -127,7 +129,7 @@ private View root;
                         gap.setVisibility(View.GONE);
                     }
                     if(result.getSearchTour().getCustomTourList()!=null){
-                        if(result.getSearchTour().getCustomTourList().size()>3){
+                        if(result.getSearchTour().getCustomTourList().size()>=3){
                             tvCustomMore.setVisibility(View.VISIBLE);
                         }else {
                             tvCustomMore.setVisibility(View.GONE);
@@ -181,7 +183,8 @@ private View root;
             return;
         }
         switch (view.getId()) {
-
+            case R.id.tv_custom_more:
+                break;
         }
     }
 }

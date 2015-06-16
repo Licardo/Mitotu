@@ -3,6 +3,19 @@
     android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"
     android:background="#f1f3f6"
     >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+
+
     <LinearLayout
         android:id="@+id/layout_together"
         android:layout_width="match_parent"
@@ -90,4 +103,5 @@
         android:id="@+id/layout_empty"
         layout="@layout/layout_empty_search_tour"
         ></include>
+    </LinearLayout></ScrollView>
 </LinearLayout>

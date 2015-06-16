@@ -92,9 +92,10 @@ public class SearchUserlistAdapter extends BaseAdapter {
         });
 		String key = ((SearchActivity)mContext).getKey();
         SpannableStringBuilder style=new SpannableStringBuilder(mList.get(position).getNickname());
-        style.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(R.color.grey64)), 0, mList.get(position).getNickname().length() - 1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-        style.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(R.color.text_orange)), mList.get(position).getNickname().indexOf(key), mList.get(position).getNickname().indexOf(key) + key.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
-
+		try{
+			style.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(R.color.grey64)), 0, mList.get(position).getNickname().length() - 1, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+			style.setSpan(new ForegroundColorSpan(mContext.getResources().getColor(R.color.text_orange)), mList.get(position).getNickname().indexOf(key), mList.get(position).getNickname().indexOf(key) + key.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+		}catch (Exception e){e.printStackTrace();}
         holder.tvNickname.setText(style);
         return convertView;
 	}
