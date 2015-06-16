@@ -30,6 +30,7 @@ import com.miaotu.util.LogUtil;
 import com.miaotu.util.MD5;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
+import com.miaotu.view.LoadingDlg;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -46,6 +47,7 @@ import cn.sharesdk.wechat.friends.Wechat;
 public class ChooseLoginActivity extends BaseActivity implements View.OnClickListener,PlatformActionListener {
 private Button btnWechatRegister,btnOtherRegister,btnLogin;
     private Dialog dialog;
+    protected Dialog loadingDlg; // 加载对话框
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,7 +126,7 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
         if (plat == null) {
             return;
         }
-
+        loadingDlg = LoadingDlg.show(this);
         plat.setPlatformActionListener(this);
         // true不使用SSO授权，false使用SSO授权
         plat.SSOSetting(false);
@@ -239,11 +241,17 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
     @Override
     public void onError(Platform platform, int i, Throwable throwable) {
         LogUtil.d("登陆失败！");
+        if(loadingDlg!=null){
+            loadingDlg.dismiss();
+        }
     }
 
     @Override
     public void onCancel(Platform platform, int i) {
         LogUtil.d("登陆取消！");
+        if(loadingDlg!=null){
+            loadingDlg.dismiss();
+        }
     }
     //登陆
     private void login(final RegisterInfo registerInfo) {
@@ -309,6 +317,12 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
                 return HttpRequestUtil.getInstance().login(registerInfo);
             }
 
+            @Override
+            protected void finallyRun() {
+                if(loadingDlg!=null){
+                    loadingDlg.dismiss();
+                }
+            }
         }.execute();
     }
     class LoadIMInfoThread extends Thread{

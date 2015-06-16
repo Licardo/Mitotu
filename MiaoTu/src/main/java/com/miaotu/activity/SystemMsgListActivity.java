@@ -106,6 +106,7 @@ private TextView tvTitle,tvLeft;
             protected void onCompleteTask(RemindSysResult remindLikeResult) {
                 if(remindLikeResult.getCode() == BaseResult.SUCCESS){
                     remindSyses.addAll(remindLikeResult.getRemindSyses());
+
                     adapter.notifyDataSetChanged();
                 }else {
                     if(StringUtil.isBlank(remindLikeResult.getMsg())){
@@ -163,6 +164,7 @@ private TextView tvTitle,tvLeft;
             protected void onCompleteTask(DeleteTopicMessageResult deleteTopicMessageResult) {
                 if (deleteTopicMessageResult.getCode() == BaseResult.SUCCESS){
                     remindSyses.get(position).setStatus("1");
+                    adapter.notifyDataSetChanged();
                     Intent intent = new Intent(SystemMsgListActivity.this, SystemMsgDetailActivity.class);
                     intent.putExtra("msgtitle", remindSyses.get(position).getTitle());
                     intent.putExtra("msgdate", remindSyses.get(position).getCreated());

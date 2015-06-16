@@ -66,7 +66,7 @@ public class RemindSysListAdapter extends BaseAdapter{
         holder.tvTitle.setText(remindLikes.get(i).getTitle());
         holder.tvContent.setText(remindLikes.get(i).getContent().getContent());
         if ("1".equals(remindLikes.get(i).getStatus())){
-            holder.ivIdot.setVisibility(View.GONE);
+            holder.ivIdot.setVisibility(View.INVISIBLE);
         }else {
             holder.ivIdot.setVisibility(View.VISIBLE);
         }
