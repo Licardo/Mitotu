@@ -133,7 +133,7 @@ private void publish(){
                 wmsp.setShareType(Platform.SHARE_WEBPAGE);
                 wmsp.setTitle(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
                 wmsp.setText(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
-                wmsp.setImageUrl(headurl);
+                wmsp.setImageUrl(headurl + "200×200");
                 wmsp.setUrl("http://m.miaotu.com/ShareLine/?yid=" + yid);
                 Platform wechatmoments = ShareSDK.getPlatform(WechatMoments.NAME);
                 wechatmoments.setPlatformActionListener(new PlatFormListener());
@@ -144,7 +144,7 @@ private void publish(){
                 wcsp.setShareType(Platform.SHARE_WEBPAGE);
                 wcsp.setTitle(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
                 wcsp.setText(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
-                wcsp.setImageUrl(headurl);
+                wcsp.setImageUrl(headurl + "200×200");
                 wcsp.setUrl("http://m.miaotu.com/ShareLine/?yid=" + yid);
                 Platform wechat = ShareSDK.getPlatform(Wechat.NAME);
                 wechat.setPlatformActionListener(new PlatFormListener());
@@ -153,7 +153,7 @@ private void publish(){
             case R.id.rb_share_weibo:
                 SinaWeibo.ShareParams wbsp = new SinaWeibo.ShareParams();
                 wbsp.setText(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
-                wbsp.setImagePath(headurl);
+                wbsp.setImagePath(headurl + "200×200");
                 Platform weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
                 weibo.setPlatformActionListener(new PlatFormListener());
                 weibo.share(wbsp);
@@ -163,7 +163,7 @@ private void publish(){
                 qqsp.setTitle(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
                 qqsp.setTitleUrl("http://m.miaotu.com/ShareLine/?yid=" + yid); // 标题的超链接
                 qqsp.setText(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
-                qqsp.setImageUrl(headurl);
+                qqsp.setImageUrl(headurl + "200×200");
                 qqsp.setSite(getString(R.string.app_name));
                 qqsp.setSiteUrl("http://m.miaotu.com/ShareLine/?yid=" + yid);
 

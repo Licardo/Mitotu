@@ -383,8 +383,8 @@
         <activity
             android:name=".activity.PublishCustomTourActivity5"
             android:label="@string/title_activity_custom_tour"
-            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden" >
         </activity>
         <activity
             android:name=".activity.SearchActivity"
@@ -539,6 +539,14 @@
         <activity
             android:name=".activity.JoinFinishedActicity"
             android:label="@string/title_activity_join_finished_acticity" >
+        </activity>
+        <activity
+            android:name=".activity.SearchResultTogetherActivity"
+            android:label="@string/title_activity_search_result_together" >
+        </activity>
+        <activity
+            android:name=".activity.SearchResultCustomTourActicity"
+            android:label="@string/title_activity_search_result_custom_tour_acticity" >
         </activity>
     </application>
 

@@ -184,6 +184,13 @@ private View root;
         }
         switch (view.getId()) {
             case R.id.tv_custom_more:
+
+                break;
+            case R.id.tv_together_more:
+                Intent togetherIntent = new Intent(SearchResultTab1Fragment.this.getActivity(),
+                        SearchResultTogetherActivity.class);
+                togetherIntent.putExtra("key",((SearchActivity) getActivity()).getKey());
+                startActivity(togetherIntent);
                 break;
         }
     }
