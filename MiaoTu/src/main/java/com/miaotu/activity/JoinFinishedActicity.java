@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -21,7 +22,7 @@ import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 import cn.sharesdk.onekeyshare.OnekeyShareTheme;
 
-public class JoinFinishedActicity extends BaseActivity {
+public class JoinFinishedActicity extends BaseActivity implements View.OnClickListener{
 
     private TextView tvLeft,tvTilte;
     private WebView webView;
@@ -40,9 +41,11 @@ public class JoinFinishedActicity extends BaseActivity {
         tvLeft = (TextView) findViewById(R.id.tv_left);
         tvTilte = (TextView) findViewById(R.id.tv_title);
         webView = (WebView) findViewById(R.id.webview);
+        tvLeft.setOnClickListener(this);
     }
 
     private void initData(){
+        tvTilte.setText("报名完成");
         uid = getIntent().getStringExtra("uid");
         nickname = getIntent().getStringExtra("nickname");
         hearurl = getIntent().getStringExtra("headurl");
@@ -60,6 +63,15 @@ public class JoinFinishedActicity extends BaseActivity {
             }
         });
         webView.loadUrl("http://m.miaotu.com/App/joinRes/?uid="+uid+"&nickname="+nickname+"&headurl="+hearurl+"&gid="+gid+"&groupname="+gname+"&remark="+remark);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.tv_left:
+                finish();
+                break;
+        }
     }
 
     /**
