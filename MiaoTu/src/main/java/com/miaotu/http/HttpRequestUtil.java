@@ -988,6 +988,36 @@ public class HttpRequestUtil {
         return HttpDecoder.getForObject(getUrl("user/msg/activity_like"),
                 RemindLikeCustomResult.class, params);
     }
+
+    /**
+     * 获取评论一起去提醒
+     * @param token
+     * @return
+     */
+    public RemindLikeTogetherResult getRemindCommentTogetherList(String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("type","yueyou_reply"));
+        params.add(new BasicNameValuePair("page","1"));
+        params.add(new BasicNameValuePair("num","1000"));
+        return HttpDecoder.getForObject(getUrl("user/msg/yueyou_reply"),
+                RemindLikeTogetherResult.class, params);
+    }
+    /**
+     * 获取评论定制游提醒
+     * @param token
+     * @return
+     */
+    public RemindLikeCustomResult getRemindCommentCustomTourList(String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        params.add(new BasicNameValuePair("type","activity_reply"));
+        params.add(new BasicNameValuePair("page","1"));
+        params.add(new BasicNameValuePair("num","1000"));
+        return HttpDecoder.getForObject(getUrl("user/msg/activity_reply"),
+                RemindLikeCustomResult.class, params);
+    }
+
     /**
      * 获取参加一起去提醒
      * @param token
@@ -1095,6 +1125,30 @@ public class HttpRequestUtil {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token",token));
         return HttpDecoder.postForObject(getUrl("user/msg/delete/yueyou_like"),
+                BaseResult.class, params);
+    }
+
+    /**
+     * 清空关注提醒
+     * @param token
+     * @return
+     */
+    public BaseResult delAllCommentCustomTourRemind(String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        return HttpDecoder.postForObject(getUrl("user/msg/delete/activity_reply"),
+                BaseResult.class, params);
+    }
+
+    /**
+     * 清空评论一起去提醒
+     * @param token
+     * @return
+     */
+    public BaseResult delAllCommentTogetherRemind(String token){
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token",token));
+        return HttpDecoder.postForObject(getUrl("user/msg/delete/yueyou_reply"),
                 BaseResult.class, params);
     }
     /**
