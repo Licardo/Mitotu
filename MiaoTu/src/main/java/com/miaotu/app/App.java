@@ -32,6 +32,8 @@ import com.amap.api.location.AMapLocationListener;
 import com.amap.api.location.LocationManagerProxy;
 import com.amap.api.location.LocationProviderProxy;
 import com.easemob.chat.EMChat;
+import com.miaotu.activity.CityListActivity;
+import com.miaotu.activity.FirstPageFragment;
 import com.miaotu.util.LogUtil;
 
 public class App extends Application implements
@@ -335,6 +337,8 @@ public class App extends Application implements
 			writePreference("latitude","30.312021");
 			writePreference("longitude","120.255116");
 			writePreference("located_city",amapLocation.getCity() +"");
+			FirstPageFragment.getInstance().refreshCity();
+			CityListActivity.getInstance().refreshCity();
 //			mLocationCountyTextView.setText(amapLocation.getDistrict());
 //			mLocationRoadTextView.setText(amapLocation.getRoad());
 //			mLocationPOITextView.setText(amapLocation.getPoiName());

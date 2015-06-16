@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.miaotu.R;
+import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 
 public class FirstPageFragment extends BaseFragment implements View.OnClickListener {
@@ -26,16 +27,42 @@ private View root;
     private RadioGroup radioGroup;
     private LinearLayout layoutSearch;
     private TextView tvRight;
+    private static FirstPageFragment instance;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         root = inflater.inflate(R.layout.fragment_first_page, container, false);
+        instance = FirstPageFragment.this;
         findView();
         bindView();
         init();
         return root;
     }
+    public static FirstPageFragment getInstance(){
+        return instance;
+    }
+    public void refreshCity(){
+        try{
+            if(!StringUtil.isEmpty(readPreference("selected_city"))){
+                if(readPreference("selected_city").length()>4){
+                    tvRight.setText(readPreference("selected_city").substring(0,3)+"...");
+                }else{
+                    tvRight.setText(readPreference("selected_city"));
+                }
+            }else if(!StringUtil.isEmpty(readPreference("located_city"))){
+                if(readPreference("located_city").length()>4){
+                    tvRight.setText(readPreference("located_city").substring(0,3)+"...");
+                }else{
+                    tvRight.setText(readPreference("located_city"));
+                }
+            }else{
+                tvRight.setText("定位中...");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -68,10 +95,20 @@ private View root;
 
     private void init() {
         fragmentManager = getChildFragmentManager();
-        if(readPreference("located_city").length()>4){
-            tvRight.setText(readPreference("located_city").substring(0,3)+"...");
+        if(!StringUtil.isEmpty(readPreference("selected_city"))){
+            if(readPreference("selected_city").length()>4){
+                tvRight.setText(readPreference("selected_city").substring(0,3)+"...");
+            }else{
+                tvRight.setText(readPreference("selected_city"));
+            }
+        }else if(!StringUtil.isEmpty(readPreference("located_city"))){
+            if(readPreference("located_city").length()>4){
+                tvRight.setText(readPreference("located_city").substring(0,3)+"...");
+            }else{
+                tvRight.setText(readPreference("located_city"));
+            }
         }else{
-            tvRight.setText(readPreference("located_city"));
+                tvRight.setText("定位中...");
         }
         setTabSelection(0);
     }
@@ -158,11 +195,11 @@ private View root;
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == 1) {
-            ((MainActivity) getActivity()).writePreference("located_city", data.getStringExtra("city"));
-            if(readPreference("located_city").length()>4){
-                tvRight.setText(readPreference("located_city").substring(0,4)+"...");
+            ((MainActivity) getActivity()).writePreference("selected_city", data.getStringExtra("city"));
+            if(readPreference("selected_city").length()>4){
+                tvRight.setText(readPreference("selected_city").substring(0,4)+"...");
             }else{
-                tvRight.setText(readPreference("located_city"));
+                tvRight.setText(readPreference("selected_city"));
             }
         }
         switch (resultCode) {
