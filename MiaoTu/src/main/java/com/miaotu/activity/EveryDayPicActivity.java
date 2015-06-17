@@ -175,7 +175,10 @@ private ImageView ivPic,ivShare,ivDownload;
                 CommonUtils.launchActivity(EveryDayPicActivity.this, PhotoPreviewActivity.class, bundle);
                 break;
             case R.id.iv_share:
-                showShare();
+                Intent shareintent = new Intent(EveryDayPicActivity.this, HomeShareActivity.class);
+                shareintent.putExtra("url", url);
+                startActivity(shareintent);
+//                showShare();
                 break;
             case R.id.iv_download:
                 UrlImageViewHelper.loadUrlDrawable(EveryDayPicActivity.this, url, new UrlImageViewCallback() {
