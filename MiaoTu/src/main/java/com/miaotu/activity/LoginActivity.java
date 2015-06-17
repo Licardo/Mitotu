@@ -136,13 +136,13 @@ private void init(){
                     Calendar calendar = Calendar.getInstance();
                     SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
                     String sysDatetime = fmt.format(calendar.getTime());
-//                    if(readPreference("everyday").equals(sysDatetime)){
-//                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-//                        startActivity(intent);
-//                    }else{
+                    if(readPreference("everyday").equals(sysDatetime)){
+                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                        startActivity(intent);
+                    }else{
                         Intent intent = new Intent(LoginActivity.this,EveryDayPicActivity.class);
                         startActivity(intent);
-//                    }
+                    }
                     setResult(1);
                     finish();
                 } else {

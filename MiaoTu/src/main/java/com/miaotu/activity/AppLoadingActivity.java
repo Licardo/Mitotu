@@ -32,6 +32,7 @@ import java.util.Calendar;
 public class AppLoadingActivity extends BaseActivity {
     /** Called when the activity is first created. */
 	private static final int sleepTime = 1888;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
      // TODO Auto-generated method stub
