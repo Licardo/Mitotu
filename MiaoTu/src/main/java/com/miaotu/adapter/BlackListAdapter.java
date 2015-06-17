@@ -7,12 +7,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.easemob.util.DateUtils;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.model.BlackInfo;
 import com.miaotu.result.BlackResult;
 import com.miaotu.view.CircleImageView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -60,7 +63,13 @@ public class BlackListAdapter extends BaseAdapter{
         }
         UrlImageViewHelper.setUrlDrawable(holder.ivPhoto,
                 blackInfos.get(i).getHeadurl(), R.drawable.default_avatar);
-        holder.tvDate.setText(blackInfos.get(i).getCreated());
+        try {
+            holder.tvDate.setText(DateUtils.getTimestampString(
+                    new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(blackInfos.get(i).getCreated())));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         holder.tvName.setText(blackInfos.get(i).getNickname());
         return view;
     }

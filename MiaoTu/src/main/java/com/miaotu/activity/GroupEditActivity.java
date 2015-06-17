@@ -37,6 +37,7 @@ public class GroupEditActivity extends BaseActivity implements OnClickListener {
     private GroupUserAdapter adapter;
     private List<GroupUserInfo> memberList;
     private String gid;
+    private TextView tvGroupCount;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class GroupEditActivity extends BaseActivity implements OnClickListener {
 	private void findView() {
         tvLeft = (TextView) findViewById(R.id.tv_left);
 		tvTitle = (TextView) findViewById(R.id.tv_title);
+		tvGroupCount = (TextView) findViewById(R.id.tv_groupcount);
 
         etGroupName = (EditText) findViewById(R.id.et_groupname);
         etAnnoncement = (EditText) findViewById(R.id.et_groupnotice);
@@ -140,10 +142,12 @@ public class GroupEditActivity extends BaseActivity implements OnClickListener {
                     memberList.clear();
                     if (result.getGroupUserInfoList() == null){
                         adapter.notifyDataSetChanged();
+                        tvGroupCount.setText("群成员(0)");
                         return;
                     }
                     memberList.addAll(result.getGroupUserInfoList());
                     adapter.notifyDataSetChanged();
+                    tvGroupCount.setText("群成员(" + result.getGroupUserInfoList().size() + ")");
                 }else{
                     if(!StringUtil.isEmpty(result.getMsg())){
                         showToastMsg(result.getMsg());

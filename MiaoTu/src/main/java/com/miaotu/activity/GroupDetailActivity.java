@@ -38,6 +38,7 @@ public class GroupDetailActivity extends BaseActivity implements OnClickListener
     private String gid;
     private GroupUserAdapter adapter;
     private List<GroupUserInfo> groupUserInfos;
+    private TextView tvGroupCount;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,7 @@ public class GroupDetailActivity extends BaseActivity implements OnClickListener
         btnDismiss = (TextView) findViewById(R.id.btn_dismiss);
         tvAnnoncement = (TextView) findViewById(R.id.tv_annoncement);
         lvGroupMember = (ListView) findViewById(R.id.lv_group_member);
+        tvGroupCount = (TextView) findViewById(R.id.tv_groupcount);
 	}
 
 	private void bindView() {
@@ -78,7 +80,7 @@ public class GroupDetailActivity extends BaseActivity implements OnClickListener
 	}
 
 	private void initView() {
-		tvTitle.setText("团资料");
+		tvTitle.setText("群资料");
         tvRight.setText("管理");
 	}
     private void init(){
@@ -140,7 +142,7 @@ public class GroupDetailActivity extends BaseActivity implements OnClickListener
         }
         GroupDetailInfo info = result.getInfolist();
         tvGroupName.setText(info.getName());
-        tvGroupNo.setText("团号：" + info.getGid());
+        tvGroupNo.setText("群号：" + info.getGid());
         tvAnnoncement.setText(info.getNotice());
         if(info.getIsowner().equals("true")){
             tvRight.setText("管理");
@@ -172,10 +174,12 @@ public class GroupDetailActivity extends BaseActivity implements OnClickListener
                     groupUserInfos.clear();
                     if (result.getGroupUserInfoList() == null){
                         adapter.notifyDataSetChanged();
+                        tvGroupCount.setText("群成员(0)");
                         return;
                     }
                     groupUserInfos.addAll(result.getGroupUserInfoList());
                     adapter.notifyDataSetChanged();
+                    tvGroupCount.setText("群成员(" + result.getGroupUserInfoList().size()+")");
                 }else{
                     if(!StringUtil.isEmpty(result.getMsg())){
                         showToastMsg(result.getMsg());

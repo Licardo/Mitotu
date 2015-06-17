@@ -79,13 +79,14 @@ public class TopicMessageAdapter extends BaseAdapter {
         }
         UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto,
                 mList.get(position).getContent().getHeadurl(),
-                R.drawable.icon_default_head);
+                R.drawable.default_avatar);
         UrlImageViewHelper.setUrlDrawable(holder.ivPhoto,
                 mList.get(position).getContent().getPicurl());
         holder.tvName.setText(mList.get(position).getContent().getNickname());
         holder.tvStatus.setText(mList.get(position).getTitle());
         try {
-            holder.tvTime.setText(DateUtils.getTimestampString(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(mList.get(position).getCreated())));
+            holder.tvTime.setText(DateUtils.getTimestampString(
+                    new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(mList.get(position).getCreated())));
         } catch (ParseException e) {
             e.printStackTrace();
         }
