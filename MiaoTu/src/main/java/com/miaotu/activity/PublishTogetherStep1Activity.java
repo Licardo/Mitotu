@@ -159,7 +159,7 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
         photoList = new ArrayList<>();
         files = new ArrayList<>();
         tvStartDate.setText(Calendar.getInstance().get(Calendar.YEAR) + "-" + (Calendar.getInstance().get(Calendar.MONTH) + 1) + "-" + Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-        tvEndDate.setText(Calendar.getInstance().get(Calendar.YEAR) + "-" + (Calendar.getInstance().get(Calendar.MONTH) + 1) + "-" + Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+//        tvEndDate.setText(Calendar.getInstance().get(Calendar.YEAR) + "-" + (Calendar.getInstance().get(Calendar.MONTH) + 1) + "-" + Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         publishTogether = new PublishTogether();
     }
 
@@ -288,6 +288,10 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
         }
         if (StringUtil.isBlank(tvCount.getText().toString())){
             showToastMsg("选择旅伴人数");
+            return false;
+        }
+        if (StringUtil.isBlank(tvEndDate.getText().toString())){
+            showToastMsg("选择结束日期");
             return false;
         }
         return true;

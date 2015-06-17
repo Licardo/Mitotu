@@ -19,6 +19,7 @@ import com.easemob.exceptions.EaseMobException;
 import com.miaotu.R;
 import com.miaotu.util.LogUtil;
 import com.miaotu.util.MD5;
+import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 
 import java.text.SimpleDateFormat;
@@ -35,19 +36,19 @@ public class AppLoadingActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
      // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-//        if(readPreference("first") == null || "".equals(readPreference("first"))) {
-//        	writePreference("first", "first");
-//        	Intent i = new Intent(this,FirstGuideActivity.class);
-//        	this.startActivity(i);
-//        	AppLoadingActivity.this.finish();
-//            return;
-//        }
+
         // 取消状态栏
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_loading);
 
-
+        if(StringUtil.isBlank(readPreference("isFirst"))) {
+            writePreference("isFirst", "first");
+            Intent i = new Intent(this,FirstGuideActivity.class);
+            this.startActivity(i);
+            AppLoadingActivity.this.finish();
+            return;
+        }
 
         // 三秒钟之后进入login
 //        ImageView ivLoadingMiao = (ImageView) this.findViewById(R.id.iv_loading_miao);
