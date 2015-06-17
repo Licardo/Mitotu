@@ -75,6 +75,10 @@ public class FeedBackActivity extends BaseActivity implements View.OnClickListen
             case R.id.btn_submit:
                 String email = etEmail.getText().toString().trim();
                 String content = etContent.getText().toString().trim();
+                if (StringUtil.isBlank(email)){
+                    showToastMsg("请输入邮箱");
+                    return;
+                }
                 if(!isEmail(email)){
                     showToastMsg("邮箱格式不正确");
                     return;

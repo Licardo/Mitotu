@@ -228,7 +228,7 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
                         startdate = sdf.parse(currentYear + "-" + currentMonth + "-"
                                 + currentDay);
                         if (compareDate(startdate, enddate)){
-                            showToastMsg("不能比结束日期大");
+                            showToastMsg("时光机还未发明 返回时间没法早于出发时间哦");
                             ((TextView)parent).setText("");
                         }else {
                             ((TextView)parent).setText(currentYear + "-" + currentMonth + "-"
@@ -240,13 +240,14 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
                 }else { //结束日期
                     if (StringUtil.isBlank(tvStartDate.getText().toString())){
                         showToastMsg("选择开始日期");
+                        ((TextView)parent).setText("");
                     }else {
                         try {
                             startdate = sdf.parse(tvStartDate.getText().toString());
                             enddate = sdf.parse(currentYear + "-" + currentMonth + "-"
                                     + currentDay);
                             if (compareDate(startdate, enddate)){
-                                showToastMsg("不能比开始日期小");
+                                showToastMsg("时光机还未发明 返回时间没法早于出发时间哦");
                                 ((TextView)parent).setText("");
                             }else {
                                 ((TextView)parent).setText(currentYear + "-" + currentMonth + "-"
