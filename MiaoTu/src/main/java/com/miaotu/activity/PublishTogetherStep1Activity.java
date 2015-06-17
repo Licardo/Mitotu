@@ -47,8 +47,11 @@ import com.photoselector.ui.PhotoSelectorActivity;
 import com.photoselector.util.CommonUtils;
 
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import kankan.wheel.widget.OnWheelChangedListener;
@@ -161,7 +164,8 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
     }
 
     // 获取生日dialog
-    private void getDateDialog(final View parent) {
+    //flag true 開始日期 false 結束日期
+    private void getDateDialog(final View parent, final boolean flag) {
         // 为dialog的listview赋值
         LayoutInflater lay = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -213,8 +217,46 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
                 if (currentDay.length() == 1) {
                     currentDay = "0" + currentDay;
                 }
-                ((TextView)parent).setText(currentYear + "-" + currentMonth + "-"
-                        + currentDay);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date startdate = null;
+                Date enddate = null;
+                if (flag){  //开始日期
+                    ((TextView)parent).setText(currentYear + "-" + currentMonth + "-"
+                            + currentDay);
+                    try {
+                        enddate = sdf.parse(tvEndDate.getText().toString());
+                        startdate = sdf.parse(currentYear + "-" + currentMonth + "-"
+                                + currentDay);
+                        if (compareDate(startdate, enddate)){
+                            showToastMsg("不能比结束日期大");
+                            ((TextView)parent).setText("");
+                        }else {
+                            ((TextView)parent).setText(currentYear + "-" + currentMonth + "-"
+                                    + currentDay);
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }else { //结束日期
+                    if (StringUtil.isBlank(tvStartDate.getText().toString())){
+                        showToastMsg("选择开始日期");
+                    }else {
+                        try {
+                            startdate = sdf.parse(tvStartDate.getText().toString());
+                            enddate = sdf.parse(currentYear + "-" + currentMonth + "-"
+                                    + currentDay);
+                            if (compareDate(startdate, enddate)){
+                                showToastMsg("不能比开始日期小");
+                                ((TextView)parent).setText("");
+                            }else {
+                                ((TextView)parent).setText(currentYear + "-" + currentMonth + "-"
+                                        + currentDay);
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
                 dialog.dismiss();
             }
         });
@@ -422,10 +464,10 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
 //                break;
             case R.id.tv_start_date:
                 //出发日期
-                getDateDialog(view);
+                getDateDialog(view, true);
                 break;
             case R.id.tv_end_date:
-                getDateDialog(view);
+                getDateDialog(view, false);
                 //结束日期
                 break;
             case R.id.btn_tag_add:
@@ -509,5 +551,18 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
                 dialog.dismiss();
             }
         });
+    }
+
+    public boolean compareDate(Date d1, Date d2) {
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
+        c1.setTime(d1);
+        c2.setTime(d2);
+
+        int result = c1.compareTo(c2);
+        if (result > 0)
+            return true;
+        else
+            return false;
     }
 }

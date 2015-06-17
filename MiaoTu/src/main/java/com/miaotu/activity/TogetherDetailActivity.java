@@ -243,16 +243,8 @@ private Together together;
             ivLine.setVisibility(View.VISIBLE);
         }
 
-        if (result.getTogether().getJoinList() == null){
-            tvJoined.setText("报名 0");
-        }else {
-            tvJoined.setText("报名 " + result.getTogether().getJoinList().size());
-        }
-        if (result.getTogether().getLikeList() == null){
-            tvLiked.setText("喜欢 0");
-        }else {
-            tvLiked.setText("喜欢 " + result.getTogether().getLikeList().size());
-        }
+        tvJoined.setText("报名 " + result.getTogether().getJoinCount());
+        tvLiked.setText("喜欢 " + result.getTogether().getLikeCount());
         tvJoined.setTextColor(getResources().getColor(R.color.grey));
 
         tvStartDate.setText(result.getTogether().getStartDate());
