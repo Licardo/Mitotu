@@ -237,6 +237,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginLeft="30dp"
+                android:layout_marginRight="20dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:background="@drawable/bg_edittext"
