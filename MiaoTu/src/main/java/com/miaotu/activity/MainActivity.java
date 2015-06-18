@@ -56,6 +56,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import cn.jpush.android.api.JPushInterface;
+import cn.sharesdk.framework.Platform;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.sina.weibo.SinaWeibo;
+import cn.sharesdk.tencent.qzone.QZone;
+import cn.sharesdk.wechat.friends.Wechat;
 
 public class MainActivity extends BaseFragmentActivity implements
         OnClickListener {
@@ -730,6 +735,39 @@ public class MainActivity extends BaseFragmentActivity implements
                         // 显示帐号在其他设备登陆
                         showToastMsg("您的账户已经在其他设备登陆，请重新登陆！");
                         writePreference("login_state", "out");
+                        writePreference("login_state", "out");
+                        writePreference("gender", "");
+                        writePreference("tour_join_count","0");
+                        writePreference("tour_like_name","");
+                        writePreference("tour_join_name","");
+                        writePreference("like_date","");
+                        writePreference("tour_like_date","");
+                        writePreference("tour_join_date","");
+                        writePreference("im_content","");
+                        writePreference("im_date","");
+                        writePreference("sys_date","");
+                        writePreference("sys_name","");
+                        writePreference("sys_count","");
+                        writePreference("tour_comment_date","");
+                        writePreference("tour_comment_name","");
+                        writePreference("tour_comment_count","0");
+                        JPushInterface.stopPush(MainActivity.this);
+                        ShareSDK.initSDK(getApplicationContext());
+                        Platform qzone = ShareSDK.getPlatform(MainActivity.this, QZone.NAME);
+                        if(qzone.isValid()) {
+                            qzone.removeAccount();
+                        }
+                        Platform wechat = ShareSDK.getPlatform(MainActivity.this, Wechat.NAME);
+                        if(wechat.isValid()) {
+                            wechat.removeAccount();
+                        }
+                        Platform weibo = ShareSDK.getPlatform(MainActivity.this, SinaWeibo.NAME);
+                        if(weibo.isValid()) {
+                            weibo.removeAccount();
+                        }
+                        Intent intent = new Intent(MainActivity.this,ChooseLoginActivity.class);
+                        startActivity(intent);
+                        finish();
                     } else {
                         //"连接不到聊天服务器"
                     }
