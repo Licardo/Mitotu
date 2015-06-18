@@ -378,7 +378,11 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
             @Override
             protected void onCompleteTask(BaseResult baseResult) {
                 if (baseResult.getCode() == BaseResult.SUCCESS) {
-                    int count = Integer.parseInt(readPreference("followcount"));
+                    int count = 0;
+                    if (!StringUtil.isBlank(readPreference("followcount"))){
+                        count = Integer.parseInt(readPreference("followcount"));
+                    }
+
                     if("true".equals(result.getPersonInfo().getIslike())){
                         changeBtnFollow(false);
                         result.getPersonInfo().setIslike("false");

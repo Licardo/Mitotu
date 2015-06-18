@@ -81,13 +81,13 @@ public class RemindCommentTourActivity extends BaseFragmentActivity implements V
                 break;
             case 1:
                 if (mTab02 == null) {
-                    // 如果MessageFragment为空，则创建一个并添加到界面上
-                    mTab02 = new RemindCommentCustomFragment();
-                    transaction.add(R.id.id_content, mTab02);
-                } else {
-                    // 如果MessageFragment不为空，则直接将它显示出来
-                    transaction.show(mTab02);
-                }
+                // 如果MessageFragment为空，则创建一个并添加到界面上
+                mTab02 = new RemindCommentCustomFragment();
+                transaction.add(R.id.id_content, mTab02);
+            } else {
+                // 如果MessageFragment不为空，则直接将它显示出来
+                transaction.show(mTab02);
+            }
                 break;
         }
         transaction.commitAllowingStateLoss(); //为了解决换量页面返回时报的错误，详情见http://blog.csdn.net/ranxiedao/article/details/8214936

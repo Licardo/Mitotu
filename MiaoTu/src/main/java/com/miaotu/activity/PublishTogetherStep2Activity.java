@@ -153,7 +153,9 @@ private void publish(){
             case R.id.rb_share_weibo:
                 SinaWeibo.ShareParams wbsp = new SinaWeibo.ShareParams();
                 wbsp.setText(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
-                wbsp.setImagePath(headurl + "200×200");
+                if (!StringUtil.isBlank(headurl)){
+                    wbsp.setImagePath(headurl + "200×200");
+                }
                 Platform weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
                 weibo.setPlatformActionListener(new PlatFormListener());
                 weibo.share(wbsp);

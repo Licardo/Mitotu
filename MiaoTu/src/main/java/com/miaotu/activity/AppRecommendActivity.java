@@ -19,7 +19,7 @@ public class AppRecommendActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_app_recommend);
         webView = (WebView) findViewById(R.id.webview);
-        webView.loadUrl(HttpRequestUtil.getServer()+"configs/exchange");
+        webView.loadUrl("http://112.124.11.134/configs/exchange");
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setDownloadListener(new DownloadListener() {
             @Override
