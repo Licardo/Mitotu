@@ -61,7 +61,7 @@ import com.miaotu.util.Util;
 public class HttpRequestUtil {
     //    正式环境
 	private static final String SYM_HOST = "http://api.miaotu.com/v1/";
-	private static final String IMG_SYM_HOST = "http://img2.miaotu.com/upload/picture";
+	private static final String IMG_SYM_HOST = "http://img2.miaotu.com/";
     //测试环境
 //    private static final String SYM_HOST = "http://121.41.105.30:8011/v1/";
 //    private static final String IMG_SYM_HOST = "http://img1.miaotu.com/";

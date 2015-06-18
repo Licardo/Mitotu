@@ -110,6 +110,26 @@ public class PublishStateActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void init(){
+        View emptyview = LayoutInflater.from(this).inflate(R.layout.activity_empty, null);
+        TextView tvContent1 = (TextView) emptyview.findViewById(R.id.tv_content1);
+        TextView tvContent2 = (TextView) emptyview.findViewById(R.id.tv_content2);
+        TextView tvTip1 = (TextView) emptyview.findViewById(R.id.tv_tip1);
+        TextView tvTip2 = (TextView) emptyview.findViewById(R.id.tv_tip2);
+        Button btnSearch = (Button) emptyview.findViewById(R.id.btn_search);
+        btnSearch.setVisibility(View.GONE);
+        if (getIntent().getBooleanExtra("flag", false)){
+            tvContent2.setVisibility(View.VISIBLE);
+            tvTip2.setVisibility(View.VISIBLE);
+            tvContent1.setText("你若不发动态");
+            tvContent2.setText("我该如何勾搭");
+            tvTip1.setText("你还没有发过动态");
+            tvTip2.setText("快去“妙友”扯扯淡，和别人一起玩！");
+        }else {
+            tvContent1.setText("TA还没有发布动态");
+            tvTip1.setVisibility(View.GONE);
+        }
+        lvTopics.setEmptyView(emptyview);
+
         topicList=new ArrayList<>();
         token = readPreference("token");
         uid = getIntent().getStringExtra("uid");
