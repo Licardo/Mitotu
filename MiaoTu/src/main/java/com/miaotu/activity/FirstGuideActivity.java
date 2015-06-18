@@ -52,7 +52,7 @@ public class FirstGuideActivity extends BaseFragmentActivity implements OnClickL
 
 			@Override
 			public int getCount() {
-				return mFragments.size();
+				return mFragments == null?0:mFragments.size();
 			}
 
 			@Override

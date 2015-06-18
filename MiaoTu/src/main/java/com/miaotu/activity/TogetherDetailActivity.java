@@ -485,7 +485,8 @@ private Together together;
             }
 
         }.execute();
-    } /**
+    }
+    /**
      * 分享到sns社区平台
      */
     private void showShare() {

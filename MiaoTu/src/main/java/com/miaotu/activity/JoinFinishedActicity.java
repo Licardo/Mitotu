@@ -26,7 +26,7 @@ public class JoinFinishedActicity extends BaseActivity implements View.OnClickLi
 
     private TextView tvLeft,tvTilte;
     private WebView webView;
-    private String uid,nickname,hearurl,gid,gname,remark;
+    private String uid,nickname,hearurl,gid,gname,remark,yid,picurl;
     Handler mHandler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,8 @@ public class JoinFinishedActicity extends BaseActivity implements View.OnClickLi
         gid = getIntent().getStringExtra("gid");
         gname = getIntent().getStringExtra("groupname");
         remark = getIntent().getStringExtra("remark");
+        yid = getIntent().getStringExtra("yid");
+        picurl = getIntent().getStringExtra("picurl");
         WebSettings wSet = webView.getSettings();
         wSet.setJavaScriptEnabled(true);
         webView.addJavascriptInterface(new JSInterface(), "native");
@@ -118,23 +120,22 @@ public class JoinFinishedActicity extends BaseActivity implements View.OnClickLi
 //        oks.setNotification(R.drawable.ic_launcher,
 //                getString(R.string.app_name));
             // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
-            oks.setTitle(remark + "\n http://m.miaotu.com/ShareLine/custom/?aid=" + getIntent().getStringExtra("id"));
+            oks.setTitle(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
             // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-            oks.setTitleUrl("http://m.miaotu.com/ShareLine/custom/?aid=" + getIntent().getStringExtra("id"));
+            oks.setTitleUrl("http://m.miaotu.com/ShareLine/?yid=" + yid);
             // text是分享文本，所有平台都需要这个字段
-            oks.setText(remark + "\n http://m.miaotu.com/ShareLine/custom/?aid=" + getIntent().getStringExtra("id"));
+            oks.setText(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
             // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
 
-            oks.setImageUrl(getIntent().getStringExtra("picurl")
-                    + "200x200");
+            oks.setImageUrl(picurl + "200x200");
             // url仅在微信（包括好友和朋友圈）中使用
-            oks.setUrl("http://m.miaotu.com/ShareLine/custom/?aid=" + getIntent().getStringExtra("id"));
+            oks.setUrl("http://m.miaotu.com/ShareLine/?yid=" + yid);
             // comment是我对这条分享的评论，仅在人人网和QQ空间使用
-            oks.setComment(remark + "\n http://m.miaotu.com/ShareLine/custom/?aid=" + getIntent().getStringExtra("id"));
+            oks.setComment(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
             // site是分享此内容的网站名称，仅在QQ空间使用
             oks.setSite(getString(R.string.app_name));
             // siteUrl是分享此内容的网站地址，仅在QQ空间使用
-            oks.setSiteUrl("http://m.miaotu.com/ShareLine/custom/?aid=" +getIntent().getStringExtra("id"));
+            oks.setSiteUrl("http://m.miaotu.com/ShareLine/?yid=" + yid);
 
             // 启动分享GUI
             oks.show(JoinFinishedActicity.this);
