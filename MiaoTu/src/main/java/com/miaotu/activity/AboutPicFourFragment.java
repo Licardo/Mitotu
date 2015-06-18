@@ -41,14 +41,6 @@ public class AboutPicFourFragment extends BaseFragment {
     @SuppressLint("NewApi")
     private void init() {
         ivAboutPic.setBackgroundResource(R.drawable.bg_guide_4);
-        ivAboutPic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(AboutPicFourFragment.this.getActivity(), AppLoadingActivity.class);
-                startActivity(intent);
-                AboutPicFourFragment.this.getActivity().finish();
-            }
-        });
     }
 
 }

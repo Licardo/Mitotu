@@ -146,7 +146,12 @@ public class JPushReceiver extends BroadcastReceiver {
 				SharedPreferences.Editor editor = sharedPreferences.edit();
 				editor.putString("tour_like_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + ""))));
 				editor.putString("tour_like_name", "" + likeMessage.getNickname());
-				editor.putString("tour_like_count", "" + (1+Integer.parseInt(sharedPreferences.getString("tour_like_count", "0"))));
+				try {
+					editor.putString("tour_like_count", "" + (1+Integer.parseInt(sharedPreferences.getString("tour_like_count", "0"))));
+				}catch (Exception e){
+					e.printStackTrace();
+					editor.putString("tour_like_count", "1");
+				}
 				editor.commit();
                 LogUtil.d("插入收到的系统消息：喜欢约游");
                 Intent msgIntent = new Intent(ACTION_JPUSH_SYS_MESSAGE_RECIEVE);
@@ -161,7 +166,12 @@ public class JPushReceiver extends BroadcastReceiver {
 				SharedPreferences.Editor editor = sharedPreferences.edit();
 				editor.putString("tour_join_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + ""))));
 				editor.putString("tour_join_name", "" + likeMessage.getContent());
-				editor.putString("tour_join_count", "" + (1+Integer.parseInt(sharedPreferences.getString("tour_join_count", "0"))));
+				try {
+					editor.putString("tour_join_count", "" + (1+Integer.parseInt(sharedPreferences.getString("tour_join_count", "0"))));
+				}catch (Exception e){
+					e.printStackTrace();
+					editor.putString("tour_join_count", "1");
+				}
 				editor.commit();
 				LogUtil.d("插入收到的系统消息：参加约游");
 				Intent msgIntent = new Intent(ACTION_JPUSH_SYS_MESSAGE_RECIEVE);
@@ -174,9 +184,14 @@ public class JPushReceiver extends BroadcastReceiver {
 				SharedPreferences sharedPreferences = mContext.getSharedPreferences("COMMON",
 						mContext.MODE_PRIVATE);
 				SharedPreferences.Editor editor = sharedPreferences.edit();
-				editor.putString("tour_comment_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time")+""))));
+				editor.putString("tour_comment_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + ""))));
 				editor.putString("tour_comment_name", "" + likeMessage.getNickname());
-				editor.putString("tour_comment_count", "" + (1+Integer.parseInt(sharedPreferences.getString("tour_comment_count", "0"))));
+				try {
+					editor.putString("tour_comment_count", "" + (1+Integer.parseInt(sharedPreferences.getString("tour_comment_count", "0"))));
+				}catch (Exception e){
+					e.printStackTrace();
+					editor.putString("tour_comment_count", "1");
+				}
 				editor.commit();
 				LogUtil.d("插入收到的系统消息：评论约游");
 				Intent msgIntent = new Intent(ACTION_JPUSH_SYS_MESSAGE_RECIEVE);
@@ -189,9 +204,10 @@ public class JPushReceiver extends BroadcastReceiver {
 				SharedPreferences sharedPreferences = mContext.getSharedPreferences("COMMON",
 						mContext.MODE_PRIVATE);
 				SharedPreferences.Editor editor = sharedPreferences.edit();
+
 				editor.putString("sys_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + ""))));
 				editor.putString("sys_name", "" + likeMessage.getContent());
-				try{
+				try {
 					editor.putString("sys_count", "" + (1+Integer.parseInt(sharedPreferences.getString("sys_count", "0"))));
 				}catch (Exception e){
 					e.printStackTrace();

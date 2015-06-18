@@ -26,8 +26,8 @@ public class FirstGuideActivity extends BaseFragmentActivity implements OnClickL
 	private FragmentPagerAdapter mAdapter;
 	private List<Fragment> mFragments = new ArrayList<Fragment>();
     private static FirstGuideActivity firstGuideActivity;
-	private int lastValue = -1;
-	private int pos,state;
+	private boolean isScrolling;	//是否滑动
+	private boolean isFromIntroduce;//是否从设置介绍界面过来
 
     public static FirstGuideActivity getFirstGuideActivity() {
         return firstGuideActivity;
@@ -67,25 +67,29 @@ public class FirstGuideActivity extends BaseFragmentActivity implements OnClickL
 
 			@Override
 			public void onPageSelected(final int position) {
-				pos = position;
+
 			}
 
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
-//				if (lastValue > arg2) {
-//					// 递增，向左侧滑动
-//					if (pos == 3 && state == 1){
-//						Intent intent = new Intent(FirstGuideActivity.this, AppLoadingActivity.class);
-//						startActivity(intent);
-//						finish();
-//					}
-//				}
-//				lastValue = arg2;
+					if (arg0 == 3 && arg1 == 0 && arg2 == 0 && isScrolling){
+						if (isFromIntroduce){
+							finish();
+						}else {
+							Intent intent = new Intent(FirstGuideActivity.this, AppLoadingActivity.class);
+							startActivity(intent);
+							finish();
+						}
+					}
 			}
 
 			@Override
 			public void onPageScrollStateChanged(int arg0) {
-				state = arg0;
+				if (arg0 == 1){
+					isScrolling = true;
+				}else {
+					isScrolling = false;
+				}
 			}
 		});
 
@@ -109,6 +113,7 @@ public class FirstGuideActivity extends BaseFragmentActivity implements OnClickL
 	}
 
 	private void initView() {
+		isFromIntroduce = getIntent().getBooleanExtra("flag", false);
 		AboutPicOneFragment tab01 = new AboutPicOneFragment();
 		AboutPicTwoFragment tab02 = new AboutPicTwoFragment();
 		AboutPicThreeFragment tab03 = new AboutPicThreeFragment();
