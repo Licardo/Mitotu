@@ -157,7 +157,7 @@ private View root;
         };
     }
 //获取一起去
-    private void getTogether(final boolean isShow) {
+    public void getTogether(final boolean isShow) {
         new BaseHttpAsyncTask<Void, Void, CustomTourResult>(getActivity(), isShow) {
             @Override
             protected void onCompleteTask(CustomTourResult result) {
@@ -224,7 +224,11 @@ private View root;
             @Override
             protected CustomTourResult run(Void... params) {
                 page=1;
-                return HttpRequestUtil.getInstance().getCustomTourList(readPreference("token"), page + "", PAGECOUNT + "");
+                String city = "";
+                if(!StringUtil.isEmpty(readPreference("located_city"))){
+                    city=readPreference("located_city");
+                }
+                return HttpRequestUtil.getInstance().getCustomTourList(readPreference("token"),city, page + "", PAGECOUNT + "");
             }
 
             @Override
@@ -292,7 +296,11 @@ private View root;
             protected CustomTourResult run(Void... params) {
                 isLoadMore = true;
                 page+=1;
-                return HttpRequestUtil.getInstance().getCustomTourList(readPreference("token"), page + "", PAGECOUNT + "");
+                String city = "";
+                if(!StringUtil.isEmpty(readPreference("located_city"))){
+                    city=readPreference("located_city");
+                }
+                return HttpRequestUtil.getInstance().getCustomTourList(readPreference("token"),city, page + "", PAGECOUNT + "");
             }
 
             @Override
