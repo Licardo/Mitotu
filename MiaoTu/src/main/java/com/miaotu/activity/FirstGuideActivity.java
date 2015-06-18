@@ -72,15 +72,15 @@ public class FirstGuideActivity extends BaseFragmentActivity implements OnClickL
 
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
-				if (isFromIntroduce){
-					finish();
-				}else {
 					if (arg0 == 3 && arg1 == 0 && arg2 == 0 && isScrolling){
-						Intent intent = new Intent(FirstGuideActivity.this, AppLoadingActivity.class);
-						startActivity(intent);
-						finish();
+						if (isFromIntroduce){
+							finish();
+						}else {
+							Intent intent = new Intent(FirstGuideActivity.this, AppLoadingActivity.class);
+							startActivity(intent);
+							finish();
+						}
 					}
-				}
 			}
 
 			@Override
