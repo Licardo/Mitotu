@@ -69,6 +69,10 @@ private boolean validate(){
                         intent.putExtra("gid",together.getGroupId());
                         intent.putExtra("groupname",together.getGroupname());
                         intent.putExtra("remark",together.getComment());
+                        intent.putExtra("yid",together.getId());
+                        if (together.getPicList() != null && together.getPicList().size() > 0){
+                            intent.putExtra("picurl",together.getPicList().get(0));
+                        }
                         startActivity(intent);
                         setResult(1);
                     } else {
