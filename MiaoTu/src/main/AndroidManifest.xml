@@ -288,8 +288,8 @@
         <!-- Required. AppKey copied from Portal -->
         <meta-data
             android:name="EASEMOB_APPKEY"
-            android:value="miaotu#merryutest" />
-        <!-- android:value="miaotu#miaotu" /> -->
+         android:value="miaotu#miaotu" />
+            <!--android:value="miaotu#merryutest" />-->
         <!-- Required SDK核心功能 -->
         <service android:name="com.easemob.chat.EMChatService" />
 
