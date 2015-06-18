@@ -122,6 +122,13 @@ public class MessageFragment extends BaseFragment implements View.OnClickListene
         }else{
             ivCommentCount.setVisibility(View.GONE);
         }
+        //是否有系统消息
+        if(!StringUtil.isEmpty(readPreference("sys_count"))&&Integer.parseInt(readPreference("sys_count"))>0){
+            ivSysCount.setText(readPreference("sys_count"));
+            ivSysCount.setVisibility(View.VISIBLE);
+        }else{
+            ivSysCount.setVisibility(View.GONE);
+        }
 
         if(!StringUtil.isEmpty(readPreference("tour_like_name"))){
             tvLikeTourContent.setText("@" + readPreference("tour_like_name") + "喜欢您发布的线路了~");

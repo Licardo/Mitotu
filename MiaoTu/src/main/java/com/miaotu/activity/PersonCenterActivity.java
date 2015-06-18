@@ -313,6 +313,7 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                 Intent stateIntent = new Intent(PersonCenterActivity.this, PublishStateActivity.class);
                 stateIntent.putExtra("uid", uid);
                 stateIntent.putExtra("title","发布的动态");
+                stateIntent.putExtra("flag", isMine);
                 if (!isMine){
                     stateIntent.putExtra("title","TA的动态");
                 }
