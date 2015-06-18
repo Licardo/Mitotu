@@ -225,10 +225,10 @@ public class HttpDecoder {
 				}
 //				result = mapper.readValue(response
 //						.getEntity().getContent(), clz);
+				LogUtil.d(sb.toString());
 				if (null != sb) {
 					result = mapper.readValue(sb.toString(), clz);
 				}
-				LogUtil.d(sb.toString());
 			}
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
