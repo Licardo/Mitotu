@@ -60,11 +60,11 @@ import com.miaotu.util.Util;
 @SuppressLint("SimpleDateFormat")
 public class HttpRequestUtil {
     //    正式环境
-//	private static final String SYM_HOST = "http://api.miaotu.com/";
-//	private static final String IMG_SYM_HOST = "http://img2.miaotu.com/upload/picture";
+	private static final String SYM_HOST = "http://api.miaotu.com/v1/";
+	private static final String IMG_SYM_HOST = "http://img2.miaotu.com/upload/picture";
     //测试环境
-    private static final String SYM_HOST = "http://121.41.105.30:8011/v1/";
-    private static final String IMG_SYM_HOST = "http://img1.miaotu.com/";
+//    private static final String SYM_HOST = "http://121.41.105.30:8011/v1/";
+//    private static final String IMG_SYM_HOST = "http://img1.miaotu.com/";
 
     public static String getServer() {
         return SYM_HOST;
@@ -247,7 +247,8 @@ public class HttpRequestUtil {
         params.add(new BasicNameValuePair("token",token));
         params.add(new BasicNameValuePair("channel",channel));
         params.add(new BasicNameValuePair("order_no",orderNo));
-        return HttpDecoder.postForString("http://121.41.105.30:8011/v1/order/pay",
+        return HttpDecoder.postForString(
+                getUrl("order/pay"),
                 params);
 
     }

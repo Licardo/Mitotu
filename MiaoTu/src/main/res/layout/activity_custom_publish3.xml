@@ -60,7 +60,7 @@
                     android:textSize="14sp"
                     android:textColor="#646464"
                     android:singleLine="true"
-                    android:maxLength="20"
+                    android:maxLength="11"
                     android:hint="联系电话"
                     android:maxLines="11"
                     android:inputType="number"

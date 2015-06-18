@@ -168,7 +168,9 @@ private View root;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     mList.clear();
-                    mList.addAll(result.getTogetherList());
+                    if(result.getTogetherList()!=null){
+                        mList.addAll(result.getTogetherList());
+                    }
                     adapter.notifyDataSetChanged();
                     timer = new Timer();
                     timer.schedule(new TimerTask() {
