@@ -76,9 +76,9 @@ private void publish(){
                 if (result.getCode() == BaseResult.SUCCESS) {
                     showToastMsg("发布成功！");
                     String hearurl = "";
-                    if (result.getTogether().getPicList() != null &&
-                            result.getTogether().getPicList().size() > 0){
-                        hearurl = result.getTogether().getPicList().get(0).getUrl();
+                    if (publishTogether.getImg() != null &&
+                            publishTogether.getImg().split(",").length > 0){
+                        hearurl = publishTogether.getImg().split(",")[0];
                     }
                     rbSelected = (RadioButton)findViewById(rgShare.getCheckedRadioButtonId());
                     share(rbSelected.getId(),result.getTogether().getId(),
