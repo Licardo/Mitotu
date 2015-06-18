@@ -191,7 +191,12 @@ public class JPushReceiver extends BroadcastReceiver {
 				SharedPreferences.Editor editor = sharedPreferences.edit();
 				editor.putString("sys_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + ""))));
 				editor.putString("sys_name", "" + likeMessage.getContent());
-				editor.putString("sys_count", "" + (1+Integer.parseInt(sharedPreferences.getString("sys_count", "0"))));
+				try{
+					editor.putString("sys_count", "" + (1+Integer.parseInt(sharedPreferences.getString("sys_count", "0"))));
+				}catch (Exception e){
+					e.printStackTrace();
+					editor.putString("sys_count", "1");
+				}
 				editor.commit();
 				LogUtil.d("插入收到的系统消息：系统消息");
 				Intent msgIntent = new Intent(ACTION_JPUSH_SYS_MESSAGE_RECIEVE);

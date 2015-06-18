@@ -166,7 +166,9 @@ private View root;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
                     mList.clear();
-                    mList.addAll(result.getCustomTourList());
+                    if(result.getCustomTourList()!=null){
+                        mList.addAll(result.getCustomTourList());
+                    }
                     adapter.notifyDataSetChanged();
                     timer = new Timer();
                     timer.schedule(new TimerTask() {

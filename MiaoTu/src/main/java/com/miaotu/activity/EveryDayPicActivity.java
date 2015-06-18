@@ -95,7 +95,7 @@ private ImageView ivPic,ivShare,ivDownload;
                     return;
                 }
                 if (result.getCode() == BaseResult.SUCCESS) {
-                    UrlImageViewHelper.setUrlDrawable(ivPic, result.getEveryDayInfo().getPicUrl() + "800x800", R.drawable.default_avatar);
+                    UrlImageViewHelper.setUrlDrawable(ivPic, result.getEveryDayInfo().getPicUrl() + "800x800", R.drawable.icon_default_day_pic);
                     url = result.getEveryDayInfo().getPicUrl();
                     tvDate1.setText(result.getEveryDayInfo().getDate1());
                     tvDate2.setText(result.getEveryDayInfo().getDate2());
