@@ -374,9 +374,10 @@ public class HttpRequestUtil {
      * @param num
      * @return
      */
-    public CustomTourResult getCustomTourList(String token, String page, String num) {
+    public CustomTourResult getCustomTourList(String token,String city, String page, String num) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
+        params.add(new BasicNameValuePair("city", city));
         params.add(new BasicNameValuePair("page", page));
         params.add(new BasicNameValuePair("num", num));
         return HttpDecoder.getForObject(
