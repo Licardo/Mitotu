@@ -49,12 +49,12 @@ public class BBSTopicRemindActivity extends BaseActivity implements View.OnClick
 
     private void initData(){
         isSelected1 = true;
-        if ("on".equals(readPreference("msgnotification"))){
+        if ("off".equals(readPreference("msgnotification"))){
             isSelected2 = true;
         }else {
             isSelected2 = false;
         }
-        if ("on".equals(readPreference("msgdetail"))){
+        if ("off".equals(readPreference("msgdetail"))){
             isSelected1 = true;
         }else {
             isSelected1 = false;
