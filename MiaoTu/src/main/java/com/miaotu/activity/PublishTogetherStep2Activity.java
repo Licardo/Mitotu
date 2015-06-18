@@ -130,22 +130,30 @@ private void publish(){
         switch (id){
             case R.id.rb_share_circle:
                 WechatMoments.ShareParams wmsp = new WechatMoments.ShareParams();
-                wmsp.setShareType(Platform.SHARE_WEBPAGE);
+                if (StringUtil.isBlank(headurl)){
+                    wmsp.setShareType(Platform.SHARE_TEXT);
+                }else {
+                    wmsp.setShareType(Platform.SHARE_WEBPAGE);
+                    wmsp.setImageUrl(headurl + "200×200");
+                    wmsp.setUrl("http://m.miaotu.com/ShareLine/?yid=" + yid);
+                }
                 wmsp.setTitle(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
                 wmsp.setText(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
-                wmsp.setImageUrl(headurl + "200×200");
-                wmsp.setUrl("http://m.miaotu.com/ShareLine/?yid=" + yid);
                 Platform wechatmoments = ShareSDK.getPlatform(WechatMoments.NAME);
                 wechatmoments.setPlatformActionListener(new PlatFormListener());
                 wechatmoments.share(wmsp);
             break;
             case R.id.rb_share_wechat:
                 Wechat.ShareParams wcsp = new Wechat.ShareParams();
-                wcsp.setShareType(Platform.SHARE_WEBPAGE);
+                if (StringUtil.isBlank(headurl)){
+                    wcsp.setShareType(Platform.SHARE_TEXT);
+                }else {
+                    wcsp.setShareType(Platform.SHARE_WEBPAGE);
+                    wcsp.setImageUrl(headurl + "200×200");
+                    wcsp.setUrl("http://m.miaotu.com/ShareLine/?yid=" + yid);
+                }
                 wcsp.setTitle(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
                 wcsp.setText(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
-                wcsp.setImageUrl(headurl + "200×200");
-                wcsp.setUrl("http://m.miaotu.com/ShareLine/?yid=" + yid);
                 Platform wechat = ShareSDK.getPlatform(Wechat.NAME);
                 wechat.setPlatformActionListener(new PlatFormListener());
                 wechat.share(wcsp);
