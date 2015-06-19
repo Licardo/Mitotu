@@ -149,7 +149,7 @@ private void publish(){
                     wcsp.setShareType(Platform.SHARE_TEXT);
                 }else {
                     wcsp.setShareType(Platform.SHARE_WEBPAGE);
-                    wcsp.setImageUrl(headurl + "200×200");
+                    wcsp.setImageUrl(headurl + "200x200");
                     wcsp.setUrl("http://m.miaotu.com/ShareLine/?yid=" + yid);
                 }
                 wcsp.setTitle(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
@@ -162,7 +162,7 @@ private void publish(){
                 SinaWeibo.ShareParams wbsp = new SinaWeibo.ShareParams();
                 wbsp.setText(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
                 if (!StringUtil.isBlank(headurl)){
-                    wbsp.setImagePath(headurl + "200×200");
+                    wbsp.setImageUrl(headurl + "200x200");
                 }
                 Platform weibo = ShareSDK.getPlatform(SinaWeibo.NAME);
                 weibo.setPlatformActionListener(new PlatFormListener());
@@ -173,7 +173,7 @@ private void publish(){
                 qqsp.setTitle(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
                 qqsp.setTitleUrl("http://m.miaotu.com/ShareLine/?yid=" + yid); // 标题的超链接
                 qqsp.setText(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
-                qqsp.setImageUrl(headurl + "200×200");
+                qqsp.setImageUrl(headurl + "200x200");
                 qqsp.setSite(getString(R.string.app_name));
                 qqsp.setSiteUrl("http://m.miaotu.com/ShareLine/?yid=" + yid);
 
