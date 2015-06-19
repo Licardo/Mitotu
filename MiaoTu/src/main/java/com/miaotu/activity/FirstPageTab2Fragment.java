@@ -226,7 +226,7 @@ private View root;
                 page=1;
                 String city = "";
                 if(!StringUtil.isEmpty(readPreference("located_city"))){
-                    city=readPreference("located_city");
+//                    city=readPreference("located_city");
                 }
                 return HttpRequestUtil.getInstance().getCustomTourList(readPreference("token"),city, page + "", PAGECOUNT + "");
             }

@@ -53,7 +53,7 @@ private WebView webView;
             @Override
             public void onClick(View view) {
                 if(isPay){
-                    webView.loadUrl("http://m.miaotu.com/App/detail/?aid=" + getIntent().getStringExtra("id")+"&token="+readPreference("token"));
+                    webView.loadUrl("http://m.miaotu.com/App/detail/?aid=" + getIntent().getStringExtra("id")+"&token="+readPreference("token")+"&uid="+readPreference("uid"));
                     webView.postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -80,7 +80,7 @@ private WebView webView;
         });
 
 
-                webView.loadUrl("http://m.miaotu.com/App/detail/?aid=" + getIntent().getStringExtra("id")+"&token="+readPreference("token"));
+                webView.loadUrl("http://m.miaotu.com/App/detail/?aid=" + getIntent().getStringExtra("id")+"&token="+readPreference("token")+"&uid="+readPreference("uid"));
     }
     /**
      * js调用java的接口
@@ -260,7 +260,7 @@ private WebView webView;
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(isPay){
-            webView.loadUrl("http://m.miaotu.com/App/detail/?aid=" + getIntent().getStringExtra("id")+"&token="+readPreference("token"));
+            webView.loadUrl("http://m.miaotu.com/App/detail/?aid=" + getIntent().getStringExtra("id")+"&token="+readPreference("token")+"&uid="+readPreference("uid"));
             webView.postDelayed(new Runnable() {
                 @Override
                 public void run() {
