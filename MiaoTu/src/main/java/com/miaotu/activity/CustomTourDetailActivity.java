@@ -24,11 +24,14 @@ import com.miaotu.model.CustomTour;
 import com.miaotu.model.CustomTourInfo;
 import com.miaotu.util.LogUtil;
 import com.miaotu.util.MD5;
+import com.miaotu.util.StringUtil;
 import com.pingplusplus.android.PaymentActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+
+import java.text.DecimalFormat;
 
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
@@ -257,6 +260,43 @@ private WebView webView;
             CustomTourDetailActivity.this.remark = remark;
             payOrder();
         }
+
+        @android.webkit.JavascriptInterface
+        public void payRedPackage(String amount, final String uid, final String nickname, final String headUrl, final String groupId, final String groupName, final String remark){
+
+            boolean isSuccess = false;
+            if (!StringUtil.isBlank(readPreference("luckmoney"))) {
+                if (StringUtil.isBlank(amount)){
+                    amount = "0.00";
+                }
+                double luckyMoney = Double.parseDouble(readPreference("luckmoney"));
+                double payLuckMoney = Double.parseDouble(amount);
+                double leaveMoney = luckyMoney - payLuckMoney;
+                if (leaveMoney >= 0){
+                    isSuccess = true;
+                }else {
+                    leaveMoney = 0.00;
+                }
+                DecimalFormat df = new DecimalFormat("0.00");
+                writePreference("luckmoney", df.format(leaveMoney));
+            } else {
+                writePreference("luckmoney", "0.00");
+            }
+            if (isSuccess)
+            showToastMsg("付款完成！");
+            mHandler.post(new Runnable() {
+                public void run() {
+                    webView.loadUrl("http://m.miaotu.com/App/joinRes/?uid=" + uid + "&nickname=" + nickname + "&headurl=" + headUrl + "&gid=" + groupId + "&groupname=" + groupName + "&remark=" + remark);
+                }
+            });
+//                    webView.loadUrl("http://m.miaotu.com/App/joinRes");
+            webView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    webView.clearHistory();
+                }
+            }, 1000);
+        }
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if(isPay){
@@ -329,16 +369,16 @@ private WebView webView;
                  */
 //                Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
                 if(result.equals("success")){
-                    //支付成
-                    showToastMsg("付款完成！");
-                    webView.loadUrl("http://m.miaotu.com/App/joinRes/?uid=" + uid + "&nickname=" + nickname + "&headurl=" + headUrl + "&gid=" + groupId + "&groupname=" + groupName +"&remark=" + remark);
+                        //支付成
+                        showToastMsg("付款完成！");
+                        webView.loadUrl("http://m.miaotu.com/App/joinRes/?uid=" + uid + "&nickname=" + nickname + "&headurl=" + headUrl + "&gid=" + groupId + "&groupname=" + groupName + "&remark=" + remark);
 //                    webView.loadUrl("http://m.miaotu.com/App/joinRes");
-                    webView.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            webView.clearHistory();
-                        }
-                    }, 1000);
+                        webView.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                webView.clearHistory();
+                            }
+                        }, 1000);
                     isPay=true;
                 }else{
                     Toast.makeText(this, "付款未完成", Toast.LENGTH_SHORT).show();

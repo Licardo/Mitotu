@@ -58,7 +58,7 @@ public class PopMovementListAdapter extends BaseAdapter {
 		}
 
 		// 对ListView的Item中的控件的操作
-		holder.name.setText(mList.get(position).getNickname());
+		holder.name.setText(mList.get(position).getTitle());
 		return convertView;
 	}
 	

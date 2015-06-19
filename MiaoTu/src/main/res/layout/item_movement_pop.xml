@@ -8,6 +8,7 @@
     android:id="@+id/tv_name"
     android:layout_height="30dp"
     android:layout_width="match_parent"
+    android:singleLine="true"
     android:text="身份证"
     android:gravity="center"
     />

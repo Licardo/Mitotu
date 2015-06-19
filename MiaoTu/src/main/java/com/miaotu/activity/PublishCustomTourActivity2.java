@@ -22,7 +22,10 @@ import com.miaotu.form.PublishCustomForm;
 import com.miaotu.util.StringUtil;
 import com.miaotu.view.WheelTwoColumnDialog;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import kankan.wheel.widget.OnWheelChangedListener;
 import kankan.wheel.widget.WheelView;
@@ -66,7 +69,7 @@ public class PublishCustomTourActivity2 extends BaseActivity implements OnClickL
     private void init(){
         tvTitle.setText("定制约游");
         tvStartDate.setText(Calendar.getInstance().get(Calendar.YEAR) + "-" + (Calendar.getInstance().get(Calendar.MONTH) + 1) + "-" + Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
-        tvEndDate.setText(Calendar.getInstance().get(Calendar.YEAR) + "-" + (Calendar.getInstance().get(Calendar.MONTH) + 1) + "-" + Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+//        tvEndDate.setText(Calendar.getInstance().get(Calendar.YEAR) + "-" + (Calendar.getInstance().get(Calendar.MONTH) + 1) + "-" + Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         customForm = new PublishCustomForm();
     };
     private boolean validate(){
@@ -81,7 +84,8 @@ public class PublishCustomTourActivity2 extends BaseActivity implements OnClickL
         return true;
     }
     // 获取生日dialog
-    private void getDateDialog(final View parent) {
+    //flag true:开始日期  false结束日期
+    private void getDateDialog(final View parent, final boolean flag) {
         // 为dialog的listview赋值
         LayoutInflater lay = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -133,8 +137,49 @@ public class PublishCustomTourActivity2 extends BaseActivity implements OnClickL
                 if (currentDay.length() == 1) {
                     currentDay = "0" + currentDay;
                 }
-                ((TextView)parent).setText(currentYear + "-" + currentMonth + "-"
-                        + currentDay);
+//                ((TextView)parent).setText(currentYear + "-" + currentMonth + "-"
+//                        + currentDay);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date startdate = null;
+                Date enddate = null;
+                if (flag){  //开始日期
+                    ((TextView)parent).setText(currentYear + "-" + currentMonth + "-"
+                            + currentDay);
+                    try {
+                        enddate = sdf.parse(tvEndDate.getText().toString());
+                        startdate = sdf.parse(currentYear + "-" + currentMonth + "-"
+                                + currentDay);
+                        if (compareDate(startdate, enddate)){
+                            showToastMsg("时光机还未发明 返回时间没法早于出发时间哦");
+                            ((TextView)parent).setText("");
+                        }else {
+                            ((TextView)parent).setText(currentYear + "-" + currentMonth + "-"
+                                    + currentDay);
+                        }
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                }else { //结束日期
+                    if (StringUtil.isBlank(tvStartDate.getText().toString())){
+                        showToastMsg("选择开始日期");
+                        ((TextView)parent).setText("");
+                    }else {
+                        try {
+                            startdate = sdf.parse(tvStartDate.getText().toString());
+                            enddate = sdf.parse(currentYear + "-" + currentMonth + "-"
+                                    + currentDay);
+                            if (compareDate(startdate, enddate)){
+                                showToastMsg("时光机还未发明 返回时间没法早于出发时间哦");
+                                ((TextView)parent).setText("");
+                            }else {
+                                ((TextView)parent).setText(currentYear + "-" + currentMonth + "-"
+                                        + currentDay);
+                            }
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
                 dialog.dismiss();
             }
         });
@@ -200,12 +245,25 @@ public class PublishCustomTourActivity2 extends BaseActivity implements OnClickL
                 break;
             case R.id.tv_start_date:
                 //出发日期
-                getDateDialog(view);
+                getDateDialog(view, true);
                 break;
             case R.id.tv_end_date:
-                getDateDialog(view);
+                getDateDialog(view, false);
                 //结束日期
                 break;
         }
+    }
+
+    public boolean compareDate(Date d1, Date d2) {
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
+        c1.setTime(d1);
+        c2.setTime(d2);
+
+        int result = c1.compareTo(c2);
+        if (result > 0)
+            return true;
+        else
+            return false;
     }
 }
