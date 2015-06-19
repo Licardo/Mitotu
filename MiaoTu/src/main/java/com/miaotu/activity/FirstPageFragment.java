@@ -80,9 +80,11 @@ private View root;
                 switch (i){
                     case R.id.tab1:
                         setTabSelection(0);
+                        tvRight.setVisibility(View.VISIBLE);
                         break;
                     case R.id.tab2:
                         setTabSelection(1);
+                        tvRight.setVisibility(View.GONE);
                         break;
                 }
             }
@@ -113,7 +115,6 @@ private View root;
         }else{
                 tvRight.setText("定位中...");
         }
-        tvRight.setVisibility(View.GONE);
         setTabSelection(0);
     }
 
