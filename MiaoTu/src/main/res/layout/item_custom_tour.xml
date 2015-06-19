@@ -52,8 +52,8 @@
 
         <com.miaotu.view.CircleImageView
             android:id="@+id/iv_head_photo"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="31dp"
+            android:layout_height="31dp"
             android:layout_below="@id/rl_image"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="-15dp"

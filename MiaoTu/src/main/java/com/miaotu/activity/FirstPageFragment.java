@@ -106,6 +106,7 @@ private View root;
 //                tvRight.setText(readPreference("selected_city"));
 //            }
 //        }else
+        tvRight.setTextColor(getResources().getColor(R.color.grey64));
         if(!StringUtil.isEmpty(readPreference("located_city"))){
             if(readPreference("located_city").length()>4){
                 tvRight.setText(readPreference("located_city").substring(0,3)+"...");

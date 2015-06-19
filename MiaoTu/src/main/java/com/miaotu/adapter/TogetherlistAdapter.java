@@ -175,7 +175,7 @@ public class TogetherlistAdapter extends BaseAdapter {
         }
         holder.tvFee.setText(mList.get(position).getFee());
         holder.tvComment.setText(mList.get(position).getComment());
-        holder.tvJoinCount.setText("已报名"+mList.get(position).getJoinCount()+"人");
+        holder.tvJoinCount.setText("已报名" + mList.get(position).getJoinCount() + "人");
         holder.tvCommentCount.setText("评论"+mList.get(position).getReplyCount()+"人");
         if(mList.get(position).isLike()){
             holder.ivLike.setBackgroundResource(R.drawable.icon_like);
@@ -189,6 +189,9 @@ public class TogetherlistAdapter extends BaseAdapter {
             }
         });
         holder.tvAge.setText(mList.get(position).getAge()+"岁");
+        if (StringUtil.isBlank(mList.get(position).getJob())){
+            holder.tvJob.setVisibility(View.GONE);
+        }
         holder.tvJob.setText(mList.get(position).getJob());
         if(mList.get(position).getGender().equals("男")){
             holder.ivGender.setBackgroundResource(R.drawable.icon_man);
