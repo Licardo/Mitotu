@@ -179,6 +179,8 @@
                 android:textSize="14sp"
                 android:textColor="#646464"
                 android:gravity="center|left"
+                android:textColorHint="#b4b4b4"
+                android:hint="请选择出发日期"
                 />
             <TextView
                 android:layout_width="match_parent"
@@ -202,6 +204,8 @@
                 android:textSize="14sp"
                 android:textColor="#646464"
                 android:gravity="center|left"
+                android:textColorHint="#b4b4b4"
+                android:hint="请选择返回日期"
                 />
         </LinearLayout>
         <LinearLayout
