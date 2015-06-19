@@ -101,11 +101,11 @@ private void init(){
                     writePreference("job",result.getLogin().getJob());
                     writePreference("fanscount", result.getLogin().getFanscount());
                     writePreference("followcount", result.getLogin().getFollowcount());
-                    writePreference("wxid", result.getLogin().getWxunionid());
-                    writePreference("qqid", result.getLogin().getQqopenid());
-                    writePreference("sinaid", result.getLogin().getSinauid());
+//                    writePreference("wxid", result.getLogin().getWxunionid());
+//                    writePreference("qqid", result.getLogin().getQqopenid());
+//                    writePreference("sinaid", result.getLogin().getSinauid());
                     writePreference("luckmoney", result.getLogin().getLuckymoney());
-                    writePreference("status", result.getLogin().getStatus());   //1身份证验证 0未验证
+//                    writePreference("status", result.getLogin().getStatus());   //1身份证验证 0未验证
                     writePreference("email", result.getLogin().getEmail());
                     writePreference("phone", result.getLogin().getPhone());
                     writePreference("login_state","in");
