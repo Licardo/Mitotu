@@ -113,6 +113,7 @@ private View root;
         }else{
                 tvRight.setText("定位中...");
         }
+        tvRight.setVisibility(View.GONE);
         setTabSelection(0);
     }
 

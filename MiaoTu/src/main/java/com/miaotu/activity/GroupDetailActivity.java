@@ -141,7 +141,7 @@ public class GroupDetailActivity extends BaseActivity implements OnClickListener
             return;
         }
         GroupDetailInfo info = result.getInfolist();
-        tvGroupName.setText(info.getName());
+        tvGroupName.setText(info.getDesc());
         tvGroupNo.setText("群号：" + info.getGid());
         tvAnnoncement.setText(info.getNotice());
         if(info.getIsowner().equals("true")){
