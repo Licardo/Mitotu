@@ -170,6 +170,9 @@ public class TogetherlistAdapter extends BaseAdapter {
             e.printStackTrace();
         }
         holder.tvNum.setText("需要"+mList.get(position).getNum()+"人");
+        if ("0".equals(mList.get(position).getNum())){
+            holder.tvNum.setText("人数不限");
+        }
         holder.tvFee.setText(mList.get(position).getFee());
         holder.tvComment.setText(mList.get(position).getComment());
         holder.tvJoinCount.setText("已报名"+mList.get(position).getJoinCount()+"人");

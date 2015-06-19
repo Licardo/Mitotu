@@ -15,6 +15,7 @@ import com.miaotu.adapter.PopMovementListAdapter;
 import com.miaotu.model.CustomTour;
 import com.miaotu.util.StringUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,7 +38,7 @@ public class ChoseTopicMovementPopupWindow extends PopupWindow {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(!StringUtil.isEmpty(movementList.get(i).getId())){
-                    ((TextView)v.findViewById(R.id.tv_movement_name)).setText(movementList.get(i).getNickname());
+                    ((TextView)v.findViewById(R.id.tv_movement_name)).setText(movementList.get(i).getTitle());
                     v.findViewById(R.id.tv_movement_name).setTag(movementList.get(i).getId());
                 }else{
                     ((TextView)v.findViewById(R.id.tv_movement_name)).setText("");
@@ -46,7 +47,6 @@ public class ChoseTopicMovementPopupWindow extends PopupWindow {
                 ChoseTopicMovementPopupWindow.this.dismiss();
             }
         });
-
         PopMovementListAdapter adapter = new PopMovementListAdapter(context,movementList);
         lvMovments.setAdapter(adapter);
 

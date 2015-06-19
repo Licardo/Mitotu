@@ -1206,6 +1206,27 @@ public class HttpRequestUtil {
                 MyCustomTourResult.class, params);
     }
 
+    /**
+     * 获取去重后我参加的秒旅团
+     * @param token
+     * @param uid
+     * @param type  owner(我发起的)/join(我参加的)/like(我喜欢的)
+     * @param num
+     * @return
+     */
+    public MyCustomTourResult getOwnerJoinedCustomerTour(String token, String uid, String type, String num){
+
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("token", token));
+        params.add(new BasicNameValuePair("uid", uid));
+        params.add(new BasicNameValuePair("type", type));
+        params.add(new BasicNameValuePair("page", "1"));
+        params.add(new BasicNameValuePair("num", num));
+        params.add(new BasicNameValuePair("only", "true"));
+        return HttpDecoder.getForObject(getUrl("user/activity/" + type),
+                MyCustomTourResult.class, params);
+    }
+
 /**
      * 获取我的约游
      * @param token

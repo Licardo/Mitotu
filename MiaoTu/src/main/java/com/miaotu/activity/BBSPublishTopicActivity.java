@@ -266,8 +266,8 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
 
             @Override
             protected MyCustomTourResult run(Void... params) {
-                return HttpRequestUtil.getInstance().getOwnerCustomerTour(readPreference("token"),
-                        readPreference("uid"), "join", "100");
+                return HttpRequestUtil.getInstance().getOwnerJoinedCustomerTour(readPreference("token"),
+                        readPreference("uid"), "join", "1000");
             }
 //        @Override
 //        protected void onError() {
