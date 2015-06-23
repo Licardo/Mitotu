@@ -74,7 +74,7 @@ public class MyCustomTourActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(MyCustomTourActivity.this, CustomTourDetailActivity.class);
-                intent.putExtra("id", customTourInfoList.get(i).getId());
+                intent.putExtra("id", customTourInfoList.get(i-1).getId());
                 startActivity(intent);
             }
         });

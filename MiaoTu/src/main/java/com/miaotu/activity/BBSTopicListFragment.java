@@ -153,6 +153,18 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
         adapter = new TopiclistAdapter(getActivity(),topicList, token, false);
         lvTopics.setAdapter(adapter);
 
+        info = new MFriendsInfo();
+        String lat = readPreference("latitude");    //纬度
+        String lon = readPreference("longitude");    //经度
+//        lat = "30.312021";
+//        lon = "120.255116";
+        info.setLatitude(lat);
+        info.setLongitude(lon);
+        info.setToken(token);
+        info.setNum("");
+        info.setPage("");
+        info.setType("nearby");
+
         View emptyview = LayoutInflater.from(BBSTopicListFragment.this.getActivity()).
                 inflate(R.layout.activity_empty, null);
         Button btnSearch = (Button) emptyview.findViewById(R.id.btn_search);
@@ -167,18 +179,6 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
         });
         lvTopics.setEmptyView(emptyview);
 
-//        getMessageCount();
-        info = new MFriendsInfo();
-        String lat = readPreference("latitude");    //纬度
-        String lon = readPreference("longitude");    //经度
-//        lat = "30.312021";
-//        lon = "120.255116";
-        info.setLatitude(lat);
-        info.setLongitude(lon);
-        info.setToken(token);
-        info.setNum("");
-        info.setPage("");
-        info.setType("nearby");
         getTopics(true, info);
     }
     //刷新左上角提示
