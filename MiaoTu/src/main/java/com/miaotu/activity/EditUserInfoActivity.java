@@ -279,7 +279,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                     if (!StringUtil.isBlank(info.getTags())) {
                         writePreference("tags", info.getTags());
                     }
-
+                    EditUserInfoActivity.this.finish();
 //                    UrlImageViewHelper.setUrlDrawable(iv_head_photo, info.getHear_url(),
 //                            R.drawable.icon_default_head_photo);
                 } else {
