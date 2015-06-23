@@ -225,7 +225,7 @@ private View root;
             protected CustomTourResult run(Void... params) {
                 page=1;
                 String city = "";
-                if(!StringUtil.isEmpty(readPreference("located_city"))){
+                if(!StringUtil.isEmpty(readPreference("selected_city"))){
 //                    city=readPreference("located_city");
                 }
                 return HttpRequestUtil.getInstance().getCustomTourList(readPreference("token"),city, page + "", PAGECOUNT + "");
@@ -297,7 +297,7 @@ private View root;
                 isLoadMore = true;
                 page+=1;
                 String city = "";
-                if(!StringUtil.isEmpty(readPreference("located_city"))){
+                if(!StringUtil.isEmpty(readPreference("selected_city"))){
 //                    city=readPreference("located_city");
                 }
                 return HttpRequestUtil.getInstance().getCustomTourList(readPreference("token"),city, page + "", PAGECOUNT + "");

@@ -110,7 +110,7 @@ private void init(){
 //                    writePreference("status", result.getLogin().getStatus());   //1身份证验证 0未验证
                     writePreference("email", result.getLogin().getEmail());
                     writePreference("phone", result.getLogin().getPhone());
-                    writePreference("login_state","in");
+                    writePreference("login_status","in");
 
                     EMChatManager.getInstance().login(MD5.md5(readPreference("uid")), readPreference("token"),
                             new EMCallBack() {//回调

@@ -80,7 +80,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
     private void init() {
 //		btnLeft.setBackgroundResource(R.drawable.arrow_white_left);
         tvTitle.setText("设置");
-        if (!readPreference("login_state").equals("in")) {
+        if (!readPreference("login_status").equals("in")) {
             btnExit.setVisibility(View.GONE);
         }
     }
@@ -108,7 +108,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
                 this.startActivity(aboutIntent);
                 break;
             case R.id.layout_account_safe:      //账号与安全
-                if (!readPreference("login_state").equals("in")) {
+                if (!readPreference("login_status").equals("in")) {
                     Intent loginIntent = new Intent(this, LoginActivity.class);
                     this.startActivity(loginIntent);
                     return;
@@ -117,7 +117,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
                 this.startActivity(safeIntent);
                 break;
             case R.id.layout_blacklist:
-			if(!readPreference("login_state").equals("in")){
+			if(!readPreference("login_status").equals("in")){
 				Intent loginIntent = new Intent(this,LoginActivity.class);
 				this.startActivity(loginIntent);
 				return;
@@ -126,7 +126,7 @@ public class SettingActivity extends BaseActivity implements OnClickListener {
 			this.startActivity(blacklistIntent);
 			break;
             case R.id.btn_exit:
-                writePreference("login_state", "out");
+                writePreference("login_status", "out");
                 writePreference("gender", "");
                 writePreference("tour_join_count","0");
                 writePreference("tour_like_name","");

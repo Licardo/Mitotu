@@ -582,7 +582,7 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
 
     private void publishComment() {
         //发表评论
-        if (!readPreference("login_state").equals("in")) {
+        if (!readPreference("login_status").equals("in")) {
             Intent intent = new Intent(BBSTopicDetailActivity.this, LoginActivity.class);
             startActivity(intent);
             return;

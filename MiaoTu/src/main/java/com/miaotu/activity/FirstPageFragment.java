@@ -43,20 +43,21 @@ private View root;
     }
     public void refreshCity(){
         try{
-//            if(!StringUtil.isEmpty(readPreference("selected_city"))){
-//                if(readPreference("selected_city").length()>4){
-//                    tvRight.setText(readPreference("selected_city").substring(0,3)+"...");
+            if(!StringUtil.isEmpty(readPreference("selected_city"))){
+                if(readPreference("selected_city").length()>4){
+                    tvRight.setText(readPreference("selected_city").substring(0,3)+"...");
+                }else{
+                    tvRight.setText(readPreference("selected_city"));
+                }
+            }else
+//            if(!StringUtil.isEmpty(readPreference("located_city"))){
+//                if(readPreference("located_city").length()>4){
+//                    tvRight.setText(readPreference("located_city").substring(0,3)+"...");
 //                }else{
-//                    tvRight.setText(readPreference("selected_city"));
+//                    tvRight.setText(readPreference("located_city"));
 //                }
 //            }else
-            if(!StringUtil.isEmpty(readPreference("located_city"))){
-                if(readPreference("located_city").length()>4){
-                    tvRight.setText(readPreference("located_city").substring(0,3)+"...");
-                }else{
-                    tvRight.setText(readPreference("located_city"));
-                }
-            }else{
+            {
                 tvRight.setText("定位中...");
             }
             mTab02.getTogether(false);
@@ -107,11 +108,11 @@ private View root;
 //            }
 //        }else
         tvRight.setTextColor(getResources().getColor(R.color.grey64));
-        if(!StringUtil.isEmpty(readPreference("located_city"))){
-            if(readPreference("located_city").length()>4){
-                tvRight.setText(readPreference("located_city").substring(0,3)+"...");
+        if(!StringUtil.isEmpty(readPreference("selected_city"))){
+            if(readPreference("selected_city").length()>4){
+                tvRight.setText(readPreference("selected_city").substring(0,3)+"...");
             }else{
-                tvRight.setText(readPreference("located_city"));
+                tvRight.setText(readPreference("selected_city"));
             }
         }else{
                 tvRight.setText("定位中...");
@@ -201,11 +202,11 @@ private View root;
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && resultCode == 1) {
-            ((MainActivity) getActivity()).writePreference("located_city", data.getStringExtra("city"));
-            if(readPreference("located_city").length()>4){
-                tvRight.setText(readPreference("located_city").substring(0,4)+"...");
+            ((MainActivity) getActivity()).writePreference("selected_city", data.getStringExtra("city"));
+            if(readPreference("selected_city").length()>4){
+                tvRight.setText(readPreference("selected_city").substring(0,4)+"...");
             }else{
-                tvRight.setText(readPreference("located_city"));
+                tvRight.setText(readPreference("selected_city"));
             }
         }
         switch (resultCode) {

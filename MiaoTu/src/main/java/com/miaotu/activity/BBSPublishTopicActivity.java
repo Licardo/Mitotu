@@ -362,7 +362,7 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
      * 上传图片得到相应的图片url
      */
     private void getPhotoUrl() {
-        if (!readPreference("login_state").equals("in")) {
+        if (!readPreference("login_status").equals("in")) {
             Intent intent = new Intent(BBSPublishTopicActivity.this, LoginActivity.class);
             startActivity(intent);
             return;

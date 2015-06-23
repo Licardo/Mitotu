@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:indeterminate="true"
-                android:indeterminateDuration="500"
+                android:indeterminateDuration="1000"
                 android:visibility="visible" />
         </FrameLayout>
 
