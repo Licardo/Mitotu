@@ -75,7 +75,7 @@ public class MyCustomTourFragment extends BaseFragment implements View.OnClickLi
                 Intent intent = new Intent(getActivity(),
                         CustomTourDetailActivity.class);
                 intent.putExtra("id", mList.get(position - 1).getId());
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, position - 1);
             }
         });
         lvPull.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
@@ -275,6 +275,29 @@ public class MyCustomTourFragment extends BaseFragment implements View.OnClickLi
         }
         switch (view.getId()) {
 
+        }
+    }
+
+    /**
+     * 设置喜欢控件显示
+     * @param postion
+     * @param flag
+     */
+    public void modifyLikeView(int postion, boolean flag){
+        mList.get(postion).setIsLike(flag);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode){
+            case 1003:
+                modifyLikeView(requestCode, true);
+                break;
+            case 1004:
+                modifyLikeView(requestCode, false);
+                break;
         }
     }
 }

@@ -158,7 +158,6 @@ public class BBSTopicListFragment extends BaseFragment implements View.OnClickLi
         String lon = readPreference("longitude");    //经度
 //        lat = "30.312021";
 //        lon = "120.255116";
-        showToastMsg("纬度："+lat + "经度："+lon);
         info.setLatitude(lat);
         info.setLongitude(lon);
         info.setToken(token);
