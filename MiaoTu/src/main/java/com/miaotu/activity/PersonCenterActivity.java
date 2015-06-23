@@ -431,10 +431,10 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
         Intent intent = new Intent(Intent.ACTION_PICK, null);
         intent.setType("image/*");
         intent.putExtra("crop", "true");
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        intent.putExtra("outputX", 300);
-        intent.putExtra("outputY", 300);
+//        intent.putExtra("aspectX", 1080);
+//        intent.putExtra("aspectY", 669);
+//        intent.putExtra("outputX", 300);
+//        intent.putExtra("outputY", 300);
         intent.putExtra("scale", true);
         intent.putExtra("return-data", true);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
