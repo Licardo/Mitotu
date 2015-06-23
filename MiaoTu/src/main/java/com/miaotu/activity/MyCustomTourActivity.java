@@ -1,5 +1,6 @@
 package com.miaotu.activity;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.format.DateUtils;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -66,6 +68,14 @@ public class MyCustomTourActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
                 loadMore();
+            }
+        });
+        lvCustomTour.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(MyCustomTourActivity.this, CustomTourDetailActivity.class);
+                intent.putExtra("id", customTourInfoList.get(i).getId());
+                startActivity(intent);
             }
         });
         tvLeft.setOnClickListener(this);
