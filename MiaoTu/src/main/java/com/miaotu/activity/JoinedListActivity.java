@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -56,6 +57,8 @@ public class JoinedListActivity extends BaseActivity implements View.OnClickList
         tvContent1.setText("别着急，等一等");
         tvTip1.setText("还没有人报名，请再等等吧！");
         btnSearch.setVisibility(View.GONE);
+        ((ViewGroup)lvContent.getParent()).addView(emptyview,ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT);
         lvContent.setEmptyView(emptyview);
 
         joinedListInfoList = new ArrayList<>();
@@ -111,7 +114,7 @@ public class JoinedListActivity extends BaseActivity implements View.OnClickList
             @Override
             protected JoinedListResult run(Void... params) {
                 return HttpRequestUtil.getInstance().getTogetherJoinedList(
-                        readPreference("token"), yid, "100");
+                        readPreference("token"), yid, "1000");
             }
         }.execute();
     }
@@ -145,7 +148,7 @@ public class JoinedListActivity extends BaseActivity implements View.OnClickList
             @Override
             protected JoinedListResult run(Void... params) {
                 return HttpRequestUtil.getInstance().getCustomTourJoinedList(
-                        readPreference("token"), aid, "100");
+                        readPreference("token"), aid, "1000");
             }
         }.execute();
     }
