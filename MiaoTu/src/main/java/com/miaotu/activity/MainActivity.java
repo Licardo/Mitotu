@@ -133,7 +133,7 @@ public class MainActivity extends BaseFragmentActivity implements
                         .memoryCache(new UsingFreqLimitedMemoryCache(4 * 1024 * 1024))//设置缓存大小，UsingFrgLimitMemoryCache类可以扩展
                         .imageDownloader(new BaseImageDownloader(this, 5000, 30000)).build());
 
-        if (readPreference("login_state").equals("in")) {
+        if (readPreference("login_status").equals("in")) {
             JPushInterface.init(getApplicationContext());
             JPushInterface.setDebugMode(true);
             JPushInterface.setAliasAndTags(this, MD5.md5(readPreference("uid")), null);
@@ -382,7 +382,7 @@ public class MainActivity extends BaseFragmentActivity implements
     @Override
     public void onClick(View v) {
         // TODO Auto-generated method stub
-        if (!readPreference("login_state").equals("in")
+        if (!readPreference("login_status").equals("in")
                 && (v.getId() == R.id.layout_tab_message || v.getId() == R.id.layout_tab_mine)) {
             if (v.getId() == R.id.layout_tab_message) {
                 desPage = 2;
@@ -733,9 +733,8 @@ public class MainActivity extends BaseFragmentActivity implements
                 public void run() {
                     if (error == EMError.CONNECTION_CONFLICT) {
                         // 显示帐号在其他设备登陆
-                        showToastMsg("您的账户已经在其他设备登陆，请重新登陆！");
-                        writePreference("login_state", "out");
-                        writePreference("login_state", "out");
+                        showToastMsg("您的账户已经在其他设备登录，请重新登录！");
+                        writePreference("login_status", "out");
                         writePreference("gender", "");
                         writePreference("tour_join_count","0");
                         writePreference("tour_like_name","");

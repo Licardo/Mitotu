@@ -132,7 +132,7 @@ public class AppLoadingActivity extends BaseActivity {
         }
     }
     private void finishLoading(){
-         if(readPreference("login_state").equals("in")){
+         if(readPreference("login_status").equals("in")){
              EMChatManager.getInstance().login(MD5.md5(readPreference("uid")), readPreference("token"),
                      new EMCallBack() {//回调
                          @Override

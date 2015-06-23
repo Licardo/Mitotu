@@ -23,7 +23,7 @@ public class ConnectionChangeReceiver extends BroadcastReceiver {
                 if (State.CONNECTED==state) {
                 	SharedPreferences sharedPreferences = context.getSharedPreferences("COMMON",
             				Context.MODE_PRIVATE);
-                	if (sharedPreferences.getString("login_state","").equals("in")) {
+                	if (sharedPreferences.getString("login_status","").equals("in")) {
 //                		XmppConnection.getInstance().closeConnection();
 //                		ChatHelper.getInstance().loginOpenfire(context,
 //                				sharedPreferences.getString("id",""), sharedPreferences.getString("token",""));

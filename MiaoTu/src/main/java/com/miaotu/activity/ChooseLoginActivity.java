@@ -271,7 +271,7 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
                     writePreference("gender",result.getLogin().getGender());
                     writePreference("headphoto",result.getLogin().getHeadPhoto());
                     writePreference("job",result.getLogin().getJob());
-                    writePreference("login_state","in");
+                    writePreference("login_status","in");
                     EMChatManager.getInstance().login(MD5.md5(readPreference("uid")), readPreference("token"),
                             new EMCallBack() {//回调
                                 @Override
