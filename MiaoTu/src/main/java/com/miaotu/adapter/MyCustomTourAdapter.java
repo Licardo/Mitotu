@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.easemob.util.DateUtils;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.activity.JoinedListActivity;
@@ -19,6 +20,8 @@ import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 import com.miaotu.view.FlowLayout;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -72,15 +75,28 @@ public class MyCustomTourAdapter extends BaseAdapter{
             holder = (ViewHolder) view.getTag();
         }
 
+        holder.flTags.removeAllViews();
         holder.tvCount.setVisibility(View.GONE);
         holder.ivLike.setVisibility(View.GONE);
         holder.tvJoin.setVisibility(View.VISIBLE);
         CustomTour info = customTourInfoList.get(i);
-        holder.tvDate.setText(info.getStartDate()+"-"+info.getEndDate());
+        try {
+            holder.tvDate.setText(DateUtils.getTimestampString(new
+                    SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(info.getStartDate()))+"-"+
+                    DateUtils.getTimestampString(new
+                            SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(info.getEndDate())));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         holder.tvTitle.setText(info.getTitle());
         holder.tvPrice.setText(info.getMtPrice());
         holder.tvName.setText(info.getNickname());
-        holder.tvEndDate.setText(info.getEndDate()+"截止报名");
+        try {
+            holder.tvEndDate.setText(DateUtils.getTimestampString(new
+                    SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(info.getEndDate()))+"截止报名");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         UrlImageViewHelper.setUrlDrawable(holder.ivBackground,
                 info.getPicUrl(), R.drawable.icon_default_background);
         UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto,
