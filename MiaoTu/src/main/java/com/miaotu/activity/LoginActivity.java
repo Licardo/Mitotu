@@ -31,6 +31,8 @@ import com.miaotu.view.LoadingDlg;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
@@ -301,10 +303,17 @@ private void init(){
 
         if(platform.getName().equals(QZone.NAME)){
             try{
+                Iterator iter = res.entrySet().iterator();
+                while (iter.hasNext()) {
+                    Map.Entry entry = (Map.Entry) iter.next();
+                    Object key = entry.getKey();
+                    Object val = entry.getValue();
+                    LogUtil.d(key+":"+val);
+                    }
                 String info = "qq登陆信息：";
                 //qq登陆
                 info+=" id:"+platform.getDb().getUserId();
-                info+=" 头像地址："+res.get("figureurl_qq_1").toString();
+                info+=" 头像地址："+res.get("figureurl_qq_2").toString();
                 info+=" 昵称："+res.get("nickname").toString();
                 info+=" 城市："+res.get("city").toString();
                 info+=" 省份："+res.get("province").toString();
@@ -312,7 +321,7 @@ private void init(){
                 LogUtil.d(info);
                 final RegisterInfo registerInfo = new RegisterInfo();
                 registerInfo.setOpenid(platform.getDb().getUserId());
-                registerInfo.setHeadurl(res.get("figureurl_qq_1").toString());
+                registerInfo.setHeadurl(res.get("figureurl_qq_2").toString());
                 registerInfo.setNickname(res.get("nickname").toString());
                 registerInfo.setCity(res.get("city").toString());
                 registerInfo.setProvince(res.get("province").toString());
