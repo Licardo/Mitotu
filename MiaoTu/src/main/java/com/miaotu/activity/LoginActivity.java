@@ -137,7 +137,7 @@ private void init(){
                             });
                     Calendar calendar = Calendar.getInstance();
                     SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
-                    String sysDatetime = fmt.format(calendar.getTime());
+                    String sysDatetime = fmt.format(calendar.getTime())+readPreference("token");
                     if(readPreference("everyday").equals(sysDatetime)){
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                         startActivity(intent);

@@ -159,7 +159,7 @@ public class AppLoadingActivity extends BaseActivity {
 
              Calendar calendar = Calendar.getInstance();
              SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
-             String sysDatetime = fmt.format(calendar.getTime());
+             String sysDatetime = fmt.format(calendar.getTime())+readPreference("token");
              if(readPreference("everyday").equals(sysDatetime)){
                  Intent intent = new Intent(AppLoadingActivity.this,MainActivity.class);
                  startActivity(intent);

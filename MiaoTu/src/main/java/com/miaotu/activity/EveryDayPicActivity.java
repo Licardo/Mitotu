@@ -101,7 +101,7 @@ private ImageView ivPic,ivShare,ivDownload;
                     tvDate2.setText(result.getEveryDayInfo().getDate2());
                     Calendar calendar = Calendar.getInstance();
                     SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
-                    String sysDatetime = fmt.format(calendar.getTime());
+                    String sysDatetime = fmt.format(calendar.getTime())+readPreference("token");
                     writePreference("everyday",sysDatetime);
                 } else {
                     if(StringUtil.isEmpty(result.getMsg())){
