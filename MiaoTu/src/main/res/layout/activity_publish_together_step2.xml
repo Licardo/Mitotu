@@ -88,7 +88,7 @@
             android:layout_marginRight="16dp"
             android:layout_centerVertical="true"
             >
-            <RadioButton
+            <CheckBox
                 android:id="@+id/rb_share_circle"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -97,7 +97,7 @@
                 android:background="@drawable/selector_share_circle"
                 android:checked="true"
                 />
-            <RadioButton
+            <CheckBox
             android:id="@+id/rb_share_wechat"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -106,7 +106,7 @@
                 android:background="@drawable/selector_share_wechat"
                 android:checked="false"
                 />
-            <RadioButton
+            <CheckBox
             android:id="@+id/rb_share_weibo"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -115,7 +115,7 @@
                 android:background="@drawable/selector_share_weibo"
                 android:checked="false"
                 />
-            <RadioButton
+            <CheckBox
             android:id="@+id/rb_share_zone"
                 android:layout_width="30dp"
                 android:layout_height="30dp"

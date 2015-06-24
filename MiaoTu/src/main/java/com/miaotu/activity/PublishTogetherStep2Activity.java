@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -43,7 +44,8 @@ public class PublishTogetherStep2Activity extends BaseActivity implements OnClic
     private TextView tvPublish;
     private TextView tvTitle,tvLeft;
     private RadioGroup rgShare;
-    private RadioButton rbSelected,rbCircle,rbWechat,rbWeibo,rbZone;
+    private CheckBox rbSelected;
+    private CheckBox rbCircle,rbWechat,rbWeibo,rbZone;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,18 +60,101 @@ private void findView(){
     tvLeft = (TextView) findViewById(R.id.tv_left);
     tvTitle = (TextView) findViewById(R.id.tv_title);
     rgShare = (RadioGroup) findViewById(R.id.rg_share);
-    rbCircle = (RadioButton)findViewById(R.id.rb_share_circle);
-    rbWechat = (RadioButton)findViewById(R.id.rb_share_wechat);
-    rbWeibo = (RadioButton)findViewById(R.id.rb_share_weibo);
-    rbZone = (RadioButton)findViewById(R.id.rb_share_zone);
+    rbCircle = (CheckBox)findViewById(R.id.rb_share_circle);
+    rbWechat = (CheckBox)findViewById(R.id.rb_share_wechat);
+    rbWeibo = (CheckBox)findViewById(R.id.rb_share_weibo);
+    rbZone = (CheckBox)findViewById(R.id.rb_share_zone);
 }
 private void bindView(){
     tvPublish.setOnClickListener(this);
     tvLeft.setOnClickListener(this);
-    rgShare.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+    rbSelected = rbCircle;
+    rbCircle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
         @Override
-        public void onCheckedChanged(RadioGroup radioGroup, int i) {
-            showToastMsg("shbi");
+        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            if (b) {
+                if (rbSelected == null || rbSelected.getId() == rbCircle.getId()) {
+                    rbCircle.setChecked(true);
+                    rbSelected = rbCircle;
+                } else {
+                    if (rbSelected.getId() != rbCircle.getId()) {
+                        rbSelected.setChecked(false);
+                        rbCircle.setChecked(true);
+                        rbSelected = rbCircle;
+                    }
+                }
+            } else {
+                if (rbSelected.getId() == rbCircle.getId()) {
+                    rbSelected = null;
+                    rbCircle.setChecked(false);
+                }
+            }
+        }
+    });
+    rbWechat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            if (b){
+                if (rbSelected == null || rbSelected.getId() == rbWechat.getId()){
+                    rbWechat.setChecked(true);
+                    rbSelected = rbWechat;
+                }else {
+                    if (rbSelected.getId() != rbWechat.getId()){
+                        rbSelected.setChecked(false);
+                        rbWechat.setChecked(true);
+                        rbSelected = rbWechat;
+                    }
+                }
+            }else {
+                if (rbSelected.getId() == rbWechat.getId()){
+                    rbSelected = null;
+                    rbWechat.setChecked(false);
+                }
+            }
+        }
+    });
+    rbWeibo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            if (b){
+                if (rbSelected == null || rbSelected.getId() == rbWeibo.getId()){
+                    rbWeibo.setChecked(true);
+                    rbSelected = rbWeibo;
+                }else {
+                    if (rbSelected.getId() != rbCircle.getId()){
+                        rbSelected.setChecked(false);
+                        rbWeibo.setChecked(true);
+                        rbSelected = rbWeibo;
+                    }
+                }
+            }else {
+                if (rbSelected.getId() == rbWeibo.getId()){
+                    rbSelected = null;
+                    rbWeibo.setChecked(false);
+                }
+            }
+        }
+    });
+    rbZone.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            if (b){
+                if (rbSelected == null || rbSelected.getId() == rbZone.getId()){
+                    rbZone.setChecked(true);
+                    rbSelected = rbZone;
+                }else {
+                    if (rbSelected.getId() != rbZone.getId()){
+                        rbSelected.setChecked(false);
+                        rbZone.setChecked(true);
+                        rbSelected = rbZone;
+                    }
+                }
+            }else {
+                if (rbSelected.getId() == rbZone.getId()){
+                    rbSelected = null;
+                    rbZone.setChecked(false);
+                }
+            }
         }
     });
 }
@@ -91,10 +176,11 @@ private void publish(){
                             publishTogether.getImg().split(",").length > 0){
                         hearurl = publishTogether.getImg().split(",")[0];
                     }
-                    showToastMsg(rgShare.getCheckedRadioButtonId()+"//选中的id");
-                    rbSelected = (RadioButton)findViewById(rgShare.getCheckedRadioButtonId());
-                    share(rbSelected.getId(),result.getTogether().getId(),
-                         result.getTogether().getComment(),hearurl);
+//                    rbSelected = (RadioButton)findViewById(rgShare.getCheckedRadioButtonId());
+                    if (rbSelected != null){
+                        share(rbSelected.getId(),result.getTogether().getId(),
+                             result.getTogether().getComment(),hearurl);
+                    }
 
                     setResult(1);
                     finish();
