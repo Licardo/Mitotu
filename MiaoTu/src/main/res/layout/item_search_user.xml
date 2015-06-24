@@ -5,6 +5,7 @@
     android:layout_height="70dp"
     android:orientation="horizontal"
     android:gravity="center_vertical"
+    android:background="#ffffff"
     >
     <com.miaotu.view.CircleImageView
         android:id="@+id/iv_head_photo"
