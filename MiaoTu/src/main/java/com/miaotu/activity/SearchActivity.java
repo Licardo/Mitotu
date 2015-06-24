@@ -26,7 +26,7 @@ private LinearLayout layoutSearch,layoutClear,layoutResult;
     private SearchResultTab1Fragment mTab01 ;
     private SearchResultTab2Fragment mTab02 ;
     private String key;
-    private TextView tvCancel;
+    private TextView tvCancel,tvLeft;
     private int index;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +44,14 @@ private LinearLayout layoutSearch,layoutClear,layoutResult;
         ivInit = (ImageView) findViewById(R.id.iv_init);
         rgTab = (RadioGroup) findViewById(R.id.rg_search);
         tvCancel = (TextView) findViewById(R.id.tv_cancel);
+        tvLeft = (TextView) findViewById(R.id.tv_left);
 
     }
     private void bindView(){
         layoutClear.setOnClickListener(this);
         layoutSearch.setOnClickListener(this);
         tvCancel.setOnClickListener(this);
+        tvLeft.setOnClickListener(this);
         rgTab.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -131,28 +133,28 @@ private LinearLayout layoutSearch,layoutClear,layoutResult;
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.layout_search:
-                //点击搜索
-                if(StringUtil.isBlank(etKey.getText().toString())){
-                showToastMsg("请输入关键词！");
-                return;
-            }
-            key = StringUtil.trimAll(etKey.getText().toString());
-            ivInit.setVisibility(View.GONE);
-            layoutResult.setVisibility(View.VISIBLE);
-            setTabSelection(index);
-            if (index == 0){
-                rgTab.check(R.id.rb_search1);
-            }else {
-                rgTab.check(R.id.rb_search2);
-            }
-            break;
+            case R.id.tv_left:
+                finish();
+                break;
             case R.id.layout_clear:
                 //点击清除
                 etKey.setText("");
                 break;
             case R.id.tv_cancel:
-                finish();
+                //点击搜索
+                if(StringUtil.isBlank(etKey.getText().toString())){
+                    showToastMsg("请输入关键词！");
+                    return;
+                }
+                key = StringUtil.trimAll(etKey.getText().toString());
+                ivInit.setVisibility(View.GONE);
+                layoutResult.setVisibility(View.VISIBLE);
+                setTabSelection(index);
+                if (index == 0){
+                    rgTab.check(R.id.rb_search1);
+                }else {
+                    rgTab.check(R.id.rb_search2);
+                }
                 break;
         }
     }

@@ -180,7 +180,7 @@ private View root;
             protected SearchUserResult run(Void... params) {
                 isLoadMore = true;
                 page+=1;
-                return HttpRequestUtil.getInstance().searchUser(readPreference("token"), ((SearchActivity) getActivity()).getKey(), "1", "12");
+                return HttpRequestUtil.getInstance().searchUser(readPreference("token"), ((SearchActivity) getActivity()).getKey(), page+"",PAGECOUNT+"");
             }
 
             @Override
