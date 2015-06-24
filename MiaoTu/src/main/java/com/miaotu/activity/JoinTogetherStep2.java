@@ -73,7 +73,7 @@ private boolean validate(){
                         if (together.getPicList() != null && together.getPicList().size() > 0){
                             intent.putExtra("picurl",together.getPicList().get(0));
                         }
-                        startActivity(intent);
+                        startActivityForResult(intent, 1);
                         setResult(1);
                     } else {
                         if(StringUtil.isEmpty(result.getMsg())){
@@ -104,6 +104,14 @@ private boolean validate(){
             case R.id.tv_left:
                 finish();
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==1&&resultCode==1){
+            setResult(1);
+            finish();
         }
     }
 }

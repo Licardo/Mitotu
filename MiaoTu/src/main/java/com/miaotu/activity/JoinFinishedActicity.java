@@ -65,6 +65,7 @@ public class JoinFinishedActicity extends BaseActivity implements View.OnClickLi
             }
         });
         webView.loadUrl("http://m.miaotu.com/App/joinRes/?uid="+uid+"&nickname="+nickname+"&headurl="+hearurl+"&gid="+gid+"&groupname="+gname+"&remark="+remark);
+        setResult(1);
     }
 
     @Override
