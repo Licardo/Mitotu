@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -42,7 +43,7 @@ public class PublishTogetherStep2Activity extends BaseActivity implements OnClic
     private TextView tvPublish;
     private TextView tvTitle,tvLeft;
     private RadioGroup rgShare;
-    private RadioButton rbSelected;
+    private RadioButton rbSelected,rbCircle,rbWechat,rbWeibo,rbZone;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,10 +58,20 @@ private void findView(){
     tvLeft = (TextView) findViewById(R.id.tv_left);
     tvTitle = (TextView) findViewById(R.id.tv_title);
     rgShare = (RadioGroup) findViewById(R.id.rg_share);
+    rbCircle = (RadioButton)findViewById(R.id.rb_share_circle);
+    rbWechat = (RadioButton)findViewById(R.id.rb_share_wechat);
+    rbWeibo = (RadioButton)findViewById(R.id.rb_share_weibo);
+    rbZone = (RadioButton)findViewById(R.id.rb_share_zone);
 }
 private void bindView(){
     tvPublish.setOnClickListener(this);
     tvLeft.setOnClickListener(this);
+    rgShare.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(RadioGroup radioGroup, int i) {
+            showToastMsg("shbi");
+        }
+    });
 }
 private void init(){
     publishTogether = (PublishTogether) getIntent().getSerializableExtra("publishTogether");
@@ -80,9 +91,10 @@ private void publish(){
                             publishTogether.getImg().split(",").length > 0){
                         hearurl = publishTogether.getImg().split(",")[0];
                     }
+                    showToastMsg(rgShare.getCheckedRadioButtonId()+"//选中的id");
                     rbSelected = (RadioButton)findViewById(rgShare.getCheckedRadioButtonId());
                     share(rbSelected.getId(),result.getTogether().getId(),
-                            result.getTogether().getComment(),hearurl);
+                         result.getTogether().getComment(),hearurl);
 
                     setResult(1);
                     finish();

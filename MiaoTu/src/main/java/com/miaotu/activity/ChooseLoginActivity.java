@@ -271,6 +271,15 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
                     writePreference("gender",result.getLogin().getGender());
                     writePreference("headphoto",result.getLogin().getHeadPhoto());
                     writePreference("job",result.getLogin().getJob());
+                    writePreference("address",result.getLogin().getAddress());
+                    writePreference("emotion",result.getLogin().getMaritalstatus());
+                    writePreference("wantgo",result.getLogin().getWantgo());
+                    writePreference("tags",result.getLogin().getTags());
+                    writePreference("fanscount", result.getLogin().getFanscount());
+                    writePreference("followcount", result.getLogin().getFollowcount());
+                    writePreference("luckmoney", result.getLogin().getLuckymoney());
+                    writePreference("email", result.getLogin().getEmail());
+                    writePreference("phone", result.getLogin().getPhone());
                     writePreference("login_status","in");
                     EMChatManager.getInstance().login(MD5.md5(readPreference("uid")), readPreference("token"),
                             new EMCallBack() {//回调

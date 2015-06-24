@@ -50,7 +50,7 @@
             android:background="@drawable/bg_publish_topic_et"
             android:gravity="left|top"
             android:hint="写下你想说的吧"
-            android:maxLength="300"
+            android:maxLength="140"
             android:padding="10dp"
             android:textColor="#646464"
             android:textColorHint="#b4b4b4"

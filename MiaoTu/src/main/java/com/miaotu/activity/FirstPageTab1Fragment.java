@@ -300,7 +300,8 @@ private View root;
             protected TogetherResult run(Void... params) {
                 isLoadMore = true;
                 page+=1;
-                return HttpRequestUtil.getInstance().getTogetherList(readPreference("token"),page+"",PAGECOUNT+"",readPreference("latitude"),readPreference("longitude"));
+                return HttpRequestUtil.getInstance().getTogetherList(readPreference("token"),
+                        page+"",PAGECOUNT+"",readPreference("latitude"),readPreference("longitude"));
             }
 
             @Override
