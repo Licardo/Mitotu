@@ -194,8 +194,13 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                 }
                 break;
             case R.id.btn_add:
-                String content = et_tag.getText().toString().trim();
-                addTag(content);
+                if (fl_tags.getChildCount() < 6){
+                    String content = et_tag.getText().toString().trim();
+                    addTag(content);
+                }else {
+                    et_tag.setText("");
+                    showToastMsg("最多输入6个标签");
+                }
                 break;
             case R.id.tv_right:
                 if (isEmpty()) {
