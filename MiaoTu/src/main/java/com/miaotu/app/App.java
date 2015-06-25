@@ -336,10 +336,14 @@ public class App extends Application implements
 			writePreference("longitude",amapLocation.getLongitude() +"");
 			writePreference("latitude","30.312021");
 			writePreference("longitude","120.255116");
-			writePreference("located_city",amapLocation.getCity() +"");
-			writePreference("selected_city",amapLocation.getCity() +"");
-			FirstPageFragment.getInstance().refreshCity();
-			CityListActivity.getInstance().refreshCity();
+			writePreference("located_city", amapLocation.getCity() + "");
+			writePreference("selected_city", amapLocation.getCity() + "");
+			try {
+				FirstPageFragment.getInstance().refreshCity();
+				CityListActivity.getInstance().refreshCity();
+			}catch (Exception e){
+				e.printStackTrace();
+			}
 //			mLocationCountyTextView.setText(amapLocation.getDistrict());
 //			mLocationRoadTextView.setText(amapLocation.getRoad());
 //			mLocationPOITextView.setText(amapLocation.getPoiName());

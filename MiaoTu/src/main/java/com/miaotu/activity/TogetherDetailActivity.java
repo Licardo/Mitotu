@@ -611,6 +611,10 @@ private Together together;
                 break;
             case R.id.iv_chat:
                 //私聊
+                if(!Util.isNetworkConnected(TogetherDetailActivity.this)) {
+                    showToastMsg("当前未联网，请检查网络设置");
+                    return;
+                }
                 if(togetherDetailResult.getTogether().getUid().equals(readPreference("uid"))){
                     showToastMsg("不能和自己聊天！");
                     break;
@@ -625,6 +629,10 @@ private Together together;
                 break;
             case R.id.iv_group_chat:
                 //群聊
+                if(!Util.isNetworkConnected(TogetherDetailActivity.this)) {
+                    showToastMsg("当前未联网，请检查网络设置");
+                    return;
+                }
                 if(togetherDetailResult.getTogether().isAddGroup()){
                     Intent groupChatIntent = new Intent(TogetherDetailActivity.this, ChatsActivity.class);
                     groupChatIntent.putExtra("groupImId", togetherDetailResult.getTogether().getGroupId());
@@ -637,6 +645,10 @@ private Together together;
                 break;
             case R.id.iv_share:
                 //分享
+                if(!Util.isNetworkConnected(TogetherDetailActivity.this)) {
+                    showToastMsg("当前未联网，请检查网络设置");
+                    return;
+                }
                 showShare();
                 break;
             case R.id.layout_all:
@@ -646,6 +658,10 @@ private Together together;
                 break;
             case R.id.layout_join:
                 // 参加
+                if(!Util.isNetworkConnected(TogetherDetailActivity.this)) {
+                    showToastMsg("当前未联网，请检查网络设置");
+                    return;
+                }
                 Intent joinIntent = new Intent(TogetherDetailActivity.this,JoinTogetherStep1.class);
                 joinIntent.putExtra("together",together);
                 startActivityForResult(joinIntent, 1);

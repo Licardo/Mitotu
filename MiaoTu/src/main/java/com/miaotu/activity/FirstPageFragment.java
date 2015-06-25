@@ -43,6 +43,9 @@ private View root;
     }
     public void refreshCity(){
         try{
+            if (tvRight == null){
+                return;
+            }
             if(!StringUtil.isEmpty(readPreference("selected_city"))){
                 if(readPreference("selected_city").length()>4){
                     tvRight.setText(readPreference("selected_city").substring(0,3)+"...");

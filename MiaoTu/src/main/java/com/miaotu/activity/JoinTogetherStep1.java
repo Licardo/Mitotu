@@ -32,6 +32,9 @@ private TextView tvTitle,tvLable,tvLeft;
         btnNext.setOnClickListener(this);
         tvTitle.setText("报名");
         together = (Together) getIntent().getSerializableExtra("together");
+        if (together == null){
+            return;
+        }
         SpannableStringBuilder style=new SpannableStringBuilder("您将报名由"+" "+together.getNickname()+" 发起的约游线路，请仔细阅读下文。");
         style.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.grey64)), 0, 5, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
         style.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.fbab4a)), 6, 6+together.getNickname().length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
