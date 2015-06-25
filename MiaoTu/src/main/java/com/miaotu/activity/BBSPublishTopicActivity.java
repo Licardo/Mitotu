@@ -159,6 +159,7 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
                 popWindow.showPopupWindow();
                 break;
             case R.id.tv_right:
+                tvRight.setClickable(false);
                 if (validate()) {
                     if (photoList.size() > 0){
                         getPhotoUrl();
@@ -207,6 +208,7 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
                         showToastMsg(result.getMsg());
                     }
                 }
+                tvRight.setClickable(true);
             }
 
             @Override
