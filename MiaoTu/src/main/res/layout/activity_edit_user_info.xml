@@ -267,7 +267,9 @@
                     android:hint="请输入您的情感状态"
                     android:textColorHint="#b4b4b4"
                     android:textColor="#646464"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:maxLength="10"
+                    />
             </RelativeLayout>
 
             <RelativeLayout
@@ -306,7 +308,9 @@
                     android:hint="请输入您的职业"
                     android:textColorHint="#b4b4b4"
                     android:textColor="#646464"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:maxLength="15"
+                    />
             </RelativeLayout>
 
             <RelativeLayout
@@ -345,7 +349,9 @@
                     android:hint="请输入您想去的地方"
                     android:textColorHint="#b4b4b4"
                     android:textColor="#646464"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:maxLength="20"
+                    />
             </RelativeLayout>
 
             <RelativeLayout
