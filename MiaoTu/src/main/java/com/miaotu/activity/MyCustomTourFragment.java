@@ -45,6 +45,7 @@ public class MyCustomTourFragment extends BaseFragment implements View.OnClickLi
     private String type,uid;
     private boolean isOwner;    //我的动态orTA的动态
     private boolean isMineCustomTour;   //是否是我发布的妙旅团
+    private int isMineLikeCustomTour;   //1:我喜欢的妙旅团 2:ta喜欢的秒旅团
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -123,8 +124,14 @@ public class MyCustomTourFragment extends BaseFragment implements View.OnClickLi
         if (isOwner && "owner".equals(type)){
             isMineCustomTour = true;
         }
+        if (isOwner && "like".equals(type)){
+            isMineLikeCustomTour = 1;
+        }
+        if (!isOwner && "like".equals(type)){
+            isMineLikeCustomTour = 2;
+        }
         mList = new ArrayList<>();
-        adapter = new CustomTourlistAdapter(getActivity(), mList, isMineCustomTour);
+        adapter = new CustomTourlistAdapter(getActivity(), mList, isMineCustomTour, isMineLikeCustomTour);
         lvPull.setAdapter(adapter);
         WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
         Point size = new Point();
@@ -284,6 +291,11 @@ public class MyCustomTourFragment extends BaseFragment implements View.OnClickLi
      * @param flag
      */
     public void modifyLikeView(int postion, boolean flag){
+        if (isMineLikeCustomTour == 1){
+            mList.remove(postion);
+            adapter.notifyDataSetChanged();
+            return;
+        }
         mList.get(postion).setIsLike(flag);
         adapter.notifyDataSetChanged();
     }
