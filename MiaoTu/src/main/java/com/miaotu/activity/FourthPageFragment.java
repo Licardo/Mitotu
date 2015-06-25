@@ -121,6 +121,10 @@ public class FourthPageFragment extends BaseFragment implements View.OnClickList
                         EditUserInfoActivity.class);
                 break;
             case R.id.rl_homepage:
+                if(!Util.isNetworkConnected(FourthPageFragment.this.getActivity())) {
+                    showToastMsg("当前未联网，请检查网络设置");
+                    return;
+                }
                 String uid = readPreference("uid");
                 intent.putExtra("uid", uid);
                 intent.setClass(FourthPageFragment.this.getActivity(),

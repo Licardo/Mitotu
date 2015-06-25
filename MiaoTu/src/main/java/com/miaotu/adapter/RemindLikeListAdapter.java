@@ -15,6 +15,7 @@ import com.miaotu.activity.BaseActivity;
 import com.miaotu.activity.PersonCenterActivity;
 import com.miaotu.model.BlackInfo;
 import com.miaotu.model.RemindLike;
+import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 
 import java.text.ParseException;
@@ -68,6 +69,9 @@ public class RemindLikeListAdapter extends BaseAdapter{
         holder.ivPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!Util.isNetworkConnected(context)) {
+                    return;
+                }
                 Intent intent = new Intent(context, PersonCenterActivity.class);
                 intent.putExtra("uid",remindLikes.get(i).getPersonInfo().getUid());
                 context.startActivity(intent);

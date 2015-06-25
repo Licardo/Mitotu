@@ -25,6 +25,7 @@ import com.miaotu.model.CustomTourInfo;
 import com.miaotu.util.LogUtil;
 import com.miaotu.util.MD5;
 import com.miaotu.util.StringUtil;
+import com.miaotu.util.Util;
 import com.pingplusplus.android.PaymentActivity;
 
 import org.json.JSONException;
@@ -244,6 +245,10 @@ private WebView webView;
         @android.webkit.JavascriptInterface
         public void enterUser(String uid) {
             // 个人中心
+            if(!Util.isNetworkConnected(CustomTourDetailActivity.this)) {
+                showToastMsg("当前未联网，请检查网络设置");
+                return;
+            }
             Intent userIntent = new Intent(CustomTourDetailActivity.this,PersonCenterActivity.class);
             userIntent.putExtra("uid", uid);
             startActivity(userIntent);

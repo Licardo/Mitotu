@@ -299,6 +299,10 @@ private Together together;
                     @Override
                     public void onClick(View v) {
                         // TODO Auto-generated method stub
+                        if(!Util.isNetworkConnected(TogetherDetailActivity.this)) {
+                            showToastMsg("当前未联网，请检查网络设置");
+                            return;
+                        }
                         MobclickAgent.onEvent(TogetherDetailActivity.this, "线路详情页-感兴趣的人");
                         Intent intent = new Intent(
                                 TogetherDetailActivity.this,
@@ -335,6 +339,10 @@ private Together together;
                     @Override
                     public void onClick(View v) {
                         // TODO Auto-generated method stub
+                        if(!Util.isNetworkConnected(TogetherDetailActivity.this)) {
+                            showToastMsg("当前未联网，请检查网络设置");
+                            return;
+                        }
                         MobclickAgent.onEvent(TogetherDetailActivity.this, "线路详情页-感兴趣的人");
                         Intent intent = new Intent(
                                 TogetherDetailActivity.this,
@@ -593,6 +601,10 @@ private Together together;
 //                break;
             case R.id.iv_head_photo:
                 // 个人中心
+                if(!Util.isNetworkConnected(TogetherDetailActivity.this)) {
+                    showToastMsg("当前未联网，请检查网络设置");
+                    return;
+                }
                 Intent userIntent = new Intent(TogetherDetailActivity.this,PersonCenterActivity.class);
                 userIntent.putExtra("uid", togetherDetailResult.getTogether().getUid());
                 startActivity(userIntent);

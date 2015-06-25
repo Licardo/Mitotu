@@ -21,6 +21,7 @@ import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.model.BlackInfo;
 import com.miaotu.result.BaseResult;
 import com.miaotu.util.StringUtil;
+import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 
 import java.util.List;
@@ -90,6 +91,10 @@ public class MyFansAdapter extends BaseAdapter{
         holder.ivPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!Util.isNetworkConnected(context)) {
+                    ((BaseFragmentActivity)context).showToastMsg("当前未联网，请检查网络设置");
+                    return;
+                }
                 int pos = (int) view.getTag();
                 Intent intent = new Intent(context, PersonCenterActivity.class);
                 intent.putExtra("uid", blackInfos.get(pos).getUid());

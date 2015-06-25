@@ -147,6 +147,10 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
 
     @Override
     public void onClick(View view) {
+        if(!Util.isNetworkConnected(BBSPublishTopicActivity.this)) {
+            showToastMsg("当前未联网，请检查网络设置");
+            return;
+        }
         switch (view.getId()) {
             case R.id.layout_movement:
                 //选择活动

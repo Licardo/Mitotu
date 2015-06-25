@@ -72,6 +72,7 @@ import com.miaotu.activity.ShowVideoActivity;
 import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.util.LogUtil;
 import com.miaotu.util.StringUtil;
+import com.miaotu.util.Util;
 import com.umeng.analytics.MobclickAgent;
 
 public class MessageAdapter extends BaseAdapter{
@@ -321,6 +322,9 @@ public class MessageAdapter extends BaseAdapter{
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
+					if(!Util.isNetworkConnected(context)) {
+						return;
+					}
 					Intent intent = new Intent(activity,PersonCenterActivity.class);
 					intent.putExtra("uid", uid);
                     if(!StringUtil.isEmpty(uid)){
@@ -364,6 +368,9 @@ public class MessageAdapter extends BaseAdapter{
 					@Override
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
+						if(!Util.isNetworkConnected(context)) {
+							return;
+						}
 						Intent intent = new Intent(activity,PersonCenterActivity.class);
 						intent.putExtra("uid", contactInfo.getUid());
 						if(!StringUtil.isEmpty(contactInfo.getUid())){

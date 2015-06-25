@@ -178,6 +178,10 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             view.findViewById(R.id.iv_head_photo).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if(!Util.isNetworkConnected(BBSTopicDetailActivity.this)) {
+                        showToastMsg("当前未联网，请检查网络设置");
+                        return;
+                    }
                     Intent intent = new Intent(BBSTopicDetailActivity.this, PersonCenterActivity.class);
                     intent.putExtra("uid", topic.getUid());
 //                    startActivity(intent);
@@ -420,6 +424,10 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
                     view.findViewById(R.id.iv_head_photo).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
+                            if(!Util.isNetworkConnected(BBSTopicDetailActivity.this)) {
+                                showToastMsg("当前未联网，请检查网络设置");
+                                return;
+                            }
                             Intent intent = new Intent(BBSTopicDetailActivity.this, PersonCenterActivity.class);
                             intent.putExtra("uid",topic.getUid());
                             startActivityForResult(intent, 1001);
@@ -709,6 +717,10 @@ public class BBSTopicDetailActivity extends BaseActivity implements View.OnClick
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    if(!Util.isNetworkConnected(BBSTopicDetailActivity.this)) {
+                        showToastMsg("当前未联网，请检查网络设置");
+                        return;
+                    }
                     int pos = (int) view.getTag();
                     Intent intent = new Intent();
                     intent.setClass(BBSTopicDetailActivity.this, PersonCenterActivity.class);

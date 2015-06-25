@@ -66,6 +66,10 @@ private View root;
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 // TODO Auto-generated method stub
+                if(!Util.isNetworkConnected(SearchResultTab2Fragment.this.getActivity())) {
+                    showToastMsg("当前未联网，请检查网络设置");
+                    return;
+                }
                 Intent intent = new Intent(getActivity(),
                         PersonCenterActivity.class);
                 intent.putExtra("uid", mList.get(position - 1).getUid());
