@@ -1,6 +1,7 @@
 package com.miaotu.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import com.easemob.util.DateUtils;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
+import com.miaotu.activity.PersonCenterActivity;
 import com.miaotu.model.BlackInfo;
 import com.miaotu.result.BlackResult;
 import com.miaotu.view.CircleImageView;
@@ -49,7 +51,7 @@ public class BlackListAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         ViewHolder holder = null;
         if(view == null){
             view = mLayoutInflater.inflate(R.layout.item_blacklist, null);
@@ -69,8 +71,15 @@ public class BlackListAdapter extends BaseAdapter{
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
         holder.tvName.setText(blackInfos.get(i).getNickname());
+        holder.ivPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, PersonCenterActivity.class);
+                intent.putExtra("uid", blackInfos.get(i).getUid());
+                context.startActivity(intent);
+            }
+        });
         return view;
     }
 
