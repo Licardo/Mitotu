@@ -35,6 +35,9 @@
             android:layout_alignLeft="@id/tv_name"
             android:text="和朋友出去玩碰到了这样的事"
             android:textColor="#b4b4b4"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:layout_marginRight="45dp"
             android:textSize="12sp" />
 
         <ImageView

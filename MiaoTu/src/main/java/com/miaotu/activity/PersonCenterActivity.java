@@ -20,6 +20,8 @@ import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
+import com.miaotu.imutil.ContactInfo;
+import com.miaotu.imutil.IMDatabaseHelper;
 import com.miaotu.model.ModifyPersonInfo;
 import com.miaotu.result.PersonInfoResult;
 import com.miaotu.result.BaseResult;
@@ -268,6 +270,13 @@ public class PersonCenterActivity extends BaseActivity implements View.OnClickLi
                 chatIntent.putExtra("uid", result.getPersonInfo().getUid());
                 chatIntent.putExtra("name", result.getPersonInfo().getNickname());
                 chatIntent.putExtra("headphoto", result.getPersonInfo().getHeadurl());
+                ContactInfo contactInfo = new ContactInfo();
+                contactInfo.setImId(MD5.md5(result.getPersonInfo().getUid()));
+                contactInfo.setUid(result.getPersonInfo().getUid());
+                contactInfo.setNickName(result.getPersonInfo().getNickname());
+                contactInfo.setHeadPhoto(result.getPersonInfo().getHeadurl());
+                IMDatabaseHelper imDatabaseHelper = new IMDatabaseHelper(getApplicationContext());
+                imDatabaseHelper.saveContactInfo(contactInfo);
                 startActivity(chatIntent);
                 break;
             case R.id.rl_follow:
