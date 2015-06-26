@@ -61,7 +61,7 @@ public class SmileUtils {
 	public static final String ee_32 = "[(k)]";
 	public static final String ee_33 = "[(F)]";
 	public static final String ee_34 = "[(W)]";
-	public static final String ee_35 = "[(D)]";
+//	public static final String ee_35 = "[(D)]";
 	
 	private static final Factory spannableFactory = Factory
 	        .getInstance();

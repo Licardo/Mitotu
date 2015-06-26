@@ -625,4 +625,39 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
             position++;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        if (!isEmpty()) {
+            final Dialog dialog = new AlertDialog.Builder(EditUserInfoActivity.this).create();
+            dialog.setCancelable(true);
+            dialog.show();
+            View v = LayoutInflater.from(EditUserInfoActivity.this).inflate(
+                    R.layout.dialog_message_empty, null);
+            v.setBackgroundResource(R.drawable.bg_dialog_choose_register);
+            dialog.setContentView(v);
+            Button btnCancle = (Button) v.findViewById(R.id.btn_cancel);
+            Button btnConfirm = (Button) v.findViewById(R.id.btn_confirm);
+            TextView tvContent = (TextView) v.findViewById(R.id.tv_content);
+            btnCancle.setText("否");
+            btnConfirm.setText("是");
+            tvContent.setText("是否保存已填信息？");
+            btnConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    EditUserInfoActivity.this.onClick(tv_right);
+                    dialog.dismiss();
+                }
+            });
+            btnCancle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    finish();
+                    dialog.dismiss();
+                }
+            });
+            return;
+        }
+        super.onBackPressed();
+    }
 }

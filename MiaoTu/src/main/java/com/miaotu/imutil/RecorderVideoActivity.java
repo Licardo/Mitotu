@@ -2,7 +2,7 @@
  *  * EaseMob CONFIDENTIAL 
  * __________________ 
  * Copyright (C) 2013-2014 EaseMob Technologies. All rights reserved. 
- *  
+ *
  * NOTICE: All information contained herein is, and remains 
  * the property of EaseMob Technologies.
  * Dissemination of this information or reproduction of this material 
@@ -227,7 +227,9 @@ public class RecorderVideoActivity extends BaseActivity implements
 			break;
 		case R.id.recorder_start:
 			// start recording
-			startRecording();
+			try{
+				startRecording();
+			}catch (Exception e){e.printStackTrace();}
 			Toast.makeText(this, "录像开始", Toast.LENGTH_SHORT).show();
 			btn_switch.setVisibility(View.INVISIBLE);
 			btnStart.setVisibility(View.INVISIBLE);
@@ -300,6 +302,9 @@ public class RecorderVideoActivity extends BaseActivity implements
 			handleSurfaceChanged();
 		} catch (IOException e1) {
 			EMLog.e("video", "start preview fail " + e1.getMessage());
+		}catch(NullPointerException e){
+			e.printStackTrace();
+			showToastMsg("请检查权限设置");
 		}
 	}
 

@@ -75,6 +75,12 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
+        <activity
+            android:name=".imutil.AlertDialogActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
         <!-- choose video -->
         <activity
             android:name=".imutil.ImageGridActivity"
@@ -572,10 +578,6 @@
             android:name=".activity.HomeShareActivity"
             android:label="@string/title_activity_home_share"
             android:theme="@android:style/Theme.Translucent"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden">
-        </activity>
-        <activity android:name="com.miaotu.imutil.AlertDialogActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden">
         </activity>
