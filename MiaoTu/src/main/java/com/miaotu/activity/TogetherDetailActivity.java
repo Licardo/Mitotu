@@ -673,7 +673,8 @@ private Together together;
                 break;
             case R.id.tv_publish_comment:
                 //发表评论
-                if(StringUtil.isBlank(etComment.getText().toString())){
+
+                if(StringUtil.isBlank(StringUtil.trimAll(etComment.getText().toString()))){
                     layoutMenu.setVisibility(View.VISIBLE);
                     layoutPublishComment.setVisibility(View.GONE);
                 }else{

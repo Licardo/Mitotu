@@ -179,7 +179,7 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
 //            showToastMsg("请输入标题");
 //            return false;
 //        }
-        if (StringUtil.isBlank(etContent.getText().toString())) {
+        if (StringUtil.isBlank(StringUtil.trimAll(etContent.getText().toString()))) {
             showToastMsg("请输入内容");
             return false;
         }
@@ -224,7 +224,7 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
                 }
                 return HttpRequestUtil.getInstance().publishTopic(
                         (String) layoutMovement.getTag(), readPreference("token"),
-                        etContent.getText().toString(),
+                        StringUtil.trimAll(etContent.getText().toString()),
                         images.substring(0, images.length() - 1));
             }
 
