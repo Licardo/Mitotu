@@ -119,7 +119,6 @@ public class RedPackageActivity extends BaseActivity implements OnClickListener 
         adapter = new RedPackageListAdapter(this, mList);
         lvLucky.setAdapter(adapter);
         getLuckyList();
-//		getRedPackage();
     }
 
     @Override
@@ -177,7 +176,7 @@ public class RedPackageActivity extends BaseActivity implements OnClickListener 
             protected RedPackageListResult run(Void... params) {
                 return HttpRequestUtil
                         .getInstance().
-                                getLuckyList(readPreference("token"), "10");
+                                getLuckyList(readPreference("token"), "1000");
             }
 
         }.execute();
@@ -364,44 +363,6 @@ public class RedPackageActivity extends BaseActivity implements OnClickListener 
         oks.show(this);
     }
 
-    /**
-     * 获取红包
-     */
-    private void getRedPackage() {
-
-        new BaseHttpAsyncTask<Void, Void, MoneyResult>(this,
-                true) {
-            @Override
-            protected void onCompleteTask(MoneyResult result) {
-                if (tvTitle == null) {
-                    return;
-                }
-                if (result.getCode() == BaseResult.SUCCESS) {
-                    if ("0".equals(result.getMoney().getMoney())) {
-                        tvMoney.setText("0.0");
-                    } else {
-                        tvMoney.setText(result.getMoney().getMoney());
-                    }
-                } else {
-                    if (StringUtil.isEmpty(result.getMsg())) {
-                        showToastMsg("获取红包金额失败！");
-                    } else {
-                        showToastMsg(result.getMsg());
-                    }
-                }
-            }
-
-            @Override
-            protected MoneyResult run(Void... params) {
-                return HttpRequestUtil
-                        .getInstance().
-                                getLuckyMoney(readPreference("token"));
-            }
-
-        }.execute();
-
-    }
-
     //输入红包兑换码dialog
     private void openCouponCodeDialog() {
         LayoutInflater lay = (LayoutInflater) (this
@@ -460,10 +421,19 @@ public class RedPackageActivity extends BaseActivity implements OnClickListener 
                     if (tvTitle == null) {
                         return;
                     }
+                    if (result == null){
+                        return;
+                    }
                     if (result.getCode() == BaseResult.SUCCESS) {
                         //兑换成功
                         showToastMsg("红包兑换成功");
-                        getRedPackage();
+                        double origionmoney = Double.parseDouble(tvMoney.getText().toString().trim());
+                        if (StringUtil.isBlank(result.getLuckyInfo().getMoney())){
+                            result.getLuckyInfo().setMoney("0");
+                        }
+                        double exchangemoney = Double.parseDouble(result.getLuckyInfo().getMoney());
+                        DecimalFormat df = new DecimalFormat("0.00"); //保留两位小数
+                        tvMoney.setText(df.format(origionmoney + exchangemoney) + "");
                         getLuckyList();
                     /*if(MainSlidingActivity.getMainSlidingActivityInstance()!=null){
                         MainSlidingActivity.getMainSlidingActivityInstance().getStatistics();
