@@ -345,6 +345,7 @@ public class App extends Application implements
 			}catch (Exception e){
 				e.printStackTrace();
 			}
+			return;
 //			mLocationCountyTextView.setText(amapLocation.getDistrict());
 //			mLocationRoadTextView.setText(amapLocation.getRoad());
 //			mLocationPOITextView.setText(amapLocation.getPoiName());
