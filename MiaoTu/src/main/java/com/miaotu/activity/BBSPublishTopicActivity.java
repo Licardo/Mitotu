@@ -159,7 +159,7 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
                 popWindow.showPopupWindow();
                 break;
             case R.id.tv_right:
-                tvRight.setClickable(false);
+//                tvRight.setClickable(false);
                 if (validate()) {
                     if (photoList.size() > 0){
                         getPhotoUrl();
@@ -208,7 +208,7 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
                         showToastMsg(result.getMsg());
                     }
                 }
-                tvRight.setClickable(true);
+//                tvRight.setClickable(true);
             }
 
             @Override
@@ -392,7 +392,7 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
             if (gifFlg) {
                 return;
             }
-            new BaseHttpAsyncTask<Void, Void, PhotoUploadResult>(this, false) {
+            new BaseHttpAsyncTask<Void, Void, PhotoUploadResult>(this, true) {
 
                 @Override
                 protected void onCompleteTask(PhotoUploadResult result) {
