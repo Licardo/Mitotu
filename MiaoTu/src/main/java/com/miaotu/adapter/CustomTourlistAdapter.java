@@ -48,12 +48,14 @@ public class CustomTourlistAdapter extends BaseAdapter {
 	private List<CustomTour> mList = null;
 	private Context mContext;
     private boolean isMine;
+    private int LikeCustomTour;
 
-	public CustomTourlistAdapter(Context context, List<CustomTour> list, boolean isMine) {
+	public CustomTourlistAdapter(Context context, List<CustomTour> list, boolean isMine, int LikeCustomTour) {
 		mList = list;
 		mContext = context;
 		mLayoutInflater = LayoutInflater.from(context);
         this.isMine = isMine;
+        this.LikeCustomTour = LikeCustomTour;
 	}
 
 	@Override
@@ -115,6 +117,10 @@ public class CustomTourlistAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
+        if (LikeCustomTour == 2){   //ta喜欢的秒旅团
+            holder.ivLike.setVisibility(View.GONE);
+        }
+
 		// 对ListView的Item中的控件的操作
 		UrlImageViewHelper.setUrlDrawable(holder.ivHeadPhoto,
                 mList.get(position).getHeadUrl() + "100x100",
@@ -122,6 +128,9 @@ public class CustomTourlistAdapter extends BaseAdapter {
         holder.ivHeadPhoto.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!Util.isNetworkConnected(mContext)) {
+                    return;
+                }
                 Intent intent = new Intent(mContext, PersonCenterActivity.class);
                 intent.putExtra("uid", mList.get(position).getUid());
                 mContext.startActivity(intent);
@@ -203,6 +212,9 @@ public class CustomTourlistAdapter extends BaseAdapter {
                     }else{
                         ((BaseFragmentActivity)mContext).showToastMsg("喜欢成功！");
                         mList.get(position).setIsLike(true);
+                    }
+                    if (LikeCustomTour == 1){   //我喜欢的秒旅团
+                        mList.remove(position);
                     }
                     notifyDataSetChanged();
                 } else {

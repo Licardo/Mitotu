@@ -71,7 +71,7 @@ public class AboutActivity extends BaseFragmentActivity implements OnClickListen
                 startActivity(intent1);
                 break;
             case R.id.layout_add_qq_group:
-                joinQQGroup();
+//                joinQQGroup();
                 break;
 		}
 	}

@@ -147,6 +147,10 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
 
     @Override
     public void onClick(View view) {
+        if(!Util.isNetworkConnected(BBSPublishTopicActivity.this)) {
+            showToastMsg("当前未联网，请检查网络设置");
+            return;
+        }
         switch (view.getId()) {
             case R.id.layout_movement:
                 //选择活动
@@ -155,6 +159,7 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
                 popWindow.showPopupWindow();
                 break;
             case R.id.tv_right:
+//                tvRight.setClickable(false);
                 if (validate()) {
                     if (photoList.size() > 0){
                         getPhotoUrl();
@@ -174,7 +179,7 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
 //            showToastMsg("请输入标题");
 //            return false;
 //        }
-        if (StringUtil.isBlank(etContent.getText().toString())) {
+        if (StringUtil.isBlank(StringUtil.trimAll(etContent.getText().toString()))) {
             showToastMsg("请输入内容");
             return false;
         }
@@ -203,6 +208,7 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
                         showToastMsg(result.getMsg());
                     }
                 }
+//                tvRight.setClickable(true);
             }
 
             @Override
@@ -218,7 +224,7 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
                 }
                 return HttpRequestUtil.getInstance().publishTopic(
                         (String) layoutMovement.getTag(), readPreference("token"),
-                        etContent.getText().toString(),
+                        StringUtil.trimAll(etContent.getText().toString()),
                         images.substring(0, images.length() - 1));
             }
 
@@ -386,7 +392,7 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
             if (gifFlg) {
                 return;
             }
-            new BaseHttpAsyncTask<Void, Void, PhotoUploadResult>(this, false) {
+            new BaseHttpAsyncTask<Void, Void, PhotoUploadResult>(this, true) {
 
                 @Override
                 protected void onCompleteTask(PhotoUploadResult result) {

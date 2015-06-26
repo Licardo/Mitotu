@@ -208,27 +208,31 @@ public class MessageDatabaseHelper {
 	 */
 	public List<LikeMessage> getAllLikeMessage(){
 		List<LikeMessage>list = new ArrayList<LikeMessage>();
-		SQLiteDatabase db = messageDbHelper.getWritableDatabase();
-		String sql = "select * from "+TABLE_LIKE_MESSAGE+" order by message_id desc";
-		Cursor cursor = db.rawQuery(sql, null);
-		while (cursor.moveToNext()) {
-			LikeMessage likeMessage = new LikeMessage();
-			likeMessage.setAge(cursor.getString(cursor
-					.getColumnIndex("age")));
-			likeMessage.setGender(cursor.getString(cursor
-					.getColumnIndex("gender")));
-			likeMessage.setMessageId(cursor.getInt(cursor
-					.getColumnIndex("message_id")));
-			likeMessage.setHeadUrl(cursor.getString(cursor
-					.getColumnIndex("headurl")));
-			likeMessage.setUid(cursor.getString(cursor
-					.getColumnIndex("uid")));
-			list.add(likeMessage);
+		try {
+			SQLiteDatabase db = messageDbHelper.getWritableDatabase();
+			String sql = "select * from "+TABLE_LIKE_MESSAGE+" order by message_id desc";
+			Cursor cursor = db.rawQuery(sql, null);
+			while (cursor.moveToNext()) {
+				LikeMessage likeMessage = new LikeMessage();
+				likeMessage.setAge(cursor.getString(cursor
+						.getColumnIndex("age")));
+				likeMessage.setGender(cursor.getString(cursor
+						.getColumnIndex("gender")));
+				likeMessage.setMessageId(cursor.getInt(cursor
+						.getColumnIndex("message_id")));
+				likeMessage.setHeadUrl(cursor.getString(cursor
+						.getColumnIndex("headurl")));
+				likeMessage.setUid(cursor.getString(cursor
+						.getColumnIndex("uid")));
+				list.add(likeMessage);
+			}
+			if (!(cursor == null||cursor.isClosed())) {
+				cursor.close();
+			}
+			db.close();
+		}catch (Exception e){
+			e.printStackTrace();
 		}
-		if (!(cursor == null||cursor.isClosed())) {
-			cursor.close();
-		}
-		db.close();
 		return list;
 	}
 	/**

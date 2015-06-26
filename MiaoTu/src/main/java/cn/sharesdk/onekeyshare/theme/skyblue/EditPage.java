@@ -20,6 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.miaotu.util.Util;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 

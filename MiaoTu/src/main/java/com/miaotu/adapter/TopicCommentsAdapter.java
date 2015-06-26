@@ -81,6 +81,9 @@ public class TopicCommentsAdapter extends BaseAdapter {
         holder.ivHeadPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!Util.isNetworkConnected(mContext)) {
+                    return;
+                }
                 int pos = (int) view.getTag();
                 Intent intent = new Intent(mContext, PersonCenterActivity.class);
                 intent.putExtra("uid", mList.get(pos).getUid());

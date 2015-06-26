@@ -123,6 +123,9 @@ public class TopiclistAdapter extends BaseAdapter {
         holder.ivHeadPhoto.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!Util.isNetworkConnected(mContext)) {
+                    return;
+                }
                 int pos = (int) view.getTag();
                 Intent intent = new Intent(mContext, PersonCenterActivity.class);
                 intent.putExtra("uid", mList.get(pos).getUid());

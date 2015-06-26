@@ -134,7 +134,7 @@ private View root;
     private void init() {
         lvPull.getRefreshableView().addHeaderView(head,null,false);
         mList = new ArrayList<>();
-        adapter = new CustomTourlistAdapter(getActivity(),mList,false);
+        adapter = new CustomTourlistAdapter(getActivity(),mList,false,0);
         lvPull.setAdapter(adapter);
         WindowManager wm = (WindowManager) getActivity().getSystemService(Context.WINDOW_SERVICE);
         Point size = new Point();

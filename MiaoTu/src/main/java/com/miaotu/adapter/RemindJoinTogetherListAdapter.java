@@ -15,6 +15,7 @@ import com.miaotu.R;
 import com.miaotu.activity.JoinedListActivity;
 import com.miaotu.activity.PersonCenterActivity;
 import com.miaotu.model.RemindLikeTogether;
+import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 
 import java.text.ParseException;
@@ -70,6 +71,9 @@ public class RemindJoinTogetherListAdapter extends BaseAdapter{
         holder.ivPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!Util.isNetworkConnected(context)) {
+                    return;
+                }
                 Intent intent = new Intent(context, PersonCenterActivity.class);
                 intent.putExtra("uid", remindLikes.get(i).getRemindLikeTogetherInfo().getUid());
                 context.startActivity(intent);

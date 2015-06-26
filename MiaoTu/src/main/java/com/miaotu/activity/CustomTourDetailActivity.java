@@ -25,6 +25,7 @@ import com.miaotu.model.CustomTourInfo;
 import com.miaotu.util.LogUtil;
 import com.miaotu.util.MD5;
 import com.miaotu.util.StringUtil;
+import com.miaotu.util.Util;
 import com.pingplusplus.android.PaymentActivity;
 
 import org.json.JSONException;
@@ -161,6 +162,10 @@ private WebView webView;
         @android.webkit.JavascriptInterface
         public void chat(String uid,String name,String headphoto) {
             //私聊
+            if(!Util.isNetworkConnected(CustomTourDetailActivity.this)) {
+                showToastMsg("当前未联网，请检查网络设置");
+                return;
+            }
             if(uid.equals(readPreference("uid"))){
                 showToastMsg("不能和自己聊天！");
                 return ;
@@ -181,6 +186,10 @@ private WebView webView;
                 public void run() {
 
                     // Code in here
+                    if(!Util.isNetworkConnected(CustomTourDetailActivity.this)) {
+                        showToastMsg("当前未联网，请检查网络设置");
+                        return;
+                    }
                     if (uid.equals(readPreference("uid"))) {
                         showToastMsg("不能和自己聊天！");
                         return;
@@ -200,7 +209,10 @@ private WebView webView;
         @android.webkit.JavascriptInterface
         public void groupChat(String groupId,String groupName) {
             //群聊
-
+            if(!Util.isNetworkConnected(CustomTourDetailActivity.this)) {
+                showToastMsg("当前未联网，请检查网络设置");
+                return;
+            }
             Intent groupChatIntent = new Intent(CustomTourDetailActivity.this, ChatsActivity.class);
             groupChatIntent.putExtra("groupImId", groupId);
             groupChatIntent.putExtra("groupName", groupName);
@@ -215,6 +227,10 @@ private WebView webView;
                 public void run() {
 
                     // Code in here
+                    if(!Util.isNetworkConnected(CustomTourDetailActivity.this)) {
+                        showToastMsg("当前未联网，请检查网络设置");
+                        return;
+                    }
                     Intent groupChatIntent = new Intent(CustomTourDetailActivity.this, ChatsActivity.class);
                     groupChatIntent.putExtra("groupImId", groupId);
                     groupChatIntent.putExtra("groupName", groupName);
@@ -233,6 +249,10 @@ private WebView webView;
 //                    webView.reload();
 //                }
 //            });
+            if(!Util.isNetworkConnected(CustomTourDetailActivity.this)) {
+                showToastMsg("当前未联网，请检查网络设置");
+                return;
+            }
             if(isLike){
                 //喜欢成功
                 setResult(1003);
@@ -244,6 +264,10 @@ private WebView webView;
         @android.webkit.JavascriptInterface
         public void enterUser(String uid) {
             // 个人中心
+            if(!Util.isNetworkConnected(CustomTourDetailActivity.this)) {
+                showToastMsg("当前未联网，请检查网络设置");
+                return;
+            }
             Intent userIntent = new Intent(CustomTourDetailActivity.this,PersonCenterActivity.class);
             userIntent.putExtra("uid", uid);
             startActivity(userIntent);
@@ -251,6 +275,10 @@ private WebView webView;
         @android.webkit.JavascriptInterface
         public void pay(String orderId,String uid,String nickname,String headUrl,String groupId,String groupName,String remark) {
             // 支付
+            if(!Util.isNetworkConnected(CustomTourDetailActivity.this)) {
+                showToastMsg("当前未联网，请检查网络设置");
+                return;
+            }
             CustomTourDetailActivity.this.uid = uid;
             CustomTourDetailActivity.this.orderId = orderId;
             CustomTourDetailActivity.this.nickname = nickname;
@@ -263,7 +291,10 @@ private WebView webView;
 
         @android.webkit.JavascriptInterface
         public void payRedPackage(String amount, final String uid, final String nickname, final String headUrl, final String groupId, final String groupName, final String remark){
-
+            if(!Util.isNetworkConnected(CustomTourDetailActivity.this)) {
+                showToastMsg("当前未联网，请检查网络设置");
+                return;
+            }
             boolean isSuccess = false;
             if (!StringUtil.isBlank(readPreference("luckmoney"))) {
                 if (StringUtil.isBlank(amount)){

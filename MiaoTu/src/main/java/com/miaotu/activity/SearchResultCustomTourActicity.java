@@ -62,7 +62,7 @@ public class SearchResultCustomTourActicity extends BaseActivity implements View
     }
 
     private void initData(){
-        tvTitle.setText("秒旅团搜索结果");
+        tvTitle.setText("妙旅团搜索结果");
         customTours = new ArrayList<>();
         adapter = new SearchResultCustomTourAdapter(this, customTours);
         listView.setAdapter(adapter);

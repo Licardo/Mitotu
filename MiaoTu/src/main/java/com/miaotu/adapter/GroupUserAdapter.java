@@ -12,6 +12,7 @@ import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
 import com.miaotu.activity.PersonCenterActivity;
 import com.miaotu.model.GroupUserInfo;
+import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 
 import java.util.List;
@@ -65,6 +66,9 @@ public class GroupUserAdapter extends BaseAdapter{
         holder.ivPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!Util.isNetworkConnected(mContext)) {
+                    return;
+                }
                 int pos = (int) view.getTag();
                 Intent intent = new Intent(mContext, PersonCenterActivity.class);
                 intent.putExtra("uid", groupInfos.get(pos).getUid());

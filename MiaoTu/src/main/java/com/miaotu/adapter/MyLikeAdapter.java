@@ -14,6 +14,7 @@ import com.miaotu.R;
 import com.miaotu.activity.BaseFragmentActivity;
 import com.miaotu.activity.PersonCenterActivity;
 import com.miaotu.model.BlackInfo;
+import com.miaotu.util.Util;
 import com.miaotu.view.CircleImageView;
 
 import java.util.List;
@@ -76,6 +77,9 @@ public class MyLikeAdapter extends BaseAdapter{
         holder.ivPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!Util.isNetworkConnected(context)) {
+                    return;
+                }
                 int pos = (int) view.getTag();
                 Intent intent = new Intent(context, PersonCenterActivity.class);
                 intent.putExtra("uid", blackInfos.get(pos).getUid());

@@ -3,6 +3,7 @@ package com.miaotu.app;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,7 +45,7 @@ public class App extends Application implements
 	public static float screenH;
 	public static App instance;
 	private LocationManagerProxy mLocationManagerProxy;
-
+	private List<Activity> activityList = new LinkedList<Activity>();
 	/**
 	 * 临时会话有效期
 	 */
@@ -336,10 +337,15 @@ public class App extends Application implements
 			writePreference("longitude",amapLocation.getLongitude() +"");
 			writePreference("latitude","30.312021");
 			writePreference("longitude","120.255116");
-			writePreference("located_city",amapLocation.getCity() +"");
-			writePreference("selected_city",amapLocation.getCity() +"");
-			FirstPageFragment.getInstance().refreshCity();
-			CityListActivity.getInstance().refreshCity();
+			writePreference("located_city", amapLocation.getCity() + "");
+			writePreference("selected_city", amapLocation.getCity() + "");
+			try {
+				FirstPageFragment.getInstance().refreshCity();
+				CityListActivity.getInstance().refreshCity();
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+			return;
 //			mLocationCountyTextView.setText(amapLocation.getDistrict());
 //			mLocationRoadTextView.setText(amapLocation.getRoad());
 //			mLocationPOITextView.setText(amapLocation.getPoiName());
@@ -468,5 +474,18 @@ public class App extends Application implements
 		SharedPreferences.Editor editor = sharedPreferences.edit();
 		editor.clear();
 		editor.commit();
+	}
+
+	// 添加Activity到容器中
+	public void addActivity(Activity activity) {
+		activityList.add(activity);
+	}
+
+	// 遍历所有Activity并finish
+	public void exit() {
+		for (Activity activity : activityList) {
+			activity.finish();
+		}
+		System.exit(0);
 	}
 }

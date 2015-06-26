@@ -16,7 +16,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.miaotu.R;
+import com.miaotu.app.App;
 import com.miaotu.util.LogUtil;
+import com.miaotu.util.StringUtil;
 import com.miaotu.view.ControlScrollViewPager;
 import com.miaotu.view.LoadingDlg;
 
@@ -42,6 +44,8 @@ public class FirstGuideActivity extends BaseFragmentActivity implements OnClickL
 		super.onCreate(savedInstanceState);
         firstGuideActivity = this;
 		setContentView(R.layout.activity_first_guide);
+
+		writePreference("isFirst", "first");
 		mViewPager = (ControlScrollViewPager) findViewById(R.id.id_viewpager);
 		mViewPager.setOffscreenPageLimit(4);
 		findView();

@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.easemob.util.DateUtils;
 import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
 import com.miaotu.R;
+import com.miaotu.activity.BaseActivity;
 import com.miaotu.activity.BaseFragmentActivity;
 import com.miaotu.activity.JoinedListActivity;
 import com.miaotu.activity.PersonCenterActivity;
@@ -138,6 +139,10 @@ public class TogetherlistAdapter extends BaseAdapter {
         holder.tvJoinList.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!Util.isNetworkConnected(mContext)) {
+                    ((BaseFragmentActivity)mContext).showToastMsg("当前未联网，请检查网络设置");
+                    return;
+                }
                 int pos = (int) view.getTag();
                 Intent intent = new Intent(mContext, JoinedListActivity.class);
                 intent.putExtra("flag", "1");
@@ -156,6 +161,9 @@ public class TogetherlistAdapter extends BaseAdapter {
         holder.ivHeadPhoto.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!Util.isNetworkConnected(mContext)) {
+                    return;
+                }
                 int pos = (int) view.getTag();
                 Intent intent = new Intent(mContext, PersonCenterActivity.class);
                 intent.putExtra("uid", mList.get(pos).getUid());

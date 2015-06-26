@@ -217,6 +217,10 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
     }
     @Override
     public void onClick(View view) {
+        if(!Util.isNetworkConnected(BBSMessageActivity.this)) {
+            showToastMsg("当前未联网，请检查网络设置");
+            return;
+        }
         switch (view.getId()){
             case R.id.tv_left:
                 finish();
@@ -234,6 +238,10 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                 btnConfirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if(!Util.isNetworkConnected(BBSMessageActivity.this)) {
+                            showToastMsg("当前未联网，请检查网络设置");
+                            return;
+                        }
                         emptyMessages(readPreference("token"));
                         dialog.dismiss();
                     }

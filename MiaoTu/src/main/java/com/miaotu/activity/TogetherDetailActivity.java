@@ -299,6 +299,10 @@ private Together together;
                     @Override
                     public void onClick(View v) {
                         // TODO Auto-generated method stub
+                        if(!Util.isNetworkConnected(TogetherDetailActivity.this)) {
+                            showToastMsg("当前未联网，请检查网络设置");
+                            return;
+                        }
                         MobclickAgent.onEvent(TogetherDetailActivity.this, "线路详情页-感兴趣的人");
                         Intent intent = new Intent(
                                 TogetherDetailActivity.this,
@@ -335,6 +339,10 @@ private Together together;
                     @Override
                     public void onClick(View v) {
                         // TODO Auto-generated method stub
+                        if(!Util.isNetworkConnected(TogetherDetailActivity.this)) {
+                            showToastMsg("当前未联网，请检查网络设置");
+                            return;
+                        }
                         MobclickAgent.onEvent(TogetherDetailActivity.this, "线路详情页-感兴趣的人");
                         Intent intent = new Intent(
                                 TogetherDetailActivity.this,
@@ -593,12 +601,20 @@ private Together together;
 //                break;
             case R.id.iv_head_photo:
                 // 个人中心
+                if(!Util.isNetworkConnected(TogetherDetailActivity.this)) {
+                    showToastMsg("当前未联网，请检查网络设置");
+                    return;
+                }
                 Intent userIntent = new Intent(TogetherDetailActivity.this,PersonCenterActivity.class);
                 userIntent.putExtra("uid", togetherDetailResult.getTogether().getUid());
                 startActivity(userIntent);
                 break;
             case R.id.iv_chat:
                 //私聊
+                if(!Util.isNetworkConnected(TogetherDetailActivity.this)) {
+                    showToastMsg("当前未联网，请检查网络设置");
+                    return;
+                }
                 if(togetherDetailResult.getTogether().getUid().equals(readPreference("uid"))){
                     showToastMsg("不能和自己聊天！");
                     break;
@@ -613,6 +629,10 @@ private Together together;
                 break;
             case R.id.iv_group_chat:
                 //群聊
+                if(!Util.isNetworkConnected(TogetherDetailActivity.this)) {
+                    showToastMsg("当前未联网，请检查网络设置");
+                    return;
+                }
                 if(togetherDetailResult.getTogether().isAddGroup()){
                     Intent groupChatIntent = new Intent(TogetherDetailActivity.this, ChatsActivity.class);
                     groupChatIntent.putExtra("groupImId", togetherDetailResult.getTogether().getGroupId());
@@ -625,6 +645,10 @@ private Together together;
                 break;
             case R.id.iv_share:
                 //分享
+                if(!Util.isNetworkConnected(TogetherDetailActivity.this)) {
+                    showToastMsg("当前未联网，请检查网络设置");
+                    return;
+                }
                 showShare();
                 break;
             case R.id.layout_all:
@@ -634,6 +658,10 @@ private Together together;
                 break;
             case R.id.layout_join:
                 // 参加
+                if(!Util.isNetworkConnected(TogetherDetailActivity.this)) {
+                    showToastMsg("当前未联网，请检查网络设置");
+                    return;
+                }
                 Intent joinIntent = new Intent(TogetherDetailActivity.this,JoinTogetherStep1.class);
                 joinIntent.putExtra("together",together);
                 startActivityForResult(joinIntent, 1);
@@ -645,7 +673,8 @@ private Together together;
                 break;
             case R.id.tv_publish_comment:
                 //发表评论
-                if(StringUtil.isBlank(etComment.getText().toString())){
+
+                if(StringUtil.isBlank(StringUtil.trimAll(etComment.getText().toString()))){
                     layoutMenu.setVisibility(View.VISIBLE);
                     layoutPublishComment.setVisibility(View.GONE);
                 }else{
