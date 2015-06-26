@@ -195,7 +195,7 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.btn_add:
                 if (fl_tags.getChildCount() < 6){
-                    String content = et_tag.getText().toString().trim();
+                    String content = StringUtil.trimAll(et_tag.getText().toString().trim());
                     addTag(content);
                 }else {
                     et_tag.setText("");

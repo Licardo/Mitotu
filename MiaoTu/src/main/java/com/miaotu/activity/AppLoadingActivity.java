@@ -23,8 +23,10 @@ import com.miaotu.util.MD5;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -52,7 +54,6 @@ public class AppLoadingActivity extends BaseActivity {
             startActivity(i);
             finish();
         }
-
         // 三秒钟之后进入login
 //        ImageView ivLoadingMiao = (ImageView) this.findViewById(R.id.iv_loading_miao);
 //        ImageView ivLoadingLv = (ImageView) this.findViewById(R.id.iv_loading_lv);

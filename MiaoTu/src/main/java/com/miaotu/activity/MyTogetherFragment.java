@@ -44,6 +44,7 @@ public class MyTogetherFragment extends BaseFragment implements View.OnClickList
     private String type,uid;
     private boolean isOwner;    //我的动态orTA的动态
     private boolean isMineCustomTour;   //是否是我发布的一起去
+    private int isMineLikeTogether;   //1:我喜欢的妙旅团 2:ta喜欢的秒旅团
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,7 +76,7 @@ public class MyTogetherFragment extends BaseFragment implements View.OnClickList
                 Intent intent = new Intent(getActivity(),
                         TogetherDetailActivity.class);
                 intent.putExtra("id", mList.get(position - 1).getId());
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, position - 1);
             }
         });
         lvPull.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ListView>() {
@@ -139,6 +140,9 @@ public class MyTogetherFragment extends BaseFragment implements View.OnClickList
         TextView tvTip2 = (TextView) emptyview.findViewById(R.id.tv_tip2);
         Button btnSearch = (Button) emptyview.findViewById(R.id.btn_search);
         btnSearch.setVisibility(View.GONE);
+        if (isOwner && "like".equals(type)){
+            isMineLikeTogether = 1;
+        }
         if (isOwner) {  //我的动态
             if ("join".equals(type)) {
                 tvContent1.setVisibility(View.GONE);
@@ -273,5 +277,33 @@ public class MyTogetherFragment extends BaseFragment implements View.OnClickList
         switch (view.getId()) {
 
         }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (resultCode){
+            case 1001:
+                modifyLikeView(requestCode, true);
+                break;
+            case 1002:
+                modifyLikeView(requestCode, false);
+                break;
+        }
+    }
+
+    /**
+     * 设置喜欢控件显示
+     * @param postion
+     * @param flag
+     */
+    public void modifyLikeView(int postion, boolean flag){
+        if (isMineLikeTogether == 1){
+            mList.remove(postion);
+            adapter.notifyDataSetChanged();
+            return;
+        }
+        mList.get(postion).setIsLike(flag);
+        adapter.notifyDataSetChanged();
     }
 }

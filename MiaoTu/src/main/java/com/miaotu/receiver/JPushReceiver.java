@@ -129,7 +129,7 @@ public class JPushReceiver extends BroadcastReceiver {
 				SharedPreferences sharedPreferences = mContext.getSharedPreferences("COMMON",
 						mContext.MODE_PRIVATE);
 				SharedPreferences.Editor editor = sharedPreferences.edit();
-				editor.putString("like_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + ""))));
+				editor.putString("like_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + "000"))));
 				editor.commit();
 				MessageDatabaseHelper helper = new MessageDatabaseHelper(context);
 				long l = helper.saveSysMessage(likeMessage);
@@ -144,7 +144,7 @@ public class JPushReceiver extends BroadcastReceiver {
 				SharedPreferences sharedPreferences = mContext.getSharedPreferences("COMMON",
 						mContext.MODE_PRIVATE);
 				SharedPreferences.Editor editor = sharedPreferences.edit();
-				editor.putString("tour_like_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + ""))));
+				editor.putString("tour_like_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + "000"))));
 				editor.putString("tour_like_name", "" + likeMessage.getNickname());
 				try {
 					editor.putString("tour_like_count", "" + (1+Integer.parseInt(sharedPreferences.getString("tour_like_count", "0"))));
@@ -164,7 +164,7 @@ public class JPushReceiver extends BroadcastReceiver {
 				SharedPreferences sharedPreferences = mContext.getSharedPreferences("COMMON",
 						mContext.MODE_PRIVATE);
 				SharedPreferences.Editor editor = sharedPreferences.edit();
-				editor.putString("tour_join_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + ""))));
+				editor.putString("tour_join_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + "000"))));
 				editor.putString("tour_join_name", "" + likeMessage.getContent());
 				try {
 					editor.putString("tour_join_count", "" + (1+Integer.parseInt(sharedPreferences.getString("tour_join_count", "0"))));
@@ -184,7 +184,7 @@ public class JPushReceiver extends BroadcastReceiver {
 				SharedPreferences sharedPreferences = mContext.getSharedPreferences("COMMON",
 						mContext.MODE_PRIVATE);
 				SharedPreferences.Editor editor = sharedPreferences.edit();
-				editor.putString("tour_comment_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + ""))));
+				editor.putString("tour_comment_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + "000"))));
 				editor.putString("tour_comment_name", "" + likeMessage.getNickname());
 				try {
 					editor.putString("tour_comment_count", "" + (1+Integer.parseInt(sharedPreferences.getString("tour_comment_count", "0"))));
@@ -205,7 +205,7 @@ public class JPushReceiver extends BroadcastReceiver {
 						mContext.MODE_PRIVATE);
 				SharedPreferences.Editor editor = sharedPreferences.edit();
 
-				editor.putString("sys_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + ""))));
+				editor.putString("sys_date", "" + DateUtils.getTimestampString(new Date(Long.parseLong(rootJson.get("Time") + "000"))));
 				editor.putString("sys_name", "" + likeMessage.getContent());
 				try {
 					editor.putString("sys_count", "" + (1+Integer.parseInt(sharedPreferences.getString("sys_count", "0"))));
