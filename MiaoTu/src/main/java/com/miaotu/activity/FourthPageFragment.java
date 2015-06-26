@@ -97,6 +97,8 @@ public class FourthPageFragment extends BaseFragment implements View.OnClickList
         UrlImageViewHelper.setUrlDrawable(iv_userhead, headimg, R.drawable.default_avatar);
         if ("男".equals(gender)) {
             iv_usergender.setBackgroundResource(R.drawable.mine_boy);
+        }else {
+            iv_usergender.setBackgroundResource(R.drawable.mine_girl);
         }
         tv_iden.setText(identity);
         tv_userage.setText(age);
