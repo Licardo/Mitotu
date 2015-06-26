@@ -21,6 +21,7 @@ import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.exceptions.EaseMobException;
 import com.miaotu.R;
+import com.miaotu.app.App;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
 import com.miaotu.model.RegisterInfo;
@@ -52,6 +53,7 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_login);
+        App.getInstance().addActivity(this);
         findView();
         bindView();
         init();

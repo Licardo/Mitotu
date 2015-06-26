@@ -3,6 +3,7 @@ package com.miaotu.app;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,7 +45,7 @@ public class App extends Application implements
 	public static float screenH;
 	public static App instance;
 	private LocationManagerProxy mLocationManagerProxy;
-
+	private List<Activity> activityList = new LinkedList<Activity>();
 	/**
 	 * 临时会话有效期
 	 */
@@ -472,5 +473,18 @@ public class App extends Application implements
 		SharedPreferences.Editor editor = sharedPreferences.edit();
 		editor.clear();
 		editor.commit();
+	}
+
+	// 添加Activity到容器中
+	public void addActivity(Activity activity) {
+		activityList.add(activity);
+	}
+
+	// 遍历所有Activity并finish
+	public void exit() {
+		for (Activity activity : activityList) {
+			activity.finish();
+		}
+		System.exit(0);
 	}
 }

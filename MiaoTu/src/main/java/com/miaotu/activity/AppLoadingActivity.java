@@ -17,6 +17,7 @@ import com.easemob.chat.EMChatManager;
 import com.easemob.chat.EMGroupManager;
 import com.easemob.exceptions.EaseMobException;
 import com.miaotu.R;
+import com.miaotu.app.App;
 import com.miaotu.util.LogUtil;
 import com.miaotu.util.MD5;
 import com.miaotu.util.StringUtil;
@@ -24,6 +25,8 @@ import com.miaotu.util.Util;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * @author ZhangLei
@@ -46,9 +49,8 @@ public class AppLoadingActivity extends BaseActivity {
         if(StringUtil.isBlank(readPreference("isFirst"))) {
             writePreference("isFirst", "first");
             Intent i = new Intent(this,FirstGuideActivity.class);
-            this.startActivity(i);
-            AppLoadingActivity.this.finish();
-            return;
+            startActivity(i);
+            finish();
         }
 
         // 三秒钟之后进入login
@@ -163,11 +165,12 @@ public class AppLoadingActivity extends BaseActivity {
              if(readPreference("everyday").equals(sysDatetime)){
                  Intent intent = new Intent(AppLoadingActivity.this,MainActivity.class);
                  startActivity(intent);
+                 finish();
              }else{
                  Intent intent = new Intent(AppLoadingActivity.this,EveryDayPicActivity.class);
                  startActivity(intent);
+                 finish();
              }
-             finish();
     	}else{
              Intent it = new Intent(AppLoadingActivity.this, ChooseLoginActivity.class);
              startActivity(it);

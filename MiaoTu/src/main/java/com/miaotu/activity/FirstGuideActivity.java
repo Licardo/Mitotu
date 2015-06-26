@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.miaotu.R;
+import com.miaotu.app.App;
 import com.miaotu.util.LogUtil;
 import com.miaotu.view.ControlScrollViewPager;
 import com.miaotu.view.LoadingDlg;
