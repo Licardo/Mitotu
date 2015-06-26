@@ -180,6 +180,10 @@ public class RemindLikeActivity extends BaseActivity implements View.OnClickList
                 finish();
                 break;
             case R.id.tv_right:
+                if(remindLikes.size()==0){
+                    showToastMsg("没有关注提醒，无需清空！");
+                    break;
+                }
                 delAllLike();
                 break;
         }

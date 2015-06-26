@@ -75,6 +75,12 @@
             android:theme="@style/horizontal_slide"
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
+        <activity
+            android:name=".imutil.AlertDialogActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MyDialogStyle"
+            android:windowSoftInputMode="stateAlwaysHidden" >
+        </activity>
         <!-- choose video -->
         <activity
             android:name=".imutil.ImageGridActivity"

@@ -12,7 +12,7 @@ import kankan.wheel.widget.adapters.AbstractWheelTextAdapter;
  * Adapter for countries
  */
 public class MaritalStatusAdapter extends AbstractWheelTextAdapter {
-	private String maritalStatuses[] = new String[46];
+	private String maritalStatuses[] = new String[45];
 
 	/**
 	 * Constructor
