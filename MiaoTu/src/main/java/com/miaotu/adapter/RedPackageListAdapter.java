@@ -1,5 +1,7 @@
 package com.miaotu.adapter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -11,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.easemob.util.DateUtils;
 import com.miaotu.R;
 import com.miaotu.model.RedPackage;
 
@@ -62,7 +65,12 @@ public class RedPackageListAdapter extends BaseAdapter {
 
 		// 对ListView的Item中的控件的操作
 		holder.mark.setText(mList.get(position).getMark());
-		holder.time.setText(mList.get(position).getCreated().substring(0,10));
+//		holder.time.setText(mList.get(position).getCreated().substring(0, 10));
+		try {
+			holder.time.setText(DateUtils.getTimestampString(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(mList.get(position).getCreated())));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		if("1".equals(mList.get(position).getType())) {
 			holder.money.setText("+ " + mList.get(position).getMoney());
 			holder.money.setTextColor(mContext.getResources().getColor(R.color.money_add));
