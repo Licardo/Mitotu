@@ -12,6 +12,7 @@ import android.provider.MediaStore;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -191,6 +192,10 @@ public class EditUserInfoActivity extends BaseActivity implements View.OnClickLi
                             dialog.dismiss();
                         }
                     });
+                    WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+                    params.width = Util.dip2px(EditUserInfoActivity.this, 240);
+                    params.height = Util.dip2px(EditUserInfoActivity.this, 149);
+                    dialog.getWindow().setAttributes(params);
                 }
                 break;
             case R.id.btn_add:
