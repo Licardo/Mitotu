@@ -8,7 +8,8 @@
     android:background="@drawable/bg_dialog_choose_register"-->
     <RelativeLayout
         android:layout_width="240dp"
-        android:layout_height="149dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
         android:layout_centerInParent="true">
 
         <TextView
@@ -33,7 +34,7 @@
             android:text="拉黑后，将会为您屏蔽此人消息"
             android:textColor="#b4b4b4"
             android:textSize="15sp"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <TextView
             android:id="@+id/tv_tel"
@@ -42,16 +43,14 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="109dp"
             android:textColor="#636363"
-            android:textSize="10sp" />
+            android:textSize="10sp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_below="@id/tv_tip"
+            android:layout_margin="10dp"
             android:orientation="horizontal">
 
             <Button
