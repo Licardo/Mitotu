@@ -81,6 +81,30 @@ public class PublishCustomTourActivity2 extends BaseActivity implements OnClickL
             showToastMsg("请输入出发城市！");
             return false;
         }
+        if (StringUtil.isBlank(tvStartDate.getText().toString())){
+            showToastMsg("选择开始日期");
+            return false;
+        }
+        if (StringUtil.isBlank(tvEndDate.getText().toString())){
+            showToastMsg("选择结束日期");
+            return false;
+        }
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date1 = format.parse(tvStartDate.getText().toString());
+            Date date2 = format.parse(tvEndDate.getText().toString());
+            Date now = format.parse(format.format(new Date()));
+            if (now.after(date1)){
+                showToastMsg("开始日期不能早于当前日期！");
+                return false;
+            }
+            if (date1.after(date2)){
+                showToastMsg("结束日期不能早于开始日期！");
+                return false;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         return true;
     }
     // 获取生日dialog
