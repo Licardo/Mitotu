@@ -50,9 +50,10 @@
                     android:id="@+id/tv_status"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:text="喜欢了你发起的旅行"
+                    android:text="喜欢了你发起的旅行阿什顿发松岛枫阿什顿发"
                     android:textColor="#646464"
                     android:ellipsize="end"
+                    android:singleLine="true"
                     android:textSize="12sp" />
 
             </LinearLayout>
