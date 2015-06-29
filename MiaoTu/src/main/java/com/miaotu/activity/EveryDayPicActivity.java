@@ -203,9 +203,18 @@ private ImageView ivPic,ivShare,ivDownload;
                 break;
             case R.id.btn_jump:
                 Intent intent = new Intent(EveryDayPicActivity.this,MainActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
                 finish();
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == 1){
+            setResult(1);
+            finish();
         }
     }
 }

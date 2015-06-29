@@ -53,7 +53,6 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_login);
-        App.getInstance().addActivity(this);
         findView();
         bindView();
         init();
@@ -311,7 +310,7 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
                     String sysDatetime = fmt.format(calendar.getTime())+readPreference("token");
                     if(readPreference("everyday").equals(sysDatetime)){
                         Intent intent = new Intent(ChooseLoginActivity.this,MainActivity.class);
-                        startActivity(intent);
+                        startActivityForResult(intent, 1);
                     }else{
                         Intent intent = new Intent(ChooseLoginActivity.this,EveryDayPicActivity.class);
                         startActivity(intent);

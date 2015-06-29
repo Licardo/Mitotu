@@ -141,10 +141,10 @@ private void init(){
                     String sysDatetime = fmt.format(calendar.getTime())+readPreference("token");
                     if(readPreference("everyday").equals(sysDatetime)){
                         Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                        startActivity(intent);
+                        startActivityForResult(intent, 1);
                     }else{
                         Intent intent = new Intent(LoginActivity.this,EveryDayPicActivity.class);
-                        startActivity(intent);
+                        startActivityForResult(intent, 1);
                     }
                     setResult(1);
                     finish();
@@ -260,9 +260,9 @@ private void init(){
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==1&&resultCode==1){
+            setResult(1);
             finish();
             //告诉上一个页面结束
-            setResult(1);
         }
     }
 

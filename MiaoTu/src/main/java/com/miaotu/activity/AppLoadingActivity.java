@@ -51,7 +51,7 @@ public class AppLoadingActivity extends BaseActivity {
         if(StringUtil.isBlank(readPreference("isFirst"))) {
             writePreference("isFirst", "first");
             Intent i = new Intent(this,FirstGuideActivity.class);
-            startActivity(i);
+            startActivityForResult(i, 1);
             finish();
         }
         // 三秒钟之后进入login
@@ -165,19 +165,26 @@ public class AppLoadingActivity extends BaseActivity {
              String sysDatetime = fmt.format(calendar.getTime())+readPreference("token");
              if(readPreference("everyday").equals(sysDatetime)){
                  Intent intent = new Intent(AppLoadingActivity.this,MainActivity.class);
-                 startActivity(intent);
+                 startActivityForResult(intent, 1);
                  finish();
              }else{
                  Intent intent = new Intent(AppLoadingActivity.this,EveryDayPicActivity.class);
-                 startActivity(intent);
+                 startActivityForResult(intent, 1);
                  finish();
              }
     	}else{
              Intent it = new Intent(AppLoadingActivity.this, ChooseLoginActivity.class);
-             startActivity(it);
+             startActivityForResult(it, 1);
              finish();
          }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1){
+            finish();
+        }
+    }
 }
 

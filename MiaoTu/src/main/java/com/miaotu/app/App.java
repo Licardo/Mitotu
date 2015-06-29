@@ -45,7 +45,6 @@ public class App extends Application implements
 	public static float screenH;
 	public static App instance;
 	private LocationManagerProxy mLocationManagerProxy;
-	private List<Activity> activityList = new LinkedList<Activity>();
 	/**
 	 * 临时会话有效期
 	 */
@@ -476,16 +475,4 @@ public class App extends Application implements
 		editor.commit();
 	}
 
-	// 添加Activity到容器中
-	public void addActivity(Activity activity) {
-		activityList.add(activity);
-	}
-
-	// 遍历所有Activity并finish
-	public void exit() {
-		for (Activity activity : activityList) {
-			activity.finish();
-		}
-		System.exit(0);
-	}
 }
