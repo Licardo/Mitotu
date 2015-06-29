@@ -662,6 +662,10 @@ private Together together;
                     showToastMsg("当前未联网，请检查网络设置");
                     return;
                 }
+                if (togetherDetailResult.getTogether().isAddGroup() == true){
+                    showToastMsg("您已经报过名了");
+                    return;
+                }
                 Intent joinIntent = new Intent(TogetherDetailActivity.this,JoinTogetherStep1.class);
                 joinIntent.putExtra("together",together);
                 startActivityForResult(joinIntent, 1);
