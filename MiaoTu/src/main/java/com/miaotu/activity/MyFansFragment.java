@@ -69,6 +69,7 @@ public class MyFansFragment extends BaseFragment implements View.OnClickListener
                     }
                     blackInfoList.addAll(blackResult.getBlackInfos());
                     adapter.notifyDataSetChanged();
+                    writePreference("fanscount", blackInfoList.size() + "");
                 }else {
                     if(StringUtil.isBlank(blackResult.getMsg())){
                         showToastMsg("获取黑名单失败");

@@ -63,6 +63,7 @@ public class MyLikeAndFansActivity extends BaseFragmentActivity implements View.
         tvTitle.setText("关注与粉丝");
         fragmentManager = getSupportFragmentManager();
         setTabSelection(0);
+        setResult(1);
     }
 
 
