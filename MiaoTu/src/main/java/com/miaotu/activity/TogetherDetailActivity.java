@@ -182,10 +182,10 @@ private Together together;
                     writeDetail(result);
                 } else {
                    if(StringUtil.isEmpty(result.getMsg())){
-                       showToastMsg("获取约游详情失败");
-                   }else{
-                       showToastMsg(result.getMsg());
-                   }
+                        showToastMsg("获取约游详情失败");
+                    }else{
+                        showToastMsg(result.getMsg());
+                    }
                 }
             }
 
