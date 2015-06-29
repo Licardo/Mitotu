@@ -66,14 +66,14 @@ public class AddBlackListDialog extends Dialog {
 		setCanceledOnTouchOutside(false);
         setCancelable(false);
 //        // 设置dialog的宽高
-        /*Window window = getWindow();
+        Window window = getWindow();
         WindowManager.LayoutParams wl = window.getAttributes();
 //        wl.x = Util.dip2px(context,3);
 //        wl.y = Util.dip2px(context,50);
         wl.height = WindowManager.LayoutParams.WRAP_CONTENT;
 //        wl.height = Util.dip2px(context,149);
         wl.width = Util.dip2px(context,240);
-        window.setAttributes(wl);*/
+        window.setAttributes(wl);
 
         setFeatureDrawableAlpha(Window.FEATURE_OPTIONS_PANEL, 0);
 		this.context = context;

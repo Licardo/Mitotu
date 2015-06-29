@@ -173,7 +173,7 @@ public class FourthPageFragment extends BaseFragment implements View.OnClickList
             default:
                 break;
         }
-        startActivity(intent);
+        startActivityForResult(intent, 1001);
     }
 
     /**
@@ -233,6 +233,9 @@ public class FourthPageFragment extends BaseFragment implements View.OnClickList
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 3 && resultCode == 1) {
             ((MainActivity) getActivity()).writePreference("movement_city", data.getStringExtra("city"));
+        }
+        if (requestCode == 1001 && resultCode == 1){
+            initUserInfo();
         }
     }
 

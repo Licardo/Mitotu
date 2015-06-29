@@ -101,6 +101,7 @@ public class MyLikeFragment extends BaseFragment implements View.OnClickListener
                     }
                     blackInfoList.addAll(blackResult.getBlackInfos());
                     adapter.notifyDataSetChanged();
+                    writePreference("followcount", blackInfoList.size()+"");
                 }else {
                     if(StringUtil.isBlank(blackResult.getMsg())){
                         showToastMsg("获取黑名单失败");
