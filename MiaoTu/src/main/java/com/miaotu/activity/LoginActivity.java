@@ -367,18 +367,27 @@ private void init(){
         }
         //微信
         if(platform.getName().equals(Wechat.NAME)){
+            try {
+                Iterator iter = res.entrySet().iterator();
+                while (iter.hasNext()) {
+                    Map.Entry entry = (Map.Entry) iter.next();
+                    Object key = entry.getKey();
+                    Object val = entry.getValue();
+                    LogUtil.d("微信信息"+key + ":" + val);
+                }
+            }catch (Exception e){e.printStackTrace();}
             PlatformDb platDB = platform.getDb();//获取数平台数据DB
             //通过DB获取各种数据
             platDB.getUserId();
             platDB.getToken();
             platDB.getUserGender();
             platDB.getUserIcon();
-            platDB.getUserId();
             platDB.getUserName();
             LogUtil.d("微信信息    " + platDB.getToken() + "," + platDB.getUserGender() + "," + platDB.getUserIcon()
-                    + "," + platDB.getUserId() + "," + platDB.getUserName());
+                    + "," + platDB.getUserId() + "," + platDB.getUserName()+"////"+res.get("unionid").toString());
             final RegisterInfo registerInfo = new RegisterInfo();
-            registerInfo.setUnionid(platDB.getUserId());
+//            registerInfo.setUnionid(platDB.getUserId());
+            registerInfo.setUnionid(res.get("unionid").toString());
             if(platDB.getUserGender().equals("m")){
                 registerInfo.setGender("男");
             }

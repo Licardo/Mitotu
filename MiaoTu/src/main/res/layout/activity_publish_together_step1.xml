@@ -76,6 +76,7 @@
                 android:textSize="14sp"
                 android:textColor="#646464"
                 android:hint="例如：上海"
+                android:maxLength="8"
                 android:textColorHint="#b4b4b4"
                 android:gravity="center|left"
                 />
@@ -117,6 +118,7 @@
                 android:textSize="14sp"
                 android:textColor="#646464"
                 android:hint="例如：上海"
+                android:maxLength="8"
                 android:textColorHint="#b4b4b4"
                 android:gravity="center|left"
                 />

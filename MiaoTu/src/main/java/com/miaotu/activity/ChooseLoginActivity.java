@@ -221,7 +221,8 @@ private Button btnWechatRegister,btnOtherRegister,btnLogin;
             LogUtil.d("微信信息    " + platDB.getToken() + "," + platDB.getUserGender() + "," + platDB.getUserIcon()
                     + "," + platDB.getUserId() + "," + platDB.getUserName());
             final RegisterInfo registerInfo = new RegisterInfo();
-            registerInfo.setUnionid(platDB.getUserId());
+            registerInfo.setUnionid(res.get("unionid").toString());
+
             if(platDB.getUserGender().equals("m")){
                 registerInfo.setGender("男");
             }
