@@ -128,10 +128,8 @@ public class MessageActivity extends BaseActivity implements
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
                 EMChatManager.getInstance().deleteConversation(mList.get(position).getUserName());
-                showToastMsg("位置：" + position);
                 mList.remove(position);
                 refresh();
-//                conversationAdapter.notifyDataSetChanged();
                 return false;
             }
         });
