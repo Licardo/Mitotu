@@ -350,7 +350,7 @@ public class RedPackageActivity extends BaseActivity implements OnClickListener 
         // text是分享文本，所有平台都需要这个字段
         oks.setText("我得到了妙途奖励的旅行红包啦，谁和我一起出去玩儿呢？" + "\n http://m.miaotu.com/App/devine/?user_id="+readPreference("uid")+"&date="+currentDate);
         // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-        oks.setImageUrl("http://m.miaotu.com/share/image/share_divine.png");
+//        oks.setImageUrl("http://m.miaotu.com/share/image/share_divine.png");
         // url仅在微信（包括好友和朋友圈）中使用
         oks.setUrl("http://m.miaotu.com/App/devine/?user_id="+readPreference("uid")+"&date="+currentDate);
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
