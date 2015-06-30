@@ -2,6 +2,7 @@ package com.miaotu.activity;
 
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
@@ -377,7 +378,7 @@ public class MainActivity extends BaseFragmentActivity implements
         mTabBtnMessage.setOnClickListener(this);
         mTabBtnMine.setOnClickListener(this);
 
-
+//        showTip("1");
     }
 
     @Override
@@ -779,5 +780,20 @@ public class MainActivity extends BaseFragmentActivity implements
     @Override
     protected void onSaveInstanceState(Bundle outState) {
 //        super.onSaveInstanceState(outState);
+    }
+    public void showTip(String type){
+        final Dialog tipDialog = new Dialog(this,R.style.Dialog_Fullscreen_tip);
+        ImageView imageView = new ImageView(this);
+        imageView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tipDialog.dismiss();
+            }
+        });
+        if(type.equals("1")){
+            imageView.setBackgroundResource(R.drawable.bg_tip_1);
+        }
+        tipDialog.setContentView(imageView);
+        tipDialog.show();
     }
 }
