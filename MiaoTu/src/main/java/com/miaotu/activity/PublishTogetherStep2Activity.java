@@ -121,7 +121,7 @@ private void bindView(){
                     rbWeibo.setChecked(true);
                     rbSelected = rbWeibo;
                 }else {
-                    if (rbSelected.getId() != rbCircle.getId()){
+                    if (rbSelected.getId() != rbWeibo.getId()){
                         rbSelected.setChecked(false);
                         rbWeibo.setChecked(true);
                         rbSelected = rbWeibo;
