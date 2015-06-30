@@ -71,29 +71,30 @@ public class AboutActivity extends BaseFragmentActivity implements OnClickListen
                 startActivity(intent1);
                 break;
             case R.id.layout_add_qq_group:
-//                joinQQGroup();
+                joinQQGroup();
                 break;
 		}
 	}
-    /****************
-     *
-     * 发起添加群流程。群号：杭州单身交友旅游(68481005) 的 key 为： mt69Ie5m5LHWcYzx-M1dQcXIpw9ZlFa9
-     * 调用 joinQQGroup(mt69Ie5m5LHWcYzx-M1dQcXIpw9ZlFa9) 即可发起手Q客户端申请加群 杭州单身交友旅游(68481005)
-     *
-     * @return 返回true表示呼起手Q成功，返回fals表示呼起失败
-     ******************/
-    public boolean joinQQGroup() {
-        String key = "mt69Ie5m5LHWcYzx-M1dQcXIpw9ZlFa9";
-        Intent intent = new Intent();
-        intent.setData(Uri.parse("mqqopensdkapi://bizAgent/qm/qr?url=http%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Ffrom%3Dapp%26p%3Dandroid%26k%3D" + key));
-        // 此Flag可根据具体产品需要自定义，如设置，则在加群界面按返回，返回手Q主界面，不设置，按返回会返回到呼起产品界面    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        try {
-            startActivity(intent);
-            return true;
-        } catch (Exception e) {
-            // 未安装手Q或安装的版本不支持
-            return false;
-        }
-    }
+
+	/****************
+	 *
+	 * 发起添加群流程。群号：妙途旅行交友群(253034957) 的 key 为： N60hQx781D3OuCrojeIVdyvYFLE5qaJ9
+	 * 调用 joinQQGroup(N60hQx781D3OuCrojeIVdyvYFLE5qaJ9) 即可发起手Q客户端申请加群 妙途旅行交友群(253034957)
+	 *
+	 * @return 返回true表示呼起手Q成功，返回fals表示呼起失败
+	 ******************/
+	public boolean joinQQGroup() {
+		String key = "N60hQx781D3OuCrojeIVdyvYFLE5qaJ9";
+		Intent intent = new Intent();
+		intent.setData(Uri.parse("mqqopensdkapi://bizAgent/qm/qr?url=http%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Ffrom%3Dapp%26p%3Dandroid%26k%3D" + key));
+		// 此Flag可根据具体产品需要自定义，如设置，则在加群界面按返回，返回手Q主界面，不设置，按返回会返回到呼起产品界面    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+		try {
+			startActivity(intent);
+			return true;
+		} catch (Exception e) {
+			// 未安装手Q或安装的版本不支持
+			return false;
+		}
+	}
 
 }
