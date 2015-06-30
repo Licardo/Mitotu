@@ -685,12 +685,14 @@ public class HttpRequestUtil {
      * @param img
      * @return
      */
-    public BaseResult publishTopic(String aid, String token, String content, String img) {
+    public BaseResult publishTopic(String aid, String token, String content, String img, String latitude, String longitude) {
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("token", token));
         params.add(new BasicNameValuePair("aid", aid));
         params.add(new BasicNameValuePair("content", content));
         params.add(new BasicNameValuePair("img", img));
+        params.add(new BasicNameValuePair("latitude", latitude));
+        params.add(new BasicNameValuePair("longitude", longitude));
         LogUtil.e("上传的图片", "img: " + img);
         return HttpDecoder.postForObject(
                 getUrl("user/state"), BaseResult.class,

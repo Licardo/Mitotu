@@ -323,7 +323,9 @@ public class PublishTogetherStep1Activity extends BaseActivity implements OnClic
         publishTogether.setEndDate(tvEndDate.getText().toString());
         publishTogether.setNumber(tvCount.getText().toString());
         publishTogether.setRequirement(((RadioButton) findViewById(rgRequirement.getCheckedRadioButtonId())).getText().toString());
-        publishTogether.setFee(((RadioButton)findViewById(rgFee.getCheckedRadioButtonId())).getText().toString());
+        publishTogether.setFee(((RadioButton) findViewById(rgFee.getCheckedRadioButtonId())).getText().toString());
+        publishTogether.setLatitude(readPreference("latitude"));
+        publishTogether.setLongitude(readPreference("longitude"));
         String tags = "";
         for(int i=0;i<layoutTags.getChildCount();i++){
             tags+=(((TextView)layoutTags.getChildAt(i).findViewById(R.id.tv_tag)).getText().toString()+",");
