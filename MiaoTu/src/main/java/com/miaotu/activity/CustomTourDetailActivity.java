@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.miaotu.R;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
+import com.miaotu.imutil.ContactInfo;
+import com.miaotu.imutil.IMDatabaseHelper;
 import com.miaotu.model.CustomTour;
 import com.miaotu.model.CustomTourInfo;
 import com.miaotu.util.LogUtil;
@@ -176,6 +178,14 @@ private WebView webView;
             chatIntent.putExtra("uid", uid);
             chatIntent.putExtra("name", name);
             chatIntent.putExtra("headphoto", headphoto);
+
+            ContactInfo contactInfo = new ContactInfo();
+            contactInfo.setImId(MD5.md5(uid));
+            contactInfo.setUid(uid);
+            contactInfo.setNickName(name);
+            contactInfo.setHeadPhoto(headphoto);
+            IMDatabaseHelper imDatabaseHelper = new IMDatabaseHelper(getApplicationContext());
+            imDatabaseHelper.saveContactInfo(contactInfo);
             startActivity(chatIntent);
         }
         @android.webkit.JavascriptInterface
