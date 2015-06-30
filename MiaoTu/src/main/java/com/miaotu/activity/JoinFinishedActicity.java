@@ -127,7 +127,6 @@ public class JoinFinishedActicity extends BaseActivity implements View.OnClickLi
             // text是分享文本，所有平台都需要这个字段
             oks.setText(remark + "\n http://m.miaotu.com/ShareLine/?yid=" + yid);
             // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-
             oks.setImageUrl(picurl);
             // url仅在微信（包括好友和朋友圈）中使用
             oks.setUrl("http://m.miaotu.com/ShareLine/?yid=" + yid);
