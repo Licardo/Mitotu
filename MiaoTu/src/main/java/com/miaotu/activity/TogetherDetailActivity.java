@@ -182,10 +182,10 @@ private Together together;
                     writeDetail(result);
                 } else {
                    if(StringUtil.isEmpty(result.getMsg())){
-                       showToastMsg("获取约游详情失败");
-                   }else{
-                       showToastMsg(result.getMsg());
-                   }
+                        showToastMsg("获取约游详情失败");
+                    }else{
+                        showToastMsg(result.getMsg());
+                    }
                 }
             }
 
@@ -660,6 +660,10 @@ private Together together;
                 // 参加
                 if(!Util.isNetworkConnected(TogetherDetailActivity.this)) {
                     showToastMsg("当前未联网，请检查网络设置");
+                    return;
+                }
+                if (togetherDetailResult.getTogether().isAddGroup() == true){
+                    showToastMsg("您已经报过名了");
                     return;
                 }
                 Intent joinIntent = new Intent(TogetherDetailActivity.this,JoinTogetherStep1.class);

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -238,7 +239,7 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                 btnConfirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(!Util.isNetworkConnected(BBSMessageActivity.this)) {
+                        if (!Util.isNetworkConnected(BBSMessageActivity.this)) {
                             showToastMsg("当前未联网，请检查网络设置");
                             return;
                         }
@@ -252,6 +253,10 @@ public class BBSMessageActivity extends BaseActivity implements View.OnClickList
                         dialog.dismiss();
                     }
                 });
+                WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+                params.width = Util.dip2px(BBSMessageActivity.this, 240);
+                params.height = Util.dip2px(BBSMessageActivity.this, 149);
+                dialog.getWindow().setAttributes(params);
                 break;
         }
     }
