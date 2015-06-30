@@ -71,7 +71,7 @@ private boolean validate(){
                         intent.putExtra("remark",together.getComment());
                         intent.putExtra("yid",together.getId());
                         if (together.getPicList() != null && together.getPicList().size() > 0){
-                            intent.putExtra("picurl",together.getPicList().get(0));
+                            intent.putExtra("picurl",together.getPicList().get(0).getUrl());
                         }
                         startActivityForResult(intent, 1);
                         setResult(1);
