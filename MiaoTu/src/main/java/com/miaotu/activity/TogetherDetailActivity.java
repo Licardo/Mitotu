@@ -31,6 +31,8 @@ import com.miaotu.R;
 import com.miaotu.adapter.ImageItemAdapter;
 import com.miaotu.async.BaseHttpAsyncTask;
 import com.miaotu.http.HttpRequestUtil;
+import com.miaotu.imutil.ContactInfo;
+import com.miaotu.imutil.IMDatabaseHelper;
 import com.miaotu.model.PersonInfo;
 import com.miaotu.model.PhotoInfo;
 import com.miaotu.model.RegisterInfo;
@@ -625,6 +627,14 @@ private Together together;
                 chatIntent.putExtra("uid", togetherDetailResult.getTogether().getUid());
                 chatIntent.putExtra("name", togetherDetailResult.getTogether().getNickname());
                 chatIntent.putExtra("headphoto", togetherDetailResult.getTogether().getHeadPhoto());
+
+                ContactInfo contactInfo = new ContactInfo();
+                contactInfo.setImId(MD5.md5(togetherDetailResult.getTogether().getUid()));
+                contactInfo.setUid(togetherDetailResult.getTogether().getUid());
+                contactInfo.setNickName(togetherDetailResult.getTogether().getNickname());
+                contactInfo.setHeadPhoto(togetherDetailResult.getTogether().getHeadPhoto());
+                IMDatabaseHelper imDatabaseHelper = new IMDatabaseHelper(getApplicationContext());
+                imDatabaseHelper.saveContactInfo(contactInfo);
                 startActivity(chatIntent);
                 break;
             case R.id.iv_group_chat:

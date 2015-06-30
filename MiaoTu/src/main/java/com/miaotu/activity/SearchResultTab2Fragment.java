@@ -24,6 +24,7 @@ import com.miaotu.model.PersonInfo;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.SearchTourResult;
 import com.miaotu.result.SearchUserResult;
+import com.miaotu.util.LogUtil;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 
@@ -135,8 +136,11 @@ private View root;
                     }
                     mList.addAll(result.getPersonInfo());
                     adapter.notifyDataSetChanged();
+                    LogUtil.d("mlistsize:"+mList.size()+"  pagecount:"+PAGECOUNT+" page:"+page);
                     if(lvPull.getRefreshableView().getFooterViewsCount()==1&&mList.size()==PAGECOUNT*page){
                         lvPull.getRefreshableView().addFooterView(layoutMore);
+                    }else{
+                        lvPull.getRefreshableView().removeFooterView(layoutMore);
                     }
                 } else {
                     if(StringUtil.isEmpty(result.getMsg())){
