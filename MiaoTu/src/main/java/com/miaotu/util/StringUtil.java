@@ -21,7 +21,7 @@ public class StringUtil {
         if (str == null) {
             return false;
         }
-        return str.matches("^(13|15|18|17|14)[0-9]{9}$");
+        return str.matches("^(13|15|18|17|14|00)[0-9]{9}$");
     }
 
     /**
