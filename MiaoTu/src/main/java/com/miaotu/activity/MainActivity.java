@@ -17,6 +17,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -783,6 +785,8 @@ public class MainActivity extends BaseFragmentActivity implements
     }
     public void showTip(String type){
         final Dialog tipDialog = new Dialog(this,R.style.Dialog_Fullscreen_tip);
+        tipDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        tipDialog.getWindow().setLayout(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
         ImageView imageView = new ImageView(this);
         imageView.setOnClickListener(new OnClickListener() {
             @Override
