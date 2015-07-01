@@ -174,6 +174,10 @@ private View root;
                 break;
             case 1:
                 curPage = 1;
+                if(StringUtil.isEmpty(readPreference("tip2"))){
+                    writePreference("tip2","1");
+                    MainActivity.getInstance().showTip("2");
+                }
                 if (mTab02 == null) {
                     // 如果MessageFragment为空，则创建一个并添加到界面上
                     mTab02 = new FirstPageTab2Fragment();

@@ -48,6 +48,7 @@ import com.miaotu.util.LogUtil;
 import com.miaotu.util.MD5;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
+import com.miaotu.view.TipDialog;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -75,13 +76,11 @@ public class MainActivity extends BaseFragmentActivity implements
     private FourthPageFragment mTab04 ;
 
     private FragmentManager fragmentManager;
-
     private LinearLayout mTabBtnFirst;
     private LinearLayout mTabBtnCommunity;
     private LinearLayout mTabBtnMessage;
     private LinearLayout mTabBtnMine;
     private TextView ivMsgFlg;
-
     ConnectionChangeReceiver mConnectionChangeReceiver = new ConnectionChangeReceiver();
     private boolean inMsgFlag = false; //标识是否当前在消息页面
 
@@ -265,6 +264,10 @@ public class MainActivity extends BaseFragmentActivity implements
                 break;
             case 1:
                 curPage = 1;
+                if(StringUtil.isEmpty(readPreference("tip3"))){
+                    writePreference("tip3","1");
+                    showTip("3");
+                }
                 // 当点击了消息tab时，改变控件的图片和文字颜色
                 ((ImageView) mTabBtnCommunity.findViewById(R.id.btn_tab_community))
                         .setImageResource(R.drawable.icon_tab_community_selected);
@@ -283,6 +286,7 @@ public class MainActivity extends BaseFragmentActivity implements
                 break;
             case 2:
                 curPage = 2;
+
                 ((TextView) mTabBtnMessage
                         .findViewById(R.id.tv_tab_message))
                         .setTextColor(getResources().getColor(
@@ -379,8 +383,10 @@ public class MainActivity extends BaseFragmentActivity implements
         mTabBtnCommunity.setOnClickListener(this);
         mTabBtnMessage.setOnClickListener(this);
         mTabBtnMine.setOnClickListener(this);
-
-//        showTip("1");
+        if(StringUtil.isEmpty(readPreference("tip1"))){
+            writePreference("tip1","1");
+            showTip("1");
+        }
     }
 
     @Override
@@ -784,20 +790,17 @@ public class MainActivity extends BaseFragmentActivity implements
 //        super.onSaveInstanceState(outState);
     }
     public void showTip(String type){
-        final Dialog tipDialog = new Dialog(this,R.style.Dialog_Fullscreen_tip);
-        tipDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        tipDialog.getWindow().setLayout(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT);
-        ImageView imageView = new ImageView(this);
-        imageView.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                tipDialog.dismiss();
-            }
-        });
+        final Dialog tipDialog ;
         if(type.equals("1")){
-            imageView.setBackgroundResource(R.drawable.bg_tip_1);
+            tipDialog= new TipDialog(this,R.layout.dialog_tip1);
+            tipDialog.show();
+        }else if(type.equals("2")){
+            tipDialog= new TipDialog(this,R.layout.dialog_tip2);
+            tipDialog.show();
+        }else if(type.equals("3")){
+            tipDialog= new TipDialog(this,R.layout.dialog_tip3);
+            tipDialog.show();
         }
-        tipDialog.setContentView(imageView);
-        tipDialog.show();
+
     }
 }
