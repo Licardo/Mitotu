@@ -144,7 +144,7 @@ public class CustomTourlistAdapter extends BaseAdapter {
         }else{
             holder.tvCount.setVisibility(View.VISIBLE);
             holder.tvJoinList.setVisibility(View.GONE);
-            holder.tvCount.setText("已报名" + mList.get(position).getJoinCount() + "人" + " 评论" + mList.get(position).getLikeCount() + "人");
+            holder.tvCount.setText("已报名" + mList.get(position).getJoinCount() + "人" + " 评论" + mList.get(position).getReplyCount() + "人");
         }
         holder.tvJoinList.setTag(position);
         holder.tvJoinList.setOnClickListener(new View.OnClickListener() {

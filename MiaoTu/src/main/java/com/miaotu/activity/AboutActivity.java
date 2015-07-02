@@ -18,7 +18,6 @@ public class AboutActivity extends BaseFragmentActivity implements OnClickListen
 	private TextView tvLeft;
 	private TextView tvTitle;
     private RelativeLayout layoutDial,layoutAddQQGroup;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

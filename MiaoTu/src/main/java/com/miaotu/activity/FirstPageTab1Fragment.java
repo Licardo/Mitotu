@@ -35,6 +35,7 @@ import com.miaotu.model.Together;
 import com.miaotu.result.BaseResult;
 import com.miaotu.result.LoginResult;
 import com.miaotu.result.TogetherResult;
+import com.miaotu.util.LogUtil;
 import com.miaotu.util.StringUtil;
 import com.miaotu.util.Util;
 import com.miaotu.view.GuideGallery;
@@ -230,6 +231,7 @@ private View root;
             @Override
             protected TogetherResult run(Void... params) {
                 page=1;
+                LogUtil.d("经度" + readPreference("longitude") + " 维度" + readPreference("latitude"));
                 return HttpRequestUtil.getInstance().getTogetherList(
                         readPreference("token"),page+"",PAGECOUNT+"",
                         readPreference("latitude"),readPreference("longitude"));
@@ -300,6 +302,7 @@ private View root;
             protected TogetherResult run(Void... params) {
                 isLoadMore = true;
                 page+=1;
+                LogUtil.d("经度" + readPreference("longitude") + " 维度" + readPreference("latitude"));
                 return HttpRequestUtil.getInstance().getTogetherList(readPreference("token"),
                         page+"",PAGECOUNT+"",readPreference("latitude"),readPreference("longitude"));
             }
