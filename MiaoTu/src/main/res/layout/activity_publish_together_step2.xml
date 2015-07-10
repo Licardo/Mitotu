@@ -54,7 +54,7 @@
             android:textColor="#646464"
             android:gravity="top|left"
             android:hint="一句话介绍一下你的旅行吧，或者写点和妙友们说的话，这样能让妙友们更加积极的报名哦！"
-            android:maxLength="60"
+            android:maxLength="140"
 
             />
     </LinearLayout>
