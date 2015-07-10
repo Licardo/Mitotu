@@ -223,7 +223,7 @@ public class BBSPublishTopicActivity extends BaseActivity implements View.OnClic
                     images = ",";
                 }
                 return HttpRequestUtil.getInstance().publishTopic(
-                        (String) layoutMovement.getTag(), readPreference("token"),
+                        (String) tvMovementName.getTag(), readPreference("token"),
                         StringUtil.trimAll(etContent.getText().toString()),
                         images.substring(0, images.length() - 1), readPreference("latitude"),
                         readPreference("longitude"));
