@@ -42,6 +42,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import butterknife.Bind;
+
 public class FirstPageTab2Fragment extends BaseFragment implements View.OnClickListener {
 private View root;
     private PullToRefreshListView lvPull;

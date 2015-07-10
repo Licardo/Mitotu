@@ -5,4 +5,18 @@
     android:orientation="vertical"
     android:background="@drawable/bg_activity_loading"
     >
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="60dp"
+        android:src="@drawable/icon_360logo"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:visibility="gone"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_huawei_logo"
+        android:layout_centerHorizontal="true"
+        />
 </RelativeLayout>

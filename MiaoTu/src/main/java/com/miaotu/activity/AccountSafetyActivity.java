@@ -22,7 +22,6 @@ public class AccountSafetyActivity extends BaseActivity implements
 	private TextView tvTitle, tvLeft;
 	private TextView tvIdentity,tvEmail,tvPhone,tvAccount;
 //	private LinearLayout layoutModifyPwd,layoutBindPhone;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

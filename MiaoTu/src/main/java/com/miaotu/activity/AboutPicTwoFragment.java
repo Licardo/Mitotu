@@ -47,7 +47,7 @@ public class AboutPicTwoFragment extends BaseFragment {
     }
 
 //	@SuppressLint("NewApi")
-//	private void init() {
+//	private void init() {.
 //		ivAboutPic.setBackgroundResource(R.drawable.about_miaotu_two);
 //		ivAboutPic.setScaleType(ImageView.ScaleType.CENTER_CROP);
 //		ivAboutPic.setImageResource(R.drawable.about_miaotu_two);
