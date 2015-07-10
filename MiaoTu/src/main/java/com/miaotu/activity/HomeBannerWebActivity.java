@@ -1,10 +1,7 @@
 package com.miaotu.activity;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -55,6 +52,7 @@ public class HomeBannerWebActivity extends BaseActivity implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_left:
+                webView.loadUrl("about:blank");
                 finish();
                 break;
         }
