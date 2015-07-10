@@ -83,10 +83,12 @@ public class FirstPageImageAdapter extends PagerAdapter implements OnClickListen
 				if ("1".equals(banner.getType())){	//进入秒旅团详情页
 					Intent customtourIntent = new Intent(context, CustomTourDetailActivity.class);
 					customtourIntent.putExtra("id", banner.getExtend());
+					customtourIntent.putExtra("picurl", banner.getPicUrl());
 					context.startActivity(customtourIntent);
 				}else if ("2".equals(banner.getType())){	//进入一起去详情页
 					Intent togetherIntent = new Intent(context, TogetherDetailActivity.class);
 					togetherIntent.putExtra("id", banner.getExtend());
+					togetherIntent.putExtra("picurl", banner.getPicUrl());
 					context.startActivity(togetherIntent);
 				}else if ("3".equals(banner.getType())){	//网页
 					Intent webIntent = new Intent(context, HomeBannerWebActivity.class);
